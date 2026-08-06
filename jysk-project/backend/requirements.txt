@@ -1,0 +1,18 @@
+# Веб-фреймворк и ASGI-сервер
+fastapi
+uvicorn[standard]
+
+# База данных
+sqlalchemy
+pymysql
+cryptography          # требуется pymysql для авторизации в MySQL 8 (caching_sha2_password)
+alembic
+
+# Настройки и валидация
+pydantic-settings
+email-validator       # требуется pydantic для типа EmailStr
+
+# Аутентификация (JWT + хеширование паролей)
+python-jose[cryptography]
+passlib[bcrypt]
+bcrypt==4.0.1         # passlib 1.7.4 несовместим с bcrypt 5.x, поэтому фиксируем версию
