@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  
+  .custom-scrollbar {
+    &::-webkit-scrollbar {
+      display: none; 
+    }
+    
+    @media (min-width: 1280px) {
+      &::-webkit-scrollbar {
+        display: block;
+        width: 0.4vw;
+      }
+      
+      &::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      
+      &::-webkit-scrollbar-thumb {
+        background-color: #d1d5db; 
+        border-radius: 9999px;    
+      }
+    }
+  }
+}
