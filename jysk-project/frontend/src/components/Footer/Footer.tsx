@@ -9,14 +9,14 @@ import { ReactComponent as IgIcon } from '../../assets/icons/instagram.svg';
 import { ReactComponent as FbIcon } from '../../assets/icons/facebook.svg';
 import { ReactComponent as YtIcon } from '../../assets/icons/youtube.svg';
 
-const Footer = () => {
-  const categories = ["Спальня", "Ванна", "Офіс", "Вітальня", "Кухня та їдальня", "Зберігання", "Для вікон", "Для саду", "Для дому", "Усі категорії"];
-  const information = ["Зворотній зв'язок", "Магазини і графіки роботи", "Умови та положення", "Доставка", "Політика конфіденційності"];
-  const hyggy = ["Про нас", "Робота в Hyggy", "Підписатись на розсилку", "Блог", "B2B", "Корисні посилання"];
+const Footer: React.FC = () => {
+  const categories: string[] = ["Спальня", "Ванна", "Офіс", "Вітальня", "Кухня та їдальня", "Зберігання", "Для вікон", "Для саду", "Для дому", "Усі категорії"];
+  const information: string[] = ["Зворотній зв'язок", "Магазини і графіки роботи", "Умови та положення", "Доставка", "Політика конфіденційності"];
+  const hyggy: string[] = ["Про нас", "Робота в Hyggy", "Підписатись на розсилку", "Блог", "B2B", "Корисні посилання"];
 
-  const headingClass = "font-bold text-[14px] md:text-[2.6vw] xl:text-[1.25vw] mb-4 md:mb-[3.1vw] xl:mb-[1.66vw] break-words";
-  const linkClass = "text-[12px] md:text-[2.08vw] xl:text-[0.93vw] font-normal hover:opacity-80 transition-opacity break-words";
-  const ulClass = "flex flex-col gap-3 md:gap-[1.56vw] xl:gap-[1.04vw]";
+  const headingClass: string = "font-bold text-[14px] md:text-[2.6vw] xl:text-[1.25vw] mb-4 md:mb-[3.1vw] xl:mb-[1.66vw] break-words";
+  const linkClass: string = "text-[12px] md:text-[2.08vw] xl:text-[0.93vw] font-normal hover:opacity-80 transition-opacity break-words";
+  const ulClass: string = "flex flex-col gap-3 md:gap-[1.56vw] xl:gap-[1.04vw]";
 
   return (
     <footer className="w-full bg-primary text-white font-sans px-5 md:px-[4.16vw] xl:px-[7.03%] py-10 md:py-[5.2vw] xl:pt-[4.16vw] xl:pb-[3.12vw]">

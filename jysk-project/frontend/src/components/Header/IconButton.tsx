@@ -1,6 +1,11 @@
 import React from 'react';
 
-const IconButton = ({ Icon, label }) => {
+interface IconButtonProps {
+  Icon: React.ElementType;
+  label: string;
+}
+
+const IconButton: React.FC<IconButtonProps> = ({ Icon, label }) => {
   return (
     <button className="group flex flex-col items-center justify-center text-dark transition-colors">
       

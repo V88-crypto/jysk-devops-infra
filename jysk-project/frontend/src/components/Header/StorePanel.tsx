@@ -1,8 +1,21 @@
 import React from 'react';
 import { ReactComponent as SearchIcon } from '../../assets/icons/search.svg';
 
-const StorePanel = ({ isOpen, onClose }) => {
-  const stores = [
+interface StorePanelProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+// Описуємо тип для одного магазину з масиву
+interface Store {
+  id: number;
+  name: string;
+  isOpen: boolean;
+  time: string;
+}
+
+const StorePanel: React.FC<StorePanelProps> = ({ isOpen, onClose }) => {
+  const stores: Store[] = [
     { id: 1, name: 'HYQGY Київ, ТЦ Променада', isOpen: true, time: 'Зачиняється о 20:00' },
     { id: 2, name: 'HYQGY Київ, ТЦ Променада', isOpen: true, time: 'Зачиняється о 20:00' },
     { id: 3, name: 'HYQGY Київ, ТЦ Променада', isOpen: true, time: 'Зачиняється о 20:00' },

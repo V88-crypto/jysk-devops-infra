@@ -1,6 +1,12 @@
 import React from 'react';
 
-const NavButton = ({ text, active, className = "" }) => {
+interface NavButtonProps {
+  text: string;
+  active: boolean;
+  className?: string; // Знак питання означає, що цей пропс не є обов'язковим
+}
+
+const NavButton: React.FC<NavButtonProps> = ({ text, active, className = "" }) => {
   const colorClasses = active 
     ? "bg-primary text-white" 
     : "bg-gray-border text-dark hover:bg-[#868686]";

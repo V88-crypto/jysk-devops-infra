@@ -3,7 +3,7 @@ import { ReactComponent as SofaIcon } from '../../assets/icons/sofa.svg';
 import { ReactComponent as FlagIcon } from '../../assets/icons/flag.svg';
 import { ReactComponent as DocumentIcon } from '../../assets/icons/document.svg';
 
-const Prefooter = () => {
+const Prefooter: React.FC = () => {
   return (
     <section className="w-full font-sans">
       
@@ -25,7 +25,7 @@ const Prefooter = () => {
               <FlagIcon className="h-[40px] md:h-[55px] xl:h-[70px] 2xl:h-[3.5vw] w-auto text-dark" />
             </div>
             <p className="text-dark text-[9px] md:text-[14px] xl:text-[16px] 2xl:text-[0.83vw] leading-tight md:leading-normal w-full max-w-[140px] md:max-w-[220px] xl:max-w-[85%] 2xl:max-w-[22.2vw]">
-              Наш стиль нагадує скандинавський, але ми виходимо за рамки одного напрямку, пропонуючи універсальні та функціональні варіанти, що задовольнять різні смаки.
+              Наш стиль нагадує скандинавський, але ми виходимо за рамки одного напрямку, пропорекомендуючи універсальні та функціональні варіанти, що задовольнять різні смаки.
             </p>
           </div>
 
@@ -56,7 +56,7 @@ const Prefooter = () => {
           </p>
 
           <form 
-            onSubmit={(e) => e.preventDefault()} 
+            onSubmit={(e: React.FormEvent<HTMLFormElement>) => e.preventDefault()} 
             className="flex flex-col md:flex-row justify-center items-center gap-3 md:gap-4 xl:gap-6 2xl:gap-[1.5vw] w-full max-w-sm md:max-w-none"
           >
             <input 

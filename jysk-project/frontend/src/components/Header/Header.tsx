@@ -13,9 +13,9 @@ import { ReactComponent as CartIcon } from '../../assets/icons/cart.svg';
 import { ReactComponent as LocationIcon } from '../../assets/icons/location.svg';
 import { ReactComponent as ChevronIcon } from '../../assets/icons/chevron.svg';
 
-const Header = () => {
-  const [isStorePanelOpen, setIsStorePanelOpen] = useState(false);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+const Header: React.FC = () => {
+  const [isStorePanelOpen, setIsStorePanelOpen] = useState<boolean>(false);
+  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
 
   return (
     <header className="w-full shadow-sm bg-white font-sans relative z-30">
@@ -90,7 +90,6 @@ const Header = () => {
               <ChevronIcon className="xl:w-[0.8vw] xl:h-[0.8vw] text-dark" />
             </button>
 
-            {/* ИСПРАВЛЕНО: ширины кнопок пересчитаны под более мелкие пропорции 1920px */}
             <div className="flex items-center justify-between w-full xl:w-auto xl:justify-end xl:gap-[0.8vw] shrink-0">
               <NavButton 
                 text="Блог" 

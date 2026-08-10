@@ -1,13 +1,18 @@
 import React from 'react';
 import logoImage from '../../assets/images/logo.png';
 
-export default function SidebarMenu({ isOpen, setIsOpen }) {
-  const menuItems = [
+interface SidebarMenuProps {
+  isOpen: boolean;
+  setIsOpen: (isOpen: boolean) => void;
+}
+
+const SidebarMenu: React.FC<SidebarMenuProps> = ({ isOpen, setIsOpen }) => {
+  const menuItems: string[] = [
     "Вітальня", "Кухня", "Спальня", "Ванна", "Кабінет", "Двір", 
     "Вітальня", "Кухня", "Спальня", "Ванна", "Кабінет", "Двір"
   ];
 
-  const bottomNavItems = [
+  const bottomNavItems: { text: string; href: string }[] = [
     { text: "Блог", href: "#" },
     { text: "Магазини", href: "#" },
     { text: "Питання-відповідь", href: "#" },
@@ -85,4 +90,6 @@ export default function SidebarMenu({ isOpen, setIsOpen }) {
       </div>
     </>
   );
-}
+};
+
+export default SidebarMenu;
