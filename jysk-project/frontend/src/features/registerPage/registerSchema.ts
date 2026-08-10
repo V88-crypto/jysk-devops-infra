@@ -36,3 +36,13 @@ export const RegisterSchema = z
   })
 
 export type RegisterFormData = z.infer<typeof RegisterSchema>
+
+
+export const confirmAccountSchema = z.object({
+  code: z
+    .string()
+    .min(1, 'Введіть код')
+    .regex(/^\d{6}$/, 'Код повинен містити 6 цифр'),
+})
+
+export type ConfirmAccountFormData = z.infer<typeof confirmAccountSchema>
