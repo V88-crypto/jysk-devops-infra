@@ -1,6 +1,6 @@
 import { z } from 'zod'
 
-export const registerSchema = z
+export const RegisterSchema = z
   .object({
     email: z
       .string()
@@ -35,4 +35,4 @@ export const registerSchema = z
     path: ['repeatPassword'],
   })
 
-export type RegisterFormData = z.infer<typeof registerSchema>
+export type RegisterFormData = z.infer<typeof RegisterSchema>

@@ -1,0 +1,275 @@
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+
+import {
+  loginSchema,
+  type LoginFormData,
+} from './LoginSchema'
+
+export const LoginPage = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<LoginFormData>({
+    resolver: zodResolver(loginSchema),
+    mode: 'onBlur',
+    defaultValues: {
+      email: '',
+      password: '',
+    },
+  })
+
+  const onSubmit = (data: LoginFormData) => {
+    console.log(data)
+
+    // Здесь потом будет запрос на backend
+  }
+
+  return (
+    <div className="w-full min-h-screen px-4 sm:px-6">
+      <div className="w-full max-w-[1440px] mx-auto">
+
+        <h1
+          className="
+            w-full
+            text-center
+            font-bold
+            text-[28px]
+            sm:text-[36px]
+            lg:text-[48px]
+            py-[12px]
+            sm:py-[16px]
+            lg:py-[20px]
+            mt-[5px]
+            mb-[20px]
+            sm:mb-[25px]
+            lg:mb-[30px]
+            border-t
+            border-b
+            border-[#cfcfcf]
+          "
+        >
+          Вхід
+        </h1>
+
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="w-full flex flex-col items-center"
+        >
+
+          <div
+            className="
+              w-full
+              max-w-[600px]
+              mb-[15px]
+              sm:mb-[18px]
+              lg:mb-[20px]
+            "
+          >
+            <input
+              type="email"
+              placeholder="E-mail"
+              {...register('email')}
+              className={`
+                w-full
+                h-[50px]
+                sm:h-[55px]
+                lg:h-[60px]
+                px-[15px]
+                sm:px-[18px]
+                lg:px-[20px]
+                text-[16px]
+                sm:text-[18px]
+                lg:text-[20px]
+                bg-[#e4e4e4]
+                border
+                rounded-[5px]
+                outline-none
+                ${
+                  errors.email
+                    ? 'border-red-500 focus:border-red-500'
+                    : 'border-[#c5c5c5] focus:border-[#aaa]'
+                }
+              `}
+            />
+
+            {errors.email && (
+              <p className="mt-1 text-[13px] text-red-500">
+                {errors.email.message}
+              </p>
+            )}
+          </div>
+
+          <div
+            className="
+              w-full
+              max-w-[600px]
+              mb-[20px]
+              sm:mb-[22px]
+              lg:mb-[25px]
+            "
+          >
+            <input
+              type="password"
+              placeholder="Пароль"
+              {...register('password')}
+              className={`
+                w-full
+                h-[50px]
+                sm:h-[55px]
+                lg:h-[60px]
+                px-[15px]
+                sm:px-[18px]
+                lg:px-[20px]
+                text-[16px]
+                sm:text-[18px]
+                lg:text-[20px]
+                bg-[#e4e4e4]
+                border
+                rounded-[5px]
+                outline-none
+                ${
+                  errors.password
+                    ? 'border-red-500 focus:border-red-500'
+                    : 'border-[#c5c5c5] focus:border-[#aaa]'
+                }
+              `}
+            />
+
+            {errors.password && (
+              <p className="mt-1 text-[13px] text-red-500">
+                {errors.password.message}
+              </p>
+            )}
+          </div>
+
+          <button
+            type="submit"
+            className="
+              w-full
+              max-w-[600px]
+              h-[50px]
+              sm:h-[55px]
+              lg:h-[60px]
+              rounded-[5px]
+              bg-[#00adb5]
+              text-white
+              text-[16px]
+              sm:text-[18px]
+              lg:text-[20px]
+              font-bold
+              hover:bg-[#009da5]
+              transition-colors
+            "
+          >
+            Увійти
+          </button>
+
+          <a
+            href="#"
+            className="
+              w-full
+              max-w-[600px]
+              mt-[15px]
+              sm:mt-[18px]
+              lg:mt-[20px]
+              text-left
+              text-[16px]
+              sm:text-[18px]
+              lg:text-[20px]
+              text-[#00a6b2]
+              underline
+              hover:text-[#008d96]
+            "
+          >
+            Забули пароль?
+          </a>
+
+        </form>
+
+        <section
+          className="
+            w-full
+            max-w-[600px]
+            mx-auto
+            mt-[50px]
+            sm:mt-[60px]
+            lg:mt-[70px]
+          "
+        >
+
+          <h2
+            className="
+              text-center
+              font-bold
+              text-[18px]
+              sm:text-[20px]
+              lg:text-[22px]
+              mb-[25px]
+            "
+          >
+            Створити новий обліковий запис
+          </h2>
+
+          <ul
+            className="
+              list-disc
+              pl-[25px]
+              text-[14px]
+              sm:text-[16px]
+              lg:text-[18px]
+              leading-[24px]
+              sm:leading-[28px]
+              lg:leading-[30px]
+              text-[#555]
+            "
+          >
+            <li>
+              Відстежуйте ваші посилки від замовлення до доставки
+            </li>
+
+            <li>
+              Зберігайте історію замовлень
+            </li>
+
+            <li>
+              Додавайте товари до списку бажань
+            </li>
+
+            <li>
+              Зберігайте інформацію для майбутніх покупок
+            </li>
+          </ul>
+
+          <button
+            type="button"
+            className="
+              w-full
+              h-[50px]
+              sm:h-[55px]
+              lg:h-[60px]
+              mt-[45px]
+              sm:mt-[50px]
+              lg:mt-[55px]
+              rounded-[5px]
+              bg-[#e4e4e4]
+              border
+              border-[#c5c5c5]
+              text-[#555]
+              text-[16px]
+              sm:text-[18px]
+              lg:text-[20px]
+              hover:bg-[#d8d8d8]
+              transition-colors
+            "
+          >
+            Створити новий обліковий запис
+          </button>
+
+        </section>
+
+      </div>
+    </div>
+  )
+}

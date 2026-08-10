@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 import {
-  registerSchema,
+  RegisterSchema,
   type RegisterFormData,
 } from './registerSchema'
 
@@ -12,7 +12,7 @@ export const RegisterPage = () => {
     handleSubmit,
     formState: { errors },
     } = useForm<RegisterFormData>({
-    resolver: zodResolver(registerSchema),
+    resolver: zodResolver(RegisterSchema),
 
     defaultValues: {
       email: '',
