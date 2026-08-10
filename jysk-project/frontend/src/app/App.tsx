@@ -1,9 +1,13 @@
-import { SuccessPage } from "../features/registerPage/SuccessPage"
+import { ForgotPasswordPage } from "../features/resetPasswordPage/ForgotPasswordPage"
+import { PasswordResetSuccessPage } from "../features/resetPasswordPage/PasswordResetSuccessPage"
+import { ResetPasswordPage } from "../features/resetPasswordPage/ResetPasswordPage"
 
 function App() {
   return (
     <main>
-      <SuccessPage></SuccessPage>
+      <ResetPasswordPage></ResetPasswordPage>
+      <PasswordResetSuccessPage></PasswordResetSuccessPage>
+      <ForgotPasswordPage></ForgotPasswordPage>
     </main>
   )
 }
