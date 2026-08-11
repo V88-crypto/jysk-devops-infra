@@ -41,8 +41,6 @@ export const ProfileInfo = () => {
 
       <div className="w-full max-w-[1440px] mx-auto">
 
-        {/* Title */}
-
         <h1
           className="
             text-[28px]
@@ -57,8 +55,6 @@ export const ProfileInfo = () => {
           Профіль
         </h1>
 
-        {/* Main content */}
-
         <div
           className="
             w-full
@@ -69,8 +65,6 @@ export const ProfileInfo = () => {
             lg:gap-[20px]
           "
         >
-
-          {/* Profile card */}
 
           <div
             className="
@@ -88,8 +82,6 @@ export const ProfileInfo = () => {
               flex-col
             "
           >
-
-            {/* User info */}
 
             <div className="flex items-center">
 
@@ -136,8 +128,6 @@ export const ProfileInfo = () => {
               </div>
 
             </div>
-
-            {/* Contact info */}
 
             <div
               className="
@@ -186,8 +176,6 @@ export const ProfileInfo = () => {
               </div>
 
             </div>
-
-            {/* Buttons */}
 
             <div
               className="
@@ -238,8 +226,6 @@ export const ProfileInfo = () => {
             </div>
 
           </div>
-
-          {/* Navigation card */}
 
           <div
             className="
