@@ -1,13 +1,11 @@
-import { Favorites } from "../features/profilePage/components/Favourites"
-import { OrderList } from "../features/profilePage/components/OrderItem"
+import { EditProfileForm } from "../features/profilePage/components/EditProfile"
 import { ProfileInfo } from "../features/profilePage/components/ProfileInfo"
 
 function App() {
   return (
     <main>
       <ProfileInfo />
-      <OrderList />
-      <Favorites />
+      <EditProfileForm></EditProfileForm>
     </main>
   )
 }
