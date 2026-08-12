@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 import { getReviews } from "../data/reviewsApi";
-import type { Review } from "../profile";
+import type { Review } from "../../../types/profile";
 
 import { ReviewCard } from "../components/ReviewCard";
 

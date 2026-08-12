@@ -1,5 +1,5 @@
 import { about as defaultAbout } from '../data/about'
-import type { About } from '../types'
+import type { About } from '../../../types/homePage'
 
 interface AboutSectionProps {
   about?: About

@@ -1,4 +1,4 @@
-import type { Review } from "../profile";
+import type { Review } from "../../../types/profile";
 
 type Props = {
   review: Review;

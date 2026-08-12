@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 
 import { getFavorites } from '../data/favoritesApi'
-import type { FavoriteProduct } from '../profile'
+import type { FavoriteProduct } from '../../../types/profile'
 
 export const Favorites = () => {
   const [products, setProducts] = useState<FavoriteProduct[]>([])

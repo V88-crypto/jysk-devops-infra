@@ -1,4 +1,4 @@
-import type { Order } from '../profile'
+import type { Order } from '../../../types/profile'
 
 const orders: Order[] = [
   {

@@ -1,4 +1,4 @@
-import type { BlogPost } from '../types'
+import type { BlogPost } from '../../../types/homePage'
 
 const cozyRoomImage = '/images/blog-cozy-placeholder.svg'
 const sofaLightingImage = '/images/blog-sofa-placeholder.svg'

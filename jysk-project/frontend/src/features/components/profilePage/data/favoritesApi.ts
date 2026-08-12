@@ -1,4 +1,4 @@
-import type { FavoriteProduct } from '../profile'
+import type { FavoriteProduct } from '../../../types/profile'
 
 export const getFavorites = async (): Promise<FavoriteProduct[]> => {
   return [

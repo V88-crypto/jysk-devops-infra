@@ -1,4 +1,4 @@
-import type { Brand } from '../types'
+import type { Brand } from '../../../types/homePage'
 
 const placeholderLogo = '/images/brand-placeholder.svg'
 

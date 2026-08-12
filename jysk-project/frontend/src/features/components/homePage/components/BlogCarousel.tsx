@@ -4,7 +4,7 @@ import { Navigation } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 
-import type { BlogPost } from '../types'
+import type { BlogPost } from '../../../types/homePage'
 import { BlogCard } from './BlogCard'
 
 interface BlogCarouselProps {

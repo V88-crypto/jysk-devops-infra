@@ -1,5 +1,5 @@
 import { categories as defaultCategories } from '../data/categories'
-import type { Category } from '../types'
+import type { Category } from '../../../types/homePage'
 import { CategoryCard } from './CategoryCard'
 
 interface CategoryGroupProps {

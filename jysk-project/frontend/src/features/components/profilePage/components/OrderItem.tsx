@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 
 import { getOrders } from '../data/ordersApi'
-import type { Order } from '../profile'
+import type { Order } from '../../../types/profile'
 
 export const OrderList = () => {
   const [orders, setOrders] = useState<Order[]>([])

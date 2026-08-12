@@ -1,4 +1,4 @@
-import type { Review } from "../profile";
+import type { Review } from "../../../types/profile";
 
 let chair = "https://placehold.co/390x502?text=BISTRUP";
 

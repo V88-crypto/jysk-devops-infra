@@ -1,4 +1,4 @@
-import type { Profile } from '../profile'
+import type { Profile } from '../../../types/profile'
 
 const profileData: Profile = {
   id: 1,

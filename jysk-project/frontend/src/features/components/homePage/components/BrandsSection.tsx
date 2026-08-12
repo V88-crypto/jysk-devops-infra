@@ -1,5 +1,5 @@
 import { brands as defaultBrands } from '../data/brands'
-import type { Brand } from '../types'
+import type { Brand } from '../../../types/homePage'
 import { BrandCard } from './BrandCard'
 
 interface BrandsSectionProps {
