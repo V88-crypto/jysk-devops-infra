@@ -69,6 +69,8 @@ class VariantAttribute(Base):
     attribute_id = Column("AttributeId", Integer, ForeignKey("Attributes.Id"), nullable=False)
     value = Column("Value", String(255), nullable=False)
 
+    attribute = relationship("Attribute")
+
 
 class Image(Base):
     __tablename__ = "Images"
