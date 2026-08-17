@@ -1,0 +1,22 @@
+import type { Category } from '../../../types/category'
+
+export const mockCategories: Category[] = [
+  {
+    id: 1,
+    name: 'Стільці',
+    slug: 'stiltsi',
+    parentId: null,
+  },
+  {
+    id: 2,
+    name: 'Столи',
+    slug: 'stoly',
+    parentId: null,
+  },
+  {
+    id: 3,
+    name: 'Шафи',
+    slug: 'shafy',
+    parentId: null,
+  },
+]

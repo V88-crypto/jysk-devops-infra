@@ -1,6 +1,6 @@
 import type { Review } from "../../../types/profile";
 
-let chair = "https://placehold.co/390x502?text=BISTRUP";
+const chair = "https://placehold.co/390x502?text=BISTRUP";
 
 const reviews: Review[] = [
   {

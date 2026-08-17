@@ -1,11 +1,12 @@
-import { AdminSideBar } from "../features/components/adminPanel/components/AdminSideBar"
-import { EditProduct } from "../features/components/adminPanel/components/EditProducts"
+import { AddProduct } from "../features/components/adminPanel/components/EditAddProducts/AddProduct/AddProduct"
+import { EditProduct } from "../features/components/adminPanel/components/EditAddProducts/EditProduct/EditProducts"
+
 
 function App() {
   return (
     <main>
-      <AdminSideBar></AdminSideBar>
       <EditProduct></EditProduct>
+      <AddProduct></AddProduct>
     </main>
   )
 }
