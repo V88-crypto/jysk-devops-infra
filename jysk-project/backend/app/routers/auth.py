@@ -1,10 +1,11 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 
+from app.core.deps import get_current_user
 from app.core.security import create_access_token, hash_password, verify_password
 from app.database import get_db
 from app.models.user import Role, User
-from app.schemas.user import RegisterResponse, Token, UserLogin, UserRegister
+from app.schemas.user import RegisterResponse, Token, UserLogin, UserOut, UserRegister
 
 router = APIRouter(prefix="/auth", tags=["auth"])
 
@@ -62,3 +63,9 @@ def login(data: UserLogin, db: Session = Depends(get_db)):
         )
 
     return Token(access_token=create_access_token(user.id))
+
+
+@router.get("/me", response_model=UserOut)
+def me(current_user: User = Depends(get_current_user)):
+    """Данные текущего пользователя по JWT-токену."""
+    return current_user
