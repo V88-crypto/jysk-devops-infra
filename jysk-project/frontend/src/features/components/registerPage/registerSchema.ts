@@ -1,19 +1,18 @@
 import { z } from 'zod'
+import {
+  emailField,
+  passwordField,
+  repeatPasswordField,
+  withMatchingPasswords,
+} from '../../../shared/validation/authFields'
 
-export const RegisterSchema = z
-  .object({
-    email: z
-      .string()
-      .min(1, 'Введіть E-mail')
-      .email('Введіть коректний E-mail'),
+export const RegisterSchema = withMatchingPasswords(
+  z.object({
+    email: emailField,
 
-    password: z
-      .string()
-      .min(8, 'Пароль повинен містити мінімум 8 символів'),
+    password: passwordField(),
 
-    repeatPassword: z
-      .string()
-      .min(1, 'Повторіть пароль'),
+    repeatPassword: repeatPasswordField,
 
     name: z
       .string()
@@ -29,11 +28,8 @@ export const RegisterSchema = z
     findOrders: z.boolean(),
 
     subscribe: z.boolean(),
-  })
-  .refine((data) => data.password === data.repeatPassword, {
-    message: 'Паролі не співпадають',
-    path: ['repeatPassword'],
-  })
+  }),
+)
 
 export type RegisterFormData = z.infer<typeof RegisterSchema>
 

@@ -1,10 +1,13 @@
 import { z } from 'zod'
+import {
+  emailField,
+  passwordField,
+  repeatPasswordField,
+  withMatchingPasswords,
+} from '../../../shared/validation/authFields'
 
 export const forgotPasswordSchema = z.object({
-  email: z
-    .string()
-    .min(1, 'Введіть E-mail')
-    .email('Введіть коректний E-mail'),
+  email: emailField,
 })
 
 export type ForgotPasswordFormData = z.infer<
@@ -12,21 +15,13 @@ export type ForgotPasswordFormData = z.infer<
 >
 
 
-export const resetPasswordSchema = z
-  .object({
-    password: z
-      .string()
-      .min(1, 'Введіть пароль')
-      .min(8, 'Пароль повинен містити мінімум 8 символів'),
+export const resetPasswordSchema = withMatchingPasswords(
+  z.object({
+    password: passwordField(),
 
-    repeatPassword: z
-      .string()
-      .min(1, 'Повторіть пароль'),
-  })
-  .refine((data) => data.password === data.repeatPassword, {
-    message: 'Паролі не співпадають',
-    path: ['repeatPassword'],
-  })
+    repeatPassword: repeatPasswordField,
+  }),
+)
 
 export type ResetPasswordFormData = z.infer<
   typeof resetPasswordSchema

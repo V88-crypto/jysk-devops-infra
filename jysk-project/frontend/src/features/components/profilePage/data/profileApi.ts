@@ -1,4 +1,5 @@
 import type { Profile } from '../../../types/profile'
+import { mockFetch } from '../../../../shared/api/mockDelay'
 
 const profileData: Profile = {
   id: 1,
@@ -13,9 +14,5 @@ const profileData: Profile = {
 }
 
 export const getProfile = async (): Promise<Profile> => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(profileData)
-    }, 500)
-  })
+  return mockFetch(profileData, 500)
 }

@@ -1,24 +1,8 @@
-import { useEffect, useState } from 'react'
-
 import { getProfile } from '../data/profileApi'
-import type { Profile } from '../../../types/profile'
+import { useAsyncData } from '../../../../shared/hooks/useAsyncData'
 
 export const ProfileInfo = () => {
-  const [profile, setProfile] = useState<Profile | null>(null)
-  const [isLoading, setIsLoading] = useState(true)
-
-  useEffect(() => {
-    const loadProfile = async () => {
-      try {
-        const data = await getProfile()
-        setProfile(data)
-      } finally {
-        setIsLoading(false)
-      }
-    }
-
-    loadProfile()
-  }, [])
+  const { data: profile, isLoading } = useAsyncData(getProfile)
 
   if (isLoading) {
     return (

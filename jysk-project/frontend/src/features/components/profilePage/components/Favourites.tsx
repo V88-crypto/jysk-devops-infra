@@ -1,24 +1,8 @@
-import { useEffect, useState } from 'react'
-
 import { getFavorites } from '../data/favoritesApi'
-import type { FavoriteProduct } from '../../../types/profile'
+import { useAsyncData } from '../../../../shared/hooks/useAsyncData'
 
 export const Favorites = () => {
-  const [products, setProducts] = useState<FavoriteProduct[]>([])
-  const [isLoading, setIsLoading] = useState(true)
-
-  useEffect(() => {
-    const loadFavorites = async () => {
-      try {
-        const data = await getFavorites()
-        setProducts(data)
-      } finally {
-        setIsLoading(false)
-      }
-    }
-
-    loadFavorites()
-  }, [])
+  const { data: products, isLoading } = useAsyncData(getFavorites)
 
   if (isLoading) {
     return (
@@ -56,7 +40,7 @@ export const Favorites = () => {
           lg:gap-[20px]
         "
       >
-        {products.map((product) => (
+        {(products ?? []).map((product) => (
           <article
             key={product.id}
             className="

@@ -1,13 +1,8 @@
 import { mockProducts } from '../mocks/products'
 import type { Product } from '../../../types/product'
+import { mockDelay } from '../../../../shared/api/mockDelay'
 
 const API_DELAY_MS = 500
-
-const delay = (ms: number): Promise<void> => {
-  return new Promise((resolve) => {
-    window.setTimeout(resolve, ms)
-  })
-}
 
 const cloneProduct = (product: Product): Product => {
   return {
@@ -22,13 +17,13 @@ const cloneProduct = (product: Product): Product => {
 
 export const productService = {
   async getAll(): Promise<Product[]> {
-    await delay(API_DELAY_MS)
+    await mockDelay(API_DELAY_MS)
 
     return mockProducts.map(cloneProduct)
   },
 
   async getById(id: number): Promise<Product | null> {
-    await delay(API_DELAY_MS)
+    await mockDelay(API_DELAY_MS)
 
     const product = mockProducts.find((item) => item.id === id)
 
@@ -36,7 +31,7 @@ export const productService = {
   },
 
   async create(product: Product): Promise<Product> {
-    await delay(API_DELAY_MS)
+    await mockDelay(API_DELAY_MS)
 
     const createdProduct = cloneProduct(product)
     mockProducts.push(createdProduct)
@@ -45,7 +40,7 @@ export const productService = {
   },
 
   async update(product: Product): Promise<Product> {
-    await delay(API_DELAY_MS)
+    await mockDelay(API_DELAY_MS)
 
     const productIndex = mockProducts.findIndex((item) => item.id === product.id)
 
@@ -60,7 +55,7 @@ export const productService = {
   },
 
   async delete(id: number): Promise<void> {
-    await delay(API_DELAY_MS)
+    await mockDelay(API_DELAY_MS)
 
     const productIndex = mockProducts.findIndex((item) => item.id === id)
 

@@ -1,4 +1,5 @@
 import type { Order } from '../../../types/profile'
+import { mockFetch } from '../../../../shared/api/mockDelay'
 
 const orders: Order[] = [
   {
@@ -71,9 +72,5 @@ const orders: Order[] = [
 ]
 
 export const getOrders = async (): Promise<Order[]> => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(orders)
-    }, 500)
-  })
+  return mockFetch(orders, 500)
 }

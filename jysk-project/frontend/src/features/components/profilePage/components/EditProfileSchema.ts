@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { emailField } from '../../../../shared/validation/authFields';
 
 export const editProfileSchema = z.object({
   firstName: z
@@ -11,8 +12,7 @@ export const editProfileSchema = z.object({
     .min(2, "Прізвище повинно містити мінімум 2 символи")
     .max(30, "Максимум 30 символів"),
 
-  email: z
-    .email("Некоректна електронна пошта"),
+  email: emailField,
 
   phone: z
     .string()

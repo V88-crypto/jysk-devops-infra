@@ -1,7 +1,7 @@
 import type { FavoriteProduct } from '../../../types/profile'
+import { mockFetch } from '../../../../shared/api/mockDelay'
 
-export const getFavorites = async (): Promise<FavoriteProduct[]> => {
-  return [
+const favoriteProducts: FavoriteProduct[] = [
     {
       id: 1,
       name: 'BISTUP',
@@ -55,5 +55,8 @@ export const getFavorites = async (): Promise<FavoriteProduct[]> => {
       reviews: 3,
       available: true,
     },
-  ]
+]
+
+export const getFavorites = async (): Promise<FavoriteProduct[]> => {
+  return mockFetch(favoriteProducts, 500)
 }

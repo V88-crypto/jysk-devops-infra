@@ -1,4 +1,5 @@
 import type { Review } from "../../../types/profile";
+import { mockFetch } from "../../../../shared/api/mockDelay";
 
 const chair = "https://placehold.co/390x502?text=BISTRUP";
 
@@ -36,7 +37,5 @@ const reviews: Review[] = [
 ];
 
 export const getReviews = async (): Promise<Review[]> => {
-  return new Promise((resolve) => {
-    setTimeout(() => resolve(reviews), 300);
-  });
+  return mockFetch(reviews, 300);
 };

@@ -1,26 +1,10 @@
-import { useEffect, useState } from "react";
-
 import { getReviews } from "../data/reviewsApi";
-import type { Review } from "../../../types/profile";
 
 import { ReviewCard } from "../components/ReviewCard";
+import { useAsyncData } from "../../../../shared/hooks/useAsyncData";
 
 export const Reviews = () => {
-  const [reviews, setReviews] = useState<Review[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    const loadReviews = async () => {
-      try {
-        const data = await getReviews();
-        setReviews(data);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    loadReviews();
-  }, []);
+  const { data: reviews, isLoading } = useAsyncData(getReviews);
 
   if (isLoading) {
     return (
@@ -62,7 +46,7 @@ export const Reviews = () => {
       </h2>
 
       <div className="flex flex-col gap-[20px]">
-        {reviews.map((review) => (
+        {(reviews ?? []).map((review) => (
           <ReviewCard
             key={review.id}
             review={review}

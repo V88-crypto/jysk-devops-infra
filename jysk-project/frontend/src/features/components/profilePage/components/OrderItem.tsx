@@ -1,25 +1,11 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 import { getOrders } from '../data/ordersApi'
-import type { Order } from '../../../types/profile'
+import { useAsyncData } from '../../../../shared/hooks/useAsyncData'
 
 export const OrderList = () => {
-  const [orders, setOrders] = useState<Order[]>([])
-  const [isLoading, setIsLoading] = useState(true)
+  const { data: orders, isLoading } = useAsyncData(getOrders)
   const [expandedOrderId, setExpandedOrderId] = useState<number | null>(null)
-
-  useEffect(() => {
-    const loadOrders = async () => {
-      try {
-        const data = await getOrders()
-        setOrders(data)
-      } finally {
-        setIsLoading(false)
-      }
-    }
-
-    loadOrders()
-  }, [])
 
   const toggleOrder = (orderId: number) => {
     setExpandedOrderId((currentId) =>
@@ -54,7 +40,7 @@ export const OrderList = () => {
 
     <div className="w-full flex flex-col gap-[10px]">
 
-      {orders.map((order) => (
+      {(orders ?? []).map((order) => (
         <div key={order.id} className="w-full">
 
           <button
