@@ -1,0 +1,43 @@
+import type { WriteOff } from '../../../types/warehouseDocs'
+
+export const mockWriteOffs: WriteOff[] = [
+  {
+    id: 1,
+    number: '123',
+    date: '2026-08-30T15:25:00.000Z',
+    employeeName: "Ім'я",
+    warehouseId: 3,
+    warehouseName: 'Загальний склад',
+    categoryId: 4,
+    productsSummary: 'Стілець обідній BISTRUP оливковий/дуб',
+    reasonId: null,
+    reasonName: null,
+    sum: 1650,
+  },
+  {
+    id: 2,
+    number: '123',
+    date: '2026-08-30T15:25:00.000Z',
+    employeeName: "Ім'я",
+    warehouseId: 3,
+    warehouseName: 'Загальний склад',
+    categoryId: 4,
+    productsSummary: 'Стілець обідній BISTRUP оливковий/дуб',
+    reasonId: null,
+    reasonName: null,
+    sum: 1650,
+  },
+  {
+    id: 3,
+    number: '123',
+    date: '2026-08-30T15:25:00.000Z',
+    employeeName: "Ім'я",
+    warehouseId: 3,
+    warehouseName: 'Загальний склад',
+    categoryId: 4,
+    productsSummary: 'Стілець обідній BISTRUP оливковий/дуб',
+    reasonId: null,
+    reasonName: null,
+    sum: 1650,
+  },
+]

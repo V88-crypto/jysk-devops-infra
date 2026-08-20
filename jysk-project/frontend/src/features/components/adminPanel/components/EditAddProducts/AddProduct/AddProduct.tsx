@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import type { FormEvent } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import { attributeService } from '../../../services/attributeService'
 import { categoryService } from '../../../services/categoryService'
@@ -10,12 +11,15 @@ import type { Category } from '../../../../../types/category'
 
 import { ProductFormFields } from '../components/ProductFormFields'
 import { useProductFormState } from '../hooks/useProductFormState'
+import { AdminPageLayout } from '../../common/AdminPageLayout'
 
 import { emptyProductFormState } from '../utils/productHelpers'
 
 import { mapFormToNewProduct } from './utils/productsMapper'
 
 export const AddProduct = () => {
+  const navigate = useNavigate()
+
   const [categories, setCategories] = useState<Category[]>([])
   const [attributes, setAttributes] = useState<Attribute[]>([])
 
@@ -92,12 +96,18 @@ export const AddProduct = () => {
   }
 
   return (
-    <main className="min-h-screen bg-[#f4f4f4] px-4 py-6 pt-[84px] text-[#202020] sm:px-6 md:ml-[160px] md:px-10 md:pt-8 lg:px-12">
+    <AdminPageLayout>
       <form
         className="w-full max-w-[1400px]"
         onSubmit={(event) => void handleSubmit(event)}
       >
-        <h1 className="mb-7 text-2xl font-semibold">Додати товар</h1>
+        <button
+          type="button"
+          onClick={() => navigate('/products')}
+          className="mb-7 flex items-center gap-2 text-2xl font-semibold transition-opacity hover:opacity-70"
+        >
+          <span className="text-lg">‹</span> Додати товар
+        </button>
 
         <ProductFormFields
           form={form}
@@ -128,6 +138,6 @@ export const AddProduct = () => {
           )}
         </div>
       </form>
-    </main>
+    </AdminPageLayout>
   )
 }

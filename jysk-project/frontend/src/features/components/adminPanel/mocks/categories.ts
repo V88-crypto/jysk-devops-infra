@@ -19,4 +19,10 @@ export const mockCategories: Category[] = [
     slug: 'shafy',
     parentId: null,
   },
+  {
+    id: 4,
+    name: 'Обідні столи',
+    slug: 'obidni-stoly',
+    parentId: null,
+  },
 ]

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import type { FormEvent } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
 
 import { attributeService } from '../../../services/attributeService'
 import { categoryService } from '../../../services/categoryService'
@@ -11,15 +12,18 @@ import type { Product } from '../../../../../types/product'
 
 import { ProductFormFields } from '../components/ProductFormFields'
 import { useProductFormState } from '../hooks/useProductFormState'
+import { AdminPageLayout } from '../../common/AdminPageLayout'
 
 import {
   mapFormToProduct,
   mapProductToForm,
 } from './utils/productMapper'
 
-const EDIT_PRODUCT_ID = 1
-
 export const EditProduct = () => {
+  const { id } = useParams()
+  const productId = Number(id)
+  const navigate = useNavigate()
+
   const [categories, setCategories] = useState<Category[]>([])
   const [attributes, setAttributes] = useState<Attribute[]>([])
   const [product, setProduct] = useState<Product | null>(null)
@@ -47,7 +51,7 @@ export const EditProduct = () => {
       try {
         const [loadedProduct, loadedCategories, loadedAttributes] =
           await Promise.all([
-            productService.getById(EDIT_PRODUCT_ID),
+            productService.getById(productId),
             categoryService.getAll(),
             attributeService.getAll(),
           ])
@@ -82,7 +86,7 @@ export const EditProduct = () => {
     return () => {
       isMounted = false
     }
-  }, [setForm])
+  }, [setForm, productId])
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -110,14 +114,18 @@ export const EditProduct = () => {
   }
 
   return (
-    <main className="min-h-screen bg-[#f4f4f4] px-4 py-6 pt-[84px] text-[#202020] sm:px-6 md:ml-[160px] md:px-10 md:pt-8 lg:px-12">
+    <AdminPageLayout>
       <form
         className="w-full max-w-[1400px]"
         onSubmit={(event) => void handleSubmit(event)}
       >
-        <h1 className="mb-7 text-2xl font-semibold">
-          Редагування товару
-        </h1>
+        <button
+          type="button"
+          onClick={() => navigate('/products')}
+          className="mb-7 flex items-center gap-2 text-2xl font-semibold transition-opacity hover:opacity-70"
+        >
+          <span className="text-lg">‹</span> Редагування товару
+        </button>
 
         <ProductFormFields
           form={form}
@@ -147,6 +155,6 @@ export const EditProduct = () => {
           )}
         </div>
       </form>
-    </main>
+    </AdminPageLayout>
   )
 }
