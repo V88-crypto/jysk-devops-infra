@@ -1,0 +1,62 @@
+import type { FavoriteProduct } from '../../../types/profile'
+import { mockFetch } from '../../../../shared/api/mockDelay'
+
+const favoriteProducts: FavoriteProduct[] = [
+    {
+      id: 1,
+      name: 'BISTUP',
+      brand: 'BISTUP',
+      description: 'Стілець обідній BISTUP оливковий/дуб',
+      price: 60,
+      oldPrice: 100,
+      image: 'https://placehold.co/390x502?text=BISTRUP',
+      discount: 40,
+      badge: 'Новинка',
+      rating: 5,
+      reviews: 5,
+      available: true,
+    },
+    {
+      id: 2,
+      name: 'RYESTARR',
+      brand: 'RYESTARR',
+      description: 'Килим RYESTARR 63x90см чорний',
+      price: 60,
+      image: 'https://placehold.co/390x502?text=RYESTARR',
+      badge: 'Чудова пропозиція',
+      rating: 5,
+      reviews: 4,
+      available: true,
+    },
+    {
+      id: 3,
+      name: 'BISTRUP',
+      brand: 'BISTRUP',
+      description: 'Стілець обідній BISTRUP оливковий/дуб',
+      price: 60,
+      oldPrice: 90,
+      image: 'https://placehold.co/390x502?text=BISTRUP',
+      discount: 33,
+      rating: 5,
+      reviews: 8,
+      available: true,
+    },
+    {
+      id: 4,
+      name: 'TARDURP',
+      brand: 'TARDURP',
+      description: 'Комод TARDURP дуб',
+      price: 60,
+      oldPrice: 100,
+      image: 'https://placehold.co/390x502?text=TARDURP',
+      discount: 40,
+      badge: 'Новинка',
+      rating: 5,
+      reviews: 3,
+      available: true,
+    },
+]
+
+export const getFavorites = async (): Promise<FavoriteProduct[]> => {
+  return mockFetch(favoriteProducts, 500)
+}
