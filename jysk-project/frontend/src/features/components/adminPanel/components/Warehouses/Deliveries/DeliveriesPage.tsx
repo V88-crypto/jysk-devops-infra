@@ -8,8 +8,8 @@ const AddDeliveryRoute = () => {
 
   return (
     <AddDeliveryForm
-      onBack={() => navigate('/deliveries')}
-      onSaved={() => navigate('/deliveries')}
+      onBack={() => navigate('/admin/deliveries')}
+      onSaved={() => navigate('/admin/deliveries')}
     />
   )
 }
@@ -17,7 +17,7 @@ const AddDeliveryRoute = () => {
 const DeliveriesListRoute = () => {
   const navigate = useNavigate()
 
-  return <DeliveriesList onAdd={() => navigate('/deliveries/add')} />
+  return <DeliveriesList onAdd={() => navigate('/admin/deliveries/add')} />
 }
 
 export const DeliveriesPage = () => {

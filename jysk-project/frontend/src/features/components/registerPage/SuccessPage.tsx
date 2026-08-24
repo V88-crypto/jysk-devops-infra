@@ -1,4 +1,8 @@
+import { useNavigate } from 'react-router-dom'
+
 export const SuccessPage = () => {
+  const navigate = useNavigate()
+
   return (
     <div className="w-full min-h-screen px-4 sm:px-6">
       <div className="w-full max-w-[1440px] mx-auto flex flex-col items-center">
@@ -26,8 +30,9 @@ export const SuccessPage = () => {
           Обліковий запис успішно створено!
         </h1>
 
-        <a
-          href="#"
+        <button
+          type="button"
+          onClick={() => navigate('/profile')}
           className="
             mt-[15px]
             sm:mt-[18px]
@@ -41,7 +46,7 @@ export const SuccessPage = () => {
           "
         >
           Перейти в профіль
-        </a>
+        </button>
 
       </div>
     </div>

@@ -1,5 +1,6 @@
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useNavigate } from 'react-router-dom'
 
 import {
   resetPasswordSchema,
@@ -7,6 +8,8 @@ import {
 } from './PasswordResetSchema'
 
 export const ResetPasswordPage = () => {
+  const navigate = useNavigate()
+
   const {
     register,
     handleSubmit,
@@ -23,7 +26,8 @@ export const ResetPasswordPage = () => {
   const onSubmit = (data: ResetPasswordFormData) => {
     console.log(data)
 
-    // Здесь потом запрос на backend
+    // Бекенд поки не має ендпоінту для скидання пароля — переходимо далі за макетом
+    navigate('/reset-password/success')
   }
 
   return (
@@ -154,8 +158,9 @@ export const ResetPasswordPage = () => {
             Підтвердити
           </button>
 
-          <a
-            href="#"
+          <button
+            type="button"
+            onClick={() => navigate('/login')}
             className="
               mt-[15px]
               sm:mt-[18px]
@@ -169,7 +174,7 @@ export const ResetPasswordPage = () => {
             "
           >
             Скасувати
-          </a>
+          </button>
 
         </form>
 

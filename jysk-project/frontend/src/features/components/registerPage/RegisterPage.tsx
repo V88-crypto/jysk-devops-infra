@@ -1,16 +1,33 @@
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useNavigate } from 'react-router-dom'
+
+import { authService } from '../../../shared/api/authService'
+import { ApiError } from '../../../shared/api/httpClient'
+import { useAuth } from '../../../shared/auth/useAuth'
 
 import {
   RegisterSchema,
   type RegisterFormData,
 } from './registerSchema'
 
+const splitFullName = (fullName: string): { firstName: string; lastName: string } => {
+  const [firstName, ...rest] = fullName.trim().split(/\s+/)
+  const lastName = rest.join(' ')
+
+  return { firstName, lastName: lastName || firstName }
+}
+
 export const RegisterPage = () => {
+  const navigate = useNavigate()
+  const auth = useAuth()
+  const [submitError, setSubmitError] = useState<string | null>(null)
+
     const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
     } = useForm<RegisterFormData>({
     resolver: zodResolver(RegisterSchema),
 
@@ -25,11 +42,28 @@ export const RegisterPage = () => {
     },
   })
 
-  const onSubmit = (data: RegisterFormData) => {
-    console.log(data)
+  const onSubmit = async (data: RegisterFormData) => {
+    setSubmitError(null)
 
-    // Здесь потом будет:
-    // запрос на backend
+    const { firstName, lastName } = splitFullName(data.name)
+
+    try {
+      await authService.register({
+        firstName,
+        lastName,
+        email: data.email,
+        password: data.password,
+      })
+
+      auth.login()
+      navigate('/')
+    } catch (error) {
+      setSubmitError(
+        error instanceof ApiError
+          ? error.message
+          : 'Не вдалося створити обліковий запис. Спробуйте ще раз.',
+      )
+    }
   }
 
   return (
@@ -331,8 +365,15 @@ export const RegisterPage = () => {
 
           </div>
 
+          {submitError && (
+            <p className="w-full max-w-[600px] mb-[15px] text-[14px] text-red-500">
+              {submitError}
+            </p>
+          )}
+
           <button
             type="submit"
+            disabled={isSubmitting}
             className="
               w-full
               max-w-[600px]
@@ -348,13 +389,16 @@ export const RegisterPage = () => {
               font-bold
               hover:bg-[#009da5]
               transition-colors
+              disabled:cursor-not-allowed
+              disabled:opacity-60
             "
           >
-            Створити обліковий запис
+            {isSubmitting ? 'Створення...' : 'Створити обліковий запис'}
           </button>
 
-          <a
-            href="#"
+          <button
+            type="button"
+            onClick={() => navigate('/login')}
             className="
               mt-[15px]
               sm:mt-[18px]
@@ -368,7 +412,7 @@ export const RegisterPage = () => {
             "
           >
             Скасувати
-          </a>
+          </button>
 
         </form>
       </div>

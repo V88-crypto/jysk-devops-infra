@@ -8,8 +8,8 @@ const AddWriteOffRoute = () => {
 
   return (
     <AddWriteOffForm
-      onBack={() => navigate('/writeOffs')}
-      onSaved={() => navigate('/writeOffs')}
+      onBack={() => navigate('/admin/writeOffs')}
+      onSaved={() => navigate('/admin/writeOffs')}
     />
   )
 }
@@ -17,7 +17,7 @@ const AddWriteOffRoute = () => {
 const WriteOffsListRoute = () => {
   const navigate = useNavigate()
 
-  return <WriteOffsList onAdd={() => navigate('/writeOffs/add')} />
+  return <WriteOffsList onAdd={() => navigate('/admin/writeOffs/add')} />
 }
 
 export const WriteOffsPage = () => {

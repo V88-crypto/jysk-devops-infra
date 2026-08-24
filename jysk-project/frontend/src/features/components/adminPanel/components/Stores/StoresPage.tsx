@@ -10,8 +10,8 @@ const EditStoreRoute = () => {
   return (
     <EditStoreForm
       storeId={Number(id)}
-      onBack={() => navigate('/stores')}
-      onSaved={() => navigate('/stores')}
+      onBack={() => navigate('/admin/stores')}
+      onSaved={() => navigate('/admin/stores')}
     />
   )
 }
@@ -19,7 +19,7 @@ const EditStoreRoute = () => {
 const StoresListRoute = () => {
   const navigate = useNavigate()
 
-  return <StoresList onEdit={(id) => navigate(`/stores/${id}/edit`)} />
+  return <StoresList onEdit={(id) => navigate(`/admin/stores/${id}/edit`)} />
 }
 
 export const StoresPage = () => {

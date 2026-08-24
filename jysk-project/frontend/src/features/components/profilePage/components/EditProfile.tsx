@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import { FormState } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useNavigate } from "react-router-dom";
 
 import {
   editProfileSchema,
@@ -8,6 +9,8 @@ import {
 } from "./EditProfileSchema";
 
 export const EditProfileForm = () => {
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -26,6 +29,7 @@ export const EditProfileForm = () => {
 
   const onSubmit = (data: EditProfileFormData) => {
     console.log("SUCCESS:", data);
+    navigate("/profile");
   };
 
   const onError = (errors: FormState<EditProfileFormData>["errors"]) => {

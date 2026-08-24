@@ -40,9 +40,10 @@ const ComingSoonPage = ({ itemId }: { itemId: AdminNavItemId }) => {
 }
 
 const getActiveItem = (pathname: string): AdminNavItemId => {
-  const [, firstSegment] = pathname.split('/')
+  // pathname виглядає як "/admin/<розділ>/...", розділ адмінки — третій сегмент
+  const [, , section] = pathname.split('/')
 
-  return (firstSegment || 'stock') as AdminNavItemId
+  return (section || 'stock') as AdminNavItemId
 }
 
 export const AdminLayout = () => {
@@ -55,11 +56,11 @@ export const AdminLayout = () => {
     <div>
       <AdminSideBar
         activeItem={activeItem}
-        onSelect={(id) => navigate(`/${id}`)}
+        onSelect={(id) => navigate(`/admin/${id}`)}
       />
 
       <Routes>
-        <Route index element={<Navigate to="/stock" replace />} />
+        <Route index element={<Navigate to="/admin/stock" replace />} />
 
         <Route path="products/*" element={<ProductsPage />} />
 

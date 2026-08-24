@@ -9,4 +9,8 @@ export default defineConfig({
     tailwindcss(),
     svgr()
   ],
+  server: {
+    // бэкенд (app/main.py) разрешает CORS только с localhost:3000
+    port: 3000,
+  },
 })

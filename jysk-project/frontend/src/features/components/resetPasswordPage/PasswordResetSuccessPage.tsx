@@ -1,4 +1,8 @@
+import { useNavigate } from 'react-router-dom'
+
 export const PasswordResetSuccessPage = () => {
+  const navigate = useNavigate()
+
   return (
     <div className="w-full min-h-screen px-4 sm:px-6">
       <div className="w-full max-w-[1440px] mx-auto">
@@ -28,8 +32,9 @@ export const PasswordResetSuccessPage = () => {
 
         <div className="w-full flex justify-center">
 
-          <a
-            href="#"
+          <button
+            type="button"
+            onClick={() => navigate('/login')}
             className="
               text-[16px]
               sm:text-[18px]
@@ -41,7 +46,7 @@ export const PasswordResetSuccessPage = () => {
             "
           >
             Перейти до входу
-          </a>
+          </button>
 
         </div>
 
