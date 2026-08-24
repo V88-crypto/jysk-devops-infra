@@ -1,5 +1,6 @@
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useNavigate } from 'react-router-dom'
 
 import {
   forgotPasswordSchema,
@@ -7,6 +8,8 @@ import {
 } from './PasswordResetSchema'
 
 export const ForgotPasswordPage = () => {
+  const navigate = useNavigate()
+
   const {
     register,
     handleSubmit,
@@ -21,8 +24,7 @@ export const ForgotPasswordPage = () => {
 
   const onSubmit = (data: ForgotPasswordFormData) => {
     console.log(data)
-
-    // Здесь потом запрос на backend
+    navigate('/reset-password')
   }
 
   return (
@@ -139,8 +141,9 @@ export const ForgotPasswordPage = () => {
           >
             Надіслати
           </button>
-          <a
-            href="#"
+          <button
+            type="button"
+            onClick={() => navigate('/login')}
             className="
               mt-[15px]
               sm:mt-[18px]
@@ -154,7 +157,7 @@ export const ForgotPasswordPage = () => {
             "
           >
             Скасувати
-          </a>
+          </button>
 
         </form>
 

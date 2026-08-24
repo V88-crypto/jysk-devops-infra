@@ -1,5 +1,6 @@
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useNavigate } from 'react-router-dom'
 
 import {
   confirmAccountSchema,
@@ -7,6 +8,8 @@ import {
 } from './registerSchema'
 
 export const ConfirmEmailPage = () => {
+  const navigate = useNavigate()
+
   const {
     register,
     handleSubmit,
@@ -21,8 +24,7 @@ export const ConfirmEmailPage = () => {
 
   const onSubmit = (data: ConfirmAccountFormData) => {
     console.log(data)
-
-    // Здесь потом запрос на backend
+    navigate('/register/success')
   }
 
   return (
@@ -141,8 +143,9 @@ export const ConfirmEmailPage = () => {
             Підтвердити
           </button>
 
-          <a
-            href="#"
+          <button
+            type="button"
+            onClick={() => navigate('/register')}
             className="
               mt-[15px]
               sm:mt-[18px]
@@ -156,7 +159,7 @@ export const ConfirmEmailPage = () => {
             "
           >
             Скасувати
-          </a>
+          </button>
 
         </form>
       </div>

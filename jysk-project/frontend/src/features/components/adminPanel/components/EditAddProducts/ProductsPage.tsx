@@ -9,8 +9,8 @@ const ProductsListRoute = () => {
 
   return (
     <ProductsList
-      onAdd={() => navigate('/products/add')}
-      onEdit={(id) => navigate(`/products/${id}/edit`)}
+      onAdd={() => navigate('/admin/products/add')}
+      onEdit={(id) => navigate(`/admin/products/${id}/edit`)}
     />
   )
 }

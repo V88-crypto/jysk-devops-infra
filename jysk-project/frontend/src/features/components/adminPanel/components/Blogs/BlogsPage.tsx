@@ -10,8 +10,8 @@ const EditBlogRoute = () => {
   return (
     <EditBlogForm
       postId={Number(id)}
-      onBack={() => navigate('/blogs')}
-      onSaved={() => navigate('/blogs')}
+      onBack={() => navigate('/admin/blogs')}
+      onSaved={() => navigate('/admin/blogs')}
     />
   )
 }
@@ -19,7 +19,7 @@ const EditBlogRoute = () => {
 const BlogsListRoute = () => {
   const navigate = useNavigate()
 
-  return <BlogsList onEdit={(id) => navigate(`/blogs/${id}/edit`)} />
+  return <BlogsList onEdit={(id) => navigate(`/admin/blogs/${id}/edit`)} />
 }
 
 export const BlogsPage = () => {

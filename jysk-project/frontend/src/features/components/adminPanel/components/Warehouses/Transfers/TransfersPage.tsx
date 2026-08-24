@@ -8,8 +8,8 @@ const AddTransferRoute = () => {
 
   return (
     <AddTransferForm
-      onBack={() => navigate('/transfers')}
-      onSaved={() => navigate('/transfers')}
+      onBack={() => navigate('/admin/transfers')}
+      onSaved={() => navigate('/admin/transfers')}
     />
   )
 }
@@ -17,7 +17,7 @@ const AddTransferRoute = () => {
 const TransfersListRoute = () => {
   const navigate = useNavigate()
 
-  return <TransfersList onAdd={() => navigate('/transfers/add')} />
+  return <TransfersList onAdd={() => navigate('/admin/transfers/add')} />
 }
 
 export const TransfersPage = () => {

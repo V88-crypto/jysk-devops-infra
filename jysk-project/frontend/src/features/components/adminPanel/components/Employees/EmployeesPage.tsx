@@ -10,8 +10,8 @@ const EditEmployeeRoute = () => {
   return (
     <EditEmployeeForm
       employeeId={Number(id)}
-      onBack={() => navigate('/employees')}
-      onSaved={() => navigate('/employees')}
+      onBack={() => navigate('/admin/employees')}
+      onSaved={() => navigate('/admin/employees')}
     />
   )
 }
@@ -19,7 +19,7 @@ const EditEmployeeRoute = () => {
 const EmployeesListRoute = () => {
   const navigate = useNavigate()
 
-  return <EmployeesList onEdit={(id) => navigate(`/employees/${id}/edit`)} />
+  return <EmployeesList onEdit={(id) => navigate(`/admin/employees/${id}/edit`)} />
 }
 
 export const EmployeesPage = () => {
