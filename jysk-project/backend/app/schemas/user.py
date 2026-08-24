@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from pydantic import BaseModel, ConfigDict, EmailStr, Field
+from pydantic import BaseModel, ConfigDict, EmailStr, Field, field_validator
 
 
 class UserRegister(BaseModel):
@@ -33,7 +33,13 @@ class UserOut(BaseModel):
     email: EmailStr
     phone: str | None
     role_id: int
+    role: str
     created_at: datetime
+
+    @field_validator("role", mode="before")
+    @classmethod
+    def role_to_name(cls, value):
+        return getattr(value, "name", value)
 
 
 class Token(BaseModel):
