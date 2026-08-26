@@ -1,5 +1,11 @@
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useNavigate } from 'react-router-dom'
+
+import { authService } from '../../../shared/api/authService'
+import { ApiError } from '../../../shared/api/httpClient'
+import { useAuth } from '../../../shared/auth/useAuth'
 
 import {
   loginSchema,
@@ -7,10 +13,14 @@ import {
 } from './LoginSchema'
 
 export const LoginPage = () => {
+  const navigate = useNavigate()
+  const auth = useAuth()
+  const [submitError, setSubmitError] = useState<string | null>(null)
+
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm<LoginFormData>({
     resolver: zodResolver(loginSchema),
     mode: 'onBlur',
@@ -20,10 +30,20 @@ export const LoginPage = () => {
     },
   })
 
-  const onSubmit = (data: LoginFormData) => {
-    console.log(data)
+  const onSubmit = async (data: LoginFormData) => {
+    setSubmitError(null)
 
-    // Здесь потом будет запрос на backend
+    try {
+      await authService.login(data)
+      auth.login()
+      navigate('/')
+    } catch (error) {
+      setSubmitError(
+        error instanceof ApiError
+          ? error.message
+          : 'Не вдалося увійти. Спробуйте ще раз.',
+      )
+    }
   }
 
   return (
@@ -144,8 +164,15 @@ export const LoginPage = () => {
             )}
           </div>
 
+          {submitError && (
+            <p className="w-full max-w-[600px] mb-[15px] text-[14px] text-red-500">
+              {submitError}
+            </p>
+          )}
+
           <button
             type="submit"
+            disabled={isSubmitting}
             className="
               w-full
               max-w-[600px]
@@ -161,13 +188,16 @@ export const LoginPage = () => {
               font-bold
               hover:bg-[#009da5]
               transition-colors
+              disabled:cursor-not-allowed
+              disabled:opacity-60
             "
           >
-            Увійти
+            {isSubmitting ? 'Вхід...' : 'Увійти'}
           </button>
 
-          <a
-            href="#"
+          <button
+            type="button"
+            onClick={() => navigate('/forgot-password')}
             className="
               w-full
               max-w-[600px]
@@ -184,7 +214,7 @@ export const LoginPage = () => {
             "
           >
             Забули пароль?
-          </a>
+          </button>
 
         </form>
 
@@ -244,6 +274,7 @@ export const LoginPage = () => {
 
           <button
             type="button"
+            onClick={() => navigate('/register')}
             className="
               w-full
               h-[50px]

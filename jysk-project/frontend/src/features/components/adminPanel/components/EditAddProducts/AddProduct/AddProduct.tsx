@@ -103,7 +103,7 @@ export const AddProduct = () => {
       >
         <button
           type="button"
-          onClick={() => navigate('/products')}
+          onClick={() => navigate('/admin/products')}
           className="mb-7 flex items-center gap-2 text-2xl font-semibold transition-opacity hover:opacity-70"
         >
           <span className="text-lg">‹</span> Додати товар

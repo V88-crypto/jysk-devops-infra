@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../shared/auth/useAuth';
 import IconButton from './IconButton';
 import NavButton from './NavButton';
 import StorePanel from './StorePanel';
@@ -14,6 +16,8 @@ import LocationIcon from '../../assets/icons/location.svg?react';
 import ChevronIcon from '../../assets/icons/chevron.svg?react';
 
 const Header: React.FC = () => {
+  const navigate = useNavigate();
+  const { isAuthenticated } = useAuth();
   const [isStorePanelOpen, setIsStorePanelOpen] = useState<boolean>(false);
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
 
@@ -28,11 +32,17 @@ const Header: React.FC = () => {
             
             <div className="flex items-center gap-3 md:gap-[2vw] xl:gap-[1.6vw] shrink-0">
               
-              <img 
-                src={logoImage} 
-                alt="Логотип HYQGY" 
-                className="w-[62px] h-[40px] md:w-[9.6vw] md:h-[6.25vw] xl:w-[7.6vw] xl:h-[4.9vw] object-contain shrink-0 order-2 xl:order-1" 
-              />
+              <button
+                type="button"
+                onClick={() => navigate('/')}
+                className="shrink-0 order-2 xl:order-1"
+              >
+                <img
+                  src={logoImage}
+                  alt="Логотип HYQGY"
+                  className="w-[62px] h-[40px] md:w-[9.6vw] md:h-[6.25vw] xl:w-[7.6vw] xl:h-[4.9vw] object-contain"
+                />
+              </button>
               
               <button 
                 onClick={() => setIsMenuOpen(true)}
@@ -56,7 +66,19 @@ const Header: React.FC = () => {
 
             <div className="flex items-center gap-4 md:gap-[3.1vw] xl:gap-[2vw] shrink-0">
               <IconButton Icon={HeartIcon} label="Обране" />
-              <IconButton Icon={UserIcon} label="Вхід" />
+              {isAuthenticated ? (
+                <IconButton
+                  Icon={UserIcon}
+                  label="Мій профіль"
+                  onClick={() => navigate('/profile')}
+                />
+              ) : (
+                <IconButton
+                  Icon={UserIcon}
+                  label="Вхід"
+                  onClick={() => navigate('/login')}
+                />
+              )}
               <IconButton Icon={CartIcon} label="Кошик" />
             </div>
 

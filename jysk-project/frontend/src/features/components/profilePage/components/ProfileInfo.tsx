@@ -1,8 +1,18 @@
+import { useNavigate } from 'react-router-dom'
+
 import { getProfile } from '../data/profileApi'
 import { useAsyncData } from '../../../../shared/hooks/useAsyncData'
+import { useAuth } from '../../../../shared/auth/useAuth'
 
 export const ProfileInfo = () => {
+  const navigate = useNavigate()
+  const { logout } = useAuth()
   const { data: profile, isLoading } = useAsyncData(getProfile)
+
+  const handleLogout = () => {
+    logout()
+    navigate('/')
+  }
 
   if (isLoading) {
     return (
@@ -173,6 +183,7 @@ export const ProfileInfo = () => {
 
               <button
                 type="button"
+                onClick={() => navigate('/profile/edit')}
                 className="
                   w-[150px]
                   h-[45px]
@@ -191,6 +202,7 @@ export const ProfileInfo = () => {
 
               <button
                 type="button"
+                onClick={handleLogout}
                 className="
                   w-[150px]
                   h-[45px]
