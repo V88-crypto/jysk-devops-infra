@@ -16,3 +16,4 @@ email-validator       # требуется pydantic для типа EmailStr
 python-jose[cryptography]
 passlib[bcrypt]
 bcrypt==4.0.1         # passlib 1.7.4 несовместим с bcrypt 5.x, поэтому фиксируем версию
+python-multipart      # нужен FastAPI для OAuth2-формы (эндпоинт /auth/token)
