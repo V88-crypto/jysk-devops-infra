@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from pydantic import BaseModel, ConfigDict, EmailStr, Field
+from pydantic import BaseModel, ConfigDict, EmailStr, Field, field_validator
 
 
 class UserRegister(BaseModel):
@@ -21,6 +21,12 @@ class UserLogin(BaseModel):
     password: str
 
 
+class RefreshRequest(BaseModel):
+    """Тело запроса обновления токенов и выхода."""
+
+    refresh_token: str
+
+
 class UserOut(BaseModel):
     """Данные пользователя в ответах API (без хеша пароля)."""
 
@@ -33,17 +39,30 @@ class UserOut(BaseModel):
     email: EmailStr
     phone: str | None
     role_id: int
+    role: str
     created_at: datetime
+
+    @field_validator("role", mode="before")
+    @classmethod
+    def role_to_name(cls, value):
+        """Подставляет имя роли строкой вместо ORM-объекта Role."""
+        return getattr(value, "name", value)
 
 
 class Token(BaseModel):
-    """Ответ с JWT-токеном."""
+    """Ответ с access-токеном."""
 
     access_token: str
     token_type: str = "bearer"
 
 
-class RegisterResponse(Token):
-    """Ответ регистрации: токен (авто-логин) + данные пользователя."""
+class TokenPair(Token):
+    """Пара токенов: короткоживущий access и долгоживущий refresh."""
+
+    refresh_token: str
+
+
+class RegisterResponse(TokenPair):
+    """Ответ регистрации: пара токенов (авто-логин) + данные пользователя."""
 
     user: UserOut

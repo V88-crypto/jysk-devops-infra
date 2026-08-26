@@ -1,3 +1,5 @@
+import hashlib
+import secrets
 from datetime import datetime, timedelta, timezone
 
 from jose import jwt
@@ -26,3 +28,13 @@ def create_access_token(user_id: int) -> str:
     )
     payload = {"sub": str(user_id), "exp": expires_at}
     return jwt.encode(payload, settings.JWT_SECRET, algorithm=settings.JWT_ALGORITHM)
+
+
+def create_refresh_token() -> str:
+    """Генерирует криптослучайный refresh-токен."""
+    return secrets.token_urlsafe(48)
+
+
+def hash_refresh_token(token: str) -> str:
+    """SHA-256-хеш refresh-токена: в БД храним только хеш, не сам токен."""
+    return hashlib.sha256(token.encode()).hexdigest()
