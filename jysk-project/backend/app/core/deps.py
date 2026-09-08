@@ -9,6 +9,8 @@ from app.models.user import User
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/auth/token")
 
+ADMIN_ROLE = "admin"
+
 
 def get_current_user(
     token: str = Depends(oauth2_scheme),
@@ -32,3 +34,13 @@ def get_current_user(
     if user is None:
         raise credentials_error
     return user
+
+
+def require_admin(current_user: User = Depends(get_current_user)) -> User:
+    """Пропускает только пользователей с ролью admin."""
+    if current_user.role is None or current_user.role.name != ADMIN_ROLE:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Требуются права администратора",
+        )
+    return current_user
