@@ -4,6 +4,8 @@ import { AuthProvider } from "../shared/auth/AuthProvider"
 import { SiteLayout } from "./SiteLayout"
 import { RequireAuth } from "./RequireAuth"
 import { MainPage } from "../features/mainPage/MainPage"
+import { BlogListPage } from "../features/blogPage/BlogListPage"
+import { BlogPostDetailPage } from "../features/blogPage/BlogPostDetailPage"
 import { LoginPage } from "../features/components/loginPage/LoginPage"
 import { RegisterPage } from "../features/components/registerPage/RegisterPage"
 import { ConfirmEmailPage } from "../features/components/registerPage/ConfirmEmailPage"
@@ -27,6 +29,8 @@ function App() {
           <Route element={<SiteLayout />}>
             <Route index element={<MainPage />} />
             <Route path="vacancies" element={<VacanciesPage />} />
+            <Route path="blog" element={<BlogListPage />} />
+            <Route path="blog/:postId" element={<BlogPostDetailPage />} />
 
             <Route path="login" element={<LoginPage />} />
             <Route path="register" element={<RegisterPage />} />
