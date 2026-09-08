@@ -113,10 +113,11 @@ const Header: React.FC = () => {
             </button>
 
             <div className="flex items-center justify-between w-full xl:w-auto xl:justify-end xl:gap-[0.8vw] shrink-0">
-              <NavButton 
-                text="Блог" 
-                active={false} 
-                className="md:w-[15.88vw] xl:w-[7.18vw]" 
+              <NavButton
+                text="Блог"
+                active={false}
+                onClick={() => navigate('/blog')}
+                className="md:w-[15.88vw] xl:w-[7.18vw]"
               />
               <NavButton 
                 text="Магазини" 
