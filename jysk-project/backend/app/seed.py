@@ -2,6 +2,7 @@ from decimal import Decimal
 
 from sqlalchemy.orm import Session
 
+from app.core.security import hash_password
 from app.database import SessionLocal
 from app.models.catalog import (
     Attribute,
@@ -11,6 +12,11 @@ from app.models.catalog import (
     ProductVariant,
     VariantAttribute,
 )
+from app.models.user import Role, User
+
+ADMIN_ROLE = "admin"
+ADMIN_EMAIL = "admin@jysk.local"
+ADMIN_PASSWORD = "Admin12345"
 
 CATEGORY_TREE = [
     ("Мебель", "mebel", [("Диваны", "divany"), ("Кресла", "kresla"), ("Столы", "stoly")]),
@@ -180,6 +186,24 @@ def get_or_create_category(db: Session, name: str, slug: str, parent_id: int | N
     return category
 
 
+def seed_admin(db: Session) -> None:
+    role = db.query(Role).filter(Role.name == ADMIN_ROLE).first()
+    if role is None:
+        role = Role(name=ADMIN_ROLE)
+        db.add(role)
+        db.flush()
+    if db.query(User).filter(User.email == ADMIN_EMAIL).first() is None:
+        db.add(
+            User(
+                first_name="Admin",
+                last_name="Jysk",
+                email=ADMIN_EMAIL,
+                password_hash=hash_password(ADMIN_PASSWORD),
+                role_id=role.id,
+            )
+        )
+
+
 def get_or_create_attribute(db: Session, name: str) -> Attribute:
     attribute = db.query(Attribute).filter(Attribute.name == name).first()
     if attribute is None:
@@ -213,6 +237,8 @@ def create_variant(db: Session, product: Product, data: dict, image_count: int) 
 
 
 def seed(db: Session) -> None:
+    seed_admin(db)
+
     categories = {}
     for name, slug, children in CATEGORY_TREE:
         root = get_or_create_category(db, name, slug, None)
@@ -249,7 +275,8 @@ def main() -> None:
             "Seed OK:",
             db.query(Category).count(), "categories,",
             db.query(Product).count(), "products,",
-            db.query(ProductVariant).count(), "variants",
+            db.query(ProductVariant).count(), "variants,",
+            db.query(User).count(), "users",
         )
     except Exception:
         db.rollback()
