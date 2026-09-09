@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.routers import admin, auth, catalog
+from app.routers import admin, auth, catalog, favorites, orders, reviews, users
 
 app = FastAPI(
     title="Jysk Clone API",
@@ -19,6 +19,10 @@ app.add_middleware(
 
 app.include_router(auth.router)
 app.include_router(catalog.router)
+app.include_router(users.router)
+app.include_router(reviews.router)
+app.include_router(orders.router)
+app.include_router(favorites.router)
 app.include_router(admin.router)
 
 

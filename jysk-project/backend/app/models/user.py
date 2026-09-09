@@ -30,6 +30,7 @@ class User(Base):
     email = Column("Email", String(255), unique=True, index=True, nullable=False)
     password_hash = Column("PasswordHash", String(255), nullable=False)
     phone = Column("Phone", String(32), nullable=True)
+    avatar_url = Column("AvatarUrl", String(512), nullable=True)
     role_id = Column("RoleId", Integer, ForeignKey("Roles.Id"), nullable=False)
     # Даты выставляет сама БД: func.now() -> CURRENT_TIMESTAMP
     created_at = Column("CreatedAt", DateTime, nullable=False, server_default=func.now())

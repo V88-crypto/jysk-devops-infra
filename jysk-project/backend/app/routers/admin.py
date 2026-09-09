@@ -60,6 +60,7 @@ TRANSLIT = {
     "н": "n", "о": "o", "п": "p", "р": "r", "с": "s", "т": "t", "у": "u",
     "ф": "f", "х": "h", "ц": "ts", "ч": "ch", "ш": "sh", "щ": "sch",
     "ъ": "", "ы": "y", "ь": "", "э": "e", "ю": "yu", "я": "ya",
+    "і": "i", "ї": "yi", "є": "ye", "ґ": "g",
 }
 
 PRODUCT_OPTIONS = (
@@ -71,7 +72,6 @@ PRODUCT_OPTIONS = (
 
 
 def make_slug(name: str) -> str:
-    """Транслитерирует название в slug вида kebab-case."""
     text = "".join(TRANSLIT.get(char, char) for char in name.lower())
     return re.sub(r"[^a-z0-9]+", "-", text).strip("-")
 
@@ -264,7 +264,6 @@ def check_unique_skus(variants: list[VariantIn]) -> None:
 
 
 def normalize_images(images: list[ImageIn]) -> None:
-    """Оставляет ровно одну главную картинку; если её нет — главной станет первая."""
     primary_index = next(
         (index for index, image in enumerate(images) if image.is_primary), 0
     )
@@ -385,7 +384,6 @@ def check_variants_not_ordered(db: Session, variant_ids: list[int]) -> None:
 
 
 def delete_variants(db: Session, variants: list[ProductVariant]) -> None:
-    """Удаляет варианты вместе с их атрибутами, картинками и отзывами."""
     for variant in variants:
         for item in list(variant.attributes):
             db.delete(item)
@@ -544,7 +542,6 @@ def delete_review(review_id: int, db: Session = Depends(get_db)):
 
 
 def orders_to_out(db: Session, orders: list[Order]) -> list[OrderOut]:
-    """Собирает заказы одним набором запросов, без N+1."""
     user_ids = {order.user_id for order in orders}
     address_ids = {order.address_id for order in orders}
     variant_ids = {item.variant_id for order in orders for item in order.items}

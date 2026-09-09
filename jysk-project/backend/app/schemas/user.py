@@ -31,6 +31,18 @@ class RefreshRequest(BaseModel):
     refresh_token: str
 
 
+class ProfileUpdate(BaseModel):
+    first_name: str | None = Field(default=None, min_length=1, max_length=100)
+    last_name: str | None = Field(default=None, min_length=1, max_length=100)
+    phone: str | None = Field(default=None, max_length=32)
+    avatar_url: str | None = Field(default=None, max_length=512)
+
+
+class PasswordChange(BaseModel):
+    current_password: str
+    new_password: str = Field(min_length=6, max_length=72)
+
+
 class UserOut(BaseModel):
     """Данные пользователя в ответах API (без хеша пароля)."""
 
@@ -42,6 +54,7 @@ class UserOut(BaseModel):
     last_name: str
     email: EmailStr
     phone: str | None
+    avatar_url: str | None
     role_id: int
     role: str
     created_at: datetime
