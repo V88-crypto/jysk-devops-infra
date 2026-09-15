@@ -1,24 +1,31 @@
 from datetime import datetime, timedelta, timezone
 
-from fastapi import APIRouter, Depends, HTTPException, Response, status
+from fastapi import APIRouter, BackgroundTasks, Depends, HTTPException, Response, status
 from fastapi.security import OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
 
 from app.config import settings
 from app.core.deps import get_current_user
+from app.core.mailer import send_password_reset_email
 from app.core.security import (
     create_access_token,
+    create_password_reset_token,
     create_refresh_token,
     hash_password,
+    hash_password_reset_token,
     hash_refresh_token,
     verify_password,
 )
 from app.database import get_db
-from app.models.token import RefreshToken
+from app.models.token import PasswordResetToken, RefreshToken
 from app.models.user import Role, User
 from app.schemas.user import (
+    ForgotPasswordRequest,
+    MessageOut,
     RefreshRequest,
     RegisterResponse,
+    ResetPasswordRequest,
+    ResetTokenValidOut,
     TokenPair,
     UserLogin,
     UserOut,
@@ -29,6 +36,12 @@ router = APIRouter(prefix="/auth", tags=["auth"])
 
 # Роль, которая выдаётся каждому новому пользователю
 DEFAULT_ROLE = "customer"
+
+FORGOT_PASSWORD_MESSAGE = (
+    "Если такой email зарегистрирован, мы отправили на него ссылку для восстановления пароля"
+)
+RESET_TOKEN_INVALID_MESSAGE = "Ссылка для восстановления пароля недействительна или устарела"
+PASSWORD_RESET_DONE_MESSAGE = "Пароль изменён, войдите с новым паролем"
 
 
 def utc_now() -> datetime:
@@ -172,3 +185,75 @@ def logout(
 def me(current_user: User = Depends(get_current_user)):
     """Данные текущего пользователя по access-токену."""
     return current_user
+
+
+def find_valid_reset_token(db: Session, raw_token: str) -> PasswordResetToken:
+    token_record = (
+        db.query(PasswordResetToken)
+        .filter(PasswordResetToken.token_hash == hash_password_reset_token(raw_token))
+        .first()
+    )
+    if (
+        token_record is None
+        or token_record.is_revoked
+        or token_record.used_at is not None
+        or token_record.expires_at < utc_now()
+    ):
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=RESET_TOKEN_INVALID_MESSAGE,
+        )
+    return token_record
+
+
+@router.post("/forgot-password", response_model=MessageOut)
+def forgot_password(
+    data: ForgotPasswordRequest,
+    background_tasks: BackgroundTasks,
+    db: Session = Depends(get_db),
+):
+    user = db.query(User).filter(User.email == data.email).first()
+    if user is not None:
+        db.query(PasswordResetToken).filter(
+            PasswordResetToken.user_id == user.id,
+            PasswordResetToken.is_revoked.is_(False),
+        ).update({PasswordResetToken.is_revoked: True}, synchronize_session=False)
+
+        raw_token = create_password_reset_token()
+        db.add(
+            PasswordResetToken(
+                user_id=user.id,
+                token_hash=hash_password_reset_token(raw_token),
+                expires_at=utc_now()
+                + timedelta(minutes=settings.PASSWORD_RESET_TOKEN_EXPIRE_MINUTES),
+            )
+        )
+        db.commit()
+
+        reset_url = f"{settings.FRONTEND_URL.rstrip('/')}/reset-password?token={raw_token}"
+        background_tasks.add_task(send_password_reset_email, user.email, reset_url)
+
+    return MessageOut(detail=FORGOT_PASSWORD_MESSAGE)
+
+
+@router.get("/reset-password/validate", response_model=ResetTokenValidOut)
+def validate_reset_token(token: str, db: Session = Depends(get_db)):
+    find_valid_reset_token(db, token)
+    return ResetTokenValidOut(valid=True)
+
+
+@router.post("/reset-password", response_model=MessageOut)
+def reset_password(data: ResetPasswordRequest, db: Session = Depends(get_db)):
+    token_record = find_valid_reset_token(db, data.token)
+    user = db.query(User).filter(User.id == token_record.user_id).first()
+
+    user.password_hash = hash_password(data.new_password)
+    token_record.used_at = utc_now()
+    token_record.is_revoked = True
+    db.query(RefreshToken).filter(
+        RefreshToken.user_id == user.id,
+        RefreshToken.is_revoked.is_(False),
+    ).update({RefreshToken.is_revoked: True}, synchronize_session=False)
+    db.commit()
+
+    return MessageOut(detail=PASSWORD_RESET_DONE_MESSAGE)
