@@ -7,19 +7,22 @@ from app.models.catalog import (
     ProductVariant,
     VariantAttribute,
 )
+from app.models.favorite import Favorite
 from app.models.order import Address, Order, OrderItem
 from app.models.payment import Payment
 from app.models.review import Review
-from app.models.token import RefreshToken
+from app.models.token import PasswordResetToken, RefreshToken
 from app.models.user import Role, User
 
 __all__ = [
     "Address",
     "Attribute",
     "Category",
+    "Favorite",
     "Image",
     "Order",
     "OrderItem",
+    "PasswordResetToken",
     "Payment",
     "Product",
     "ProductVariant",

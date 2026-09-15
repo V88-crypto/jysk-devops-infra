@@ -1,10 +1,11 @@
 from datetime import datetime
-from decimal import Decimal
 from typing import Literal
 
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 
+from app.schemas.base import Money
 from app.schemas.catalog import ImageOut
+from app.schemas.order import OrderAddressOut, OrderItemOut
 from app.schemas.user import UserOut
 
 OrderStatus = Literal["new", "processing", "shipped", "delivered", "cancelled"]
@@ -59,7 +60,6 @@ class VariantAttributeIn(BaseModel):
 
     @model_validator(mode="after")
     def check_attribute_reference(self):
-        """Атрибут задаётся либо существующим attribute_id, либо именем."""
         if self.attribute_id is None and not self.name:
             raise ValueError("нужно передать attribute_id или name")
         return self
@@ -75,7 +75,7 @@ class ImageIn(BaseModel):
 class VariantIn(BaseModel):
     id: int | None = None
     sku: str = Field(min_length=1, max_length=64)
-    price: Decimal = Field(ge=0, max_digits=10, decimal_places=2)
+    price: Money = Field(ge=0, max_digits=10, decimal_places=2)
     stock: int = Field(default=0, ge=0)
     attributes: list[VariantAttributeIn] = []
     images: list[ImageIn] = []
@@ -99,7 +99,7 @@ class VariantAttributeOut(BaseModel):
 class VariantOut(BaseModel):
     id: int
     sku: str
-    price: Decimal
+    price: Money
     stock: int
     images: list[ImageOut]
     attributes: list[VariantAttributeOut]
@@ -157,26 +157,10 @@ class OrderUserOut(BaseModel):
     email: str
 
 
-class OrderAddressOut(BaseModel):
-    id: int
-    city: str
-    address: str
-    postal_code: str | None
-
-
-class OrderItemOut(BaseModel):
-    id: int
-    variant_id: int
-    sku: str
-    product_name: str
-    quantity: int
-    price: Decimal
-
-
 class OrderOut(BaseModel):
     id: int
     status: str
-    total_price: Decimal
+    total_price: Money
     created_at: datetime
     user: OrderUserOut
     address: OrderAddressOut

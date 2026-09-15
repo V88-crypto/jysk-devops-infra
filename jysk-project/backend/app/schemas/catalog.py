@@ -1,7 +1,8 @@
 from datetime import datetime
-from decimal import Decimal
 
 from pydantic import BaseModel, ConfigDict
+
+from app.schemas.base import Money
 
 
 class CategoryOut(BaseModel):
@@ -17,7 +18,7 @@ class ProductListItem(BaseModel):
     id: int
     name: str
     slug: str
-    price_from: Decimal | None
+    price_from: Money | None
     image_url: str | None
 
 
@@ -43,7 +44,7 @@ class VariantAttributeOut(BaseModel):
 class VariantOut(BaseModel):
     id: int
     sku: str
-    price: Decimal
+    price: Money
     stock: int
     images: list[ImageOut]
     attributes: list[VariantAttributeOut]
