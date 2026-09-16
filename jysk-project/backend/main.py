@@ -1,7 +1,12 @@
+import logging
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.routers import admin, auth, catalog, favorites, orders, reviews, users
+
+logging.basicConfig(level=logging.WARNING, format="%(levelname)s:     %(name)s - %(message)s")
+logging.getLogger("app").setLevel(logging.INFO)
 
 app = FastAPI(
     title="Jysk Clone API",
