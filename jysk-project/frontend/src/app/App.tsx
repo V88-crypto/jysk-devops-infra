@@ -19,6 +19,7 @@ import VacanciesPage from "../features/vacanciesPage/VacanciesPage"
 import NotFoundPage from "../features/notFoundPage/NotFoundPage"
 import { AdminLayout } from "../features/components/adminPanel/AdminLayout"
 import StorePage from "../features/storePage/StorePage"
+import FaqPage from "../features/faqPage/FaqPage"
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
             <Route path="vacancies" element={<VacanciesPage />} />
             
             <Route path="store" element={<StorePage />} />
+            <Route path="faq" element={<FaqPage />} />
 
             <Route path="blog" element={<BlogListPage />} />
             <Route path="blog/:postId" element={<BlogPostDetailPage />} />
