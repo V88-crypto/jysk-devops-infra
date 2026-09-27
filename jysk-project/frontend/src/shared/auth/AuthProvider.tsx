@@ -59,6 +59,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       isAdmin: user?.role === ADMIN_ROLE,
       login,
       logout,
+      updateUser: setUser,
     }),
     [isAuthenticated, user, login, logout],
   )

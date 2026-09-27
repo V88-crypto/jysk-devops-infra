@@ -1,13 +1,171 @@
-import { getFavorites } from '../data/favoritesApi'
-import { useAsyncData } from '../../../../shared/hooks/useAsyncData'
+import { useState } from 'react'
 
-export const Favorites = () => {
-  const { data: products, isLoading } = useAsyncData(getFavorites)
+import type { FavoriteProduct } from '../../../types/profile'
+import type { SectionState } from '../data/useProfileData'
+import { formatPrice } from '../utils/format'
+import { SectionStatus } from './SectionStatus'
 
-  if (isLoading) {
+interface FavoritesProps {
+  state: SectionState<FavoriteProduct[]>
+  onRemove: (variantId: number) => Promise<void>
+}
+
+export const Favorites = ({ state, onRemove }: FavoritesProps) => {
+  const [removingId, setRemovingId] = useState<number | null>(null)
+  const [removeError, setRemoveError] = useState<string | null>(null)
+
+  const handleRemove = async (variantId: number) => {
+    setRemovingId(variantId)
+    setRemoveError(null)
+
+    try {
+      await onRemove(variantId)
+    } catch {
+      setRemoveError('Не вдалося видалити товар з обраного. Спробуйте ще раз.')
+    } finally {
+      setRemovingId(null)
+    }
+  }
+
+  const renderContent = () => {
+    if (state.status === 'loading') {
+      return <SectionStatus>Завантаження...</SectionStatus>
+    }
+
+    if (state.status === 'error') {
+      return <SectionStatus>Не вдалося завантажити обране</SectionStatus>
+    }
+
+    if (state.data.length === 0) {
+      return <SectionStatus>Ви ще нічого не додали в обране</SectionStatus>
+    }
+
     return (
-      <div className="w-full py-[40px] text-center text-[18px]">
-        Завантаження...
+      <div
+        className="
+          grid
+          grid-cols-1
+          sm:grid-cols-2
+          lg:grid-cols-3
+          xl:grid-cols-4
+          gap-[15px]
+          lg:gap-[20px]
+        "
+      >
+        {state.data.map((product) => (
+          <article
+            key={product.variantId}
+            className="
+                w-full
+                bg-white
+                border
+                border-[#dedede]
+                shadow-[0_1px_3px_rgba(0,0,0,0.15)]
+                relative
+            ">
+
+            <div className="relative
+                w-full
+                h-[260px]
+                sm:h-[340px]
+                md:h-[420px]
+                lg:h-[500px]
+                bg-[#f5f5f5]">
+              {product.image ? (
+                <img
+                  src={product.image}
+                  alt={product.name}
+                  className="
+                    w-full
+                    h-full
+                    object-cover
+                  "
+                />
+              ) : (
+                <div className="flex h-full w-full items-center justify-center text-[15px] text-[#999]">
+                  Немає фото
+                </div>
+              )}
+
+              <button
+                type="button"
+                onClick={() => handleRemove(product.variantId)}
+                disabled={removingId === product.variantId}
+                aria-label="Видалити з обраного"
+                title="Видалити з обраного"
+                className="
+                  absolute
+                  top-[10px]
+                  right-[10px]
+                  flex
+                  h-[40px]
+                  w-[40px]
+                  items-center
+                  justify-center
+                  rounded-full
+                  bg-white/90
+                  text-[24px]
+                  leading-none
+                  text-[#00a6b2]
+                  shadow-sm
+                  hover:scale-110
+                  transition-transform
+                  disabled:opacity-50
+                "
+              >
+                ♥
+              </button>
+            </div>
+
+            <div
+              className="
+                px-[12px]
+                pt-[8px]
+                pb-[14px]
+                flex
+                flex-col
+              "
+            >
+
+              <p
+                className="
+                  text-[20px]
+                  font-bold
+                  mb-[3px]
+                "
+              >
+                {product.name}
+              </p>
+
+              <p
+                className="
+                    text-[15px]
+                    text-[#555]
+                    mt-[4px]
+                "
+                >
+                Артикул: {product.sku}
+              </p>
+
+              <div className="mt-[10px]">
+                <span className="text-[28px] font-bold">
+                  {formatPrice(product.price)}
+                </span>
+              </div>
+
+              <p className="mt-[6px] flex items-center gap-[5px] text-[17px]">
+                <span
+                  className={`w-[6px] h-[6px] rounded-full ${
+                    product.inStock ? 'bg-[#19c514]' : 'bg-red-500'
+                  }`}
+                />
+                {product.inStock ? 'В наявності' : 'Немає в наявності'}
+              </p>
+
+            </div>
+
+          </article>
+        ))}
       </div>
     )
   }
@@ -29,177 +187,11 @@ export const Favorites = () => {
         Обране
       </h2>
 
-      <div
-        className="
-          grid
-          grid-cols-1
-          sm:grid-cols-2
-          lg:grid-cols-3
-          xl:grid-cols-4
-          gap-[15px]
-          lg:gap-[20px]
-        "
-      >
-        {(products ?? []).map((product) => (
-          <article
-            key={product.id}
-            className="
-                w-full
-                bg-white
-                border
-                border-[#dedede]
-                shadow-[0_1px_3px_rgba(0,0,0,0.15)]
-                relative
-            ">
+      {removeError && (
+        <p className="mb-[15px] text-[14px] text-red-500">{removeError}</p>
+      )}
 
-            <div className="relative
-                w-full
-                h-[260px]
-                sm:h-[340px]
-                md:h-[420px]
-                lg:h-[500px]
-                bg-[#f5f5f5]">
-                <img
-                    src={product.image}
-                    alt={product.description}
-                    className="
-                    w-full
-                    h-full
-                    object-cover
-                    "
-                />
-
-              <button
-                type="button"
-                className="
-                absolute
-                top-[10px]
-                right-[10px]
-                text-[26px]
-                leading-none
-                hover:scale-110
-                transition-transform
-                "
-            >
-                ♡
-            </button>
-
-              <div className="absolute bottom-0 left-0 flex flex-col items-start">
-                {product.discount && (
-                <span
-                    className="
-                    bg-[#e31b23]
-                    text-white
-                    text-[12px]
-                    font-bold
-                    px-[7px]
-                    py-[5px]
-                    "
-                >
-                    -{product.discount}%
-                </span>
-                )}
-
-                {product.badge && (
-                <span
-                    className="
-                    bg-[#19c514]
-                    text-white
-                    text-[12px]
-                    font-medium
-                    px-[7px]
-                    py-[5px]
-                    "
-                >
-                    {product.badge}
-                </span>
-                )}
-            </div>
-            </div>
-
-            <div
-              className="
-                h-[32%]
-                px-[12px]
-                pt-[8px]
-                pb-[10px]
-                flex
-                flex-col
-              "
-            >
-
-              <p
-                className="
-                  text-[20px]
-                  font-bold
-                  uppercase
-                  mb-[3px]
-                "
-              >
-                {product.brand}
-              </p>
-
-              <p
-                className="
-                    text-[18px]
-                    leading-[22px]
-                    text-[#555]
-                    mt-[7px]
-                    h-[44px]
-                    overflow-hidden
-                "
-                >
-                {product.description}
-              </p>
-
-              <div className="flex items-center gap-[5px] mt-[10px]">
-
-                <span className="text-[30px] tracking-[-2px]">
-                  ★★★★★
-                </span>
-
-              </div>
-
-              <div className="mt-[4px]">
-
-                <span className="text-[32px] font-bold">
-                  {product.price}$.
-                </span>
-
-                {product.oldPrice && (
-                  <span
-                    className="
-                      ml-[6px]
-                      text-[21px]
-                      text-[#888]
-                      line-through
-                    "
-                  >
-                    {product.oldPrice}$.
-                  </span>
-                )}
-
-              </div>
-
-              <div className="mt-[4px]">
-
-                <p className="flex items-center gap-[5px] text-[17px]">
-                  <span className="w-[6px] h-[6px] rounded-full bg-red-500" />
-                  Доставка
-                </p>
-
-                <p className="flex items-center gap-[5px] text-[17px]">
-                  <span className="w-[6px] h-[6px] rounded-full bg-[#19c514]" />
-                  В наявності
-                </p>
-
-              </div>
-
-            </div>
-
-          </article>
-        ))}
-      </div>
+      {renderContent()}
 
     </section>
   )

@@ -8,6 +8,7 @@ export interface AuthContextValue {
   isAdmin: boolean
   login: () => void
   logout: () => void
+  updateUser: (user: AuthUser) => void
 }
 
 export const AuthContext = createContext<AuthContextValue | null>(null)

@@ -73,9 +73,7 @@ export const authService = {
   },
 
   me(): Promise<AuthUser> {
-    return apiRequest<AuthUser>('/auth/me', {
-      headers: { Authorization: `Bearer ${tokenStorage.get()}` },
-    })
+    return apiRequest<AuthUser>('/auth/me')
   },
 
   forgotPassword(email: string): Promise<MessageResponse> {
