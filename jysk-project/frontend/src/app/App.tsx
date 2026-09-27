@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom"
 import { AuthProvider } from "../shared/auth/AuthProvider"
 import { SiteLayout } from "./SiteLayout"
 import { RequireAuth } from "./RequireAuth"
+import { RequireAdmin } from "./RequireAdmin"
 import { MainPage } from "../features/mainPage/MainPage"
 import { BlogListPage } from "../features/blogPage/BlogListPage"
 import { BlogPostDetailPage } from "../features/blogPage/BlogPostDetailPage"
@@ -26,7 +27,14 @@ function App() {
     <AuthProvider>
       <BrowserRouter>
         <Routes>
-          <Route path="/admin/*" element={<AdminLayout />} />
+          <Route
+            path="/admin/*"
+            element={
+              <RequireAdmin>
+                <AdminLayout />
+              </RequireAdmin>
+            }
+          />
 
           <Route element={<SiteLayout />}>
             <Route index element={<MainPage />} />
