@@ -17,7 +17,10 @@ export type ForgotPasswordFormData = z.infer<
 
 export const resetPasswordSchema = withMatchingPasswords(
   z.object({
-    password: passwordField(),
+    password: passwordField().max(
+      72,
+      'Пароль може містити максимум 72 символи',
+    ),
 
     repeatPassword: repeatPasswordField,
   }),

@@ -22,6 +22,14 @@ interface RegisterResponse extends AuthTokenResponse {
   user: AuthUser
 }
 
+interface MessageResponse {
+  detail: string
+}
+
+interface ResetTokenValidResponse {
+  valid: boolean
+}
+
 export interface LoginPayload {
   email: string
   password: string
@@ -67,6 +75,26 @@ export const authService = {
   me(): Promise<AuthUser> {
     return apiRequest<AuthUser>('/auth/me', {
       headers: { Authorization: `Bearer ${tokenStorage.get()}` },
+    })
+  },
+
+  forgotPassword(email: string): Promise<MessageResponse> {
+    return apiRequest<MessageResponse>('/auth/forgot-password', {
+      method: 'POST',
+      body: JSON.stringify({ email }),
+    })
+  },
+
+  validateResetToken(token: string): Promise<ResetTokenValidResponse> {
+    return apiRequest<ResetTokenValidResponse>(
+      `/auth/reset-password/validate?token=${encodeURIComponent(token)}`,
+    )
+  },
+
+  resetPassword(token: string, newPassword: string): Promise<MessageResponse> {
+    return apiRequest<MessageResponse>('/auth/reset-password', {
+      method: 'POST',
+      body: JSON.stringify({ token, new_password: newPassword }),
     })
   },
 }
