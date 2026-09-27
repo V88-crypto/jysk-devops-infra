@@ -5,11 +5,7 @@ import react from '@vitejs/plugin-react'
 import svgr from 'vite-plugin-svgr'
 
 export default defineConfig({
-  plugins: [
-    react(),
-    tailwindcss(),
-    svgr()
-  ],
+  plugins: [react(), tailwindcss(), svgr()],
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),

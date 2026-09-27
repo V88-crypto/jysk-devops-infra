@@ -1,6 +1,10 @@
 import type { AuthUser } from '@/shared/api/authService'
 import { apiRequest } from '@/shared/api/httpClient'
-import type { Client, ClientPage, ClientRole } from '@/features/admin/types/client'
+import type {
+  Client,
+  ClientPage,
+  ClientRole,
+} from '@/features/admin/types/client'
 
 interface UserListResponse {
   items: AuthUser[]
@@ -36,7 +40,9 @@ export const clientService = {
       params.set('search', search)
     }
 
-    const response = await apiRequest<UserListResponse>(`/admin/users?${params}`)
+    const response = await apiRequest<UserListResponse>(
+      `/admin/users?${params}`,
+    )
 
     return {
       items: response.items.map(toClient),

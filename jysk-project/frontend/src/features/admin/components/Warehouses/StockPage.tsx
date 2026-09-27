@@ -11,8 +11,9 @@ import { SearchField } from '@/features/admin/components/common/SearchField'
 import { AdminPageLayout } from '@/features/admin/components/common/AdminPageLayout'
 
 export const StockPage = () => {
-  const { data: stockItems, isLoading: isStockLoading } =
-    useAsyncData(stockService.getAll)
+  const { data: stockItems, isLoading: isStockLoading } = useAsyncData(
+    stockService.getAll,
+  )
 
   const { data: warehouses, isLoading: isWarehousesLoading } = useAsyncData(
     warehouseService.getAll,
@@ -26,8 +27,7 @@ export const StockPage = () => {
   const [warehouseId, setWarehouseId] = useState<number | null>(null)
   const [categoryId, setCategoryId] = useState<number | null>(null)
 
-  const isLoading =
-    isStockLoading || isWarehousesLoading || isCategoriesLoading
+  const isLoading = isStockLoading || isWarehousesLoading || isCategoriesLoading
 
   const filteredItems = useMemo(() => {
     const normalizedSearch = search.trim().toLocaleLowerCase('uk-UA')
@@ -98,7 +98,10 @@ export const StockPage = () => {
 
           <tbody>
             {filteredItems.map((item) => (
-              <tr key={item.id} className="border-b border-[#f0f0f0] last:border-0">
+              <tr
+                key={item.id}
+                className="border-b border-[#f0f0f0] last:border-0"
+              >
                 <td className="px-4 py-3">{item.productName}</td>
                 <td className="px-4 py-3">{item.categoryName}</td>
                 <td className="px-4 py-3">{item.quantity} шт.</td>

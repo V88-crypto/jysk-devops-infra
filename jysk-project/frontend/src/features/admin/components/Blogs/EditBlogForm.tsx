@@ -37,7 +37,11 @@ const dangerButtonClass =
 const nextId = (items: { id: number }[]) =>
   items.reduce((max, item) => Math.max(max, item.id), 0) + 1
 
-export const EditBlogForm = ({ postId, onBack, onSaved }: EditBlogFormProps) => {
+export const EditBlogForm = ({
+  postId,
+  onBack,
+  onSaved,
+}: EditBlogFormProps) => {
   const fetchPost = useCallback(() => blogPostService.getById(postId), [postId])
 
   const { data: post, isLoading: isPostLoading } = useAsyncData(fetchPost)
@@ -115,7 +119,9 @@ export const EditBlogForm = ({ postId, onBack, onSaved }: EditBlogFormProps) => 
   }
 
   const clearContentBlocks = () => {
-    setForm((current) => (current ? { ...current, contentBlocks: [] } : current))
+    setForm((current) =>
+      current ? { ...current, contentBlocks: [] } : current,
+    )
   }
 
   const addKeyword = () => {
@@ -208,7 +214,9 @@ export const EditBlogForm = ({ postId, onBack, onSaved }: EditBlogFormProps) => 
           <input
             type="text"
             value={form.title}
-            onChange={(event) => setForm({ ...form, title: event.target.value })}
+            onChange={(event) =>
+              setForm({ ...form, title: event.target.value })
+            }
             placeholder="Заголовок блогу"
             className={fieldClass}
           />
@@ -379,7 +387,9 @@ export const EditBlogForm = ({ postId, onBack, onSaved }: EditBlogFormProps) => 
                   <input
                     type="text"
                     value={keyword}
-                    onChange={(event) => updateKeyword(index, event.target.value)}
+                    onChange={(event) =>
+                      updateKeyword(index, event.target.value)
+                    }
                     placeholder="Ключове слово"
                     className="w-[100px] border-none bg-transparent text-[#333] outline-none placeholder:text-[#8a8a8a]"
                   />

@@ -1,4 +1,10 @@
-import { Navigate, Route, Routes, useLocation, useNavigate } from 'react-router-dom'
+import {
+  Navigate,
+  Route,
+  Routes,
+  useLocation,
+  useNavigate,
+} from 'react-router-dom'
 
 import { AdminSideBar } from './components/AdminSideBar'
 import { StockPage } from './components/Warehouses/StockPage'

@@ -38,9 +38,7 @@ export const ProfileInfo = ({ counts }: ProfileInfoProps) => {
 
   return (
     <div className="w-full px-4 sm:px-6">
-
       <div className="w-full max-w-[1440px] mx-auto">
-
         <h1
           className="
             text-[28px]
@@ -65,7 +63,6 @@ export const ProfileInfo = ({ counts }: ProfileInfoProps) => {
             lg:gap-[20px]
           "
         >
-
           <div
             className="
               w-full
@@ -82,9 +79,7 @@ export const ProfileInfo = ({ counts }: ProfileInfoProps) => {
               flex-col
             "
           >
-
             <div className="flex items-center">
-
               {user.avatar_url ? (
                 <img
                   src={user.avatar_url}
@@ -104,7 +99,6 @@ export const ProfileInfo = ({ counts }: ProfileInfoProps) => {
               )}
 
               <div className="ml-[25px]">
-
                 <h2
                   className="
                     text-[18px]
@@ -129,9 +123,7 @@ export const ProfileInfo = ({ counts }: ProfileInfoProps) => {
                 >
                   Завантажити фото
                 </a>
-
               </div>
-
             </div>
 
             <div
@@ -143,7 +135,6 @@ export const ProfileInfo = ({ counts }: ProfileInfoProps) => {
                 gap-[18px]
               "
             >
-
               <div
                 className="
                   flex
@@ -153,13 +144,9 @@ export const ProfileInfo = ({ counts }: ProfileInfoProps) => {
                   lg:text-[16px]
                 "
               >
-                <span className="font-medium">
-                  Електронна пошта
-                </span>
+                <span className="font-medium">Електронна пошта</span>
 
-                <span className="break-all text-right">
-                  {user.email}
-                </span>
+                <span className="break-all text-right">{user.email}</span>
               </div>
 
               <div
@@ -171,15 +158,12 @@ export const ProfileInfo = ({ counts }: ProfileInfoProps) => {
                   lg:text-[16px]
                 "
               >
-                <span className="font-medium">
-                  Номер телефону
-                </span>
+                <span className="font-medium">Номер телефону</span>
 
                 <span className={user.phone ? '' : 'text-[#999]'}>
                   {user.phone || 'Не вказано'}
                 </span>
               </div>
-
             </div>
 
             <div
@@ -191,7 +175,6 @@ export const ProfileInfo = ({ counts }: ProfileInfoProps) => {
                 gap-[20px]
               "
             >
-
               <button
                 type="button"
                 onClick={() => navigate('/profile/edit')}
@@ -229,9 +212,7 @@ export const ProfileInfo = ({ counts }: ProfileInfoProps) => {
               >
                 Вийти
               </button>
-
             </div>
-
           </div>
 
           <div
@@ -251,12 +232,10 @@ export const ProfileInfo = ({ counts }: ProfileInfoProps) => {
               justify-center
             "
           >
-
             <div className="flex flex-col gap-[30px]">
-
-                <a
-                    href="#profile-orders"
-                    className="
+              <a
+                href="#profile-orders"
+                className="
                     w-full
                     flex
                     items-center
@@ -267,19 +246,17 @@ export const ProfileInfo = ({ counts }: ProfileInfoProps) => {
                     hover:text-primary
                     transition-colors
                     "
-                >
-                    <span>
-                    {withCount('Мої замовлення', counts.orders)}
-                    </span>
+              >
+                <span>{withCount('Мої замовлення', counts.orders)}</span>
 
-                    <span className="text-[32px] lg:text-[38px] font-normal leading-none">
-                    →
-                    </span>
-                </a>
+                <span className="text-[32px] lg:text-[38px] font-normal leading-none">
+                  →
+                </span>
+              </a>
 
-                <a
-                    href="#profile-orders"
-                    className="
+              <a
+                href="#profile-orders"
+                className="
                     w-full
                     flex
                     items-center
@@ -290,19 +267,19 @@ export const ProfileInfo = ({ counts }: ProfileInfoProps) => {
                     hover:text-primary
                     transition-colors
                     "
-                >
-                    <span>
-                    {withCount('Виконані замовлення', counts.completedOrders)}
-                    </span>
+              >
+                <span>
+                  {withCount('Виконані замовлення', counts.completedOrders)}
+                </span>
 
-                    <span className="text-[32px] lg:text-[38px] font-normal leading-none">
-                    →
-                    </span>
-                </a>
+                <span className="text-[32px] lg:text-[38px] font-normal leading-none">
+                  →
+                </span>
+              </a>
 
-                <a
-                    href="#profile-reviews"
-                    className="
+              <a
+                href="#profile-reviews"
+                className="
                     w-full
                     flex
                     items-center
@@ -313,19 +290,17 @@ export const ProfileInfo = ({ counts }: ProfileInfoProps) => {
                     hover:text-primary
                     transition-colors
                     "
-                >
-                    <span>
-                    {withCount('Мої відгуки', counts.reviews)}
-                    </span>
+              >
+                <span>{withCount('Мої відгуки', counts.reviews)}</span>
 
-                    <span className="text-[32px] lg:text-[38px] font-normal leading-none">
-                    →
-                    </span>
-                </a>
+                <span className="text-[32px] lg:text-[38px] font-normal leading-none">
+                  →
+                </span>
+              </a>
 
-                <a
-                    href="#profile-favorites"
-                    className="
+              <a
+                href="#profile-favorites"
+                className="
                     w-full
                     flex
                     items-center
@@ -336,23 +311,17 @@ export const ProfileInfo = ({ counts }: ProfileInfoProps) => {
                     hover:text-primary
                     transition-colors
                     "
-                >
-                    <span>
-                    {withCount('Обране', counts.favorites)}
-                    </span>
+              >
+                <span>{withCount('Обране', counts.favorites)}</span>
 
-                    <span className="text-[32px] lg:text-[38px] font-normal leading-none">
-                    →
-                    </span>
-                </a>
-
-                </div>
+                <span className="text-[32px] lg:text-[38px] font-normal leading-none">
+                  →
+                </span>
+              </a>
+            </div>
           </div>
-
         </div>
-
       </div>
-
     </div>
   )
 }

@@ -8,7 +8,11 @@ interface BlogCategorySectionProps {
   posts: BlogPost[]
 }
 
-export function BlogCategorySection({ id, title, posts }: BlogCategorySectionProps) {
+export function BlogCategorySection({
+  id,
+  title,
+  posts,
+}: BlogCategorySectionProps) {
   const navigate = useNavigate()
 
   if (!posts.length) {

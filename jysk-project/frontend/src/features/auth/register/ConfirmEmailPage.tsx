@@ -30,7 +30,6 @@ export const ConfirmEmailPage = () => {
   return (
     <div className="w-full min-h-screen px-4 sm:px-6">
       <div className="w-full max-w-[1440px] mx-auto">
-
         <h1
           className="
             w-full
@@ -81,9 +80,7 @@ export const ConfirmEmailPage = () => {
           onSubmit={handleSubmit(onSubmit)}
           className="w-full flex flex-col items-center"
         >
-
           <div className="w-full max-w-[600px] mb-[30px] sm:mb-[35px] lg:mb-[40px]">
-
             <input
               type="text"
               inputMode="numeric"
@@ -118,7 +115,6 @@ export const ConfirmEmailPage = () => {
                 {errors.code.message}
               </p>
             )}
-
           </div>
 
           <button
@@ -160,7 +156,6 @@ export const ConfirmEmailPage = () => {
           >
             Скасувати
           </button>
-
         </form>
       </div>
     </div>

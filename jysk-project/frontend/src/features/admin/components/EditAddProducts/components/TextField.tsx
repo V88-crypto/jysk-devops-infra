@@ -7,10 +7,5 @@ export const TextField = ({
   className = '',
   ...props
 }: InputHTMLAttributes<HTMLInputElement>) => {
-  return (
-    <input
-      {...props}
-      className={`${controlClass} w-full ${className}`}
-    />
-  )
+  return <input {...props} className={`${controlClass} w-full ${className}`} />
 }

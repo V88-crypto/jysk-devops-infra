@@ -11,7 +11,8 @@ export const ProfilePage = () => {
     orders: orders.status === 'ready' ? orders.data.total : null,
     completedOrders:
       orders.status === 'ready'
-        ? orders.data.items.filter((order) => order.status === 'delivered').length
+        ? orders.data.items.filter((order) => order.status === 'delivered')
+            .length
         : null,
     reviews: reviews.status === 'ready' ? reviews.data.total : null,
     favorites: favorites.status === 'ready' ? favorites.data.length : null,

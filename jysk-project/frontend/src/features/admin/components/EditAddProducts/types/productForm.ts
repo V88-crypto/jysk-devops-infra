@@ -34,11 +34,7 @@ export interface FlagOptionProps {
 export interface AttributeRowProps {
   row: AttributeFormRow
   disabled: boolean
-  onChange: (
-    rowId: number,
-    field: 'name' | 'value',
-    value: string,
-  ) => void
+  onChange: (rowId: number, field: 'name' | 'value', value: string) => void
 }
 
 export interface PhotoPreviewProps {

@@ -139,9 +139,7 @@ export const ProductFormFields = ({
             label="Можлива доставка"
             checked={form.deliveryAvailable}
             disabled={isLoading}
-            onChange={(checked) =>
-              updateField('deliveryAvailable', checked)
-            }
+            onChange={(checked) => updateField('deliveryAvailable', checked)}
           />
 
           <FlagOption
@@ -155,9 +153,7 @@ export const ProductFormFields = ({
       </section>
 
       <section className="mt-7">
-        <h2 className="mb-3 text-lg font-semibold">
-          Докладний опис товару
-        </h2>
+        <h2 className="mb-3 text-lg font-semibold">Докладний опис товару</h2>
 
         <TextAreaField
           placeholder="Введіть опис товару"
@@ -170,9 +166,7 @@ export const ProductFormFields = ({
       </section>
 
       <section className="mt-7">
-        <h2 className="mb-3 text-lg font-semibold">
-          Характеристики товару
-        </h2>
+        <h2 className="mb-3 text-lg font-semibold">Характеристики товару</h2>
 
         <div className="space-y-3">
           {form.attributes.map((attribute) => (

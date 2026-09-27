@@ -14,7 +14,10 @@ export const deliveryService = {
   async create(delivery: Omit<Delivery, 'id' | 'number'>): Promise<Delivery> {
     await mockDelay(API_DELAY_MS)
 
-    const maxId = mockDeliveries.reduce((max, item) => Math.max(max, item.id), 0)
+    const maxId = mockDeliveries.reduce(
+      (max, item) => Math.max(max, item.id),
+      0,
+    )
 
     const createdDelivery: Delivery = {
       ...delivery,

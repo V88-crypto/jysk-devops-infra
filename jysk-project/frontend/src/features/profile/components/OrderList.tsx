@@ -18,9 +18,7 @@ export const OrderList = ({ state }: OrderListProps) => {
   const [expandedOrderId, setExpandedOrderId] = useState<number | null>(null)
 
   const toggleOrder = (orderId: number) => {
-    setExpandedOrderId((currentId) =>
-      currentId === orderId ? null : orderId,
-    )
+    setExpandedOrderId((currentId) => (currentId === orderId ? null : orderId))
   }
 
   const renderContent = () => {
@@ -38,10 +36,8 @@ export const OrderList = ({ state }: OrderListProps) => {
 
     return (
       <div className="w-full flex flex-col gap-[10px]">
-
         {state.data.items.map((order) => (
           <div key={order.id} className="w-full">
-
             <button
               type="button"
               onClick={() => toggleOrder(order.id)}
@@ -63,7 +59,6 @@ export const OrderList = ({ state }: OrderListProps) => {
                 transition-colors
               "
             >
-
               <span
                 className="
                   text-[13px]
@@ -118,7 +113,6 @@ export const OrderList = ({ state }: OrderListProps) => {
               >
                 {expandedOrderId === order.id ? '⌃' : '⌄'}
               </span>
-
             </button>
 
             {expandedOrderId === order.id && (
@@ -139,9 +133,7 @@ export const OrderList = ({ state }: OrderListProps) => {
                   gap-[25px]
                 "
               >
-
                 <div className="w-full lg:w-[23%] shrink-0">
-
                   <p
                     className="
                       text-[13px]
@@ -188,11 +180,9 @@ export const OrderList = ({ state }: OrderListProps) => {
                   >
                     Адреса доставки: {order.address}
                   </p>
-
                 </div>
 
                 <div className="w-full">
-
                   {order.items.map((item, index) => (
                     <div
                       key={item.id}
@@ -204,16 +194,10 @@ export const OrderList = ({ state }: OrderListProps) => {
                         justify-between
                         gap-[15px]
                         py-[10px]
-                        ${
-                          index !== 0
-                            ? 'border-t border-[#bdbdbd]'
-                            : ''
-                        }
+                        ${index !== 0 ? 'border-t border-[#bdbdbd]' : ''}
                       `}
                     >
-
                       <div className="w-[60%]">
-
                         <p
                           className="
                             text-[13px]
@@ -236,11 +220,9 @@ export const OrderList = ({ state }: OrderListProps) => {
                         >
                           Артикул: {item.sku}
                         </p>
-
                       </div>
 
                       <div className="w-[35%] text-right">
-
                         <p
                           className="
                             text-[12px]
@@ -262,27 +244,23 @@ export const OrderList = ({ state }: OrderListProps) => {
                         >
                           {item.quantity} × {formatPrice(item.price)}
                         </p>
-
                       </div>
-
                     </div>
                   ))}
-
                 </div>
-
               </div>
             )}
-
           </div>
         ))}
-
       </div>
     )
   }
 
   return (
-    <div id="profile-orders" className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-0 scroll-mt-4">
-
+    <div
+      id="profile-orders"
+      className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-0 scroll-mt-4"
+    >
       <h2
         className="
           text-[28px]
@@ -298,7 +276,6 @@ export const OrderList = ({ state }: OrderListProps) => {
       </h2>
 
       {renderContent()}
-
     </div>
   )
 }

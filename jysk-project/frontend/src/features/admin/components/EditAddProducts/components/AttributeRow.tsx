@@ -14,13 +14,7 @@ export const AttributeRow = ({
         placeholder="Назва характеристики"
         value={row.name}
         disabled={disabled}
-        onChange={(event) =>
-          onChange(
-            row.id,
-            'name',
-            event.target.value,
-          )
-        }
+        onChange={(event) => onChange(row.id, 'name', event.target.value)}
       />
 
       <TextField
@@ -28,13 +22,7 @@ export const AttributeRow = ({
         placeholder="Значення характеристики"
         value={row.value}
         disabled={disabled}
-        onChange={(event) =>
-          onChange(
-            row.id,
-            'value',
-            event.target.value,
-          )
-        }
+        onChange={(event) => onChange(row.id, 'value', event.target.value)}
       />
     </div>
   )

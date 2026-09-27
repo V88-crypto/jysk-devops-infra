@@ -3,7 +3,10 @@ interface RowDeleteButtonProps {
   disabled?: boolean
 }
 
-export const RowDeleteButton = ({ onClick, disabled }: RowDeleteButtonProps) => {
+export const RowDeleteButton = ({
+  onClick,
+  disabled,
+}: RowDeleteButtonProps) => {
   return (
     <button
       type="button"

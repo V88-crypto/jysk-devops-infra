@@ -42,7 +42,9 @@ export const productService = {
   async update(product: Product): Promise<Product> {
     await mockDelay(API_DELAY_MS)
 
-    const productIndex = mockProducts.findIndex((item) => item.id === product.id)
+    const productIndex = mockProducts.findIndex(
+      (item) => item.id === product.id,
+    )
 
     if (productIndex === -1) {
       throw new Error(`Product with id ${product.id} was not found`)

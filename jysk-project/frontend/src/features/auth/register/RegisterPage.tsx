@@ -7,12 +7,11 @@ import { authService } from '@/shared/api/authService'
 import { ApiError } from '@/shared/api/httpClient'
 import { useAuth } from '@/shared/auth/useAuth'
 
-import {
-  RegisterSchema,
-  type RegisterFormData,
-} from './registerSchema'
+import { RegisterSchema, type RegisterFormData } from './registerSchema'
 
-const splitFullName = (fullName: string): { firstName: string; lastName: string } => {
+const splitFullName = (
+  fullName: string,
+): { firstName: string; lastName: string } => {
   const [firstName, ...rest] = fullName.trim().split(/\s+/)
   const lastName = rest.join(' ')
 
@@ -24,11 +23,11 @@ export const RegisterPage = () => {
   const auth = useAuth()
   const [submitError, setSubmitError] = useState<string | null>(null)
 
-    const {
+  const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-    } = useForm<RegisterFormData>({
+  } = useForm<RegisterFormData>({
     resolver: zodResolver(RegisterSchema),
 
     defaultValues: {
@@ -69,7 +68,6 @@ export const RegisterPage = () => {
   return (
     <div className="w-full min-h-screen px-4 sm:px-6">
       <div className="w-full max-w-[1440px] mx-auto">
-
         <h1
           className="
             w-full
@@ -97,7 +95,6 @@ export const RegisterPage = () => {
           onSubmit={handleSubmit(onSubmit)}
           className="w-full flex flex-col items-center"
         >
-
           <div className="w-full max-w-[600px] mb-[15px] sm:mb-[18px] lg:mb-[20px]">
             <input
               type="email"
@@ -252,7 +249,6 @@ export const RegisterPage = () => {
               lg:mb-[30px]
             "
           >
-
             <div>
               <label
                 className="
@@ -281,10 +277,7 @@ export const RegisterPage = () => {
 
                 <span>
                   Прийняти{' '}
-                  <a
-                    href="#"
-                    className="text-primary hover:underline"
-                  >
+                  <a href="#" className="text-primary hover:underline">
                     Умови та Положення
                   </a>
                 </span>
@@ -322,9 +315,7 @@ export const RegisterPage = () => {
                 "
               />
 
-              <span>
-                Знайти минулі замовлення для цього облікового запису
-              </span>
+              <span>Знайти минулі замовлення для цього облікового запису</span>
             </label>
 
             <label
@@ -354,15 +345,11 @@ export const RegisterPage = () => {
 
               <span>
                 Підписатися на наші новини{' '}
-                <a
-                  href="#"
-                  className="text-primary hover:underline"
-                >
+                <a href="#" className="text-primary hover:underline">
                   Переглянути
                 </a>
               </span>
             </label>
-
           </div>
 
           {submitError && (
@@ -413,7 +400,6 @@ export const RegisterPage = () => {
           >
             Скасувати
           </button>
-
         </form>
       </div>
     </div>

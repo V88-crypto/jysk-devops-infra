@@ -45,7 +45,6 @@ export const ForgotPasswordPage = () => {
   return (
     <div className="w-full min-h-screen px-4 sm:px-6">
       <div className="w-full max-w-[1440px] mx-auto">
-
         <h1
           className="
             w-full
@@ -157,8 +156,8 @@ export const ForgotPasswordPage = () => {
                 lg:mb-[40px]
               "
             >
-              Напишіть свою електронну адресу для того, щоб скинути пароль.
-              Ми відправимо вам лист з посиланням, де ви зможете
+              Напишіть свою електронну адресу для того, щоб скинути пароль. Ми
+              відправимо вам лист з посиланням, де ви зможете
               <br className="hidden sm:block" />
               ввести новий пароль.
             </p>
@@ -167,9 +166,7 @@ export const ForgotPasswordPage = () => {
               onSubmit={handleSubmit(onSubmit)}
               className="w-full flex flex-col items-center"
             >
-
               <div className="w-full max-w-[600px] mb-[25px]">
-
                 <input
                   type="email"
                   placeholder="E-mail"
@@ -202,7 +199,6 @@ export const ForgotPasswordPage = () => {
                     {errors.email.message}
                   </p>
                 )}
-
               </div>
 
               {submitError && (
@@ -252,11 +248,9 @@ export const ForgotPasswordPage = () => {
               >
                 Скасувати
               </button>
-
             </form>
           </>
         )}
-
       </div>
     </div>
   )

@@ -10,10 +10,7 @@ export const FlagOption = ({
   tone = 'teal',
   onChange,
 }: FlagOptionProps) => {
-  const checkboxTone =
-    tone === 'black'
-      ? 'accent-black'
-      : 'accent-primary'
+  const checkboxTone = tone === 'black' ? 'accent-black' : 'accent-primary'
 
   return (
     <label className="flex w-[320px] items-center gap-4">
@@ -21,15 +18,11 @@ export const FlagOption = ({
         type="checkbox"
         checked={checked}
         disabled={disabled}
-        onChange={(event) =>
-          onChange(event.target.checked)
-        }
+        onChange={(event) => onChange(event.target.checked)}
         className={`h-6 w-6 ${checkboxTone}`}
       />
 
-      <span className={flagTextClass}>
-        {label}
-      </span>
+      <span className={flagTextClass}>{label}</span>
     </label>
   )
 }

@@ -1,16 +1,21 @@
-import React from 'react';
+import React from 'react'
 
 interface NavButtonProps {
-  text: string;
-  active: boolean;
-  className?: string; // Знак питання означає, що цей пропс не є обов'язковим
-  onClick?: () => void;
+  text: string
+  active: boolean
+  className?: string // Знак питання означає, що цей пропс не є обов'язковим
+  onClick?: () => void
 }
 
-export const NavButton: React.FC<NavButtonProps> = ({ text, active, className = "", onClick }) => {
+export const NavButton: React.FC<NavButtonProps> = ({
+  text,
+  active,
+  className = '',
+  onClick,
+}) => {
   const colorClasses = active
-    ? "bg-primary text-white"
-    : "bg-gray-border text-dark hover:bg-[#868686]";
+    ? 'bg-primary text-white'
+    : 'bg-gray-border text-dark hover:bg-[#868686]'
 
   return (
     <button
@@ -25,8 +30,9 @@ export const NavButton: React.FC<NavButtonProps> = ({ text, active, className = 
       transition-colors duration-200 
       ${colorClasses}
       ${className}
-    `}>
+    `}
+    >
       {text}
     </button>
-  );
-};
+  )
+}

@@ -41,8 +41,9 @@ export const EditEmployeeForm = ({
   const { data: stores } = useAsyncData(storeService.getAll)
 
   const [form, setForm] = useState<EmployeeFormState | null>(null)
-  const [formSourceEmployee, setFormSourceEmployee] =
-    useState<Employee | null>(null)
+  const [formSourceEmployee, setFormSourceEmployee] = useState<Employee | null>(
+    null,
+  )
   const [isSaving, setIsSaving] = useState(false)
 
   if (employee && employee !== formSourceEmployee) {

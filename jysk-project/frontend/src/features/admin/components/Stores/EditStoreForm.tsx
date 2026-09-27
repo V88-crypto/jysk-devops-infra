@@ -36,10 +36,7 @@ export const EditStoreForm = ({
   onBack,
   onSaved,
 }: EditStoreFormProps) => {
-  const fetchStore = useCallback(
-    () => storeService.getById(storeId),
-    [storeId],
-  )
+  const fetchStore = useCallback(() => storeService.getById(storeId), [storeId])
 
   const { data: store, isLoading: isStoreLoading } = useAsyncData(fetchStore)
   const { data: warehouses } = useAsyncData(warehouseService.getAll)

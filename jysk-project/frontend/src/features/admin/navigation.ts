@@ -31,7 +31,7 @@ export const WAREHOUSE_NAV_ITEMS: AdminNavItem[] = [
 
 export const BOTTOM_NAV_ITEMS: AdminNavItem[] = [
   { id: 'stores', label: 'Магазини' },
-  { id: 'employees', label: "Співробітники" },
+  { id: 'employees', label: 'Співробітники' },
   { id: 'clients', label: 'Клієнти' },
   { id: 'orders', label: 'Замовлення' },
   { id: 'blogs', label: 'Блоги' },

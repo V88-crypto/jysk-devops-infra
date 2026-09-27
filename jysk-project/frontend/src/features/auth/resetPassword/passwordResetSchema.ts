@@ -10,10 +10,7 @@ export const forgotPasswordSchema = z.object({
   email: emailField,
 })
 
-export type ForgotPasswordFormData = z.infer<
-  typeof forgotPasswordSchema
->
-
+export type ForgotPasswordFormData = z.infer<typeof forgotPasswordSchema>
 
 export const resetPasswordSchema = withMatchingPasswords(
   z.object({
@@ -26,6 +23,4 @@ export const resetPasswordSchema = withMatchingPasswords(
   }),
 )
 
-export type ResetPasswordFormData = z.infer<
-  typeof resetPasswordSchema
->
+export type ResetPasswordFormData = z.infer<typeof resetPasswordSchema>

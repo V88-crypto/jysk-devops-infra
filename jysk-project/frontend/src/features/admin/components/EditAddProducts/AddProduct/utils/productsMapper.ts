@@ -1,8 +1,5 @@
 import type { Attribute } from '@/features/admin/types/attribute'
-import type {
-  Product,
-  ProductVariant,
-} from '@/features/admin/types/product'
+import type { Product, ProductVariant } from '@/features/admin/types/product'
 
 import type { EditProductFormState } from '@/features/admin/components/EditAddProducts/types/productForm'
 
@@ -18,45 +15,26 @@ export const mapFormToNewProduct = (
   const productId = Date.now()
   const variantId = productId
 
-  const maxKnownAttributeId =
-    attributes.reduce(
-      (maxId, attribute) =>
-        Math.max(maxId, attribute.id),
-      0,
-    )
+  const maxKnownAttributeId = attributes.reduce(
+    (maxId, attribute) => Math.max(maxId, attribute.id),
+    0,
+  )
 
-  const productAttributes =
-    form.attributes
-      .filter(
-        (attribute) =>
-          attribute.name.trim() &&
-          attribute.value.trim(),
-      )
-      .map(
-        (
-          attribute,
-          attributeIndex,
-        ) => ({
-          id:
-            maxKnownAttributeId +
-            attributeIndex +
-            1,
+  const productAttributes = form.attributes
+    .filter((attribute) => attribute.name.trim() && attribute.value.trim())
+    .map((attribute, attributeIndex) => ({
+      id: maxKnownAttributeId + attributeIndex + 1,
 
-          variantId,
+      variantId,
 
-          attributeId:
-            resolveAttributeId(
-              attribute,
-              attributes,
-              maxKnownAttributeId +
-                attributeIndex +
-                1,
-            ),
+      attributeId: resolveAttributeId(
+        attribute,
+        attributes,
+        maxKnownAttributeId + attributeIndex + 1,
+      ),
 
-          value:
-            attribute.value.trim(),
-        }),
-      )
+      value: attribute.value.trim(),
+    }))
 
   const variant: ProductVariant = {
     id: variantId,
@@ -65,41 +43,30 @@ export const mapFormToNewProduct = (
 
     sku: form.sku.trim(),
 
-    price:
-      Number(
-        form.price.replace(',', '.'),
-      ) || 0,
+    price: Number(form.price.replace(',', '.')) || 0,
 
     stock: 0,
 
-    createdAt:
-      new Date().toISOString(),
+    createdAt: new Date().toISOString(),
 
     images: [],
 
-    attributes:
-      productAttributes,
+    attributes: productAttributes,
   }
 
-  variant.images = createImages(
-    form.imageUrls,
-    variant,
-  )
+  variant.images = createImages(form.imageUrls, variant)
 
   return {
     id: productId,
 
-    categoryId:
-      Number(form.categoryId) || 0,
+    categoryId: Number(form.categoryId) || 0,
 
     name: form.name.trim(),
 
-    createdAt:
-      new Date().toISOString(),
+    createdAt: new Date().toISOString(),
 
     description:
-      form.detailedDescription.trim() ||
-      form.shortDescription.trim(),
+      form.detailedDescription.trim() || form.shortDescription.trim(),
 
     variants: [variant],
 

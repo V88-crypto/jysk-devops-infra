@@ -19,11 +19,9 @@ export const RegisterSchema = withMatchingPasswords(
       .min(1, "Введіть ім'я")
       .min(2, "Ім'я повинно містити мінімум 2 символи"),
 
-    acceptedTerms: z
-      .boolean()
-      .refine((value) => value === true, {
-        message: 'Потрібно прийняти умови та положення',
-      }),
+    acceptedTerms: z.boolean().refine((value) => value === true, {
+      message: 'Потрібно прийняти умови та положення',
+    }),
 
     findOrders: z.boolean(),
 
@@ -32,7 +30,6 @@ export const RegisterSchema = withMatchingPasswords(
 )
 
 export type RegisterFormData = z.infer<typeof RegisterSchema>
-
 
 export const confirmAccountSchema = z.object({
   code: z

@@ -6,7 +6,8 @@ export const mockProducts: Product[] = [
     categoryId: 1,
     name: 'Стілець Oslo',
     slug: 'stilets-oslo',
-    description: 'Мʼякий обідній стілець із зеленим тканинним сидінням та деревʼяними ніжками.',
+    description:
+      'Мʼякий обідній стілець із зеленим тканинним сидінням та деревʼяними ніжками.',
     createdAt: '2026-08-12T09:00:00.000Z',
     variants: [
       {

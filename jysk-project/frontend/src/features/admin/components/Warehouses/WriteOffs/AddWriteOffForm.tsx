@@ -12,7 +12,10 @@ import { useAsyncData } from '@/shared/hooks/useAsyncData'
 
 import { DateTimeFields } from '@/features/admin/components/common/DateTimeFields'
 import { AdminPageLayout } from '@/features/admin/components/common/AdminPageLayout'
-import { fieldClass, inputClass } from '@/features/admin/components/common/formFieldStyles'
+import {
+  fieldClass,
+  inputClass,
+} from '@/features/admin/components/common/formFieldStyles'
 import { useDateTimeValue } from '@/features/admin/hooks/useDateTimeValue'
 import { useLineItemRows } from '@/features/admin/hooks/useLineItemRows'
 
@@ -56,8 +59,7 @@ export const AddWriteOffForm = ({ onBack, onSaved }: AddWriteOffFormProps) => {
     const productsSummary = selectedRows
       .map(
         (row) =>
-          products?.find((product) => product.id === row.productId)?.name ??
-          '',
+          products?.find((product) => product.id === row.productId)?.name ?? '',
       )
       .filter(Boolean)
       .join(', ')

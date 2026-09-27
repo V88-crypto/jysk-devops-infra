@@ -1,7 +1,11 @@
 import { useEffect, useState } from 'react'
 
 import { clientService } from '@/features/admin/api/clientService'
-import type { Client, ClientPage, ClientRole } from '@/features/admin/types/client'
+import type {
+  Client,
+  ClientPage,
+  ClientRole,
+} from '@/features/admin/types/client'
 import { ApiError } from '@/shared/api/httpClient'
 import { useAuth } from '@/shared/auth/useAuth'
 
@@ -62,7 +66,11 @@ export const ClientsPage = () => {
       })
       .catch((error: unknown) => {
         if (isActive) {
-          setResult({ key, status: 'error', message: toLoadErrorMessage(error) })
+          setResult({
+            key,
+            status: 'error',
+            message: toLoadErrorMessage(error),
+          })
         }
       })
 
@@ -132,9 +140,7 @@ export const ClientsPage = () => {
 
     if (!clientPage) {
       return (
-        <p className="px-4 py-10 text-center text-[#8a8a8a]">
-          Завантаження...
-        </p>
+        <p className="px-4 py-10 text-center text-[#8a8a8a]">Завантаження...</p>
       )
     }
 
@@ -233,11 +239,13 @@ export const ClientsPage = () => {
                           : 'border-[#d5d5d5] bg-[#f4f4f4] text-[#333]'
                       }`}
                     >
-                      {(Object.keys(ROLE_LABELS) as ClientRole[]).map((role) => (
-                        <option key={role} value={role}>
-                          {ROLE_LABELS[role]}
-                        </option>
-                      ))}
+                      {(Object.keys(ROLE_LABELS) as ClientRole[]).map(
+                        (role) => (
+                          <option key={role} value={role}>
+                            {ROLE_LABELS[role]}
+                          </option>
+                        ),
+                      )}
                     </select>
                   </td>
                 </tr>

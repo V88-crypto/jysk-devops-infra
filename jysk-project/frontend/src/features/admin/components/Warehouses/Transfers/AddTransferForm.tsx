@@ -59,8 +59,7 @@ export const AddTransferForm = ({ onBack, onSaved }: AddTransferFormProps) => {
     const productsSummary = selectedRows
       .map(
         (row) =>
-          products?.find((product) => product.id === row.productId)?.name ??
-          '',
+          products?.find((product) => product.id === row.productId)?.name ?? '',
       )
       .filter(Boolean)
       .join(', ')

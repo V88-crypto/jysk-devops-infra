@@ -14,10 +14,7 @@ import { ProductFormFields } from '@/features/admin/components/EditAddProducts/c
 import { useProductFormState } from '@/features/admin/components/EditAddProducts/hooks/useProductFormState'
 import { AdminPageLayout } from '@/features/admin/components/common/AdminPageLayout'
 
-import {
-  mapFormToProduct,
-  mapProductToForm,
-} from './utils/productMapper'
+import { mapFormToProduct, mapProductToForm } from './utils/productMapper'
 
 export const EditProduct = () => {
   const { id } = useParams()

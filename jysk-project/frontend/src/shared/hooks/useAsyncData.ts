@@ -12,7 +12,9 @@ interface AsyncResult<T> {
   error: unknown
 }
 
-export const useAsyncData = <T,>(fetcher: () => Promise<T>): AsyncDataState<T> => {
+export const useAsyncData = <T>(
+  fetcher: () => Promise<T>,
+): AsyncDataState<T> => {
   const [result, setResult] = useState<AsyncResult<T> | null>(null)
 
   useEffect(() => {

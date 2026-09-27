@@ -63,7 +63,11 @@ export interface ProfileUpdatePayload {
   phone: string | null
 }
 
-const formatAddress = ({ city, address, postal_code }: OrderResponse['address']) =>
+const formatAddress = ({
+  city,
+  address,
+  postal_code,
+}: OrderResponse['address']) =>
   [postal_code, city, address].filter(Boolean).join(', ')
 
 export const profileApi = {
@@ -92,7 +96,8 @@ export const profileApi = {
   },
 
   async getFavorites(): Promise<FavoriteProduct[]> {
-    const response = await apiRequest<PageResponse<FavoriteResponse>>('/favorites')
+    const response =
+      await apiRequest<PageResponse<FavoriteResponse>>('/favorites')
 
     return response.items.map((favorite) => ({
       variantId: favorite.variant.id,

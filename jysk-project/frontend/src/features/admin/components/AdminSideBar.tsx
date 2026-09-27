@@ -53,7 +53,9 @@ export const AdminSideBar = ({ activeItem, onSelect }: AdminSideBarProps) => {
     navigate('/login')
   }
 
-  const userName = user ? `${user.first_name} ${user.last_name}` : 'Адміністратор'
+  const userName = user
+    ? `${user.first_name} ${user.last_name}`
+    : 'Адміністратор'
   const userInitials = user
     ? `${user.first_name.charAt(0)}${user.last_name.charAt(0)}`.toUpperCase()
     : 'A'
@@ -126,7 +128,9 @@ export const AdminSideBar = ({ activeItem, onSelect }: AdminSideBarProps) => {
       >
         <div className="shrink-0 px-4 pb-5 pt-6">
           <div className="mb-4 flex items-center gap-2 px-1 text-white">
-            <span className="text-[20px] font-bold tracking-[0.2em]">HYGGY</span>
+            <span className="text-[20px] font-bold tracking-[0.2em]">
+              HYGGY
+            </span>
             <span className="rounded bg-white/20 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider">
               Admin
             </span>
@@ -198,7 +202,9 @@ export const AdminSideBar = ({ activeItem, onSelect }: AdminSideBarProps) => {
                 {userName}
               </p>
               {user && (
-                <p className="truncate text-[12px] text-white/70">{user.email}</p>
+                <p className="truncate text-[12px] text-white/70">
+                  {user.email}
+                </p>
               )}
             </div>
           </div>

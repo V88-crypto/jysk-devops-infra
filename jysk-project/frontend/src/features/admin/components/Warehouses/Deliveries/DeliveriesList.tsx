@@ -67,7 +67,9 @@ export const DeliveriesList = ({ onAdd }: DeliveriesListProps) => {
         ? delivery.productsSummary
             .toLocaleLowerCase('uk-UA')
             .includes(normalizedSearch) ||
-          delivery.supplierName.toLocaleLowerCase('uk-UA').includes(normalizedSearch)
+          delivery.supplierName
+            .toLocaleLowerCase('uk-UA')
+            .includes(normalizedSearch)
         : true
 
       const matchesSupplier =

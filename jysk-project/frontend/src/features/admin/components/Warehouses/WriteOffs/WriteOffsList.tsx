@@ -61,10 +61,11 @@ export const WriteOffsList = ({ onAdd }: WriteOffsListProps) => {
       const matchesCategory =
         categoryId === null || writeOff.categoryId === categoryId
 
-      const matchesReason =
-        reasonId === null || writeOff.reasonId === reasonId
+      const matchesReason = reasonId === null || writeOff.reasonId === reasonId
 
-      return matchesSearch && matchesWarehouse && matchesCategory && matchesReason
+      return (
+        matchesSearch && matchesWarehouse && matchesCategory && matchesReason
+      )
     })
   }, [writeOffs, search, warehouseId, categoryId, reasonId])
 

@@ -15,70 +15,46 @@ export const mapProductToForm = (
   product: Product,
   attributes: Attribute[],
 ): EditProductFormState => {
-  const variant =
-    getFirstVariant(product)
+  const variant = getFirstVariant(product)
 
   const rows =
-    variant?.attributes.map(
-      (attribute) => ({
-        id: attribute.id,
+    variant?.attributes.map((attribute) => ({
+      id: attribute.id,
 
-        attributeId:
-          attribute.attributeId,
+      attributeId: attribute.attributeId,
 
-        name: getAttributeName(
-          attribute.attributeId,
-          attributes,
-        ),
+      name: getAttributeName(attribute.attributeId, attributes),
 
-        value: attribute.value,
-      }),
-    ) ?? []
+      value: attribute.value,
+    })) ?? []
 
   const imageUrls =
     variant?.images
       .slice()
       .sort(
         (firstImage, secondImage) =>
-          firstImage.sortOrder -
-          secondImage.sortOrder,
+          firstImage.sortOrder - secondImage.sortOrder,
       )
-      .map(
-        (image) =>
-          image.imageUrl,
-      ) ?? []
+      .map((image) => image.imageUrl) ?? []
 
   return {
     ...emptyProductFormState(),
 
-    sku:
-      variant?.sku ?? '',
+    sku: variant?.sku ?? '',
 
-    name:
-      product.name,
+    name: product.name,
 
-    categoryId:
-      String(product.categoryId),
+    categoryId: String(product.categoryId),
 
-    shortDescription:
-      product.description,
+    shortDescription: product.description,
 
-    detailedDescription:
-      product.description,
+    detailedDescription: product.description,
 
-    price:
-      variant
-        ? String(variant.price)
-        : '',
+    price: variant ? String(variant.price) : '',
 
-    attributes: [
-      ...rows,
-      ...emptyProductFormState()
-        .attributes,
-    ].slice(0, 3),
+    attributes: [...rows, ...emptyProductFormState().attributes].slice(0, 3),
 
-    imageUrls:
-      imageUrls.slice(0, 4),
+    imageUrls: imageUrls.slice(0, 4),
   }
 }
 
@@ -87,107 +63,60 @@ export const mapFormToProduct = (
   form: EditProductFormState,
   attributes: Attribute[],
 ): Product => {
-  const variant =
-    getFirstVariant(product)
+  const variant = getFirstVariant(product)
 
   if (!variant) {
     return product
   }
 
-  const maxAttributeId =
-    variant.attributes.reduce(
-      (maxId, attribute) =>
-        Math.max(
-          maxId,
-          attribute.id,
-        ),
-      0,
-    )
+  const maxAttributeId = variant.attributes.reduce(
+    (maxId, attribute) => Math.max(maxId, attribute.id),
+    0,
+  )
 
-  const maxKnownAttributeId =
-    attributes.reduce(
-      (maxId, attribute) =>
-        Math.max(
-          maxId,
-          attribute.id,
-        ),
-      0,
-    )
+  const maxKnownAttributeId = attributes.reduce(
+    (maxId, attribute) => Math.max(maxId, attribute.id),
+    0,
+  )
 
-  const updatedAttributes =
-    form.attributes
-      .filter(
-        (attribute) =>
-          attribute.name.trim() &&
-          attribute.value.trim(),
-      )
-      .map(
-        (
-          attribute,
-          attributeIndex,
-        ) => ({
-          id:
-            attribute.id > 0
-              ? attribute.id
-              : maxAttributeId +
-                attributeIndex +
-                1,
+  const updatedAttributes = form.attributes
+    .filter((attribute) => attribute.name.trim() && attribute.value.trim())
+    .map((attribute, attributeIndex) => ({
+      id: attribute.id > 0 ? attribute.id : maxAttributeId + attributeIndex + 1,
 
-          variantId:
-            variant.id,
+      variantId: variant.id,
 
-          attributeId:
-            resolveAttributeId(
-              attribute,
-              attributes,
-              maxKnownAttributeId +
-                attributeIndex +
-                1,
-            ),
+      attributeId: resolveAttributeId(
+        attribute,
+        attributes,
+        maxKnownAttributeId + attributeIndex + 1,
+      ),
 
-          value:
-            attribute.value.trim(),
-        }),
-      )
+      value: attribute.value.trim(),
+    }))
 
   const updatedVariant = {
     ...variant,
 
-    sku:
-      form.sku.trim(),
+    sku: form.sku.trim(),
 
-    price:
-      Number(
-        form.price.replace(',', '.'),
-      ) || 0,
+    price: Number(form.price.replace(',', '.')) || 0,
 
-    images:
-      createImages(
-        form.imageUrls,
-        variant,
-      ),
+    images: createImages(form.imageUrls, variant),
 
-    attributes:
-      updatedAttributes,
+    attributes: updatedAttributes,
   }
 
   return {
     ...product,
 
-    categoryId:
-      Number(form.categoryId) ||
-      product.categoryId,
+    categoryId: Number(form.categoryId) || product.categoryId,
 
-    name:
-      form.name.trim(),
+    name: form.name.trim(),
 
     description:
-      form.detailedDescription.trim() ||
-      form.shortDescription.trim(),
+      form.detailedDescription.trim() || form.shortDescription.trim(),
 
-    variants: [
-      updatedVariant,
-      ...product.variants.slice(1),
-    ],
+    variants: [updatedVariant, ...product.variants.slice(1)],
   }
 }

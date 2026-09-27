@@ -1,42 +1,39 @@
-import React, { useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { useAuth } from '@/shared/auth/useAuth';
-import { IconButton } from './IconButton';
-import { NavButton } from './NavButton';
-import { StorePanel } from './StorePanel';
-import { SidebarMenu } from './SidebarMenu'; 
-import logoImage from '@/assets/images/logo.png';
+import React, { useState } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
+import { useAuth } from '@/shared/auth/useAuth'
+import { IconButton } from './IconButton'
+import { NavButton } from './NavButton'
+import { StorePanel } from './StorePanel'
+import { SidebarMenu } from './SidebarMenu'
+import logoImage from '@/assets/images/logo.png'
 
-import MenuIcon from '@/assets/icons/menu.svg?react';
-import SearchIcon from '@/assets/icons/search.svg?react';
-import HeartIcon from '@/assets/icons/heart.svg?react';
-import UserIcon from '@/assets/icons/user.svg?react';
-import CartIcon from '@/assets/icons/cart.svg?react';
-import LocationIcon from '@/assets/icons/location.svg?react';
-import ChevronIcon from '@/assets/icons/chevron.svg?react';
-import AdminIcon from '@/assets/icons/admin.svg?react';
+import MenuIcon from '@/assets/icons/menu.svg?react'
+import SearchIcon from '@/assets/icons/search.svg?react'
+import HeartIcon from '@/assets/icons/heart.svg?react'
+import UserIcon from '@/assets/icons/user.svg?react'
+import CartIcon from '@/assets/icons/cart.svg?react'
+import LocationIcon from '@/assets/icons/location.svg?react'
+import ChevronIcon from '@/assets/icons/chevron.svg?react'
+import AdminIcon from '@/assets/icons/admin.svg?react'
 
 export const Header: React.FC = () => {
-  const navigate = useNavigate();
-  const { pathname } = useLocation();
-  const { isAuthenticated, isAdmin } = useAuth();
-  const [isStorePanelOpen, setIsStorePanelOpen] = useState<boolean>(false);
-  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
+  const navigate = useNavigate()
+  const { pathname } = useLocation()
+  const { isAuthenticated, isAdmin } = useAuth()
+  const [isStorePanelOpen, setIsStorePanelOpen] = useState<boolean>(false)
+  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false)
 
   const isActivePath = (path: string) =>
-    pathname === path || pathname.startsWith(`${path}/`);
+    pathname === path || pathname.startsWith(`${path}/`)
 
   return (
     <header className="w-full shadow-sm bg-white font-sans relative z-30">
-      
       <div className="bg-primary w-full h-[35px] xl:h-[4.1vw] 2xl:h-[3.07vw]"></div>
 
       <div className="w-full border-b border-dark/50">
         <div className="w-full px-4 md:px-[3.1vw] xl:px-[3.3vw] 2xl:px-[7.03%] py-3 xl:py-[1.1vw] 2xl:py-[1vw]">
           <div className="flex items-center justify-between">
-            
             <div className="flex items-center gap-3 md:gap-[2vw] xl:gap-[1.6vw] shrink-0">
-              
               <button
                 type="button"
                 onClick={() => navigate('/')}
@@ -50,13 +47,15 @@ export const Header: React.FC = () => {
                   className="w-[62px] h-[40px] md:w-[9.6vw] md:h-[6.25vw] xl:w-[7.6vw] xl:h-[4.9vw] object-contain"
                 />
               </button>
-              
-              <button 
+
+              <button
                 onClick={() => setIsMenuOpen(true)}
                 className="flex items-center gap-2 md:gap-[1vw] xl:gap-[0.5vw] text-dark hover:text-primary transition-colors shrink-0 order-1 xl:order-2"
               >
                 <MenuIcon className="w-[29px] h-[20px] md:w-[5.3vw] md:h-[2.6vw] xl:w-[3.8vw] xl:h-[1.8vw] shrink-0" />
-                <span className="hidden md:block font-normal md:text-[1.82vw] xl:text-[1.25vw]">Меню</span>
+                <span className="hidden md:block font-normal md:text-[1.82vw] xl:text-[1.25vw]">
+                  Меню
+                </span>
               </button>
             </div>
 
@@ -99,7 +98,6 @@ export const Header: React.FC = () => {
               )}
               <IconButton Icon={CartIcon} label="Кошик" />
             </div>
-
           </div>
         </div>
       </div>
@@ -120,13 +118,14 @@ export const Header: React.FC = () => {
       <div className="hidden md:block w-full">
         <div className="w-full md:px-[4.16vw] xl:px-[3.3vw] 2xl:px-[7.03%] md:py-[2vw] xl:py-[1.1vw] 2xl:py-[1vw]">
           <div className="flex items-center justify-between">
-            
-            <button 
+            <button
               onClick={() => setIsStorePanelOpen(true)}
               className="hidden xl:flex items-center xl:gap-[0.5vw] text-dark hover:text-primary transition-colors shrink-0"
             >
               <LocationIcon className="xl:w-[1.4vw] xl:h-[1.4vw]" />
-              <span className="font-normal xl:text-[1.11vw]">HYQGY Київ ТЦ Променада</span>
+              <span className="font-normal xl:text-[1.11vw]">
+                HYQGY Київ ТЦ Променада
+              </span>
               <ChevronIcon className="xl:w-[0.8vw] xl:h-[0.8vw] text-dark" />
             </button>
 
@@ -156,14 +155,15 @@ export const Header: React.FC = () => {
                 className="md:w-[20.83vw] xl:w-[9.42vw]"
               />
             </div>
-
           </div>
         </div>
       </div>
 
-      <StorePanel isOpen={isStorePanelOpen} onClose={() => setIsStorePanelOpen(false)} />
+      <StorePanel
+        isOpen={isStorePanelOpen}
+        onClose={() => setIsStorePanelOpen(false)}
+      />
       <SidebarMenu isOpen={isMenuOpen} setIsOpen={setIsMenuOpen} />
-
     </header>
-  );
-};
+  )
+}

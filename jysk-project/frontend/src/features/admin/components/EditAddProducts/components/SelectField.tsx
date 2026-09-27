@@ -7,10 +7,5 @@ export const SelectField = ({
   className = '',
   ...props
 }: SelectHTMLAttributes<HTMLSelectElement>) => {
-  return (
-    <select
-      {...props}
-      className={`${controlClass} w-full ${className}`}
-    />
-  )
+  return <select {...props} className={`${controlClass} w-full ${className}`} />
 }

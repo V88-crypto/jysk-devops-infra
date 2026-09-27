@@ -1,42 +1,38 @@
-import type { MyReviewList } from "@/features/profile/types";
-import { useAuth } from "@/shared/auth/useAuth";
-import type { SectionState } from "@/features/profile/hooks/useProfileData";
-import { ReviewCard } from "./ReviewCard";
-import { SectionStatus } from "./SectionStatus";
+import type { MyReviewList } from '@/features/profile/types'
+import { useAuth } from '@/shared/auth/useAuth'
+import type { SectionState } from '@/features/profile/hooks/useProfileData'
+import { ReviewCard } from './ReviewCard'
+import { SectionStatus } from './SectionStatus'
 
 type Props = {
-  state: SectionState<MyReviewList>;
-};
+  state: SectionState<MyReviewList>
+}
 
 export const Reviews = ({ state }: Props) => {
-  const { user } = useAuth();
-  const author = user ? `${user.first_name} ${user.last_name}` : "";
+  const { user } = useAuth()
+  const author = user ? `${user.first_name} ${user.last_name}` : ''
 
   const renderContent = () => {
-    if (state.status === "loading") {
-      return <SectionStatus>Завантаження...</SectionStatus>;
+    if (state.status === 'loading') {
+      return <SectionStatus>Завантаження...</SectionStatus>
     }
 
-    if (state.status === "error") {
-      return <SectionStatus>Не вдалося завантажити відгуки</SectionStatus>;
+    if (state.status === 'error') {
+      return <SectionStatus>Не вдалося завантажити відгуки</SectionStatus>
     }
 
     if (state.data.items.length === 0) {
-      return <SectionStatus>Ви ще не залишили жодного відгуку</SectionStatus>;
+      return <SectionStatus>Ви ще не залишили жодного відгуку</SectionStatus>
     }
 
     return (
       <div className="flex flex-col gap-[20px]">
         {state.data.items.map((review) => (
-          <ReviewCard
-            key={review.id}
-            review={review}
-            author={author}
-          />
+          <ReviewCard key={review.id} review={review} author={author} />
         ))}
       </div>
-    );
-  };
+    )
+  }
 
   return (
     <section
@@ -73,5 +69,5 @@ export const Reviews = ({ state }: Props) => {
 
       {renderContent()}
     </section>
-  );
-};
+  )
+}

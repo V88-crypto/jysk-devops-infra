@@ -7,10 +7,7 @@ import { authService } from '@/shared/api/authService'
 import { ApiError } from '@/shared/api/httpClient'
 import { useAuth } from '@/shared/auth/useAuth'
 
-import {
-  loginSchema,
-  type LoginFormData,
-} from './loginSchema'
+import { loginSchema, type LoginFormData } from './loginSchema'
 
 export const LoginPage = () => {
   const navigate = useNavigate()
@@ -49,7 +46,6 @@ export const LoginPage = () => {
   return (
     <div className="w-full min-h-screen px-4 sm:px-6">
       <div className="w-full max-w-[1440px] mx-auto">
-
         <h1
           className="
             w-full
@@ -77,7 +73,6 @@ export const LoginPage = () => {
           onSubmit={handleSubmit(onSubmit)}
           className="w-full flex flex-col items-center"
         >
-
           <div
             className="
               w-full
@@ -215,7 +210,6 @@ export const LoginPage = () => {
           >
             Забули пароль?
           </button>
-
         </form>
 
         <section
@@ -228,7 +222,6 @@ export const LoginPage = () => {
             lg:mt-[70px]
           "
         >
-
           <h2
             className="
               text-center
@@ -255,21 +248,13 @@ export const LoginPage = () => {
               text-[#555]
             "
           >
-            <li>
-              Відстежуйте ваші посилки від замовлення до доставки
-            </li>
+            <li>Відстежуйте ваші посилки від замовлення до доставки</li>
 
-            <li>
-              Зберігайте історію замовлень
-            </li>
+            <li>Зберігайте історію замовлень</li>
 
-            <li>
-              Додавайте товари до списку бажань
-            </li>
+            <li>Додавайте товари до списку бажань</li>
 
-            <li>
-              Зберігайте інформацію для майбутніх покупок
-            </li>
+            <li>Зберігайте інформацію для майбутніх покупок</li>
           </ul>
 
           <button
@@ -297,9 +282,7 @@ export const LoginPage = () => {
           >
             Створити новий обліковий запис
           </button>
-
         </section>
-
       </div>
     </div>
   )

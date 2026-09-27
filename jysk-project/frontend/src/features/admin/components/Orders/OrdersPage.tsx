@@ -35,7 +35,9 @@ export const OrdersPage = () => {
 
     return (orders ?? []).filter((order) => {
       const matchesSearch = normalizedSearch
-        ? order.productName.toLocaleLowerCase('uk-UA').includes(normalizedSearch)
+        ? order.productName
+            .toLocaleLowerCase('uk-UA')
+            .includes(normalizedSearch)
         : true
 
       const matchesWarehouse =

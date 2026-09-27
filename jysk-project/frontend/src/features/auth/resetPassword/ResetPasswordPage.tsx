@@ -194,7 +194,9 @@ export const ResetPasswordPage = () => {
             <button
               type="button"
               onClick={() =>
-                isInvalid ? navigate('/forgot-password') : window.location.reload()
+                isInvalid
+                  ? navigate('/forgot-password')
+                  : window.location.reload()
               }
               className={primaryButtonClass}
             >
@@ -217,16 +219,13 @@ export const ResetPasswordPage = () => {
   return (
     <div className="w-full min-h-screen px-4 sm:px-6">
       <div className="w-full max-w-[1440px] mx-auto">
-
         <h1 className={titleClass}>Новий пароль</h1>
 
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="w-full flex flex-col items-center"
         >
-
           <div className="w-full max-w-[600px] mb-[20px]">
-
             <input
               type="password"
               placeholder="Пароль"
@@ -260,11 +259,9 @@ export const ResetPasswordPage = () => {
                 {errors.password.message}
               </p>
             )}
-
           </div>
 
           <div className="w-full max-w-[600px] mb-[25px]">
-
             <input
               type="password"
               placeholder="Повторити пароль"
@@ -298,7 +295,6 @@ export const ResetPasswordPage = () => {
                 {errors.repeatPassword.message}
               </p>
             )}
-
           </div>
 
           {submitError && (
@@ -322,9 +318,7 @@ export const ResetPasswordPage = () => {
           >
             Скасувати
           </button>
-
         </form>
-
       </div>
     </div>
   )

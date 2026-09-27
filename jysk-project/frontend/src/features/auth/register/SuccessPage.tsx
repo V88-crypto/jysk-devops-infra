@@ -6,7 +6,6 @@ export const SuccessPage = () => {
   return (
     <div className="w-full min-h-screen px-4 sm:px-6">
       <div className="w-full max-w-[1440px] mx-auto flex flex-col items-center">
-
         <h1
           className="
             w-full
@@ -47,7 +46,6 @@ export const SuccessPage = () => {
         >
           Перейти в профіль
         </button>
-
       </div>
     </div>
   )

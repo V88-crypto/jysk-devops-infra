@@ -1,9 +1,5 @@
 export type OrderStatus =
-  | 'new'
-  | 'processing'
-  | 'shipped'
-  | 'delivered'
-  | 'cancelled'
+  'new' | 'processing' | 'shipped' | 'delivered' | 'cancelled'
 
 export interface OrderItem {
   id: number

@@ -27,7 +27,9 @@ export const getDeliveryLineItemSumWithoutTax = (
   return quantity * unitPrice
 }
 
-export const getDeliveryLineItemTotalSum = (row: DeliveryLineItemRow): number => {
+export const getDeliveryLineItemTotalSum = (
+  row: DeliveryLineItemRow,
+): number => {
   const sumWithoutTax = getDeliveryLineItemSumWithoutTax(row)
   const taxRate = Number(row.taxRate.replace(',', '.')) || 0
 

@@ -19,7 +19,9 @@ const EditEmployeeRoute = () => {
 const EmployeesListRoute = () => {
   const navigate = useNavigate()
 
-  return <EmployeesList onEdit={(id) => navigate(`/admin/employees/${id}/edit`)} />
+  return (
+    <EmployeesList onEdit={(id) => navigate(`/admin/employees/${id}/edit`)} />
+  )
 }
 
 export const EmployeesPage = () => {

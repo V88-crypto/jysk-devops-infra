@@ -2,7 +2,9 @@ interface AvatarPlaceholderProps {
   className?: string
 }
 
-export const AvatarPlaceholder = ({ className = '' }: AvatarPlaceholderProps) => (
+export const AvatarPlaceholder = ({
+  className = '',
+}: AvatarPlaceholderProps) => (
   <div
     role="img"
     aria-label="Фото профілю не завантажено"

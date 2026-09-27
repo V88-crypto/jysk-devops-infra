@@ -1,29 +1,27 @@
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useNavigate } from "react-router-dom";
+import { useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useNavigate } from 'react-router-dom'
 
-import type { AuthUser } from "@/shared/api/authService";
-import { ApiError } from "@/shared/api/httpClient";
-import { useAuth } from "@/shared/auth/useAuth";
-import { profileApi } from "@/features/profile/api/profileApi";
-import { ChangePasswordForm } from "./ChangePasswordForm";
+import type { AuthUser } from '@/shared/api/authService'
+import { ApiError } from '@/shared/api/httpClient'
+import { useAuth } from '@/shared/auth/useAuth'
+import { profileApi } from '@/features/profile/api/profileApi'
+import { ChangePasswordForm } from './ChangePasswordForm'
 import {
   editProfileSchema,
   type EditProfileFormData,
-} from "./editProfileSchema";
+} from './editProfileSchema'
 
 const inputClass = (hasError: boolean) =>
   `w-full h-[48px] px-[16px] rounded-[4px] border bg-[#e4e4e4] outline-none transition ${
-    hasError
-      ? "border-red-500"
-      : "border-[#c5c5c5] focus:border-primary"
-  }`;
+    hasError ? 'border-red-500' : 'border-[#c5c5c5] focus:border-primary'
+  }`
 
 const EditProfileFields = ({ user }: { user: AuthUser }) => {
-  const navigate = useNavigate();
-  const { updateUser } = useAuth();
-  const [submitError, setSubmitError] = useState<string | null>(null);
+  const navigate = useNavigate()
+  const { updateUser } = useAuth()
+  const [submitError, setSubmitError] = useState<string | null>(null)
 
   const {
     register,
@@ -32,33 +30,33 @@ const EditProfileFields = ({ user }: { user: AuthUser }) => {
     formState: { errors, isSubmitting },
   } = useForm<EditProfileFormData>({
     resolver: zodResolver(editProfileSchema),
-    mode: "onBlur",
+    mode: 'onBlur',
     defaultValues: {
       firstName: user.first_name,
       lastName: user.last_name,
-      phone: user.phone ?? "",
+      phone: user.phone ?? '',
     },
-  });
+  })
 
   const onSubmit = async (data: EditProfileFormData) => {
-    setSubmitError(null);
+    setSubmitError(null)
 
     try {
       const updatedUser = await profileApi.updateProfile({
         firstName: data.firstName,
         lastName: data.lastName,
         phone: data.phone || null,
-      });
-      updateUser(updatedUser);
-      navigate("/profile");
+      })
+      updateUser(updatedUser)
+      navigate('/profile')
     } catch (error) {
       setSubmitError(
         error instanceof ApiError
           ? error.message
-          : "Не вдалося зберегти зміни. Спробуйте ще раз.",
-      );
+          : 'Не вдалося зберегти зміни. Спробуйте ще раз.',
+      )
     }
-  };
+  }
 
   return (
     <section className="w-full max-w-[500px] mx-auto mt-[40px] mb-[60px] px-4 sm:px-0">
@@ -74,7 +72,7 @@ const EditProfileFields = ({ user }: { user: AuthUser }) => {
           <input
             type="text"
             placeholder="Ім'я"
-            {...register("firstName")}
+            {...register('firstName')}
             className={inputClass(Boolean(errors.firstName))}
           />
 
@@ -89,7 +87,7 @@ const EditProfileFields = ({ user }: { user: AuthUser }) => {
           <input
             type="text"
             placeholder="Прізвище"
-            {...register("lastName")}
+            {...register('lastName')}
             className={inputClass(Boolean(errors.lastName))}
           />
 
@@ -117,20 +115,16 @@ const EditProfileFields = ({ user }: { user: AuthUser }) => {
           <input
             type="tel"
             placeholder="Номер телефону (необов'язково)"
-            {...register("phone")}
+            {...register('phone')}
             className={inputClass(Boolean(errors.phone))}
           />
 
           {errors.phone && (
-            <p className="mt-1 text-sm text-red-500">
-              {errors.phone.message}
-            </p>
+            <p className="mt-1 text-sm text-red-500">{errors.phone.message}</p>
           )}
         </div>
 
-        {submitError && (
-          <p className="text-sm text-red-500">{submitError}</p>
-        )}
+        {submitError && <p className="text-sm text-red-500">{submitError}</p>}
 
         <div className="flex gap-[12px] mt-[10px]">
           <button
@@ -138,7 +132,7 @@ const EditProfileFields = ({ user }: { user: AuthUser }) => {
             disabled={isSubmitting}
             className="flex-1 h-[42px] rounded-[4px] bg-primary text-white font-semibold hover:bg-primary-dark transition disabled:cursor-not-allowed disabled:opacity-60"
           >
-            {isSubmitting ? "ЗБЕРЕЖЕННЯ..." : "ЗБЕРЕГТИ"}
+            {isSubmitting ? 'ЗБЕРЕЖЕННЯ...' : 'ЗБЕРЕГТИ'}
           </button>
 
           <button
@@ -158,18 +152,18 @@ const EditProfileFields = ({ user }: { user: AuthUser }) => {
         </button>
       </form>
     </section>
-  );
-};
+  )
+}
 
 export const EditProfileForm = () => {
-  const { user } = useAuth();
+  const { user } = useAuth()
 
   if (!user) {
     return (
       <div className="w-full flex justify-center items-center py-[100px]">
         Завантаження...
       </div>
-    );
+    )
   }
 
   return (
@@ -177,5 +171,5 @@ export const EditProfileForm = () => {
       <EditProfileFields key={user.id} user={user} />
       <ChangePasswordForm email={user.email} />
     </>
-  );
-};
+  )
+}

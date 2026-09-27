@@ -59,7 +59,7 @@ export const useProductFormState = (attributes: Attribute[]) => {
 
           attributeId:
             field === 'name'
-              ? matchedAttribute?.id ?? null
+              ? (matchedAttribute?.id ?? null)
               : attribute.attributeId,
         }
       }),

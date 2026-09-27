@@ -3,11 +3,7 @@ import type { ReactNode } from 'react'
 import type { AdminNavItemId } from '@/features/admin/navigation'
 
 export type AdminIconName =
-  | AdminNavItemId
-  | 'warehouseGroup'
-  | 'logout'
-  | 'external'
-  | 'chevron'
+  AdminNavItemId | 'warehouseGroup' | 'logout' | 'external' | 'chevron'
 
 const ICON_PATHS: Partial<Record<AdminIconName, ReactNode>> = {
   products: (
@@ -83,7 +79,10 @@ interface AdminNavIconProps {
   className?: string
 }
 
-export const AdminNavIcon = ({ name, className = 'h-5 w-5' }: AdminNavIconProps) => (
+export const AdminNavIcon = ({
+  name,
+  className = 'h-5 w-5',
+}: AdminNavIconProps) => (
   <svg
     aria-hidden="true"
     viewBox="0 0 24 24"

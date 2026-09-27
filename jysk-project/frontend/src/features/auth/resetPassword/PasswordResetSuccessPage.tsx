@@ -6,7 +6,6 @@ export const PasswordResetSuccessPage = () => {
   return (
     <div className="w-full min-h-screen px-4 sm:px-6">
       <div className="w-full max-w-[1440px] mx-auto">
-
         <h1
           className="
             w-full
@@ -31,7 +30,6 @@ export const PasswordResetSuccessPage = () => {
         </h1>
 
         <div className="w-full flex justify-center">
-
           <button
             type="button"
             onClick={() => navigate('/login')}
@@ -47,9 +45,7 @@ export const PasswordResetSuccessPage = () => {
           >
             Перейти до входу
           </button>
-
         </div>
-
       </div>
     </div>
   )

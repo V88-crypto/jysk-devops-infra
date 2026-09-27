@@ -62,15 +62,17 @@ export const Favorites = ({ state, onRemove }: FavoritesProps) => {
                 border-[#dedede]
                 shadow-[0_1px_3px_rgba(0,0,0,0.15)]
                 relative
-            ">
-
-            <div className="relative
+            "
+          >
+            <div
+              className="relative
                 w-full
                 h-[260px]
                 sm:h-[340px]
                 md:h-[420px]
                 lg:h-[500px]
-                bg-[#f5f5f5]">
+                bg-[#f5f5f5]"
+            >
               {product.image ? (
                 <img
                   src={product.image}
@@ -126,7 +128,6 @@ export const Favorites = ({ state, onRemove }: FavoritesProps) => {
                 flex-col
               "
             >
-
               <p
                 className="
                   text-[20px]
@@ -143,7 +144,7 @@ export const Favorites = ({ state, onRemove }: FavoritesProps) => {
                     text-[#555]
                     mt-[4px]
                 "
-                >
+              >
                 Артикул: {product.sku}
               </p>
 
@@ -161,9 +162,7 @@ export const Favorites = ({ state, onRemove }: FavoritesProps) => {
                 />
                 {product.inStock ? 'В наявності' : 'Немає в наявності'}
               </p>
-
             </div>
-
           </article>
         ))}
       </div>
@@ -171,8 +170,10 @@ export const Favorites = ({ state, onRemove }: FavoritesProps) => {
   }
 
   return (
-    <section id="profile-favorites" className="scroll-mt-4 h-full w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-0 mt-[40px] sm:mt-[50px] lg:mt-[60px] mb-[40px] sm:mb-[50px] lg:mb-[60px]">
-
+    <section
+      id="profile-favorites"
+      className="scroll-mt-4 h-full w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-0 mt-[40px] sm:mt-[50px] lg:mt-[60px] mb-[40px] sm:mb-[50px] lg:mb-[60px]"
+    >
       <h2
         className="
           text-[30px]
@@ -192,7 +193,6 @@ export const Favorites = ({ state, onRemove }: FavoritesProps) => {
       )}
 
       {renderContent()}
-
     </section>
   )
 }

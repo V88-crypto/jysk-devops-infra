@@ -1,11 +1,10 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import notFoundImage from '@/assets/images/404-image.png';
+import React from 'react'
+import { Link } from 'react-router-dom'
+import notFoundImage from '@/assets/images/404-image.png'
 
 export const NotFoundPage: React.FC = () => {
   return (
     <main className="w-full flex flex-col items-center justify-center py-12 md:py-[6vw] xl:py-[5.2vw] px-5 font-sans bg-white">
-
       <div className="flex justify-center w-[90%] md:w-[70%] xl:w-[59.22vw] mb-6 md:mb-[3vw] xl:mb-[1.5vw]">
         <img
           src={notFoundImage}
@@ -24,7 +23,6 @@ export const NotFoundPage: React.FC = () => {
       >
         На головну
       </Link>
-
     </main>
-  );
-};
+  )
+}

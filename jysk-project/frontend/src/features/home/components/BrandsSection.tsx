@@ -6,9 +6,7 @@ interface BrandsSectionProps {
   brands?: Brand[]
 }
 
-export function BrandsSection({
-  brands = defaultBrands,
-}: BrandsSectionProps) {
+export function BrandsSection({ brands = defaultBrands }: BrandsSectionProps) {
   return (
     <section className="border-y border-neutral-300 bg-white">
       <div className="mx-auto max-w-[1460px] px-6 py-8 md:py-10">

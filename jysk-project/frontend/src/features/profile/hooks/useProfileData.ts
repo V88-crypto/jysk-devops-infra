@@ -8,9 +8,7 @@ import type {
 import { profileApi } from '@/features/profile/api/profileApi'
 
 export type SectionState<T> =
-  | { status: 'loading' }
-  | { status: 'error' }
-  | { status: 'ready'; data: T }
+  { status: 'loading' } | { status: 'error' } | { status: 'ready'; data: T }
 
 const LOADING = { status: 'loading' } as const
 
@@ -23,7 +21,7 @@ export const useProfileData = () => {
   useEffect(() => {
     let isActive = true
 
-    const load = <T,>(
+    const load = <T>(
       request: Promise<T>,
       setState: (state: SectionState<T>) => void,
     ) => {
