@@ -14,7 +14,7 @@ interface Store {
   time: string;
 }
 
-const StorePanel: React.FC<StorePanelProps> = ({ isOpen, onClose }) => {
+export const StorePanel: React.FC<StorePanelProps> = ({ isOpen, onClose }) => {
   const stores: Store[] = [
     { id: 1, name: 'HYQGY Київ, ТЦ Променада', isOpen: true, time: 'Зачиняється о 20:00' },
     { id: 2, name: 'HYQGY Київ, ТЦ Променада', isOpen: true, time: 'Зачиняється о 20:00' },
@@ -93,5 +93,3 @@ const StorePanel: React.FC<StorePanelProps> = ({ isOpen, onClose }) => {
     </>
   );
 };
-
-export default StorePanel;

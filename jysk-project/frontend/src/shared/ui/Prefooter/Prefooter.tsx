@@ -3,7 +3,7 @@ import SofaIcon from '@/assets/icons/sofa.svg?react';
 import FlagIcon from '@/assets/icons/flag.svg?react';
 import DocumentIcon from '@/assets/icons/document.svg?react';
 
-const Prefooter: React.FC = () => {
+export const Prefooter: React.FC = () => {
   return (
     <section className="w-full font-sans">
       
@@ -83,5 +83,3 @@ const Prefooter: React.FC = () => {
     </section>
   );
 };
-
-export default Prefooter;

@@ -6,14 +6,14 @@ import {
   popularQuestionsColumn1, 
   popularQuestionsColumn2 
 } from './data';
-import Prefooter from '@/shared/ui/Prefooter/Prefooter';
+import { Prefooter } from '@/shared/ui/Prefooter/Prefooter';
 
 import messengerIcon from '@/assets/icons/messenger.svg';
 import phoneIcon from '@/assets/icons/phone.svg';
 import emailIcon from '@/assets/icons/email.svg';
 import arrowIcon from '@/assets/icons/arrow.svg';
 
-const FaqPage: React.FC = () => {
+export const FaqPage: React.FC = () => {
   const [openSections, setOpenSections] = useState<string[]>(['delivery']);
 
   const toggleSection = (id: string) => {
@@ -168,5 +168,3 @@ const FaqPage: React.FC = () => {
     </main>
   );
 };
-
-export default FaqPage;

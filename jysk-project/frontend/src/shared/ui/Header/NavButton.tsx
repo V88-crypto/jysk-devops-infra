@@ -7,7 +7,7 @@ interface NavButtonProps {
   onClick?: () => void;
 }
 
-const NavButton: React.FC<NavButtonProps> = ({ text, active, className = "", onClick }) => {
+export const NavButton: React.FC<NavButtonProps> = ({ text, active, className = "", onClick }) => {
   const colorClasses = active
     ? "bg-primary text-white"
     : "bg-gray-border text-dark hover:bg-[#868686]";
@@ -30,5 +30,3 @@ const NavButton: React.FC<NavButtonProps> = ({ text, active, className = "", onC
     </button>
   );
 };
-
-export default NavButton;

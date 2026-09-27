@@ -10,7 +10,7 @@ import FacebookIcon from '@/assets/icons/facebook.svg?react';
 import YoutubeIcon from '@/assets/icons/youtube.svg?react';
 import { departmentCards, bannerData, jobSections } from './data';
 
-const VacanciesPage: React.FC = () => {
+export const VacanciesPage: React.FC = () => {
   return (
     <main className="w-full bg-[#f3f3f3] font-sans">
       
@@ -148,5 +148,3 @@ const VacanciesPage: React.FC = () => {
     </main>
   );
 };
-
-export default VacanciesPage;

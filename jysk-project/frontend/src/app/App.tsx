@@ -16,13 +16,13 @@ import { ResetPasswordPage } from "@/features/auth/resetPassword/ResetPasswordPa
 import { PasswordResetSuccessPage } from "@/features/auth/resetPassword/PasswordResetSuccessPage"
 import { ProfilePage } from "@/features/profile/ProfilePage"
 import { EditProfileForm } from "@/features/profile/components/EditProfileForm"
-import VacanciesPage from "@/features/vacancies/VacanciesPage"
-import NotFoundPage from "@/features/notFound/NotFoundPage"
+import { VacanciesPage } from "@/features/vacancies/VacanciesPage"
+import { NotFoundPage } from "@/features/notFound/NotFoundPage"
 import { AdminLayout } from "@/features/admin/AdminLayout"
-import StorePage from "@/features/store/StorePage"
-import FaqPage from "@/features/faq/FaqPage"
+import { StorePage } from "@/features/store/StorePage"
+import { FaqPage } from "@/features/faq/FaqPage"
 
-function App() {
+export function App() {
   return (
     <AuthProvider>
       <BrowserRouter>
@@ -82,5 +82,3 @@ function App() {
     </AuthProvider>
   )
 }
-
-export default App

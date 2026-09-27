@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import notFoundImage from '@/assets/images/404-image.png';
 
-const NotFoundPage: React.FC = () => {
+export const NotFoundPage: React.FC = () => {
   return (
     <main className="w-full flex flex-col items-center justify-center py-12 md:py-[6vw] xl:py-[5.2vw] px-5 font-sans bg-white">
 
@@ -28,5 +28,3 @@ const NotFoundPage: React.FC = () => {
     </main>
   );
 };
-
-export default NotFoundPage;

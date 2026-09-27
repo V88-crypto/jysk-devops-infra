@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { storeMockData } from './data';
-import Prefooter from '@/shared/ui/Prefooter/Prefooter';
+import { Prefooter } from '@/shared/ui/Prefooter/Prefooter';
 
-const StorePage: React.FC = () => {
+export const StorePage: React.FC = () => {
   const [isPopupOpen, setIsPopupOpen] = useState(true);
 
   return (
@@ -120,5 +120,3 @@ const StorePage: React.FC = () => {
     </main>
   );
 };
-
-export default StorePage;

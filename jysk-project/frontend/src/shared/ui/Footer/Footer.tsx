@@ -15,7 +15,7 @@ interface FooterLink {
   path?: string;
 }
 
-const Footer: React.FC = () => {
+export const Footer: React.FC = () => {
   const categories: FooterLink[] = ["Спальня", "Ванна", "Офіс", "Вітальня", "Кухня та їдальня", "Зберігання", "Для вікон", "Для саду", "Для дому", "Усі категорії"].map((text) => ({ text }));
   const information: FooterLink[] = [
     { text: "Зворотній зв'язок" },
@@ -125,5 +125,3 @@ const Footer: React.FC = () => {
     </footer>
   );
 };
-
-export default Footer;

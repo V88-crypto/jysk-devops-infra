@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/shared/auth/useAuth';
-import IconButton from './IconButton';
-import NavButton from './NavButton';
-import StorePanel from './StorePanel';
-import SidebarMenu from './SidebarMenu'; 
+import { IconButton } from './IconButton';
+import { NavButton } from './NavButton';
+import { StorePanel } from './StorePanel';
+import { SidebarMenu } from './SidebarMenu'; 
 import logoImage from '@/assets/images/logo.png';
 
 import MenuIcon from '@/assets/icons/menu.svg?react';
@@ -16,7 +16,7 @@ import LocationIcon from '@/assets/icons/location.svg?react';
 import ChevronIcon from '@/assets/icons/chevron.svg?react';
 import AdminIcon from '@/assets/icons/admin.svg?react';
 
-const Header: React.FC = () => {
+export const Header: React.FC = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const { isAuthenticated, isAdmin } = useAuth();
@@ -167,5 +167,3 @@ const Header: React.FC = () => {
     </header>
   );
 };
-
-export default Header;

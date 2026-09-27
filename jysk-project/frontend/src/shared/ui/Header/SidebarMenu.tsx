@@ -7,7 +7,7 @@ interface SidebarMenuProps {
   setIsOpen: (isOpen: boolean) => void;
 }
 
-const SidebarMenu: React.FC<SidebarMenuProps> = ({ isOpen, setIsOpen }) => {
+export const SidebarMenu: React.FC<SidebarMenuProps> = ({ isOpen, setIsOpen }) => {
   const navigate = useNavigate();
 
   const goTo = (path: string) => {
@@ -105,5 +105,3 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({ isOpen, setIsOpen }) => {
     </>
   );
 };
-
-export default SidebarMenu;

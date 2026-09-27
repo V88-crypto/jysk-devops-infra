@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import Prefooter from '@/shared/ui/Prefooter/Prefooter'
+import { Prefooter } from '@/shared/ui/Prefooter/Prefooter'
 import { useAsyncData } from '@/shared/hooks/useAsyncData'
 import { blogPageService } from './api/blogPageService'
 import { blogCategoryTabs } from './mocks/blogCatalog'
