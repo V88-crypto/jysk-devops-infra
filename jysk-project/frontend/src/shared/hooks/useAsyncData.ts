@@ -3,24 +3,32 @@ import { useEffect, useState } from 'react'
 interface AsyncDataState<T> {
   data: T | null
   isLoading: boolean
+  error: unknown
 }
 
-export const useAsyncData = <T,>(fetcher: () => Promise<T>): AsyncDataState<T> => {
-  const [data, setData] = useState<T | null>(null)
-  const [isLoading, setIsLoading] = useState(true)
+interface AsyncResult<T> {
+  fetcher: () => Promise<T>
+  data: T | null
+  error: unknown
+}
+
+export const useAsyncData = <T>(
+  fetcher: () => Promise<T>,
+): AsyncDataState<T> => {
+  const [result, setResult] = useState<AsyncResult<T> | null>(null)
 
   useEffect(() => {
     let isMounted = true
 
     fetcher()
-      .then((result) => {
+      .then((data) => {
         if (isMounted) {
-          setData(result)
+          setResult({ fetcher, data, error: null })
         }
       })
-      .finally(() => {
+      .catch((error: unknown) => {
         if (isMounted) {
-          setIsLoading(false)
+          setResult({ fetcher, data: null, error })
         }
       })
 
@@ -29,5 +37,11 @@ export const useAsyncData = <T,>(fetcher: () => Promise<T>): AsyncDataState<T> =
     }
   }, [fetcher])
 
-  return { data, isLoading }
+  const isCurrent = result?.fetcher === fetcher
+
+  return {
+    data: isCurrent ? result.data : null,
+    isLoading: !isCurrent,
+    error: isCurrent ? result.error : null,
+  }
 }

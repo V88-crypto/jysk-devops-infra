@@ -1,10 +1,16 @@
-import { tokenStorage } from '../auth/tokenStorage'
+import { tokenStorage } from '@/shared/auth/tokenStorage'
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:8000'
+const API_BASE_URL =
+  import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:8000'
 
 // A 401 from these endpoints means wrong credentials or an already
 // invalid token, not an expired access token, so they are never refreshed.
-const NO_REFRESH_PATHS = ['/auth/login', '/auth/register', '/auth/refresh', '/auth/logout']
+const NO_REFRESH_PATHS = [
+  '/auth/login',
+  '/auth/register',
+  '/auth/refresh',
+  '/auth/logout',
+]
 
 export class ApiError extends Error {
   status: number

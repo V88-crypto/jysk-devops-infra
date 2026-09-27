@@ -1,6 +1,6 @@
 import { createContext } from 'react'
 
-import type { AuthUser } from '../api/authService'
+import type { AuthUser } from '@/shared/api/authService'
 
 export interface AuthContextValue {
   isAuthenticated: boolean

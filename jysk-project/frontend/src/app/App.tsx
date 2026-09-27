@@ -1,37 +1,45 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom"
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
-import { AuthProvider } from "../shared/auth/AuthProvider"
-import { SiteLayout } from "./SiteLayout"
-import { RequireAuth } from "./RequireAuth"
-import { MainPage } from "../features/mainPage/MainPage"
-import { BlogListPage } from "../features/blogPage/BlogListPage"
-import { BlogPostDetailPage } from "../features/blogPage/BlogPostDetailPage"
-import { LoginPage } from "../features/components/loginPage/LoginPage"
-import { RegisterPage } from "../features/components/registerPage/RegisterPage"
-import { ConfirmEmailPage } from "../features/components/registerPage/ConfirmEmailPage"
-import { SuccessPage } from "../features/components/registerPage/SuccessPage"
-import { ForgotPasswordPage } from "../features/components/resetPasswordPage/ForgotPasswordPage"
-import { ResetPasswordPage } from "../features/components/resetPasswordPage/ResetPasswordPage"
-import { PasswordResetSuccessPage } from "../features/components/resetPasswordPage/PasswordResetSuccessPage"
-import { ProfilePage } from "../features/components/profilePage/ProfilePage"
-import { EditProfileForm } from "../features/components/profilePage/components/EditProfile"
-import VacanciesPage from "../features/vacanciesPage/VacanciesPage"
-import NotFoundPage from "../features/notFoundPage/NotFoundPage"
-import { AdminLayout } from "../features/components/adminPanel/AdminLayout"
-import StorePage from "../features/storePage/StorePage"
-import FaqPage from "../features/faqPage/FaqPage"
+import { AuthProvider } from '@/shared/auth/AuthProvider'
+import { SiteLayout } from './SiteLayout'
+import { RequireAuth } from './RequireAuth'
+import { RequireAdmin } from './RequireAdmin'
+import { MainPage } from '@/features/home/MainPage'
+import { BlogListPage } from '@/features/blog/BlogListPage'
+import { BlogPostDetailPage } from '@/features/blog/BlogPostDetailPage'
+import { LoginPage } from '@/features/auth/login/LoginPage'
+import { RegisterPage } from '@/features/auth/register/RegisterPage'
+import { ConfirmEmailPage } from '@/features/auth/register/ConfirmEmailPage'
+import { SuccessPage } from '@/features/auth/register/SuccessPage'
+import { ForgotPasswordPage } from '@/features/auth/resetPassword/ForgotPasswordPage'
+import { ResetPasswordPage } from '@/features/auth/resetPassword/ResetPasswordPage'
+import { PasswordResetSuccessPage } from '@/features/auth/resetPassword/PasswordResetSuccessPage'
+import { ProfilePage } from '@/features/profile/ProfilePage'
+import { EditProfileForm } from '@/features/profile/components/EditProfileForm'
+import { VacanciesPage } from '@/features/vacancies/VacanciesPage'
+import { NotFoundPage } from '@/features/notFound/NotFoundPage'
+import { AdminLayout } from '@/features/admin/AdminLayout'
+import { StorePage } from '@/features/store/StorePage'
+import { FaqPage } from '@/features/faq/FaqPage'
 
-function App() {
+export function App() {
   return (
     <AuthProvider>
       <BrowserRouter>
         <Routes>
-          <Route path="/admin/*" element={<AdminLayout />} />
+          <Route
+            path="/admin/*"
+            element={
+              <RequireAdmin>
+                <AdminLayout />
+              </RequireAdmin>
+            }
+          />
 
           <Route element={<SiteLayout />}>
             <Route index element={<MainPage />} />
             <Route path="vacancies" element={<VacanciesPage />} />
-            
+
             <Route path="store" element={<StorePage />} />
             <Route path="faq" element={<FaqPage />} />
 
@@ -74,5 +82,3 @@ function App() {
     </AuthProvider>
   )
 }
-
-export default App
