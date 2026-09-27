@@ -3,7 +3,7 @@ import type { ReactNode } from 'react'
 
 import { authService } from '../api/authService'
 import type { AuthUser } from '../api/authService'
-import { ApiError } from '../api/httpClient'
+import { ApiError, setSessionExpiredHandler } from '../api/httpClient'
 import { AuthContext } from './authContext'
 import { tokenStorage } from './tokenStorage'
 
@@ -21,11 +21,28 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     setSessionId((id) => id + 1)
   }, [])
 
-  const logout = useCallback(() => {
-    tokenStorage.clear()
+  const endSession = useCallback(() => {
     setIsAuthenticated(false)
     setUser(null)
   }, [])
+
+  const logout = useCallback(() => {
+    const accessToken = tokenStorage.get()
+    const refreshToken = tokenStorage.getRefresh()
+
+    tokenStorage.clear()
+    endSession()
+
+    if (accessToken && refreshToken) {
+      authService.logout(accessToken, refreshToken).catch(() => {})
+    }
+  }, [endSession])
+
+  useEffect(() => {
+    setSessionExpiredHandler(endSession)
+
+    return () => setSessionExpiredHandler(null)
+  }, [endSession])
 
   useEffect(() => {
     if (!isAuthenticated) {

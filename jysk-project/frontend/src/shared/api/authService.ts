@@ -1,4 +1,4 @@
-import { apiRequest } from './httpClient'
+import { ApiError, apiRequest } from './httpClient'
 import { tokenStorage } from '../auth/tokenStorage'
 
 export interface AuthUser {
@@ -15,6 +15,7 @@ export interface AuthUser {
 
 interface AuthTokenResponse {
   access_token: string
+  refresh_token: string
   token_type: string
 }
 
@@ -50,7 +51,7 @@ export const authService = {
       body: JSON.stringify(payload),
     })
 
-    tokenStorage.set(response.access_token)
+    tokenStorage.setTokens(response.access_token, response.refresh_token)
 
     return response
   },
@@ -67,9 +68,32 @@ export const authService = {
       }),
     })
 
-    tokenStorage.set(response.access_token)
+    tokenStorage.setTokens(response.access_token, response.refresh_token)
 
     return response
+  },
+
+  async logout(accessToken: string, refreshToken: string): Promise<void> {
+    const revoke = (access: string, refresh: string) =>
+      apiRequest<void>('/auth/logout', {
+        method: 'POST',
+        headers: { Authorization: `Bearer ${access}` },
+        body: JSON.stringify({ refresh_token: refresh }),
+      })
+
+    try {
+      await revoke(accessToken, refreshToken)
+    } catch (error) {
+      if (!(error instanceof ApiError && error.status === 401)) {
+        throw error
+      }
+
+      const tokens = await apiRequest<AuthTokenResponse>('/auth/refresh', {
+        method: 'POST',
+        body: JSON.stringify({ refresh_token: refreshToken }),
+      })
+      await revoke(tokens.access_token, tokens.refresh_token)
+    }
   },
 
   me(): Promise<AuthUser> {

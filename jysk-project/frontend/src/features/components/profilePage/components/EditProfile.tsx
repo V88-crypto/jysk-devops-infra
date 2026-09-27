@@ -7,6 +7,7 @@ import type { AuthUser } from "../../../../shared/api/authService";
 import { ApiError } from "../../../../shared/api/httpClient";
 import { useAuth } from "../../../../shared/auth/useAuth";
 import { profileApi } from "../data/profileApi";
+import { ChangePasswordForm } from "./ChangePasswordForm";
 import {
   editProfileSchema,
   type EditProfileFormData,
@@ -171,5 +172,10 @@ export const EditProfileForm = () => {
     );
   }
 
-  return <EditProfileFields key={user.id} user={user} />;
+  return (
+    <>
+      <EditProfileFields key={user.id} user={user} />
+      <ChangePasswordForm email={user.email} />
+    </>
+  );
 };

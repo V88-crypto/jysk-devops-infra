@@ -126,6 +126,16 @@ export const profileApi = {
     }
   },
 
+  changePassword(currentPassword: string, newPassword: string): Promise<void> {
+    return apiRequest<void>('/users/me/password', {
+      method: 'PUT',
+      body: JSON.stringify({
+        current_password: currentPassword,
+        new_password: newPassword,
+      }),
+    })
+  },
+
   updateProfile(payload: ProfileUpdatePayload): Promise<AuthUser> {
     return apiRequest<AuthUser>('/users/me', {
       method: 'PATCH',
