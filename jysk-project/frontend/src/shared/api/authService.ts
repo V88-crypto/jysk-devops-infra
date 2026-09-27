@@ -7,7 +7,9 @@ export interface AuthUser {
   last_name: string
   email: string
   phone: string | null
+  avatar_url: string | null
   role_id: number
+  role: string
   created_at: string
 }
 
@@ -60,5 +62,11 @@ export const authService = {
     tokenStorage.set(response.access_token)
 
     return response
+  },
+
+  me(): Promise<AuthUser> {
+    return apiRequest<AuthUser>('/auth/me', {
+      headers: { Authorization: `Bearer ${tokenStorage.get()}` },
+    })
   },
 }

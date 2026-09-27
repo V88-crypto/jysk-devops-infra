@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import visaLogo from '../../assets/images/visa.png';
 import mastercardLogo from '../../assets/images/mastercard.png';
@@ -9,14 +10,47 @@ import IgIcon from '../../assets/icons/instagram.svg?react';
 import FbIcon from '../../assets/icons/facebook.svg?react';
 import YtIcon from '../../assets/icons/youtube.svg?react';
 
+interface FooterLink {
+  text: string;
+  path?: string;
+}
+
 const Footer: React.FC = () => {
-  const categories: string[] = ["Спальня", "Ванна", "Офіс", "Вітальня", "Кухня та їдальня", "Зберігання", "Для вікон", "Для саду", "Для дому", "Усі категорії"];
-  const information: string[] = ["Зворотній зв'язок", "Магазини і графіки роботи", "Умови та положення", "Доставка", "Політика конфіденційності"];
-  const hyggy: string[] = ["Про нас", "Робота в Hyggy", "Підписатись на розсилку", "Блог", "B2B", "Корисні посилання"];
+  const categories: FooterLink[] = ["Спальня", "Ванна", "Офіс", "Вітальня", "Кухня та їдальня", "Зберігання", "Для вікон", "Для саду", "Для дому", "Усі категорії"].map((text) => ({ text }));
+  const information: FooterLink[] = [
+    { text: "Зворотній зв'язок" },
+    { text: "Магазини і графіки роботи", path: "/store" },
+    { text: "Умови та положення" },
+    { text: "Доставка" },
+    { text: "Політика конфіденційності" },
+  ];
+  const hyggy: FooterLink[] = [
+    { text: "Про нас" },
+    { text: "Робота в Hyggy", path: "/vacancies" },
+    { text: "Підписатись на розсилку" },
+    { text: "Блог", path: "/blog" },
+    { text: "B2B" },
+    { text: "Корисні посилання" },
+  ];
 
   const headingClass: string = "font-bold text-[14px] md:text-[2.6vw] xl:text-[1.25vw] mb-4 md:mb-[3.1vw] xl:mb-[1.66vw] text-wrap";
   const linkClass: string = "text-[12px] md:text-[2.08vw] xl:text-[0.93vw] font-normal hover:opacity-80 transition-opacity text-wrap";
   const ulClass: string = "flex flex-col gap-3 md:gap-[1.56vw] xl:gap-[1.04vw]";
+
+  const renderLinks = (links: FooterLink[]) =>
+    links.map((link) => (
+      <li key={link.text}>
+        {link.path ? (
+          <Link to={link.path} className={linkClass}>
+            {link.text}
+          </Link>
+        ) : (
+          <a href="#" className={linkClass}>
+            {link.text}
+          </a>
+        )}
+      </li>
+    ));
 
   return (
     <footer className="w-full bg-primary text-white font-sans px-5 md:px-[4.16vw] xl:px-[7.03%] py-10 md:py-[5.2vw] xl:pt-[4.16vw] xl:pb-[3.12vw]">
@@ -26,39 +60,21 @@ const Footer: React.FC = () => {
         <div className="flex flex-col min-w-0">
           <h3 className={headingClass}>Категорії товарів</h3>
           <ul className={ulClass}>
-            {categories.map((item, index) => (
-              <li key={index}>
-                <a href="#" className={linkClass}>
-                  {item}
-                </a>
-              </li>
-            ))}
+            {renderLinks(categories)}
           </ul>
         </div>
 
         <div className="flex flex-col min-w-0">
           <h3 className={headingClass}>Інформація</h3>
           <ul className={ulClass}>
-            {information.map((item, index) => (
-              <li key={index}>
-                <a href="#" className={linkClass}>
-                  {item}
-                </a>
-              </li>
-            ))}
+            {renderLinks(information)}
           </ul>
         </div>
 
         <div className="flex flex-col min-w-0">
           <h3 className={headingClass}>Hyggy</h3>
           <ul className={ulClass}>
-            {hyggy.map((item, index) => (
-              <li key={index}>
-                <a href="#" className={linkClass}>
-                  {item}
-                </a>
-              </li>
-            ))}
+            {renderLinks(hyggy)}
           </ul>
         </div>
 

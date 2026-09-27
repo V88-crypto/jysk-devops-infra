@@ -1,3 +1,5 @@
+import { useNavigate } from 'react-router-dom'
+
 import type { BlogPost } from '../../../types/homePage'
 
 interface BlogCardProps {
@@ -5,6 +7,8 @@ interface BlogCardProps {
 }
 
 export function BlogCard({ post }: BlogCardProps) {
+  const navigate = useNavigate()
+
   return (
     <article className="flex h-full flex-col">
       <div className="group relative aspect-[523/307] overflow-hidden bg-neutral-100">
@@ -27,6 +31,7 @@ export function BlogCard({ post }: BlogCardProps) {
 
       <button
         type="button"
+        onClick={() => navigate('/blog')}
         className="blog-card-button mx-auto mt-[31px] h-[50px] w-[253px] rounded-sm bg-[#10B8C5] text-[22px] font-bold text-white transition-colors duration-300 hover:bg-[#0ea3ae] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#10B8C5] md:mx-0"
       >
         Детальніше

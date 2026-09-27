@@ -244,7 +244,7 @@ export const ProfileInfo = () => {
             <div className="flex flex-col gap-[30px]">
 
                 <a
-                    href="#"
+                    href="#profile-orders"
                     className="
                     w-full
                     flex
@@ -267,7 +267,7 @@ export const ProfileInfo = () => {
                 </a>
 
                 <a
-                    href="#"
+                    href="#profile-orders"
                     className="
                     w-full
                     flex
@@ -290,7 +290,7 @@ export const ProfileInfo = () => {
                 </a>
 
                 <a
-                    href="#"
+                    href="#profile-reviews"
                     className="
                     w-full
                     flex
@@ -313,7 +313,7 @@ export const ProfileInfo = () => {
                 </a>
 
                 <a
-                    href="#"
+                    href="#profile-favorites"
                     className="
                     w-full
                     flex

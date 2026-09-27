@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import logoImage from '../../assets/images/logo.png';
 
 interface SidebarMenuProps {
@@ -7,16 +8,23 @@ interface SidebarMenuProps {
 }
 
 const SidebarMenu: React.FC<SidebarMenuProps> = ({ isOpen, setIsOpen }) => {
+  const navigate = useNavigate();
+
+  const goTo = (path: string) => {
+    setIsOpen(false);
+    navigate(path);
+  };
+
   const menuItems: string[] = [
     "Вітальня", "Кухня", "Спальня", "Ванна", "Кабінет", "Двір", 
     "Вітальня", "Кухня", "Спальня", "Ванна", "Кабінет", "Двір"
   ];
 
-  const bottomNavItems: { text: string; href: string }[] = [
-    { text: "Блог", href: "#" },
-    { text: "Магазини", href: "#" },
-    { text: "Питання-відповідь", href: "#" },
-    { text: "Робота", href: "#" }
+  const bottomNavItems: { text: string; path: string }[] = [
+    { text: "Блог", path: "/blog" },
+    { text: "Магазини", path: "/store" },
+    { text: "Питання-відповідь", path: "/faq" },
+    { text: "Робота", path: "/vacancies" }
   ];
 
   return (
@@ -36,13 +44,18 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({ isOpen, setIsOpen }) => {
         <div className="flex flex-col h-full px-6 py-8 xl:px-[4vw] xl:py-[3vw]">
           
           <div className="flex items-center justify-between w-full shrink-0">
-            <div className="w-28 md:w-32 xl:w-[7vw] h-auto flex items-center justify-start shrink-0">
-              <img 
-                src={logoImage} 
-                alt="Логотип HYGGY" 
-                className="w-full h-auto object-contain" 
+            <button
+              type="button"
+              onClick={() => goTo('/')}
+              aria-label="На головну сторінку"
+              className="w-28 md:w-32 xl:w-[7vw] h-auto flex items-center justify-start shrink-0 transition duration-200 hover:scale-105 hover:opacity-80"
+            >
+              <img
+                src={logoImage}
+                alt="Логотип HYGGY"
+                className="w-full h-auto object-contain"
               />
-            </div>
+            </button>
             
             <button 
               onClick={() => setIsOpen(false)}
@@ -73,14 +86,15 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({ isOpen, setIsOpen }) => {
             <hr className="border-black/20 my-6 xl:my-[2vw] shrink-0" />
 
             <nav className="flex flex-col gap-5 md:gap-6 xl:gap-[1.5vw]">
-              {bottomNavItems.map((nav, index) => (
-                <a 
-                  key={index} 
-                  href={nav.href} 
-                  className="text-gray-medium text-lg md:text-xl xl:text-[1.25vw] hover:text-primary transition-colors leading-none font-inter"
+              {bottomNavItems.map((nav) => (
+                <button
+                  key={nav.path}
+                  type="button"
+                  onClick={() => goTo(nav.path)}
+                  className="text-left text-gray-medium text-lg md:text-xl xl:text-[1.25vw] hover:text-primary transition-colors leading-none font-inter"
                 >
                   {nav.text}
-                </a>
+                </button>
               ))}
             </nav>
 

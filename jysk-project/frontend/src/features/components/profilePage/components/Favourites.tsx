@@ -13,7 +13,7 @@ export const Favorites = () => {
   }
 
   return (
-    <section className="h-full w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-0 mt-[40px] sm:mt-[50px] lg:mt-[60px] mb-[40px] sm:mb-[50px] lg:mb-[60px]">
+    <section id="profile-favorites" className="scroll-mt-4 h-full w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-0 mt-[40px] sm:mt-[50px] lg:mt-[60px] mb-[40px] sm:mb-[50px] lg:mb-[60px]">
 
       <h2
         className="
