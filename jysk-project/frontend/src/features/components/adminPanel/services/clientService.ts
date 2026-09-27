@@ -1,25 +1,57 @@
-import { mockClients } from '../mocks/clients'
-import type { Client } from '../../../types/client'
-import { mockDelay } from '../../../../shared/api/mockDelay'
+import type { AuthUser } from '../../../../shared/api/authService'
+import { apiRequest } from '../../../../shared/api/httpClient'
+import type { Client, ClientPage, ClientRole } from '../../../types/client'
 
-const API_DELAY_MS = 500
+interface UserListResponse {
+  items: AuthUser[]
+  total: number
+  page: number
+  page_size: number
+}
+
+interface ClientQuery {
+  search: string
+  page: number
+  pageSize: number
+}
+
+const toClient = (user: AuthUser): Client => ({
+  id: user.id,
+  firstName: user.first_name,
+  lastName: user.last_name,
+  email: user.email,
+  phone: user.phone,
+  role: user.role as ClientRole,
+  createdAt: user.created_at,
+})
 
 export const clientService = {
-  async getAll(): Promise<Client[]> {
-    await mockDelay(API_DELAY_MS)
+  async getPage({ search, page, pageSize }: ClientQuery): Promise<ClientPage> {
+    const params = new URLSearchParams({
+      page: String(page),
+      page_size: String(pageSize),
+    })
 
-    return mockClients.map((client) => ({ ...client }))
-  },
-
-  async delete(id: number): Promise<void> {
-    await mockDelay(API_DELAY_MS)
-
-    const clientIndex = mockClients.findIndex((item) => item.id === id)
-
-    if (clientIndex === -1) {
-      throw new Error(`Client with id ${id} was not found`)
+    if (search) {
+      params.set('search', search)
     }
 
-    mockClients.splice(clientIndex, 1)
+    const response = await apiRequest<UserListResponse>(`/admin/users?${params}`)
+
+    return {
+      items: response.items.map(toClient),
+      total: response.total,
+      page: response.page,
+      pageSize: response.page_size,
+    }
+  },
+
+  async updateRole(id: number, role: ClientRole): Promise<Client> {
+    const user = await apiRequest<AuthUser>(`/admin/users/${id}/role`, {
+      method: 'PATCH',
+      body: JSON.stringify({ role }),
+    })
+
+    return toClient(user)
   },
 }
