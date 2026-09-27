@@ -2,9 +2,9 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import { authService } from "../../../../shared/api/authService";
-import { ApiError } from "../../../../shared/api/httpClient";
-import { profileApi } from "../data/profileApi";
+import { authService } from "@/shared/api/authService";
+import { ApiError } from "@/shared/api/httpClient";
+import { profileApi } from "@/features/components/profilePage/data/profileApi";
 import {
   changePasswordSchema,
   type ChangePasswordFormData,

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { storeMockData } from './data';
-import Prefooter from '../../components/Prefooter/Prefooter';
+import Prefooter from '@/components/Prefooter/Prefooter';
 
 const StorePage: React.FC = () => {
   const [isPopupOpen, setIsPopupOpen] = useState(true);

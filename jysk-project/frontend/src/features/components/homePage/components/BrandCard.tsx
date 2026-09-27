@@ -1,4 +1,4 @@
-import type { Brand } from '../../../types/homePage'
+import type { Brand } from '@/features/types/homePage'
 
 interface BrandCardProps {
   brand: Brand

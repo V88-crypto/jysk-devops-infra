@@ -1,4 +1,4 @@
-import type { WriteOff } from '../../../types/warehouseDocs'
+import type { WriteOff } from '@/features/types/warehouseDocs'
 
 export const mockWriteOffs: WriteOff[] = [
   {

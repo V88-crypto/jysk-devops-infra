@@ -1,6 +1,6 @@
-import { blogCatalog, blogRoomFilters } from '../mocks/blogCatalog'
-import type { BlogPost } from '../../types/homePage'
-import { mockDelay } from '../../../shared/api/mockDelay'
+import { blogCatalog, blogRoomFilters } from '@/features/blogPage/mocks/blogCatalog'
+import type { BlogPost } from '@/features/types/homePage'
+import { mockDelay } from '@/shared/api/mockDelay'
 
 const API_DELAY_MS = 400
 

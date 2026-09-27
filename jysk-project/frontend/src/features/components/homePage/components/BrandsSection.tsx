@@ -1,5 +1,5 @@
-import { brands as defaultBrands } from '../data/brands'
-import type { Brand } from '../../../types/homePage'
+import { brands as defaultBrands } from '@/features/components/homePage/data/brands'
+import type { Brand } from '@/features/types/homePage'
 import { BrandCard } from './BrandCard'
 
 interface BrandsSectionProps {

@@ -1,4 +1,4 @@
-import type { Review } from '../../../types/profile'
+import type { Review } from '@/features/types/profile'
 
 const chairImage = 'https://placehold.co/80x80?text=BISTRUP'
 

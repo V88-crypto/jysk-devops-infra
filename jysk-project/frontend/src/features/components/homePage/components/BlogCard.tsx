@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 
-import type { BlogPost } from '../../../types/homePage'
+import type { BlogPost } from '@/features/types/homePage'
 
 interface BlogCardProps {
   post: BlogPost

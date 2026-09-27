@@ -1,13 +1,13 @@
 import { useState } from 'react'
 
-import type { OrderList as OrderListData } from '../../../types/profile'
-import type { SectionState } from '../data/useProfileData'
+import type { OrderList as OrderListData } from '@/features/types/profile'
+import type { SectionState } from '@/features/components/profilePage/data/useProfileData'
 import {
   ORDER_STATUS_COLORS,
   ORDER_STATUS_LABELS,
   formatDate,
   formatPrice,
-} from '../utils/format'
+} from '@/features/components/profilePage/utils/format'
 import { SectionStatus } from './SectionStatus'
 
 interface OrderListProps {

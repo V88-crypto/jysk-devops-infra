@@ -1,4 +1,4 @@
-import type { Supplier } from '../../../types/warehouseDocs'
+import type { Supplier } from '@/features/types/warehouseDocs'
 
 export const mockSuppliers: Supplier[] = [
   { id: 1, name: 'BISTRUP' },

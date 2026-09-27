@@ -1,6 +1,6 @@
-import type { MyReviewList } from "../../../types/profile";
-import { useAuth } from "../../../../shared/auth/useAuth";
-import type { SectionState } from "../data/useProfileData";
+import type { MyReviewList } from "@/features/types/profile";
+import { useAuth } from "@/shared/auth/useAuth";
+import type { SectionState } from "@/features/components/profilePage/data/useProfileData";
 import { ReviewCard } from "./ReviewCard";
 import { SectionStatus } from "./SectionStatus";
 

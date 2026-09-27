@@ -1,13 +1,13 @@
 import { useMemo, useState } from 'react'
 
-import { reviewService } from '../../services/reviewService'
+import { reviewService } from '@/features/components/adminPanel/services/reviewService'
 
-import { useAsyncData } from '../../../../../shared/hooks/useAsyncData'
+import { useAsyncData } from '@/shared/hooks/useAsyncData'
 
-import { SearchField } from '../common/SearchField'
-import { RowDeleteButton } from '../common/RowDeleteButton'
-import { StarRating } from '../common/StarRating'
-import { AdminPageLayout } from '../common/AdminPageLayout'
+import { SearchField } from '@/features/components/adminPanel/components/common/SearchField'
+import { RowDeleteButton } from '@/features/components/adminPanel/components/common/RowDeleteButton'
+import { StarRating } from '@/features/components/adminPanel/components/common/StarRating'
+import { AdminPageLayout } from '@/features/components/adminPanel/components/common/AdminPageLayout'
 
 export const ReviewsPage = () => {
   const { data: reviews, isLoading } = useAsyncData(reviewService.getAll)

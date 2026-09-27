@@ -2,17 +2,17 @@ import { useEffect, useState } from 'react'
 import type { FormEvent } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 
-import { attributeService } from '../../../services/attributeService'
-import { categoryService } from '../../../services/categoryService'
-import { productService } from '../../../services/productService'
+import { attributeService } from '@/features/components/adminPanel/services/attributeService'
+import { categoryService } from '@/features/components/adminPanel/services/categoryService'
+import { productService } from '@/features/components/adminPanel/services/productService'
 
-import type { Attribute } from '../../../../../types/attribute'
-import type { Category } from '../../../../../types/category'
-import type { Product } from '../../../../../types/product'
+import type { Attribute } from '@/features/types/attribute'
+import type { Category } from '@/features/types/category'
+import type { Product } from '@/features/types/product'
 
-import { ProductFormFields } from '../components/ProductFormFields'
-import { useProductFormState } from '../hooks/useProductFormState'
-import { AdminPageLayout } from '../../common/AdminPageLayout'
+import { ProductFormFields } from '@/features/components/adminPanel/components/EditAddProducts/components/ProductFormFields'
+import { useProductFormState } from '@/features/components/adminPanel/components/EditAddProducts/hooks/useProductFormState'
+import { AdminPageLayout } from '@/features/components/adminPanel/components/common/AdminPageLayout'
 
 import {
   mapFormToProduct,

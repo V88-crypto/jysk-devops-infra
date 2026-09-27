@@ -1,15 +1,15 @@
 import { useMemo, useState } from 'react'
 
-import { transferService } from '../../../services/transferService'
-import { warehouseService } from '../../../services/warehouseService'
+import { transferService } from '@/features/components/adminPanel/services/transferService'
+import { warehouseService } from '@/features/components/adminPanel/services/warehouseService'
 
-import { useAsyncData } from '../../../../../../shared/hooks/useAsyncData'
+import { useAsyncData } from '@/shared/hooks/useAsyncData'
 
-import { FilterDropdown } from '../../common/FilterDropdown'
-import { SearchField } from '../../common/SearchField'
-import { RowEditButton } from '../../common/RowEditButton'
-import { formatDocumentDate } from '../../../utils/formatDocumentDate'
-import { AdminPageLayout } from '../../common/AdminPageLayout'
+import { FilterDropdown } from '@/features/components/adminPanel/components/common/FilterDropdown'
+import { SearchField } from '@/features/components/adminPanel/components/common/SearchField'
+import { RowEditButton } from '@/features/components/adminPanel/components/common/RowEditButton'
+import { formatDocumentDate } from '@/features/components/adminPanel/utils/formatDocumentDate'
+import { AdminPageLayout } from '@/features/components/adminPanel/components/common/AdminPageLayout'
 
 interface TransfersListProps {
   onAdd: () => void

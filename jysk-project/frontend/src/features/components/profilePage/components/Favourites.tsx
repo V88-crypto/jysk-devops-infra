@@ -1,8 +1,8 @@
 import { useState } from 'react'
 
-import type { FavoriteProduct } from '../../../types/profile'
-import type { SectionState } from '../data/useProfileData'
-import { formatPrice } from '../utils/format'
+import type { FavoriteProduct } from '@/features/types/profile'
+import type { SectionState } from '@/features/components/profilePage/data/useProfileData'
+import { formatPrice } from '@/features/components/profilePage/utils/format'
 import { SectionStatus } from './SectionStatus'
 
 interface FavoritesProps {

@@ -1,17 +1,17 @@
 import { useCallback, useState } from 'react'
 import type { FormEvent } from 'react'
 
-import { blogCategoryService } from '../../services/blogCategoryService'
-import { blogPostService } from '../../services/blogPostService'
+import { blogCategoryService } from '@/features/components/adminPanel/services/blogCategoryService'
+import { blogPostService } from '@/features/components/adminPanel/services/blogPostService'
 
-import { useAsyncData } from '../../../../../shared/hooks/useAsyncData'
+import { useAsyncData } from '@/shared/hooks/useAsyncData'
 
-import { fieldClass } from '../common/formFieldStyles'
-import { AdminPageLayout } from '../common/AdminPageLayout'
-import { PhotoUploadRow } from '../common/PhotoUploadRow'
-import { RowDeleteButton } from '../common/RowDeleteButton'
+import { fieldClass } from '@/features/components/adminPanel/components/common/formFieldStyles'
+import { AdminPageLayout } from '@/features/components/adminPanel/components/common/AdminPageLayout'
+import { PhotoUploadRow } from '@/features/components/adminPanel/components/common/PhotoUploadRow'
+import { RowDeleteButton } from '@/features/components/adminPanel/components/common/RowDeleteButton'
 
-import type { BlogContentBlock, BlogPost } from '../../../../types/homePage'
+import type { BlogContentBlock, BlogPost } from '@/features/types/homePage'
 
 interface EditBlogFormProps {
   postId: number

@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react'
 
-import { clientService } from '../../services/clientService'
-import type { Client, ClientPage, ClientRole } from '../../../../types/client'
-import { ApiError } from '../../../../../shared/api/httpClient'
-import { useAuth } from '../../../../../shared/auth/useAuth'
+import { clientService } from '@/features/components/adminPanel/services/clientService'
+import type { Client, ClientPage, ClientRole } from '@/features/types/client'
+import { ApiError } from '@/shared/api/httpClient'
+import { useAuth } from '@/shared/auth/useAuth'
 
-import { SearchField } from '../common/SearchField'
-import { AdminPageLayout } from '../common/AdminPageLayout'
+import { SearchField } from '@/features/components/adminPanel/components/common/SearchField'
+import { AdminPageLayout } from '@/features/components/adminPanel/components/common/AdminPageLayout'
 
 const PAGE_SIZE = 20
 const SEARCH_DEBOUNCE_MS = 300

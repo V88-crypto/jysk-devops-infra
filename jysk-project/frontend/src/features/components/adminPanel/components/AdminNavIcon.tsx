@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react'
 
-import type { AdminNavItemId } from '../navigation'
+import type { AdminNavItemId } from '@/features/components/adminPanel/navigation'
 
 export type AdminIconName =
   | AdminNavItemId

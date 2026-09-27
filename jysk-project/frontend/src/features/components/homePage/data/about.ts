@@ -1,4 +1,4 @@
-import type { About } from '../../../types/homePage'
+import type { About } from '@/features/types/homePage'
 
 const placeholderImage = '/images/about-placeholder.svg'
 

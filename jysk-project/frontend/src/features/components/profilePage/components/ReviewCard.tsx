@@ -1,5 +1,5 @@
-import type { MyReview } from "../../../types/profile";
-import { formatDate } from "../utils/format";
+import type { MyReview } from "@/features/types/profile";
+import { formatDate } from "@/features/components/profilePage/utils/format";
 
 type Props = {
   review: MyReview;

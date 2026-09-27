@@ -1,4 +1,4 @@
-import type { BlogPost } from '../../../types/homePage'
+import type { BlogPost } from '@/features/types/homePage'
 
 const woodCareImage = 'https://placehold.co/80x80?text=Wood'
 const interiorImage1 = 'https://placehold.co/200x140?text=Interior+1'

@@ -1,6 +1,6 @@
-import { mockAttributes } from '../mocks/attributes'
-import type { Attribute } from '../../../types/attribute'
-import { mockDelay } from '../../../../shared/api/mockDelay'
+import { mockAttributes } from '@/features/components/adminPanel/mocks/attributes'
+import type { Attribute } from '@/features/types/attribute'
+import { mockDelay } from '@/shared/api/mockDelay'
 
 const API_DELAY_MS = 500
 

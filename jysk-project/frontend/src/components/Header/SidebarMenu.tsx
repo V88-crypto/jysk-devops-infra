@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import logoImage from '../../assets/images/logo.png';
+import logoImage from '@/assets/images/logo.png';
 
 interface SidebarMenuProps {
   isOpen: boolean;

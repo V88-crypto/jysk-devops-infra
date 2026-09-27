@@ -1,7 +1,7 @@
-import type { Attribute } from '../../../../../../types/attribute'
-import type { Product } from '../../../../../../types/product'
+import type { Attribute } from '@/features/types/attribute'
+import type { Product } from '@/features/types/product'
 
-import type { EditProductFormState } from '../../types/productForm'
+import type { EditProductFormState } from '@/features/components/adminPanel/components/EditAddProducts/types/productForm'
 
 import {
   emptyProductFormState,
@@ -9,7 +9,7 @@ import {
   getFirstVariant,
   createImages,
   resolveAttributeId,
-} from '../../utils/productHelpers'
+} from '@/features/components/adminPanel/components/EditAddProducts/utils/productHelpers'
 
 export const mapProductToForm = (
   product: Product,

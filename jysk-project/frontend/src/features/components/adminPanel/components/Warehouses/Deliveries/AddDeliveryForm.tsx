@@ -1,18 +1,18 @@
 import { useState } from 'react'
 import type { FormEvent } from 'react'
 
-import { productService } from '../../../services/productService'
-import { packagingService } from '../../../services/packagingService'
-import { supplierService } from '../../../services/supplierService'
-import { warehouseService } from '../../../services/warehouseService'
-import { deliveryService } from '../../../services/deliveryService'
+import { productService } from '@/features/components/adminPanel/services/productService'
+import { packagingService } from '@/features/components/adminPanel/services/packagingService'
+import { supplierService } from '@/features/components/adminPanel/services/supplierService'
+import { warehouseService } from '@/features/components/adminPanel/services/warehouseService'
+import { deliveryService } from '@/features/components/adminPanel/services/deliveryService'
 
-import { useAsyncData } from '../../../../../../shared/hooks/useAsyncData'
+import { useAsyncData } from '@/shared/hooks/useAsyncData'
 
-import { DateTimeFields } from '../../common/DateTimeFields'
-import { AdminPageLayout } from '../../common/AdminPageLayout'
-import { useDateTimeValue } from '../../../hooks/useDateTimeValue'
-import { useLineItemRows } from '../../../hooks/useLineItemRows'
+import { DateTimeFields } from '@/features/components/adminPanel/components/common/DateTimeFields'
+import { AdminPageLayout } from '@/features/components/adminPanel/components/common/AdminPageLayout'
+import { useDateTimeValue } from '@/features/components/adminPanel/hooks/useDateTimeValue'
+import { useLineItemRows } from '@/features/components/adminPanel/hooks/useLineItemRows'
 
 import {
   createEmptyDeliveryLineItemRow,

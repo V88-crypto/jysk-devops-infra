@@ -1,20 +1,20 @@
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useAuth } from '../../shared/auth/useAuth';
+import { useAuth } from '@/shared/auth/useAuth';
 import IconButton from './IconButton';
 import NavButton from './NavButton';
 import StorePanel from './StorePanel';
 import SidebarMenu from './SidebarMenu'; 
-import logoImage from '../../assets/images/logo.png';
+import logoImage from '@/assets/images/logo.png';
 
-import MenuIcon from '../../assets/icons/menu.svg?react';
-import SearchIcon from '../../assets/icons/search.svg?react';
-import HeartIcon from '../../assets/icons/heart.svg?react';
-import UserIcon from '../../assets/icons/user.svg?react';
-import CartIcon from '../../assets/icons/cart.svg?react';
-import LocationIcon from '../../assets/icons/location.svg?react';
-import ChevronIcon from '../../assets/icons/chevron.svg?react';
-import AdminIcon from '../../assets/icons/admin.svg?react';
+import MenuIcon from '@/assets/icons/menu.svg?react';
+import SearchIcon from '@/assets/icons/search.svg?react';
+import HeartIcon from '@/assets/icons/heart.svg?react';
+import UserIcon from '@/assets/icons/user.svg?react';
+import CartIcon from '@/assets/icons/cart.svg?react';
+import LocationIcon from '@/assets/icons/location.svg?react';
+import ChevronIcon from '@/assets/icons/chevron.svg?react';
+import AdminIcon from '@/assets/icons/admin.svg?react';
 
 const Header: React.FC = () => {
   const navigate = useNavigate();

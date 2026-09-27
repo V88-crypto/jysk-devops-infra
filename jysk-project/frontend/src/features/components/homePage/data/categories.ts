@@ -1,4 +1,4 @@
-import type { Category } from '../../../types/homePage'
+import type { Category } from '@/features/types/homePage'
 
 const placeholderImage = '/images/category-placeholder.svg'
 

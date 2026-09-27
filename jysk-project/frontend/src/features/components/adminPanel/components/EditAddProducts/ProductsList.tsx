@@ -1,13 +1,13 @@
 import { useMemo, useState } from 'react'
 
-import { productService } from '../../services/productService'
+import { productService } from '@/features/components/adminPanel/services/productService'
 
-import { useAsyncData } from '../../../../../shared/hooks/useAsyncData'
+import { useAsyncData } from '@/shared/hooks/useAsyncData'
 
-import { SearchField } from '../common/SearchField'
-import { RowEditButton } from '../common/RowEditButton'
-import { RowDeleteButton } from '../common/RowDeleteButton'
-import { AdminPageLayout } from '../common/AdminPageLayout'
+import { SearchField } from '@/features/components/adminPanel/components/common/SearchField'
+import { RowEditButton } from '@/features/components/adminPanel/components/common/RowEditButton'
+import { RowDeleteButton } from '@/features/components/adminPanel/components/common/RowDeleteButton'
+import { AdminPageLayout } from '@/features/components/adminPanel/components/common/AdminPageLayout'
 
 interface ProductsListProps {
   onAdd: () => void

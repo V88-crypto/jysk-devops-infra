@@ -1,4 +1,4 @@
-import type { Attribute } from '../../../types/attribute'
+import type { Attribute } from '@/features/types/attribute'
 
 export const mockAttributes: Attribute[] = [
   {

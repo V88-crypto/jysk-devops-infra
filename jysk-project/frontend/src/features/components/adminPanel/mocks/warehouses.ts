@@ -1,4 +1,4 @@
-import type { Warehouse } from '../../../types/stock'
+import type { Warehouse } from '@/features/types/stock'
 
 export const mockWarehouses: Warehouse[] = [
   { id: 1, name: 'Склад №1 (Київ)', address: 'вул. Промислова, 12, Київ' },

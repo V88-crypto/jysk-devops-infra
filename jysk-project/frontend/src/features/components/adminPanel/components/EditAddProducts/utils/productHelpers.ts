@@ -1,14 +1,14 @@
-import type { Attribute } from '../../../../../types/attribute'
+import type { Attribute } from '@/features/types/attribute'
 import type {
   Product,
   ProductImage,
   ProductVariant,
-} from '../../../../../types/product'
+} from '@/features/types/product'
 
 import type {
   AttributeFormRow,
   EditProductFormState,
-} from '../types/productForm'
+} from '@/features/components/adminPanel/components/EditAddProducts/types/productForm'
 
 export const IMAGE_FALLBACK_URL =
   '/images/category-placeholder.svg'

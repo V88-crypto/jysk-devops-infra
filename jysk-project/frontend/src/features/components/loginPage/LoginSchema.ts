@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import { emailField, passwordField } from '../../../shared/validation/authFields'
+import { emailField, passwordField } from '@/shared/validation/authFields'
 
 export const loginSchema = z.object({
   email: emailField,

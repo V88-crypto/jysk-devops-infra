@@ -1,7 +1,7 @@
 import type { ChangeEvent, SyntheticEvent } from 'react'
 
-import type { Attribute } from '../../../../../types/attribute'
-import type { Category } from '../../../../../types/category'
+import type { Attribute } from '@/features/types/attribute'
+import type { Category } from '@/features/types/category'
 
 import { TextField } from './TextField'
 import { SelectField } from './SelectField'
@@ -10,7 +10,7 @@ import { FlagOption } from './FlagOption'
 import { AttributeRow } from './AttributeRow'
 import { PhotoPreview } from './PhotoPreview'
 
-import type { EditProductFormState } from '../types/productForm'
+import type { EditProductFormState } from '@/features/components/adminPanel/components/EditAddProducts/types/productForm'
 
 const buttonClass =
   'h-[56px] bg-primary px-10 text-lg font-semibold text-white transition hover:bg-primary-dark disabled:cursor-not-allowed disabled:opacity-60'

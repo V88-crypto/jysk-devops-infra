@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
-import Prefooter from '../../components/Prefooter/Prefooter'
-import { useAsyncData } from '../../shared/hooks/useAsyncData'
+import Prefooter from '@/components/Prefooter/Prefooter'
+import { useAsyncData } from '@/shared/hooks/useAsyncData'
 import { blogPageService } from './services/blogPageService'
 import { blogCategoryTabs } from './mocks/blogCatalog'
 import { BlogCategorySection } from './components/BlogCategorySection'

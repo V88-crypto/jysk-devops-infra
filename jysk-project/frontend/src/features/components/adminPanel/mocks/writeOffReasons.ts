@@ -1,4 +1,4 @@
-import type { WriteOffReason } from '../../../types/warehouseDocs'
+import type { WriteOffReason } from '@/features/types/warehouseDocs'
 
 export const mockWriteOffReasons: WriteOffReason[] = [
   { id: 1, name: 'Пошкодження' },

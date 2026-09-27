@@ -1,4 +1,4 @@
-import type { Category } from '../../../types/homePage'
+import type { Category } from '@/features/types/homePage'
 
 interface CategoryCardProps {
   category: Category

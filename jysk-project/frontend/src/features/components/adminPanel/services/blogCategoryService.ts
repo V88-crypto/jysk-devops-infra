@@ -1,6 +1,6 @@
-import { mockBlogCategories } from '../mocks/blogCategories'
-import type { BlogCategory } from '../mocks/blogCategories'
-import { mockDelay } from '../../../../shared/api/mockDelay'
+import { mockBlogCategories } from '@/features/components/adminPanel/mocks/blogCategories'
+import type { BlogCategory } from '@/features/components/adminPanel/mocks/blogCategories'
+import { mockDelay } from '@/shared/api/mockDelay'
 
 const API_DELAY_MS = 500
 

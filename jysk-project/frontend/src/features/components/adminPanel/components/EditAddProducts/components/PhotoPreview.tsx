@@ -1,4 +1,4 @@
-import type { PhotoPreviewProps } from '../types/productForm'
+import type { PhotoPreviewProps } from '@/features/components/adminPanel/components/EditAddProducts/types/productForm'
 
 export const PhotoPreview = ({
   imageUrl,

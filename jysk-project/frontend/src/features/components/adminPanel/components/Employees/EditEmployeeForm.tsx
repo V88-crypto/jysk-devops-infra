@@ -1,15 +1,15 @@
 import { useCallback, useState } from 'react'
 import type { FormEvent } from 'react'
 
-import { employeeService } from '../../services/employeeService'
-import { storeService } from '../../services/storeService'
-import type { Employee } from '../../../../types/employee'
+import { employeeService } from '@/features/components/adminPanel/services/employeeService'
+import { storeService } from '@/features/components/adminPanel/services/storeService'
+import type { Employee } from '@/features/types/employee'
 
-import { useAsyncData } from '../../../../../shared/hooks/useAsyncData'
+import { useAsyncData } from '@/shared/hooks/useAsyncData'
 
-import { fieldClass } from '../common/formFieldStyles'
-import { LabeledField } from '../common/LabeledField'
-import { AdminPageLayout } from '../common/AdminPageLayout'
+import { fieldClass } from '@/features/components/adminPanel/components/common/formFieldStyles'
+import { LabeledField } from '@/features/components/adminPanel/components/common/LabeledField'
+import { AdminPageLayout } from '@/features/components/adminPanel/components/common/AdminPageLayout'
 
 interface EditEmployeeFormProps {
   employeeId: number

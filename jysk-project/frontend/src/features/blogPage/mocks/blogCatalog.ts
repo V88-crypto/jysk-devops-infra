@@ -1,5 +1,5 @@
-import type { BlogPost } from '../../types/homePage'
-import type { BlogRoomFilter } from '../types'
+import type { BlogPost } from '@/features/types/homePage'
+import type { BlogRoomFilter } from '@/features/blogPage/types'
 
 const placeholderCozy = '/images/blog-cozy-placeholder.svg'
 const placeholderSofa = '/images/blog-sofa-placeholder.svg'

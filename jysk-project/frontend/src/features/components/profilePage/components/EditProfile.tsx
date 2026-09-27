@@ -3,10 +3,10 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigate } from "react-router-dom";
 
-import type { AuthUser } from "../../../../shared/api/authService";
-import { ApiError } from "../../../../shared/api/httpClient";
-import { useAuth } from "../../../../shared/auth/useAuth";
-import { profileApi } from "../data/profileApi";
+import type { AuthUser } from "@/shared/api/authService";
+import { ApiError } from "@/shared/api/httpClient";
+import { useAuth } from "@/shared/auth/useAuth";
+import { profileApi } from "@/features/components/profilePage/data/profileApi";
 import { ChangePasswordForm } from "./ChangePasswordForm";
 import {
   editProfileSchema,

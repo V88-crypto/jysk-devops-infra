@@ -1,4 +1,4 @@
-import type { BlogRoomFilter } from '../types'
+import type { BlogRoomFilter } from '@/features/blogPage/types'
 
 interface RoomFilterRowProps {
   items: BlogRoomFilter[]

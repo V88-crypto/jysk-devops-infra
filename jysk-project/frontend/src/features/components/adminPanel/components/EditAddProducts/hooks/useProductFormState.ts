@@ -1,15 +1,15 @@
 import { useState } from 'react'
 import type { ChangeEvent, SyntheticEvent } from 'react'
 
-import type { Attribute } from '../../../../../types/attribute'
+import type { Attribute } from '@/features/types/attribute'
 
-import type { EditProductFormState } from '../types/productForm'
+import type { EditProductFormState } from '@/features/components/adminPanel/components/EditAddProducts/types/productForm'
 
 import {
   IMAGE_FALLBACK_URL,
   emptyAttributeRows,
   emptyProductFormState,
-} from '../utils/productHelpers'
+} from '@/features/components/adminPanel/components/EditAddProducts/utils/productHelpers'
 
 export const useProductFormState = (attributes: Attribute[]) => {
   const [form, setForm] = useState<EditProductFormState>(

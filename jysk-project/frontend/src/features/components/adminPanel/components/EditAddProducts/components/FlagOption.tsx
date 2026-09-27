@@ -1,4 +1,4 @@
-import type { FlagOptionProps } from '../types/productForm'
+import type { FlagOptionProps } from '@/features/components/adminPanel/components/EditAddProducts/types/productForm'
 
 const flagTextClass =
   'flex h-[52px] w-[280px] items-center border border-[#b9b9b9] bg-[#dedede] px-5 text-lg text-[#333]'

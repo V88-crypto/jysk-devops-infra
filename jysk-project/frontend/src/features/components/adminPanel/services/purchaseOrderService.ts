@@ -1,6 +1,6 @@
-import { mockPurchaseOrders } from '../mocks/purchaseOrders'
-import type { PurchaseOrder } from '../../../types/purchaseOrder'
-import { mockDelay } from '../../../../shared/api/mockDelay'
+import { mockPurchaseOrders } from '@/features/components/adminPanel/mocks/purchaseOrders'
+import type { PurchaseOrder } from '@/features/types/purchaseOrder'
+import { mockDelay } from '@/shared/api/mockDelay'
 
 const API_DELAY_MS = 500
 

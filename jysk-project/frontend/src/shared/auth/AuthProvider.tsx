@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import type { ReactNode } from 'react'
 
-import { authService } from '../api/authService'
-import type { AuthUser } from '../api/authService'
-import { ApiError, setSessionExpiredHandler } from '../api/httpClient'
+import { authService } from '@/shared/api/authService'
+import type { AuthUser } from '@/shared/api/authService'
+import { ApiError, setSessionExpiredHandler } from '@/shared/api/httpClient'
 import { AuthContext } from './authContext'
 import { tokenStorage } from './tokenStorage'
 

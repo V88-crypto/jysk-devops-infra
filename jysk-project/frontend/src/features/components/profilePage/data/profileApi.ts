@@ -1,11 +1,11 @@
-import type { AuthUser } from '../../../../shared/api/authService'
-import { apiRequest } from '../../../../shared/api/httpClient'
+import type { AuthUser } from '@/shared/api/authService'
+import { apiRequest } from '@/shared/api/httpClient'
 import type {
   FavoriteProduct,
   MyReviewList,
   OrderList,
   OrderStatus,
-} from '../../../types/profile'
+} from '@/features/types/profile'
 
 const MAX_PAGE_SIZE = 100
 

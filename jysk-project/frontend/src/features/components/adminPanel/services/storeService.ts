@@ -1,6 +1,6 @@
-import { mockStores } from '../mocks/stores'
-import type { Store } from '../../../types/store'
-import { mockDelay } from '../../../../shared/api/mockDelay'
+import { mockStores } from '@/features/components/adminPanel/mocks/stores'
+import type { Store } from '@/features/types/store'
+import { mockDelay } from '@/shared/api/mockDelay'
 
 const API_DELAY_MS = 500
 

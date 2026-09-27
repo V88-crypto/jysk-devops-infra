@@ -4,7 +4,7 @@ import {
   passwordField,
   repeatPasswordField,
   withMatchingPasswords,
-} from '../../../shared/validation/authFields'
+} from '@/shared/validation/authFields'
 
 export const RegisterSchema = withMatchingPasswords(
   z.object({

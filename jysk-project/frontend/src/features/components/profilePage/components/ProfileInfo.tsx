@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 
-import { useAuth } from '../../../../shared/auth/useAuth'
+import { useAuth } from '@/shared/auth/useAuth'
 import { AvatarPlaceholder } from './AvatarPlaceholder'
 
 interface ProfileCounts {

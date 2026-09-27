@@ -1,6 +1,6 @@
-import { mockStockItems } from '../mocks/stock'
-import type { StockItem } from '../../../types/stock'
-import { mockDelay } from '../../../../shared/api/mockDelay'
+import { mockStockItems } from '@/features/components/adminPanel/mocks/stock'
+import type { StockItem } from '@/features/types/stock'
+import { mockDelay } from '@/shared/api/mockDelay'
 
 const API_DELAY_MS = 500
 

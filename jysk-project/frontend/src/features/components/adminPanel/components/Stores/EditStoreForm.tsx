@@ -1,17 +1,17 @@
 import { useCallback, useState } from 'react'
 import type { FormEvent } from 'react'
 
-import { storeService } from '../../services/storeService'
-import { warehouseService } from '../../services/warehouseService'
+import { storeService } from '@/features/components/adminPanel/services/storeService'
+import { warehouseService } from '@/features/components/adminPanel/services/warehouseService'
 
-import { useAsyncData } from '../../../../../shared/hooks/useAsyncData'
+import { useAsyncData } from '@/shared/hooks/useAsyncData'
 
-import { fieldClass } from '../common/formFieldStyles'
-import { LabeledField } from '../common/LabeledField'
-import { AdminPageLayout } from '../common/AdminPageLayout'
-import { PhotoUploadRow } from '../common/PhotoUploadRow'
+import { fieldClass } from '@/features/components/adminPanel/components/common/formFieldStyles'
+import { LabeledField } from '@/features/components/adminPanel/components/common/LabeledField'
+import { AdminPageLayout } from '@/features/components/adminPanel/components/common/AdminPageLayout'
+import { PhotoUploadRow } from '@/features/components/adminPanel/components/common/PhotoUploadRow'
 
-import type { DayWorkingHours, Store } from '../../../../types/store'
+import type { DayWorkingHours, Store } from '@/features/types/store'
 
 interface EditStoreFormProps {
   storeId: number

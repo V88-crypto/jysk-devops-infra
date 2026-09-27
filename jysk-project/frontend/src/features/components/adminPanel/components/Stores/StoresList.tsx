@@ -1,13 +1,13 @@
 import { useMemo, useState } from 'react'
 
-import { stockService } from '../../services/stockService'
-import { storeService } from '../../services/storeService'
+import { stockService } from '@/features/components/adminPanel/services/stockService'
+import { storeService } from '@/features/components/adminPanel/services/storeService'
 
-import { useAsyncData } from '../../../../../shared/hooks/useAsyncData'
+import { useAsyncData } from '@/shared/hooks/useAsyncData'
 
-import { SearchField } from '../common/SearchField'
-import { RowEditButton } from '../common/RowEditButton'
-import { AdminPageLayout } from '../common/AdminPageLayout'
+import { SearchField } from '@/features/components/adminPanel/components/common/SearchField'
+import { RowEditButton } from '@/features/components/adminPanel/components/common/RowEditButton'
+import { AdminPageLayout } from '@/features/components/adminPanel/components/common/AdminPageLayout'
 
 interface StoresListProps {
   onEdit: (storeId: number) => void

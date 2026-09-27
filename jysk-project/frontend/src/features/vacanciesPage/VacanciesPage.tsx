@@ -1,13 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import heroImage from '../../assets/images/vacancies-hero.jpg';
-import GlobeIcon from '../../assets/icons/globe.svg?react';
-import StairsIcon from '../../assets/icons/stairs.svg?react';
-import TeamIcon from '../../assets/icons/team.svg?react';
-import TelegramIcon from '../../assets/icons/telegram.svg?react';
-import InstagramIcon from '../../assets/icons/instagram.svg?react';
-import FacebookIcon from '../../assets/icons/facebook.svg?react';
-import YoutubeIcon from '../../assets/icons/youtube.svg?react';
+import heroImage from '@/assets/images/vacancies-hero.jpg';
+import GlobeIcon from '@/assets/icons/globe.svg?react';
+import StairsIcon from '@/assets/icons/stairs.svg?react';
+import TeamIcon from '@/assets/icons/team.svg?react';
+import TelegramIcon from '@/assets/icons/telegram.svg?react';
+import InstagramIcon from '@/assets/icons/instagram.svg?react';
+import FacebookIcon from '@/assets/icons/facebook.svg?react';
+import YoutubeIcon from '@/assets/icons/youtube.svg?react';
 import { departmentCards, bannerData, jobSections } from './data';
 
 const VacanciesPage: React.FC = () => {

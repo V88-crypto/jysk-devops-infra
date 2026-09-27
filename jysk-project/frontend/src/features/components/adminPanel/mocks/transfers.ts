@@ -1,4 +1,4 @@
-import type { Transfer } from '../../../types/warehouseDocs'
+import type { Transfer } from '@/features/types/warehouseDocs'
 
 export const mockTransfers: Transfer[] = [
   {

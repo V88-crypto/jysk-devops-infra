@@ -4,7 +4,7 @@ import type {
   FavoriteProduct,
   MyReviewList,
   OrderList,
-} from '../../../types/profile'
+} from '@/features/types/profile'
 import { profileApi } from './profileApi'
 
 export type SectionState<T> =

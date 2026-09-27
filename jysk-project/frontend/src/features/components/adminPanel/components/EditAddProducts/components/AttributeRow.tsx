@@ -1,4 +1,4 @@
-import type { AttributeRowProps } from '../types/productForm'
+import type { AttributeRowProps } from '@/features/components/adminPanel/components/EditAddProducts/types/productForm'
 import { TextField } from './TextField'
 
 export const AttributeRow = ({

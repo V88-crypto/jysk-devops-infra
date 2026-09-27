@@ -1,4 +1,4 @@
-import type { Delivery } from '../../../types/warehouseDocs'
+import type { Delivery } from '@/features/types/warehouseDocs'
 
 export const mockDeliveries: Delivery[] = [
   {

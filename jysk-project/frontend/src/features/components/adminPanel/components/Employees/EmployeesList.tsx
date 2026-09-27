@@ -1,14 +1,14 @@
 import { useMemo, useState } from 'react'
 
-import { employeeService } from '../../services/employeeService'
+import { employeeService } from '@/features/components/adminPanel/services/employeeService'
 
-import { useAsyncData } from '../../../../../shared/hooks/useAsyncData'
+import { useAsyncData } from '@/shared/hooks/useAsyncData'
 
-import { SearchField } from '../common/SearchField'
-import { RowEditButton } from '../common/RowEditButton'
-import { RowDeleteButton } from '../common/RowDeleteButton'
-import { formatDocumentDate } from '../../utils/formatDocumentDate'
-import { AdminPageLayout } from '../common/AdminPageLayout'
+import { SearchField } from '@/features/components/adminPanel/components/common/SearchField'
+import { RowEditButton } from '@/features/components/adminPanel/components/common/RowEditButton'
+import { RowDeleteButton } from '@/features/components/adminPanel/components/common/RowDeleteButton'
+import { formatDocumentDate } from '@/features/components/adminPanel/utils/formatDocumentDate'
+import { AdminPageLayout } from '@/features/components/adminPanel/components/common/AdminPageLayout'
 
 interface EmployeesListProps {
   onEdit: (employeeId: number) => void

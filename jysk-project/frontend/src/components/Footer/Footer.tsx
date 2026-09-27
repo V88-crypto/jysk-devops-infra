@@ -1,14 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import visaLogo from '../../assets/images/visa.png';
-import mastercardLogo from '../../assets/images/mastercard.png';
-import gpayLogo from '../../assets/images/gpay.png';
+import visaLogo from '@/assets/images/visa.png';
+import mastercardLogo from '@/assets/images/mastercard.png';
+import gpayLogo from '@/assets/images/gpay.png';
 
-import TgIcon from '../../assets/icons/telegram.svg?react';
-import IgIcon from '../../assets/icons/instagram.svg?react';
-import FbIcon from '../../assets/icons/facebook.svg?react';
-import YtIcon from '../../assets/icons/youtube.svg?react';
+import TgIcon from '@/assets/icons/telegram.svg?react';
+import IgIcon from '@/assets/icons/instagram.svg?react';
+import FbIcon from '@/assets/icons/facebook.svg?react';
+import YtIcon from '@/assets/icons/youtube.svg?react';
 
 interface FooterLink {
   text: string;

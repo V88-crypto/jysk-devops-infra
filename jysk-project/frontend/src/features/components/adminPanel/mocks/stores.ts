@@ -1,4 +1,4 @@
-import type { DayWorkingHours, Store } from '../../../types/store'
+import type { DayWorkingHours, Store } from '@/features/types/store'
 
 const STANDARD_HOURS: DayWorkingHours[] = [
   { day: 'ПН', start: '10:00', end: '19:00' },

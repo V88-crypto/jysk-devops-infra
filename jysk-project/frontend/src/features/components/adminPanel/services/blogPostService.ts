@@ -1,6 +1,6 @@
-import { mockAdminBlogPosts } from '../mocks/blogPosts'
-import type { BlogPost } from '../../../types/homePage'
-import { mockDelay } from '../../../../shared/api/mockDelay'
+import { mockAdminBlogPosts } from '@/features/components/adminPanel/mocks/blogPosts'
+import type { BlogPost } from '@/features/types/homePage'
+import { mockDelay } from '@/shared/api/mockDelay'
 
 const API_DELAY_MS = 500
 

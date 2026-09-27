@@ -1,5 +1,5 @@
 import { ApiError, apiRequest } from './httpClient'
-import { tokenStorage } from '../auth/tokenStorage'
+import { tokenStorage } from '@/shared/auth/tokenStorage'
 
 export interface AuthUser {
   id: number

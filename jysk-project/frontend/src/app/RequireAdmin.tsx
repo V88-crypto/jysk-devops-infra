@@ -1,7 +1,7 @@
 import { Navigate } from 'react-router-dom'
 import type { ReactNode } from 'react'
 
-import { useAuth } from '../shared/auth/useAuth'
+import { useAuth } from '@/shared/auth/useAuth'
 
 export const RequireAdmin = ({ children }: { children: ReactNode }) => {
   const { isAuthenticated, user, isAdmin } = useAuth()

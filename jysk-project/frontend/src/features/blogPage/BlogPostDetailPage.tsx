@@ -1,8 +1,8 @@
 import { useCallback } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 
-import Prefooter from '../../components/Prefooter/Prefooter'
-import { useAsyncData } from '../../shared/hooks/useAsyncData'
+import Prefooter from '@/components/Prefooter/Prefooter'
+import { useAsyncData } from '@/shared/hooks/useAsyncData'
 import { blogPageService } from './services/blogPageService'
 
 export function BlogPostDetailPage() {

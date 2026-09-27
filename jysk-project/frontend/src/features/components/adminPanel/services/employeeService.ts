@@ -1,6 +1,6 @@
-import { mockEmployees } from '../mocks/employees'
-import type { Employee } from '../../../types/employee'
-import { mockDelay } from '../../../../shared/api/mockDelay'
+import { mockEmployees } from '@/features/components/adminPanel/mocks/employees'
+import type { Employee } from '@/features/types/employee'
+import { mockDelay } from '@/shared/api/mockDelay'
 
 const API_DELAY_MS = 500
 

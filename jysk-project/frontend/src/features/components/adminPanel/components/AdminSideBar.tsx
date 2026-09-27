@@ -1,13 +1,13 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import { useAuth } from '../../../../shared/auth/useAuth'
+import { useAuth } from '@/shared/auth/useAuth'
 import {
   BOTTOM_NAV_ITEMS,
   TOP_LEVEL_NAV_ITEMS,
   WAREHOUSE_NAV_ITEMS,
-} from '../navigation'
-import type { AdminNavItem, AdminNavItemId } from '../navigation'
+} from '@/features/components/adminPanel/navigation'
+import type { AdminNavItem, AdminNavItemId } from '@/features/components/adminPanel/navigation'
 import { AdminNavIcon } from './AdminNavIcon'
 
 interface AdminSideBarProps {

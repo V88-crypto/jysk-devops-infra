@@ -1,14 +1,14 @@
 import { useMemo, useState } from 'react'
 
-import { categoryService } from '../../services/categoryService'
-import { purchaseOrderService } from '../../services/purchaseOrderService'
-import { warehouseService } from '../../services/warehouseService'
+import { categoryService } from '@/features/components/adminPanel/services/categoryService'
+import { purchaseOrderService } from '@/features/components/adminPanel/services/purchaseOrderService'
+import { warehouseService } from '@/features/components/adminPanel/services/warehouseService'
 
-import { useAsyncData } from '../../../../../shared/hooks/useAsyncData'
+import { useAsyncData } from '@/shared/hooks/useAsyncData'
 
-import { FilterDropdown } from '../common/FilterDropdown'
-import { SearchField } from '../common/SearchField'
-import { AdminPageLayout } from '../common/AdminPageLayout'
+import { FilterDropdown } from '@/features/components/adminPanel/components/common/FilterDropdown'
+import { SearchField } from '@/features/components/adminPanel/components/common/SearchField'
+import { AdminPageLayout } from '@/features/components/adminPanel/components/common/AdminPageLayout'
 
 export const OrdersPage = () => {
   const { data: orders, isLoading: isOrdersLoading } = useAsyncData(

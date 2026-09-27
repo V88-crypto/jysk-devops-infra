@@ -1,4 +1,4 @@
-import type { Packaging } from '../../../types/warehouseDocs'
+import type { Packaging } from '@/features/types/warehouseDocs'
 
 export const mockPackagings: Packaging[] = [
   { id: 1, name: 'шт.' },

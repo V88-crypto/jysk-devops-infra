@@ -1,6 +1,6 @@
-import { mockWriteOffReasons } from '../mocks/writeOffReasons'
-import type { WriteOffReason } from '../../../types/warehouseDocs'
-import { mockDelay } from '../../../../shared/api/mockDelay'
+import { mockWriteOffReasons } from '@/features/components/adminPanel/mocks/writeOffReasons'
+import type { WriteOffReason } from '@/features/types/warehouseDocs'
+import { mockDelay } from '@/shared/api/mockDelay'
 
 const API_DELAY_MS = 500
 

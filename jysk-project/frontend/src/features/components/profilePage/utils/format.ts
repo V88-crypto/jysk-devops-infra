@@ -1,4 +1,4 @@
-import type { OrderStatus } from '../../../types/profile'
+import type { OrderStatus } from '@/features/types/profile'
 
 export const formatPrice = (value: number) =>
   `${value.toLocaleString('uk-UA', { maximumFractionDigits: 2 })} грн`

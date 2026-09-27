@@ -1,6 +1,6 @@
-import type { AuthUser } from '../../../../shared/api/authService'
-import { apiRequest } from '../../../../shared/api/httpClient'
-import type { Client, ClientPage, ClientRole } from '../../../types/client'
+import type { AuthUser } from '@/shared/api/authService'
+import { apiRequest } from '@/shared/api/httpClient'
+import type { Client, ClientPage, ClientRole } from '@/features/types/client'
 
 interface UserListResponse {
   items: AuthUser[]

@@ -1,4 +1,4 @@
-import type { StockItem } from '../../../types/stock'
+import type { StockItem } from '@/features/types/stock'
 
 export const mockStockItems: StockItem[] = [
   {
