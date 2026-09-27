@@ -62,7 +62,7 @@ const VacanciesPage: React.FC = () => {
 
       <div className="mx-auto w-[90%] xl:w-[85%] mt-10 md:mt-16 xl:mt-[4.16vw] grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-4 lg:gap-6 xl:gap-[1.5vw]">
         {departmentCards.map((card) => (
-          <div key={card.id} className="relative group w-full aspect-[531/419] md:aspect-[4/5] lg:aspect-[531/419] rounded-[10px] xl:rounded-[0.52vw] overflow-hidden cursor-pointer">
+          <div key={card.id} className="relative group w-full aspect-531/419 md:aspect-4/5 lg:aspect-531/419 rounded-[10px] xl:rounded-[0.52vw] overflow-hidden cursor-pointer">
             <img src={card.image} alt={card.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
             <div className="absolute inset-0 bg-hover-overlay opacity-0 group-hover:opacity-40 transition-opacity duration-300 mix-blend-multiply"></div>
             <div className="absolute bottom-4 md:bottom-4 lg:bottom-6 xl:bottom-[1.5vw] left-0 w-full flex justify-center z-10 pointer-events-none">
@@ -93,7 +93,7 @@ const VacanciesPage: React.FC = () => {
                 section.imagePosition === 'left' ? 'lg:flex-row-reverse' : ''
               }`}
             >
-              <div className="w-full lg:w-1/2 aspect-[323/284] md:aspect-[4/3] lg:aspect-[847/869]">
+              <div className="w-full lg:w-1/2 aspect-323/284 md:aspect-4/3 lg:aspect-847/869">
                 <img 
                   src={section.image} 
                   alt={section.title} 
@@ -114,7 +114,7 @@ const VacanciesPage: React.FC = () => {
         </div>
 
         <div className="w-full flex justify-center lg:hidden mt-2 md:mt-4">
-          <button className="bg-primary text-white font-['Inter'] font-bold text-sm md:text-base w-full max-w-[300px] h-12 md:h-14 mx-5 md:mx-0 rounded flex justify-center items-center hover:bg-primary-hover transition-colors">
+          <button className="bg-primary text-white font-['Inter'] font-bold text-sm md:text-base w-full max-w-75 h-12 md:h-14 mx-5 md:mx-0 rounded flex justify-center items-center hover:bg-primary-hover transition-colors">
             ДЕТАЛЬНІШЕ
           </button>
         </div>
