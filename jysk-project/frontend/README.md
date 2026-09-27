@@ -1,75 +1,74 @@
-# React + TypeScript + Vite
+# Jysk Clone — Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Клієнтська частина інтернет-магазину HYGGY (навчальний проєкт Jysk Clone).
 
-Currently, two official plugins are available:
+**Стек:** React 19, TypeScript, Vite 8, Tailwind CSS 4, React Router 7, React Hook Form + Zod.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Запуск
 
-## React Compiler
+Разом з усім проєктом (backend, MySQL, MinIO) — через Docker Compose, див. [README проєкту](../README.md).
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Локально, лише фронтенд (backend має бути запущений на `http://localhost:8000`):
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+```bash
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Сайт: http://localhost:3000
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+> Після додавання або оновлення залежностей перевірте, що в `package-lock.json`
+> залишилися пакети для всіх платформ (`*-linux-x64-musl` тощо) — без них фронтенд
+> не запускається в Docker (`node:20-alpine`).
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Скрипти
+
+| Команда | Що робить |
+|---|---|
+| `npm run dev` | dev-сервер на порту 3000 |
+| `npm run build` | перевірка типів + production-збірка в `dist/` |
+| `npm run lint` | ESLint |
+| `npm run format` | форматування коду Prettier |
+| `npm run format:check` | перевірка форматування без змін |
+
+## Змінні середовища
+
+| Змінна | Опис | За замовчуванням |
+|---|---|---|
+| `VITE_API_BASE_URL` | адреса backend API | `http://localhost:8000` |
+
+## Структура
 
 ```
+src/
+  app/             App, маршрути, SiteLayout, RequireAuth, RequireAdmin, ScrollManager
+  features/        одна папка на кожну частину сайту
+    admin/         адмін-панель
+    auth/          login, register, resetPassword
+    blog/
+    faq/
+    home/          головна сторінка
+    notFound/
+    profile/
+    store/
+    vacancies/
+  shared/
+    api/           httpClient (токени, оновлення сесії), authService
+    auth/          AuthProvider, useAuth, tokenStorage
+    hooks/
+    types/         типи, що потрібні кільком фічам
+    ui/            Header, Footer, Prefooter
+    validation/
+  styles/          global.css (Tailwind)
+  assets/          іконки та зображення
+```
+
+Усередині фічі: `components/`, `api/` (запити до backend або моки), `hooks/`, `mocks/`, `types.ts` — лише те, що потрібно цій фічі.
+
+## Домовленості
+
+- **Імпорти між папками — через аліас `@/`** (`@/shared/api/httpClient`), всередині однієї папки — `./`.
+- **Тільки іменовані експорти**, ім'я файлу = ім'я компонента (`OrderList.tsx` → `export const OrderList`).
+- **Кольори бренду — токени Tailwind** з `tailwind.config.js`: `primary`, `primary-dark` (hover), `primary-hover`. Не пишіть hex-коди бірюзового напряму.
+- **Запити до backend — через `apiRequest`** з `@/shared/api/httpClient`: він сам додає токен і оновлює сесію, коли access-токен прострочений.
+- Код форматується Prettier (`npm run format`) перед комітом.
