@@ -32,7 +32,7 @@ export function BlogCard({ post }: BlogCardProps) {
       <button
         type="button"
         onClick={() => navigate('/blog')}
-        className="blog-card-button mx-auto mt-[31px] h-[50px] w-[253px] rounded-sm bg-[#10B8C5] text-[22px] font-bold text-white transition-colors duration-300 hover:bg-[#0ea3ae] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#10B8C5] md:mx-0"
+        className="blog-card-button mx-auto mt-[31px] h-[50px] w-[253px] rounded-sm bg-primary text-[22px] font-bold text-white transition-colors duration-300 hover:bg-primary-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary md:mx-0"
       >
         Детальніше
       </button>

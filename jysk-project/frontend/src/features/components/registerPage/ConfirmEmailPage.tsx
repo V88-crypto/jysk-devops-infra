@@ -130,13 +130,13 @@ export const ConfirmEmailPage = () => {
               sm:h-[55px]
               lg:h-[60px]
               rounded-[5px]
-              bg-[#00adb5]
+              bg-primary
               text-white
               text-[16px]
               sm:text-[18px]
               lg:text-[20px]
               font-bold
-              hover:bg-[#009da5]
+              hover:bg-primary-dark
               transition-colors
             "
           >
@@ -153,9 +153,9 @@ export const ConfirmEmailPage = () => {
               text-[16px]
               sm:text-[18px]
               lg:text-[20px]
-              text-[#00a6b2]
+              text-primary
               underline
-              hover:text-[#008d96]
+              hover:text-primary-dark
             "
           >
             Скасувати

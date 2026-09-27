@@ -39,9 +39,9 @@ export const PasswordResetSuccessPage = () => {
               text-[16px]
               sm:text-[18px]
               lg:text-[20px]
-              text-[#00a6b2]
+              text-primary
               underline
-              hover:text-[#008d96]
+              hover:text-primary-dark
               transition-colors
             "
           >

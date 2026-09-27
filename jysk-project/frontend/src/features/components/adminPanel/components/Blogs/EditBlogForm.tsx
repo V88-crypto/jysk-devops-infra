@@ -29,7 +29,7 @@ interface BlogFormState {
 }
 
 const primaryButtonClass =
-  'h-[44px] rounded-[4px] bg-[#00a9ad] px-5 text-sm font-semibold text-white transition hover:bg-[#008f93]'
+  'h-[44px] rounded-[4px] bg-primary px-5 text-sm font-semibold text-white transition hover:bg-primary-dark'
 
 const dangerButtonClass =
   'h-[44px] rounded-[4px] bg-[#e31b23] px-5 text-sm font-semibold text-white transition hover:bg-[#c8151c]'
@@ -418,7 +418,7 @@ export const EditBlogForm = ({ postId, onBack, onSaved }: EditBlogFormProps) => 
           <button
             type="submit"
             disabled={isSaving}
-            className="h-[44px] w-[160px] rounded-[4px] bg-[#00a9ad] text-sm font-semibold text-white transition hover:bg-[#008f93] disabled:cursor-not-allowed disabled:opacity-60"
+            className="h-[44px] w-[160px] rounded-[4px] bg-primary text-sm font-semibold text-white transition hover:bg-primary-dark disabled:cursor-not-allowed disabled:opacity-60"
           >
             {isSaving ? 'Збереження...' : 'Зберегти'}
           </button>

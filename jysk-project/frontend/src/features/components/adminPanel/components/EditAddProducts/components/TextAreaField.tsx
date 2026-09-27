@@ -1,7 +1,7 @@
 import type { TextareaHTMLAttributes } from 'react'
 
 const controlClass =
-  'rounded-[4px] border border-[#b9b9b9] bg-[#dedede] px-5 text-lg text-[#3b3b3b] outline-none transition placeholder:text-lg placeholder:text-[#565656] focus:border-[#00a9ad]'
+  'rounded-[4px] border border-[#b9b9b9] bg-[#dedede] px-5 text-lg text-[#3b3b3b] outline-none transition placeholder:text-lg placeholder:text-[#565656] focus:border-primary'
 
 export const TextAreaField = ({
   className = '',

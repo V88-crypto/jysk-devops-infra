@@ -16,8 +16,8 @@ export const ORDER_STATUS_LABELS: Record<OrderStatus, string> = {
 
 export const ORDER_STATUS_COLORS: Record<OrderStatus, string> = {
   new: 'text-[#e08a00]',
-  processing: 'text-[#00a6b2]',
-  shipped: 'text-[#00a6b2]',
+  processing: 'text-primary',
+  shipped: 'text-primary',
   delivered: 'text-[#22aa00]',
   cancelled: 'text-[#e31b23]',
 }

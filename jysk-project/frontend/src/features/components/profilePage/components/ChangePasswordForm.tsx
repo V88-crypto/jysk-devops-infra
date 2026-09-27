@@ -14,7 +14,7 @@ const inputClass = (hasError: boolean) =>
   `w-full h-[48px] px-[16px] rounded-[4px] border bg-[#e4e4e4] outline-none transition ${
     hasError
       ? "border-red-500"
-      : "border-[#c5c5c5] focus:border-[#00b5bd]"
+      : "border-[#c5c5c5] focus:border-primary"
   }`;
 
 const toErrorMessage = (error: unknown) => {
@@ -135,7 +135,7 @@ export const ChangePasswordForm = ({ email }: { email: string }) => {
         <button
           type="submit"
           disabled={isSubmitting}
-          className="h-[42px] rounded-[4px] bg-[#00adb5] text-white font-semibold hover:bg-[#009da5] transition disabled:cursor-not-allowed disabled:opacity-60"
+          className="h-[42px] rounded-[4px] bg-primary text-white font-semibold hover:bg-primary-dark transition disabled:cursor-not-allowed disabled:opacity-60"
         >
           {isSubmitting ? "ЗБЕРЕЖЕННЯ..." : "ЗМІНИТИ ПАРОЛЬ"}
         </button>

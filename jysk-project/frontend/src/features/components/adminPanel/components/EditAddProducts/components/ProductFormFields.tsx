@@ -13,7 +13,7 @@ import { PhotoPreview } from './PhotoPreview'
 import type { EditProductFormState } from '../types/productForm'
 
 const buttonClass =
-  'h-[56px] bg-[#00a9ad] px-10 text-lg font-semibold text-white transition hover:bg-[#008f93] disabled:cursor-not-allowed disabled:opacity-60'
+  'h-[56px] bg-primary px-10 text-lg font-semibold text-white transition hover:bg-primary-dark disabled:cursor-not-allowed disabled:opacity-60'
 
 interface ProductFormFieldsProps {
   form: EditProductFormState
@@ -241,7 +241,7 @@ export const ProductFormFields = ({
           <button
             type="button"
             disabled={isLoading}
-            className="m-2 h-[44px] w-[150px] rounded-[5px] bg-[#00a9ad] text-base font-semibold text-white transition hover:bg-[#008f93] disabled:cursor-not-allowed disabled:opacity-60"
+            className="m-2 h-[44px] w-[150px] rounded-[5px] bg-primary text-base font-semibold text-white transition hover:bg-primary-dark disabled:cursor-not-allowed disabled:opacity-60"
           >
             Завантажити
           </button>
@@ -252,7 +252,7 @@ export const ProductFormFields = ({
             <button
               type="button"
               disabled={isLoading}
-              className="h-[52px] w-full max-w-[280px] bg-[#00a9ad] text-base font-semibold text-white transition hover:bg-[#008f93] disabled:cursor-not-allowed disabled:opacity-60"
+              className="h-[52px] w-full max-w-[280px] bg-primary text-base font-semibold text-white transition hover:bg-primary-dark disabled:cursor-not-allowed disabled:opacity-60"
             >
               Додати галерею
             </button>

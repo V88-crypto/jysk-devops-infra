@@ -9,7 +9,7 @@ interface DateTimeFieldsProps {
 }
 
 const fieldClass =
-  'h-[44px] rounded-[4px] border border-[#d5d5d5] bg-[#f4f4f4] px-3 text-sm text-[#333] outline-none focus:border-[#00a9ad]'
+  'h-[44px] rounded-[4px] border border-[#d5d5d5] bg-[#f4f4f4] px-3 text-sm text-[#333] outline-none focus:border-primary'
 
 export const DateTimeFields = ({
   label,

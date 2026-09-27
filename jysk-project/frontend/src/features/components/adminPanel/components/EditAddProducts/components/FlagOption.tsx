@@ -13,7 +13,7 @@ export const FlagOption = ({
   const checkboxTone =
     tone === 'black'
       ? 'accent-black'
-      : 'accent-[#00a9ad]'
+      : 'accent-primary'
 
   return (
     <label className="flex w-[320px] items-center gap-4">

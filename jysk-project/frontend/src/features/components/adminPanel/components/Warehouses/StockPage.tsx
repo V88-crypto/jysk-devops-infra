@@ -108,7 +108,7 @@ export const StockPage = () => {
                 <td className="px-4 py-3 text-right">
                   <a
                     href="#"
-                    className="text-[#00a9ad] underline transition-colors hover:text-[#008f93]"
+                    className="text-primary underline transition-colors hover:text-primary-dark"
                   >
                     Постачання
                   </a>

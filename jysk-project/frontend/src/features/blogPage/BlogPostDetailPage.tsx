@@ -32,7 +32,7 @@ export function BlogPostDetailPage() {
           <button
             type="button"
             onClick={() => navigate('/blog')}
-            className="mt-4 text-[#10B8C5] underline hover:text-[#0ea3ae]"
+            className="mt-4 text-primary underline hover:text-primary-dark"
           >
             Повернутися до блогу
           </button>

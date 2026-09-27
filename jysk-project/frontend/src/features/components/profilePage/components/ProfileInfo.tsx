@@ -122,9 +122,9 @@ export const ProfileInfo = ({ counts }: ProfileInfoProps) => {
                     mt-[5px]
                     text-[12px]
                     lg:text-[14px]
-                    text-[#00a6b2]
+                    text-primary
                     underline
-                    hover:text-[#008d96]
+                    hover:text-primary-dark
                   "
                 >
                   Завантажити фото
@@ -199,12 +199,12 @@ export const ProfileInfo = ({ counts }: ProfileInfoProps) => {
                   w-[150px]
                   h-[45px]
                   rounded-[5px]
-                  bg-[#00adb5]
+                  bg-primary
                   text-white
                   text-[14px]
                   lg:text-[16px]
                   font-bold
-                  hover:bg-[#009da5]
+                  hover:bg-primary-dark
                   transition-colors
                 "
               >
@@ -218,12 +218,12 @@ export const ProfileInfo = ({ counts }: ProfileInfoProps) => {
                   w-[150px]
                   h-[45px]
                   rounded-[5px]
-                  bg-[#00adb5]
+                  bg-primary
                   text-white
                   text-[14px]
                   lg:text-[16px]
                   font-bold
-                  hover:bg-[#009da5]
+                  hover:bg-primary-dark
                   transition-colors
                 "
               >
@@ -264,7 +264,7 @@ export const ProfileInfo = ({ counts }: ProfileInfoProps) => {
                     text-[16px]
                     lg:text-[18px]
                     font-bold
-                    hover:text-[#00a6b2]
+                    hover:text-primary
                     transition-colors
                     "
                 >
@@ -287,7 +287,7 @@ export const ProfileInfo = ({ counts }: ProfileInfoProps) => {
                     text-[16px]
                     lg:text-[18px]
                     font-bold
-                    hover:text-[#00a6b2]
+                    hover:text-primary
                     transition-colors
                     "
                 >
@@ -310,7 +310,7 @@ export const ProfileInfo = ({ counts }: ProfileInfoProps) => {
                     text-[16px]
                     lg:text-[18px]
                     font-bold
-                    hover:text-[#00a6b2]
+                    hover:text-primary
                     transition-colors
                     "
                 >
@@ -333,7 +333,7 @@ export const ProfileInfo = ({ counts }: ProfileInfoProps) => {
                     text-[16px]
                     lg:text-[18px]
                     font-bold
-                    hover:text-[#00a6b2]
+                    hover:text-primary
                     transition-colors
                     "
                 >

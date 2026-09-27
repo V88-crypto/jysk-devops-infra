@@ -106,7 +106,7 @@ export const DeliveriesList = ({ onAdd }: DeliveriesListProps) => {
         <button
           type="button"
           onClick={onAdd}
-          className="h-[40px] rounded-[4px] bg-[#00a9ad] px-6 text-sm font-semibold text-white transition hover:bg-[#008f93]"
+          className="h-[40px] rounded-[4px] bg-primary px-6 text-sm font-semibold text-white transition hover:bg-primary-dark"
         >
           Додати
         </button>
@@ -186,7 +186,7 @@ export const DeliveriesList = ({ onAdd }: DeliveriesListProps) => {
                   {delivery.comment || '—'}
                 </td>
                 <td className="px-4 py-3">
-                  <span className="text-[#00a9ad] underline">
+                  <span className="text-primary underline">
                     {DELIVERY_STATUS_LABEL[delivery.status]}
                   </span>
                 </td>

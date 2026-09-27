@@ -227,9 +227,9 @@ export const ClientsPage = () => {
                           event.target.value as ClientRole,
                         )
                       }
-                      className={`h-[34px] rounded-[4px] border px-2 text-sm outline-none transition-colors focus:border-[#00a9ad] disabled:cursor-not-allowed disabled:opacity-60 ${
+                      className={`h-[34px] rounded-[4px] border px-2 text-sm outline-none transition-colors focus:border-primary disabled:cursor-not-allowed disabled:opacity-60 ${
                         client.role === 'admin'
-                          ? 'border-[#00a9ad] bg-[#e6f7f7] font-medium text-[#00787b]'
+                          ? 'border-primary bg-[#e6f7f7] font-medium text-[#00787b]'
                           : 'border-[#d5d5d5] bg-[#f4f4f4] text-[#333]'
                       }`}
                     >
@@ -260,7 +260,7 @@ export const ClientsPage = () => {
               type="button"
               onClick={() => setPage((current) => current - 1)}
               disabled={page <= 1}
-              className="h-[34px] rounded-[4px] border border-[#d5d5d5] bg-white px-3 transition-colors hover:border-[#00a9ad] disabled:cursor-not-allowed disabled:opacity-50"
+              className="h-[34px] rounded-[4px] border border-[#d5d5d5] bg-white px-3 transition-colors hover:border-primary disabled:cursor-not-allowed disabled:opacity-50"
             >
               ‹ Назад
             </button>
@@ -273,7 +273,7 @@ export const ClientsPage = () => {
               type="button"
               onClick={() => setPage((current) => current + 1)}
               disabled={page >= pageCount}
-              className="h-[34px] rounded-[4px] border border-[#d5d5d5] bg-white px-3 transition-colors hover:border-[#00a9ad] disabled:cursor-not-allowed disabled:opacity-50"
+              className="h-[34px] rounded-[4px] border border-[#d5d5d5] bg-white px-3 transition-colors hover:border-primary disabled:cursor-not-allowed disabled:opacity-50"
             >
               Далі ›
             </button>

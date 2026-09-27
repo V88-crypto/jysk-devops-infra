@@ -38,7 +38,7 @@ export function BlogListPage() {
               onClick={() => handleTabClick(tab)}
               className={`h-[40px] rounded-sm px-6 text-sm font-semibold transition-colors ${
                 activeTab === tab
-                  ? 'bg-[#10B8C5] text-white'
+                  ? 'bg-primary text-white'
                   : 'bg-neutral-200 text-neutral-700 hover:bg-neutral-300'
               }`}
             >

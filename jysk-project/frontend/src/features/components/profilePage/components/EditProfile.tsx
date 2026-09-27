@@ -17,7 +17,7 @@ const inputClass = (hasError: boolean) =>
   `w-full h-[48px] px-[16px] rounded-[4px] border bg-[#e4e4e4] outline-none transition ${
     hasError
       ? "border-red-500"
-      : "border-[#c5c5c5] focus:border-[#00b5bd]"
+      : "border-[#c5c5c5] focus:border-primary"
   }`;
 
 const EditProfileFields = ({ user }: { user: AuthUser }) => {
@@ -136,7 +136,7 @@ const EditProfileFields = ({ user }: { user: AuthUser }) => {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="flex-1 h-[42px] rounded-[4px] bg-[#00adb5] text-white font-semibold hover:bg-[#009da5] transition disabled:cursor-not-allowed disabled:opacity-60"
+            className="flex-1 h-[42px] rounded-[4px] bg-primary text-white font-semibold hover:bg-primary-dark transition disabled:cursor-not-allowed disabled:opacity-60"
           >
             {isSubmitting ? "ЗБЕРЕЖЕННЯ..." : "ЗБЕРЕГТИ"}
           </button>
@@ -144,7 +144,7 @@ const EditProfileFields = ({ user }: { user: AuthUser }) => {
           <button
             type="button"
             onClick={() => reset()}
-            className="flex-1 h-[42px] rounded-[4px] bg-[#10b7bf] text-white font-semibold hover:bg-[#009da5] transition"
+            className="flex-1 h-[42px] rounded-[4px] bg-primary text-white font-semibold hover:bg-primary-dark transition"
           >
             СКАСУВАТИ
           </button>

@@ -27,10 +27,10 @@ interface AddDeliveryFormProps {
 }
 
 const fieldClass =
-  'h-[44px] w-full rounded-[4px] border border-[#d5d5d5] bg-[#f4f4f4] px-3 text-sm text-[#333] outline-none focus:border-[#00a9ad]'
+  'h-[44px] w-full rounded-[4px] border border-[#d5d5d5] bg-[#f4f4f4] px-3 text-sm text-[#333] outline-none focus:border-primary'
 
 const inputClass =
-  'h-[40px] w-full rounded-[4px] border border-[#d5d5d5] bg-[#f4f4f4] px-2 text-sm text-[#333] outline-none focus:border-[#00a9ad]'
+  'h-[40px] w-full rounded-[4px] border border-[#d5d5d5] bg-[#f4f4f4] px-2 text-sm text-[#333] outline-none focus:border-primary'
 
 export const AddDeliveryForm = ({ onBack, onSaved }: AddDeliveryFormProps) => {
   const { data: products } = useAsyncData(productService.getAll)
@@ -186,7 +186,7 @@ export const AddDeliveryForm = ({ onBack, onSaved }: AddDeliveryFormProps) => {
             onChange={(event) => setComment(event.target.value)}
             placeholder="Введіть текст..."
             rows={4}
-            className="w-full max-w-[520px] resize-none rounded-[4px] border border-[#d5d5d5] bg-[#f4f4f4] px-3 py-2 text-sm text-[#333] outline-none placeholder:text-[#8a8a8a] focus:border-[#00a9ad]"
+            className="w-full max-w-[520px] resize-none rounded-[4px] border border-[#d5d5d5] bg-[#f4f4f4] px-3 py-2 text-sm text-[#333] outline-none placeholder:text-[#8a8a8a] focus:border-primary"
           />
         </div>
 
@@ -346,7 +346,7 @@ export const AddDeliveryForm = ({ onBack, onSaved }: AddDeliveryFormProps) => {
         <button
           type="button"
           onClick={addRow}
-          className="w-fit text-sm font-medium text-[#00a9ad] underline transition-colors hover:text-[#008f93]"
+          className="w-fit text-sm font-medium text-primary underline transition-colors hover:text-primary-dark"
         >
           + Додати ще
         </button>
@@ -355,7 +355,7 @@ export const AddDeliveryForm = ({ onBack, onSaved }: AddDeliveryFormProps) => {
           <button
             type="submit"
             disabled={isSaving}
-            className="h-[48px] w-full max-w-[240px] rounded-[4px] bg-[#00a9ad] text-base font-semibold text-white transition hover:bg-[#008f93] disabled:cursor-not-allowed disabled:opacity-60"
+            className="h-[48px] w-full max-w-[240px] rounded-[4px] bg-primary text-base font-semibold text-white transition hover:bg-primary-dark disabled:cursor-not-allowed disabled:opacity-60"
           >
             {isSaving ? 'Збереження...' : 'Зберегти'}
           </button>

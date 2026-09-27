@@ -64,7 +64,7 @@ export const EmployeesList = ({ onEdit }: EmployeesListProps) => {
 
         <button
           type="button"
-          className="h-[40px] rounded-[4px] bg-[#00a9ad] px-6 text-sm font-semibold text-white transition hover:bg-[#008f93]"
+          className="h-[40px] rounded-[4px] bg-primary px-6 text-sm font-semibold text-white transition hover:bg-primary-dark"
         >
           Додати
         </button>

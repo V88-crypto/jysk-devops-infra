@@ -227,7 +227,7 @@ export const EditStoreForm = ({
           <button
             type="submit"
             disabled={isSaving}
-            className="h-[44px] w-[160px] rounded-[4px] bg-[#00a9ad] text-sm font-semibold text-white transition hover:bg-[#008f93] disabled:cursor-not-allowed disabled:opacity-60"
+            className="h-[44px] w-[160px] rounded-[4px] bg-primary text-sm font-semibold text-white transition hover:bg-primary-dark disabled:cursor-not-allowed disabled:opacity-60"
           >
             {isSaving ? 'Збереження...' : 'Зберегти'}
           </button>

@@ -283,7 +283,7 @@ export const RegisterPage = () => {
                   Прийняти{' '}
                   <a
                     href="#"
-                    className="text-[#00a6b2] hover:underline"
+                    className="text-primary hover:underline"
                   >
                     Умови та Положення
                   </a>
@@ -356,7 +356,7 @@ export const RegisterPage = () => {
                 Підписатися на наші новини{' '}
                 <a
                   href="#"
-                  className="text-[#00a6b2] hover:underline"
+                  className="text-primary hover:underline"
                 >
                   Переглянути
                 </a>
@@ -381,13 +381,13 @@ export const RegisterPage = () => {
               sm:h-[55px]
               lg:h-[60px]
               rounded-[5px]
-              bg-[#00adb5]
+              bg-primary
               text-white
               text-[16px]
               sm:text-[18px]
               lg:text-[20px]
               font-bold
-              hover:bg-[#009da5]
+              hover:bg-primary-dark
               transition-colors
               disabled:cursor-not-allowed
               disabled:opacity-60
@@ -406,9 +406,9 @@ export const RegisterPage = () => {
               text-[16px]
               sm:text-[18px]
               lg:text-[20px]
-              text-[#00a6b2]
+              text-primary
               underline
-              hover:text-[#008d96]
+              hover:text-primary-dark
             "
           >
             Скасувати

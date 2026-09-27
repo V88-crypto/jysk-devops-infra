@@ -18,7 +18,7 @@ interface AdminSideBarProps {
 const topLevelItemClass = (isActive: boolean) =>
   `flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-left text-[15px] transition-colors ${
     isActive
-      ? 'bg-white font-semibold text-[#00A9AD] shadow-sm'
+      ? 'bg-white font-semibold text-primary shadow-sm'
       : 'text-white/85 hover:bg-white/10 hover:text-white'
   }`
 
@@ -73,7 +73,7 @@ export const AdminSideBar = ({ activeItem, onSelect }: AdminSideBarProps) => {
 
   return (
     <>
-      <div className="fixed inset-x-0 top-0 z-30 flex h-14 items-center justify-between bg-[#00A9AD] px-4 shadow-md md:hidden">
+      <div className="fixed inset-x-0 top-0 z-30 flex h-14 items-center justify-between bg-primary px-4 shadow-md md:hidden">
         <span className="flex items-center gap-2 text-sm font-semibold tracking-wide text-white">
           HYGGY
           <span className="rounded bg-white/20 px-1.5 py-0.5 text-[10px] uppercase tracking-wider">
@@ -120,7 +120,7 @@ export const AdminSideBar = ({ activeItem, onSelect }: AdminSideBarProps) => {
       )}
 
       <aside
-        className={`fixed left-0 top-0 z-40 flex h-screen w-[260px] flex-col bg-[#00A9AD] shadow-xl transition-transform duration-200 md:w-[220px] md:translate-x-0 md:shadow-none ${
+        className={`fixed left-0 top-0 z-40 flex h-screen w-[260px] flex-col bg-primary shadow-xl transition-transform duration-200 md:w-[220px] md:translate-x-0 md:shadow-none ${
           isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
@@ -135,7 +135,7 @@ export const AdminSideBar = ({ activeItem, onSelect }: AdminSideBarProps) => {
           <button
             type="button"
             onClick={() => navigate('/')}
-            className="flex h-[38px] w-full items-center justify-center gap-2 rounded-lg border border-white/40 text-[13px] font-medium text-white transition-colors hover:bg-white hover:text-[#00A9AD]"
+            className="flex h-[38px] w-full items-center justify-center gap-2 rounded-lg border border-white/40 text-[13px] font-medium text-white transition-colors hover:bg-white hover:text-primary"
           >
             <span>Перейти на сайт</span>
             <AdminNavIcon name="external" className="h-4 w-4" />
@@ -190,7 +190,7 @@ export const AdminSideBar = ({ activeItem, onSelect }: AdminSideBarProps) => {
 
         <div className="shrink-0 border-t border-white/20 px-3 py-4">
           <div className="mb-2 flex items-center gap-3 px-2">
-            <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white text-[13px] font-semibold text-[#00A9AD]">
+            <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white text-[13px] font-semibold text-primary">
               {userInitials}
             </span>
             <div className="min-w-0">

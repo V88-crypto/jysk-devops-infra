@@ -40,7 +40,7 @@ export const FilterDropdown = <TId extends string | number>({
             closeDetails(event)
           }}
           className={`block w-full rounded px-3 py-2 text-left text-sm hover:bg-[#f4f4f4] ${
-            selectedId === null ? 'font-semibold text-[#00a9ad]' : 'text-[#333]'
+            selectedId === null ? 'font-semibold text-primary' : 'text-[#333]'
           }`}
         >
           Усі
@@ -56,7 +56,7 @@ export const FilterDropdown = <TId extends string | number>({
             }}
             className={`block w-full rounded px-3 py-2 text-left text-sm hover:bg-[#f4f4f4] ${
               selectedId === option.id
-                ? 'font-semibold text-[#00a9ad]'
+                ? 'font-semibold text-primary'
                 : 'text-[#333]'
             }`}
           >

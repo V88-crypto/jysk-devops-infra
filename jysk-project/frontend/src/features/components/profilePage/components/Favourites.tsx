@@ -106,7 +106,7 @@ export const Favorites = ({ state, onRemove }: FavoritesProps) => {
                   bg-white/90
                   text-[24px]
                   leading-none
-                  text-[#00a6b2]
+                  text-primary
                   shadow-sm
                   hover:scale-110
                   transition-transform

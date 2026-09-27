@@ -145,7 +145,7 @@ export const EditProduct = () => {
           <button
             type="submit"
             disabled={isLoading || isSaving || !product}
-            className="h-[52px] w-full max-w-[280px] bg-[#00a9ad] text-lg font-semibold text-white transition hover:bg-[#008f93] disabled:cursor-not-allowed disabled:opacity-60"
+            className="h-[52px] w-full max-w-[280px] bg-primary text-lg font-semibold text-white transition hover:bg-primary-dark disabled:cursor-not-allowed disabled:opacity-60"
           >
             {isSaving ? 'Збереження...' : 'Зберегти'}
           </button>

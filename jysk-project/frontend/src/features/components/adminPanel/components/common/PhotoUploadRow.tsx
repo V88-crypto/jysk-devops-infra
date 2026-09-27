@@ -40,7 +40,7 @@ export const PhotoUploadRow = ({
 
       <button
         type="button"
-        className="m-2 h-[36px] w-[130px] shrink-0 rounded-[4px] bg-[#00a9ad] text-sm font-semibold text-white transition hover:bg-[#008f93]"
+        className="m-2 h-[36px] w-[130px] shrink-0 rounded-[4px] bg-primary text-sm font-semibold text-white transition hover:bg-primary-dark"
       >
         Завантажити
       </button>

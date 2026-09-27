@@ -26,7 +26,7 @@ export function BlogCategorySection({ id, title, posts }: BlogCategorySectionPro
         <button
           type="button"
           onClick={() => navigate(`/blog/${featured.id}`)}
-          className="group relative aspect-[4/3] overflow-hidden rounded-md bg-neutral-100 text-left focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#10B8C5] md:aspect-auto md:h-full"
+          className="group relative aspect-[4/3] overflow-hidden rounded-md bg-neutral-100 text-left focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary md:aspect-auto md:h-full"
         >
           <img
             src={featured.imageUrl}
@@ -44,7 +44,7 @@ export function BlogCategorySection({ id, title, posts }: BlogCategorySectionPro
               key={post.id}
               type="button"
               onClick={() => navigate(`/blog/${post.id}`)}
-              className="group relative aspect-square overflow-hidden rounded-md bg-neutral-100 text-left focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#10B8C5] md:aspect-auto"
+              className="group relative aspect-square overflow-hidden rounded-md bg-neutral-100 text-left focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary md:aspect-auto"
             >
               <img
                 src={post.imageUrl}
