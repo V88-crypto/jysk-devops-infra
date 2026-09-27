@@ -1,6 +1,6 @@
 import { ProfileInfo } from './components/ProfileInfo'
-import { Favorites } from './components/Favourites'
-import { OrderList } from './components/OrderItem'
+import { Favorites } from './components/Favorites'
+import { OrderList } from './components/OrderList'
 import { Reviews } from './components/Reviews'
 import { useProfileData } from './hooks/useProfileData'
 

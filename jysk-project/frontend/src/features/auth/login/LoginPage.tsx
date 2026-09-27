@@ -10,7 +10,7 @@ import { useAuth } from '@/shared/auth/useAuth'
 import {
   loginSchema,
   type LoginFormData,
-} from './LoginSchema'
+} from './loginSchema'
 
 export const LoginPage = () => {
   const navigate = useNavigate()

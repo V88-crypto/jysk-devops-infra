@@ -8,7 +8,7 @@ import { ApiError } from '@/shared/api/httpClient'
 import {
   resetPasswordSchema,
   type ResetPasswordFormData,
-} from './PasswordResetSchema'
+} from './passwordResetSchema'
 
 type TokenCheckResult = 'valid' | 'invalid' | 'error'
 

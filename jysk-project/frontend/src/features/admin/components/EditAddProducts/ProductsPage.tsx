@@ -1,7 +1,7 @@
 import { Route, Routes, useNavigate } from 'react-router-dom'
 
 import { AddProduct } from './AddProduct/AddProduct'
-import { EditProduct } from './EditProduct/EditProducts'
+import { EditProduct } from './EditProduct/EditProduct'
 import { ProductsList } from './ProductsList'
 
 const ProductsListRoute = () => {

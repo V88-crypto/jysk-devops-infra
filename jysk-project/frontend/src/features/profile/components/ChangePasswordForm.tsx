@@ -8,7 +8,7 @@ import { profileApi } from "@/features/profile/api/profileApi";
 import {
   changePasswordSchema,
   type ChangePasswordFormData,
-} from "./ChangePasswordSchema";
+} from "./changePasswordSchema";
 
 const inputClass = (hasError: boolean) =>
   `w-full h-[48px] px-[16px] rounded-[4px] border bg-[#e4e4e4] outline-none transition ${

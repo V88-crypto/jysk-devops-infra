@@ -15,7 +15,7 @@ import { ForgotPasswordPage } from "@/features/auth/resetPassword/ForgotPassword
 import { ResetPasswordPage } from "@/features/auth/resetPassword/ResetPasswordPage"
 import { PasswordResetSuccessPage } from "@/features/auth/resetPassword/PasswordResetSuccessPage"
 import { ProfilePage } from "@/features/profile/ProfilePage"
-import { EditProfileForm } from "@/features/profile/components/EditProfile"
+import { EditProfileForm } from "@/features/profile/components/EditProfileForm"
 import VacanciesPage from "@/features/vacancies/VacanciesPage"
 import NotFoundPage from "@/features/notFound/NotFoundPage"
 import { AdminLayout } from "@/features/admin/AdminLayout"

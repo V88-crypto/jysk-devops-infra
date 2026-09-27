@@ -11,7 +11,7 @@ import { ChangePasswordForm } from "./ChangePasswordForm";
 import {
   editProfileSchema,
   type EditProfileFormData,
-} from "./EditProfileSchema";
+} from "./editProfileSchema";
 
 const inputClass = (hasError: boolean) =>
   `w-full h-[48px] px-[16px] rounded-[4px] border bg-[#e4e4e4] outline-none transition ${

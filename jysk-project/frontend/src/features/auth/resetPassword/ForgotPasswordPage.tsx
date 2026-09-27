@@ -8,7 +8,7 @@ import { ApiError } from '@/shared/api/httpClient'
 import {
   forgotPasswordSchema,
   type ForgotPasswordFormData,
-} from './PasswordResetSchema'
+} from './passwordResetSchema'
 
 export const ForgotPasswordPage = () => {
   const navigate = useNavigate()
