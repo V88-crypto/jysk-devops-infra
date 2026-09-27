@@ -1,4 +1,4 @@
-import { apiRequest } from './httpClient'
+import { ApiError, apiRequest } from './httpClient'
 import { tokenStorage } from '../auth/tokenStorage'
 
 export interface AuthUser {
@@ -7,17 +7,28 @@ export interface AuthUser {
   last_name: string
   email: string
   phone: string | null
+  avatar_url: string | null
   role_id: number
+  role: string
   created_at: string
 }
 
 interface AuthTokenResponse {
   access_token: string
+  refresh_token: string
   token_type: string
 }
 
 interface RegisterResponse extends AuthTokenResponse {
   user: AuthUser
+}
+
+interface MessageResponse {
+  detail: string
+}
+
+interface ResetTokenValidResponse {
+  valid: boolean
 }
 
 export interface LoginPayload {
@@ -40,7 +51,7 @@ export const authService = {
       body: JSON.stringify(payload),
     })
 
-    tokenStorage.set(response.access_token)
+    tokenStorage.setTokens(response.access_token, response.refresh_token)
 
     return response
   },
@@ -57,8 +68,55 @@ export const authService = {
       }),
     })
 
-    tokenStorage.set(response.access_token)
+    tokenStorage.setTokens(response.access_token, response.refresh_token)
 
     return response
+  },
+
+  async logout(accessToken: string, refreshToken: string): Promise<void> {
+    const revoke = (access: string, refresh: string) =>
+      apiRequest<void>('/auth/logout', {
+        method: 'POST',
+        headers: { Authorization: `Bearer ${access}` },
+        body: JSON.stringify({ refresh_token: refresh }),
+      })
+
+    try {
+      await revoke(accessToken, refreshToken)
+    } catch (error) {
+      if (!(error instanceof ApiError && error.status === 401)) {
+        throw error
+      }
+
+      const tokens = await apiRequest<AuthTokenResponse>('/auth/refresh', {
+        method: 'POST',
+        body: JSON.stringify({ refresh_token: refreshToken }),
+      })
+      await revoke(tokens.access_token, tokens.refresh_token)
+    }
+  },
+
+  me(): Promise<AuthUser> {
+    return apiRequest<AuthUser>('/auth/me')
+  },
+
+  forgotPassword(email: string): Promise<MessageResponse> {
+    return apiRequest<MessageResponse>('/auth/forgot-password', {
+      method: 'POST',
+      body: JSON.stringify({ email }),
+    })
+  },
+
+  validateResetToken(token: string): Promise<ResetTokenValidResponse> {
+    return apiRequest<ResetTokenValidResponse>(
+      `/auth/reset-password/validate?token=${encodeURIComponent(token)}`,
+    )
+  },
+
+  resetPassword(token: string, newPassword: string): Promise<MessageResponse> {
+    return apiRequest<MessageResponse>('/auth/reset-password', {
+      method: 'POST',
+      body: JSON.stringify({ token, new_password: newPassword }),
+    })
   },
 }

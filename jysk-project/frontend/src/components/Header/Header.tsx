@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../shared/auth/useAuth';
 import IconButton from './IconButton';
 import NavButton from './NavButton';
@@ -14,12 +14,17 @@ import UserIcon from '../../assets/icons/user.svg?react';
 import CartIcon from '../../assets/icons/cart.svg?react';
 import LocationIcon from '../../assets/icons/location.svg?react';
 import ChevronIcon from '../../assets/icons/chevron.svg?react';
+import AdminIcon from '../../assets/icons/admin.svg?react';
 
 const Header: React.FC = () => {
   const navigate = useNavigate();
-  const { isAuthenticated } = useAuth();
+  const { pathname } = useLocation();
+  const { isAuthenticated, isAdmin } = useAuth();
   const [isStorePanelOpen, setIsStorePanelOpen] = useState<boolean>(false);
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
+
+  const isActivePath = (path: string) =>
+    pathname === path || pathname.startsWith(`${path}/`);
 
   return (
     <header className="w-full shadow-sm bg-white font-sans relative z-30">
@@ -35,7 +40,9 @@ const Header: React.FC = () => {
               <button
                 type="button"
                 onClick={() => navigate('/')}
-                className="shrink-0 order-2 xl:order-1"
+                aria-label="На головну сторінку"
+                title="На головну сторінку"
+                className="shrink-0 order-2 xl:order-1 cursor-pointer transition duration-200 hover:scale-105 hover:opacity-80 active:scale-100"
               >
                 <img
                   src={logoImage}
@@ -65,7 +72,18 @@ const Header: React.FC = () => {
             </div>
 
             <div className="flex items-center gap-4 md:gap-[3.1vw] xl:gap-[2vw] shrink-0">
-              <IconButton Icon={HeartIcon} label="Обране" />
+              {isAdmin && (
+                <IconButton
+                  Icon={AdminIcon}
+                  label="Адмін-панель"
+                  onClick={() => navigate('/admin')}
+                />
+              )}
+              <IconButton
+                Icon={HeartIcon}
+                label="Обране"
+                onClick={() => navigate('/profile#profile-favorites')}
+              />
               {isAuthenticated ? (
                 <IconButton
                   Icon={UserIcon}
@@ -115,24 +133,27 @@ const Header: React.FC = () => {
             <div className="flex items-center justify-between w-full xl:w-auto xl:justify-end xl:gap-[0.8vw] shrink-0">
               <NavButton
                 text="Блог"
-                active={false}
+                active={isActivePath('/blog')}
                 onClick={() => navigate('/blog')}
                 className="md:w-[15.88vw] xl:w-[7.18vw]"
               />
-              <NavButton 
-                text="Магазини" 
-                active={false} 
-                className="md:w-[20.83vw] xl:w-[9.42vw]" 
+              <NavButton
+                text="Магазини"
+                active={isActivePath('/store')}
+                onClick={() => navigate('/store')}
+                className="md:w-[20.83vw] xl:w-[9.42vw]"
               />
-              <NavButton 
-                text="Питання-відповідь" 
-                active={false} 
-                className="md:w-[29.81vw] xl:w-[13.54vw]" 
+              <NavButton
+                text="Питання-відповідь"
+                active={isActivePath('/faq')}
+                onClick={() => navigate('/faq')}
+                className="md:w-[29.81vw] xl:w-[13.54vw]"
               />
-              <NavButton 
-                text="Робота" 
-                active={false} 
-                className="md:w-[20.83vw] xl:w-[9.42vw]" 
+              <NavButton
+                text="Робота"
+                active={isActivePath('/vacancies')}
+                onClick={() => navigate('/vacancies')}
+                className="md:w-[20.83vw] xl:w-[9.42vw]"
               />
             </div>
 

@@ -1,22 +1,48 @@
-import { getReviews } from "../data/reviewsApi";
+import type { MyReviewList } from "../../../types/profile";
+import { useAuth } from "../../../../shared/auth/useAuth";
+import type { SectionState } from "../data/useProfileData";
+import { ReviewCard } from "./ReviewCard";
+import { SectionStatus } from "./SectionStatus";
 
-import { ReviewCard } from "../components/ReviewCard";
-import { useAsyncData } from "../../../../shared/hooks/useAsyncData";
+type Props = {
+  state: SectionState<MyReviewList>;
+};
 
-export const Reviews = () => {
-  const { data: reviews, isLoading } = useAsyncData(getReviews);
+export const Reviews = ({ state }: Props) => {
+  const { user } = useAuth();
+  const author = user ? `${user.first_name} ${user.last_name}` : "";
 
-  if (isLoading) {
+  const renderContent = () => {
+    if (state.status === "loading") {
+      return <SectionStatus>Завантаження...</SectionStatus>;
+    }
+
+    if (state.status === "error") {
+      return <SectionStatus>Не вдалося завантажити відгуки</SectionStatus>;
+    }
+
+    if (state.data.items.length === 0) {
+      return <SectionStatus>Ви ще не залишили жодного відгуку</SectionStatus>;
+    }
+
     return (
-      <div className="w-full py-[40px] text-center text-[18px]">
-        Завантаження...
+      <div className="flex flex-col gap-[20px]">
+        {state.data.items.map((review) => (
+          <ReviewCard
+            key={review.id}
+            review={review}
+            author={author}
+          />
+        ))}
       </div>
     );
-  }
+  };
 
   return (
     <section
+      id="profile-reviews"
       className="
+        scroll-mt-4
         w-full
         max-w-[1440px]
         mx-auto
@@ -45,14 +71,7 @@ export const Reviews = () => {
         Мої відгуки
       </h2>
 
-      <div className="flex flex-col gap-[20px]">
-        {(reviews ?? []).map((review) => (
-          <ReviewCard
-            key={review.id}
-            review={review}
-          />
-        ))}
-      </div>
+      {renderContent()}
     </section>
   );
 };

@@ -1,46 +1,53 @@
-export interface Profile {
-  id: number
-  name: string
-  email: string
-  phone: string
-  avatar: string
-  ordersCount: number
-  completedOrdersCount: number
-  reviewsCount: number
-  favoritesCount: number
-}
+export type OrderStatus =
+  | 'new'
+  | 'processing'
+  | 'shipped'
+  | 'delivered'
+  | 'cancelled'
 
 export interface OrderItem {
   id: number
   name: string
-  description: string
+  sku: string
   quantity: number
   price: number
-  image: string
 }
 
 export interface Order {
   id: number
-  orderNumber: string
   date: string
-  status: string
+  status: OrderStatus
   totalPrice: number
+  address: string
   items: OrderItem[]
 }
 
+export interface OrderList {
+  items: Order[]
+  total: number
+}
+
 export interface FavoriteProduct {
-  id: number
+  variantId: number
   name: string
-  brand: string
-  description: string
+  sku: string
   price: number
-  oldPrice?: number
-  image: string
-  discount?: number
-  badge?: string
+  image: string | null
+  inStock: boolean
+}
+
+export interface MyReview {
+  id: number
+  productName: string
+  image: string | null
   rating: number
-  reviews: number
-  available: boolean
+  comment: string | null
+  date: string
+}
+
+export interface MyReviewList {
+  items: MyReview[]
+  total: number
 }
 
 export interface Review {

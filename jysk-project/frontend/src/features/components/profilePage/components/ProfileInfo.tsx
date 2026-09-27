@@ -1,20 +1,32 @@
 import { useNavigate } from 'react-router-dom'
 
-import { getProfile } from '../data/profileApi'
-import { useAsyncData } from '../../../../shared/hooks/useAsyncData'
 import { useAuth } from '../../../../shared/auth/useAuth'
+import { AvatarPlaceholder } from './AvatarPlaceholder'
 
-export const ProfileInfo = () => {
+interface ProfileCounts {
+  orders: number | null
+  completedOrders: number | null
+  reviews: number | null
+  favorites: number | null
+}
+
+interface ProfileInfoProps {
+  counts: ProfileCounts
+}
+
+const withCount = (label: string, count: number | null) =>
+  count === null ? label : `${label} (${count})`
+
+export const ProfileInfo = ({ counts }: ProfileInfoProps) => {
   const navigate = useNavigate()
-  const { logout } = useAuth()
-  const { data: profile, isLoading } = useAsyncData(getProfile)
+  const { user, logout } = useAuth()
 
   const handleLogout = () => {
     logout()
     navigate('/')
   }
 
-  if (isLoading) {
+  if (!user) {
     return (
       <div className="w-full flex justify-center items-center py-[100px]">
         Завантаження...
@@ -22,13 +34,7 @@ export const ProfileInfo = () => {
     )
   }
 
-  if (!profile) {
-    return (
-      <div className="w-full flex justify-center items-center py-[100px]">
-        Не вдалося завантажити профіль
-      </div>
-    )
-  }
+  const fullName = `${user.first_name} ${user.last_name}`
 
   return (
     <div className="w-full px-4 sm:px-6">
@@ -79,18 +85,23 @@ export const ProfileInfo = () => {
 
             <div className="flex items-center">
 
-              <img
-                src={profile.avatar}
-                alt={profile.name}
-                className="
-                  w-[90px]
-                  h-[90px]
-                  lg:w-[100px]
-                  lg:h-[100px]
-                  rounded-full
-                  object-cover
-                "
-              />
+              {user.avatar_url ? (
+                <img
+                  src={user.avatar_url}
+                  alt={fullName}
+                  className="
+                    w-[90px]
+                    h-[90px]
+                    lg:w-[100px]
+                    lg:h-[100px]
+                    rounded-full
+                    object-cover
+                    shrink-0
+                  "
+                />
+              ) : (
+                <AvatarPlaceholder className="w-[90px] h-[90px] lg:w-[100px] lg:h-[100px] shrink-0" />
+              )}
 
               <div className="ml-[25px]">
 
@@ -101,7 +112,7 @@ export const ProfileInfo = () => {
                     font-bold
                   "
                 >
-                  {profile.name}
+                  {fullName}
                 </h2>
 
                 <a
@@ -146,8 +157,8 @@ export const ProfileInfo = () => {
                   Електронна пошта
                 </span>
 
-                <span>
-                  {profile.email}
+                <span className="break-all text-right">
+                  {user.email}
                 </span>
               </div>
 
@@ -164,8 +175,8 @@ export const ProfileInfo = () => {
                   Номер телефону
                 </span>
 
-                <span>
-                  {profile.phone}
+                <span className={user.phone ? '' : 'text-[#999]'}>
+                  {user.phone || 'Не вказано'}
                 </span>
               </div>
 
@@ -244,7 +255,7 @@ export const ProfileInfo = () => {
             <div className="flex flex-col gap-[30px]">
 
                 <a
-                    href="#"
+                    href="#profile-orders"
                     className="
                     w-full
                     flex
@@ -258,7 +269,7 @@ export const ProfileInfo = () => {
                     "
                 >
                     <span>
-                    Мої замовлення({profile.ordersCount})
+                    {withCount('Мої замовлення', counts.orders)}
                     </span>
 
                     <span className="text-[32px] lg:text-[38px] font-normal leading-none">
@@ -267,7 +278,7 @@ export const ProfileInfo = () => {
                 </a>
 
                 <a
-                    href="#"
+                    href="#profile-orders"
                     className="
                     w-full
                     flex
@@ -281,7 +292,7 @@ export const ProfileInfo = () => {
                     "
                 >
                     <span>
-                    Виконані замовлення({profile.completedOrdersCount})
+                    {withCount('Виконані замовлення', counts.completedOrders)}
                     </span>
 
                     <span className="text-[32px] lg:text-[38px] font-normal leading-none">
@@ -290,7 +301,7 @@ export const ProfileInfo = () => {
                 </a>
 
                 <a
-                    href="#"
+                    href="#profile-reviews"
                     className="
                     w-full
                     flex
@@ -304,7 +315,7 @@ export const ProfileInfo = () => {
                     "
                 >
                     <span>
-                    Мої відгуки({profile.reviewsCount})
+                    {withCount('Мої відгуки', counts.reviews)}
                     </span>
 
                     <span className="text-[32px] lg:text-[38px] font-normal leading-none">
@@ -313,7 +324,7 @@ export const ProfileInfo = () => {
                 </a>
 
                 <a
-                    href="#"
+                    href="#profile-favorites"
                     className="
                     w-full
                     flex
@@ -327,7 +338,7 @@ export const ProfileInfo = () => {
                     "
                 >
                     <span>
-                    Обране({profile.favoritesCount})
+                    {withCount('Обране', counts.favorites)}
                     </span>
 
                     <span className="text-[32px] lg:text-[38px] font-normal leading-none">

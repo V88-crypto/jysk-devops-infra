@@ -1,34 +1,46 @@
-import { getFavorites } from '../data/favoritesApi'
-import { useAsyncData } from '../../../../shared/hooks/useAsyncData'
+import { useState } from 'react'
 
-export const Favorites = () => {
-  const { data: products, isLoading } = useAsyncData(getFavorites)
+import type { FavoriteProduct } from '../../../types/profile'
+import type { SectionState } from '../data/useProfileData'
+import { formatPrice } from '../utils/format'
+import { SectionStatus } from './SectionStatus'
 
-  if (isLoading) {
-    return (
-      <div className="w-full py-[40px] text-center text-[18px]">
-        Завантаження...
-      </div>
-    )
+interface FavoritesProps {
+  state: SectionState<FavoriteProduct[]>
+  onRemove: (variantId: number) => Promise<void>
+}
+
+export const Favorites = ({ state, onRemove }: FavoritesProps) => {
+  const [removingId, setRemovingId] = useState<number | null>(null)
+  const [removeError, setRemoveError] = useState<string | null>(null)
+
+  const handleRemove = async (variantId: number) => {
+    setRemovingId(variantId)
+    setRemoveError(null)
+
+    try {
+      await onRemove(variantId)
+    } catch {
+      setRemoveError('Не вдалося видалити товар з обраного. Спробуйте ще раз.')
+    } finally {
+      setRemovingId(null)
+    }
   }
 
-  return (
-    <section className="h-full w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-0 mt-[40px] sm:mt-[50px] lg:mt-[60px] mb-[40px] sm:mb-[50px] lg:mb-[60px]">
+  const renderContent = () => {
+    if (state.status === 'loading') {
+      return <SectionStatus>Завантаження...</SectionStatus>
+    }
 
-      <h2
-        className="
-          text-[30px]
-          sm:text-[36px]
-          lg:text-[42px]
-          font-bold
-          mb-[25px]
-          sm:mb-[30px]
-          lg:mb-[35px]
-        "
-      >
-        Обране
-      </h2>
+    if (state.status === 'error') {
+      return <SectionStatus>Не вдалося завантажити обране</SectionStatus>
+    }
 
+    if (state.data.length === 0) {
+      return <SectionStatus>Ви ще нічого не додали в обране</SectionStatus>
+    }
+
+    return (
       <div
         className="
           grid
@@ -40,9 +52,9 @@ export const Favorites = () => {
           lg:gap-[20px]
         "
       >
-        {(products ?? []).map((product) => (
+        {state.data.map((product) => (
           <article
-            key={product.id}
+            key={product.variantId}
             className="
                 w-full
                 bg-white
@@ -59,70 +71,57 @@ export const Favorites = () => {
                 md:h-[420px]
                 lg:h-[500px]
                 bg-[#f5f5f5]">
+              {product.image ? (
                 <img
-                    src={product.image}
-                    alt={product.description}
-                    className="
+                  src={product.image}
+                  alt={product.name}
+                  className="
                     w-full
                     h-full
                     object-cover
-                    "
+                  "
                 />
+              ) : (
+                <div className="flex h-full w-full items-center justify-center text-[15px] text-[#999]">
+                  Немає фото
+                </div>
+              )}
 
               <button
                 type="button"
+                onClick={() => handleRemove(product.variantId)}
+                disabled={removingId === product.variantId}
+                aria-label="Видалити з обраного"
+                title="Видалити з обраного"
                 className="
-                absolute
-                top-[10px]
-                right-[10px]
-                text-[26px]
-                leading-none
-                hover:scale-110
-                transition-transform
+                  absolute
+                  top-[10px]
+                  right-[10px]
+                  flex
+                  h-[40px]
+                  w-[40px]
+                  items-center
+                  justify-center
+                  rounded-full
+                  bg-white/90
+                  text-[24px]
+                  leading-none
+                  text-[#00a6b2]
+                  shadow-sm
+                  hover:scale-110
+                  transition-transform
+                  disabled:opacity-50
                 "
-            >
-                ♡
-            </button>
-
-              <div className="absolute bottom-0 left-0 flex flex-col items-start">
-                {product.discount && (
-                <span
-                    className="
-                    bg-[#e31b23]
-                    text-white
-                    text-[12px]
-                    font-bold
-                    px-[7px]
-                    py-[5px]
-                    "
-                >
-                    -{product.discount}%
-                </span>
-                )}
-
-                {product.badge && (
-                <span
-                    className="
-                    bg-[#19c514]
-                    text-white
-                    text-[12px]
-                    font-medium
-                    px-[7px]
-                    py-[5px]
-                    "
-                >
-                    {product.badge}
-                </span>
-                )}
-            </div>
+              >
+                ♥
+              </button>
             </div>
 
             <div
               className="
-                h-[32%]
                 px-[12px]
                 pt-[8px]
-                pb-[10px]
+                pb-[14px]
                 flex
                 flex-col
               "
@@ -132,74 +131,67 @@ export const Favorites = () => {
                 className="
                   text-[20px]
                   font-bold
-                  uppercase
                   mb-[3px]
                 "
               >
-                {product.brand}
+                {product.name}
               </p>
 
               <p
                 className="
-                    text-[18px]
-                    leading-[22px]
+                    text-[15px]
                     text-[#555]
-                    mt-[7px]
-                    h-[44px]
-                    overflow-hidden
+                    mt-[4px]
                 "
                 >
-                {product.description}
+                Артикул: {product.sku}
               </p>
 
-              <div className="flex items-center gap-[5px] mt-[10px]">
-
-                <span className="text-[30px] tracking-[-2px]">
-                  ★★★★★
+              <div className="mt-[10px]">
+                <span className="text-[28px] font-bold">
+                  {formatPrice(product.price)}
                 </span>
-
               </div>
 
-              <div className="mt-[4px]">
-
-                <span className="text-[32px] font-bold">
-                  {product.price}$.
-                </span>
-
-                {product.oldPrice && (
-                  <span
-                    className="
-                      ml-[6px]
-                      text-[21px]
-                      text-[#888]
-                      line-through
-                    "
-                  >
-                    {product.oldPrice}$.
-                  </span>
-                )}
-
-              </div>
-
-              <div className="mt-[4px]">
-
-                <p className="flex items-center gap-[5px] text-[17px]">
-                  <span className="w-[6px] h-[6px] rounded-full bg-red-500" />
-                  Доставка
-                </p>
-
-                <p className="flex items-center gap-[5px] text-[17px]">
-                  <span className="w-[6px] h-[6px] rounded-full bg-[#19c514]" />
-                  В наявності
-                </p>
-
-              </div>
+              <p className="mt-[6px] flex items-center gap-[5px] text-[17px]">
+                <span
+                  className={`w-[6px] h-[6px] rounded-full ${
+                    product.inStock ? 'bg-[#19c514]' : 'bg-red-500'
+                  }`}
+                />
+                {product.inStock ? 'В наявності' : 'Немає в наявності'}
+              </p>
 
             </div>
 
           </article>
         ))}
       </div>
+    )
+  }
+
+  return (
+    <section id="profile-favorites" className="scroll-mt-4 h-full w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-0 mt-[40px] sm:mt-[50px] lg:mt-[60px] mb-[40px] sm:mb-[50px] lg:mb-[60px]">
+
+      <h2
+        className="
+          text-[30px]
+          sm:text-[36px]
+          lg:text-[42px]
+          font-bold
+          mb-[25px]
+          sm:mb-[30px]
+          lg:mb-[35px]
+        "
+      >
+        Обране
+      </h2>
+
+      {removeError && (
+        <p className="mb-[15px] text-[14px] text-red-500">{removeError}</p>
+      )}
+
+      {renderContent()}
 
     </section>
   )
