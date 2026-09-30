@@ -1,6 +1,6 @@
 import React from 'react';
 import { categoriesMockData } from './data';
-import Prefooter from '../../components/Prefooter/Prefooter';
+import { Prefooter } from '@/shared/ui/Prefooter/Prefooter'
 
 const CategoriesPage: React.FC = () => {
   return (
@@ -17,14 +17,12 @@ const CategoriesPage: React.FC = () => {
 
       <div className="mx-auto w-[90%] xl:w-[85.93vw] mt-2 md:mt-4 xl:mt-[1vw] mb-16 md:mb-24 lg:mb-32 xl:mb-[13.02vw] flex flex-col items-center">
         
-        {/* Заголовок з сірим фоном по центру */}
         <div className="flex justify-center mb-8 md:mb-10 xl:mb-[3vw]">
           <h1 className="font-['Raleway'] font-bold text-lg md:text-2xl xl:text-[2vw] text-black bg-[#E0E0E0] px-10 py-2 md:px-14 md:py-3 xl:px-[4vw] xl:py-[1vw]">
             Категорії
           </h1>
         </div>
 
-        {/* Сітка категорій: 2 колонки на телефоні та планшеті, 3 на десктопі */}
         <div className="w-full grid grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 xl:gap-[1.5vw] mb-12 xl:mb-[4vw]">
           {categoriesMockData.map((category) => (
             <a 
@@ -47,7 +45,6 @@ const CategoriesPage: React.FC = () => {
           ))}
         </div>
 
-        {/* Пагінація */}
         <div className="flex items-center gap-2 xl:gap-[0.5vw] mt-4 xl:mt-[2vw]">
           <button 
             className="text-black hover:text-primary transition-colors focus:outline-none p-1 md:p-2"
