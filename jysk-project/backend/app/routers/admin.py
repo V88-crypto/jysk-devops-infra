@@ -1,10 +1,12 @@
 import re
 
-from fastapi import APIRouter, Depends, HTTPException, Query, Response, status
+from fastapi import APIRouter, Depends, File, Form, HTTPException, Query, Response, UploadFile, status
 from sqlalchemy import or_
 from sqlalchemy.orm import Session, selectinload
 
 from app.core.deps import ADMIN_ROLE, require_admin
+from app.core.storage import public_url, upload_image
+from app.core.uploads import read_image_upload
 from app.database import get_db
 from app.models.catalog import (
     Attribute,
@@ -38,6 +40,8 @@ from app.schemas.admin import (
     ReviewOut,
     ReviewUserOut,
     ReviewVariantOut,
+    UploadFolder,
+    UploadOut,
     UserListOut,
     UserRoleIn,
     VariantAttributeIn,
@@ -711,3 +715,10 @@ def update_user_role(
     db.commit()
     db.refresh(user)
     return UserOut.model_validate(user)
+
+
+@router.post("/uploads", response_model=UploadOut, status_code=status.HTTP_201_CREATED)
+def upload_admin_file(file: UploadFile = File(), folder: UploadFolder = Form()):
+    data, content_type = read_image_upload(file)
+    key = upload_image(data, content_type, folder)
+    return UploadOut(key=key, url=public_url(key))
