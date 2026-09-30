@@ -16,6 +16,7 @@ from app.models.catalog import (
     ProductVariant,
     VariantAttribute,
 )
+from app.models.favorite import Favorite
 from app.models.order import Address, Order, OrderItem
 from app.models.review import Review
 from app.models.user import Role, User
@@ -393,6 +394,8 @@ def delete_variants(db: Session, variants: list[ProductVariant]) -> None:
             db.delete(item)
         for review in db.query(Review).filter(Review.variant_id == variant.id).all():
             db.delete(review)
+        for favorite in db.query(Favorite).filter(Favorite.variant_id == variant.id).all():
+            db.delete(favorite)
         db.delete(variant)
 
 
