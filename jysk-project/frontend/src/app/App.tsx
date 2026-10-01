@@ -23,6 +23,7 @@ import { StorePage } from '@/features/store/StorePage'
 import { FaqPage } from '@/features/faq/FaqPage'
 import { CategoriesPage } from '@/features/catalog/CategoriesPage'
 import { CategoryPage } from '@/features/catalog/CategoryPage'
+import { ProductPage } from '@/features/catalog/ProductPage'
 
 export function App() {
   return (
@@ -46,6 +47,7 @@ export function App() {
             <Route path="faq" element={<FaqPage />} />
             <Route path="categories" element={<CategoriesPage />} />
             <Route path="category/:id" element={<CategoryPage />} />
+            <Route path="product/:slug" element={<ProductPage />} />
 
             <Route path="blog" element={<BlogListPage />} />
             <Route path="blog/:postId" element={<BlogPostDetailPage />} />
