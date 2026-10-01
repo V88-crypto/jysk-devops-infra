@@ -6,7 +6,6 @@ const CategoriesPage: React.FC = () => {
   return (
     <main className="w-full bg-[#f3f3f3] font-sans pb-16 xl:pb-[4vw]">
       
-      {/* Хлібні крихти */}
       <div className="w-full px-4 md:px-8 xl:px-[7.03vw] py-4 md:py-6 xl:py-[1.5vw] flex items-center gap-2 text-xs md:text-sm xl:text-[0.83vw] text-dark/60">
         <a href="/" className="hover:text-primary transition-colors">Домашня сторінка</a>
         <span>&gt;</span>
