@@ -4,8 +4,8 @@ import type {
   FavoriteProduct,
   MyReviewList,
   OrderList,
-  OrderStatus,
 } from '@/features/profile/types'
+import type { OrderStatus } from '@/shared/orders/orderStatus'
 
 const MAX_PAGE_SIZE = 100
 

@@ -1,5 +1,4 @@
-export type OrderStatus =
-  'new' | 'processing' | 'shipped' | 'delivered' | 'cancelled'
+import type { OrderStatus } from '@/shared/orders/orderStatus'
 
 export interface OrderItem {
   id: number
