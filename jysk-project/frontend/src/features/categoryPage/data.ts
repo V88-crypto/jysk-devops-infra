@@ -1,0 +1,105 @@
+import prod1 from '@/assets/images/prod-lamp.jpg';
+import prod2 from '@/assets/images/prod-pillow.jpg';
+import prod3 from '@/assets/images/prod-sofa.jpg';
+import prod4 from '@/assets/images/prod-chair.jpg';
+
+import blogImg1 from '@/assets/images/blog1.jpg';
+import blogImg2 from '@/assets/images/blog2.jpg';
+import blogImg3 from '@/assets/images/blog3.jpg';
+import blogImg4 from '@/assets/images/blog4.jpg';
+
+import hastensLogo from '@/assets/images/hastens.png';
+import svenskaLogo from '@/assets/images/svenska.png';
+import fritzLogo from '@/assets/images/fritz.png';
+import muutoLogo from '@/assets/images/muuto.png';
+
+export const productsMockData = [
+  {
+    id: '1',
+    name: 'JULIUS',
+    description: 'Лампа настільна JULIUS д.19см в.39см натуральний',
+    image: prod1,
+    price: 60,
+    oldPrice: 100,
+    discountPercent: 40,
+    isNew: true,
+    rating: 5,
+    inStock: true,
+    deliveryAvailable: true
+  },
+  {
+    id: '2',
+    name: 'FLADSTJERNE',
+    description: 'Подушка FLADSTJERNE 30x30см в асортименті',
+    image: prod2,
+    price: 60,
+    oldPrice: 100,
+    rating: 5,
+    inStock: true,
+    deliveryAvailable: true
+  },
+  {
+    id: '3',
+    name: 'VEJLBY',
+    description: 'Софа-ліжко VEJLBY з шезлонгом св.пісочний',
+    image: prod3,
+    price: 60,
+    oldPrice: 100,
+    discountPercent: 40,
+    isNew: true,
+    rating: 5,
+    inStock: true,
+    deliveryAvailable: true
+  },
+  {
+    id: '4',
+    name: 'BISTRUP',
+    description: 'Стілець обідній BISTRUP оливковий/дуб',
+    image: prod4,
+    price: 60,
+    oldPrice: 100,
+    discountPercent: 40,
+    isNew: true,
+    rating: 5,
+    inStock: true,
+    deliveryAvailable: true
+  }
+];
+
+export const brandsMockData = [
+  { logo: hastensLogo, description: "Бренд, відомий своїми розкішними матрацами, які роблять із натуральних матеріалів з акцентом на якість та комфорт." },
+  { logo: svenskaLogo, description: "Бренд пропонує широкий вибір меблів та товарів для дому, що поєднують стиль та функціональність." },
+  { logo: fritzLogo, description: "Знаменита меблева компанія, що виробляє дизайнерські меблі та аксесуари, включаючи культові вироби від відомих дизайнерів." },
+  { logo: muutoLogo, description: "Пропонує сучасні меблі, освітлення та аксесуари з акцентом на скандинавський дизайн та простоту." }
+];
+
+export const blogPostsMockData = [
+  {
+    id: 1,
+    title: "Створіть Затишний Дім: 5 Порад з Вибору Меблів для Різних Кімнат",
+    titleAlign: "left",
+    image: blogImg1,
+    description: "Вибір меблів для вашого будинку – це не тільки питання стилю, але й комфорту та функціональності. У цьому пості ми розповімо, як підібрати ідеальні предмети для кожної кімнати вашого будинку, щоб створити затишний та гармонійний простір."
+  },
+  {
+    id: 2,
+    title: "Як Правильно Вибрати Освітлення для Різних Кімнат Вашої оселі",
+    titleAlign: "right",
+    image: blogImg2,
+    description: "Освітлення відіграє ключову роль у створенні комфортної атмосфери у вашому будинку. Правильно підібране освітлення не тільки підкреслює стиль інтер'єру, але й впливає на ваш настрій. Ми розповімо, як вибрати освітлення для кожної кімнати вашого будинку, щоб створити ідеальну атмосферу."
+  },
+  {
+    id: 3,
+    title: "Тренди в меблевому дизайні: що буде в моді у 2024 році?",
+    titleAlign: "left",
+    image: blogImg3,
+    description: "Меблевий дизайн не стоїть на місці, і щороку з'являються нові тенденції, які змінюють вигляд наших домівок. У цій статті ми розглянемо основні тренди в меблях на 2024 рік. Відновлені матеріали, інноваційні технології та новітні рішення у функціональності — ми дослідимо."
+  },
+  {
+    id: 4,
+    title: "Меблі для кожної кімнати: як обрати стиль і комфорт",
+    titleAlign: "right",
+    image: blogImg4,
+    description: "У цій статті ми поговоримо про те, як підібрати меблі для різних приміщень вашого дому, орієнтуючись на функціональність і естетику. Ви дізнаєтесь, як правильно вибрати меблі для вітальні, спальні, кухні та кабінету, враховуючи стиль інтер'єру, розмір приміщення та ваші особисті потреби."
+  }
+];
