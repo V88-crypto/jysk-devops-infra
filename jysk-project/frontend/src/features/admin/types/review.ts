@@ -1,9 +1,9 @@
 export interface Review {
   id: number
-  author: string
-  brand: string
-  product: string
-  image: string
   rating: number
-  review: string
+  comment: string | null
+  createdAt: string
+  authorName: string
+  productName: string
+  sku: string
 }
