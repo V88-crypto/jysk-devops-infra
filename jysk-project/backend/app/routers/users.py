@@ -1,8 +1,18 @@
-from fastapi import APIRouter, Depends, HTTPException, Query, Response, status
+import logging
+
+from fastapi import APIRouter, Depends, File, HTTPException, Query, Response, UploadFile, status
 from sqlalchemy.orm import Session
 
 from app.core.deps import get_current_user
 from app.core.security import hash_password, verify_password
+from app.core.storage import (
+    StorageUnavailableError,
+    delete_object,
+    key_from_url,
+    public_url,
+    upload_image,
+)
+from app.core.uploads import read_image_upload
 from app.database import get_db
 from app.models.catalog import Image, Product, ProductVariant
 from app.models.review import Review
@@ -17,6 +27,8 @@ from app.schemas.review import (
 from app.schemas.user import PasswordChange, ProfileUpdate, UserOut
 
 router = APIRouter(prefix="/users", tags=["users"])
+
+logger = logging.getLogger(__name__)
 
 REQUIRED_PROFILE_FIELDS = ("first_name", "last_name")
 
@@ -104,3 +116,46 @@ def my_reviews(
         for review, variant, product in rows
     ]
     return MyReviewListOut(items=items, total=total, page=page, page_size=page_size)
+
+
+def own_avatar_key(user: User) -> str | None:
+    key = key_from_url(user.avatar_url)
+    if key is not None and key.startswith(f"avatars/{user.id}/"):
+        return key
+    return None
+
+
+@router.post("/me/avatar", response_model=UserOut)
+def upload_avatar(
+    file: UploadFile = File(),
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db),
+):
+    data, content_type = read_image_upload(file)
+    old_key = own_avatar_key(current_user)
+    key = upload_image(data, content_type, f"avatars/{current_user.id}")
+
+    current_user.avatar_url = public_url(key)
+    db.commit()
+    db.refresh(current_user)
+
+    if old_key is not None:
+        try:
+            delete_object(old_key)
+        except StorageUnavailableError:
+            logger.warning("Старый аватар %s не удалён: MinIO недоступен", old_key)
+    return UserOut.model_validate(current_user)
+
+
+@router.delete("/me/avatar", status_code=status.HTTP_204_NO_CONTENT)
+def delete_avatar(
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db),
+):
+    old_key = own_avatar_key(current_user)
+    if old_key is not None:
+        delete_object(old_key)
+
+    current_user.avatar_url = None
+    db.commit()
+    return Response(status_code=status.HTTP_204_NO_CONTENT)

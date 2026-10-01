@@ -10,6 +10,7 @@ from app.schemas.user import UserOut
 
 OrderStatus = Literal["new", "processing", "shipped", "delivered", "cancelled"]
 RoleName = Literal["admin", "customer"]
+UploadFolder = Literal["products", "categories", "blog"]
 
 
 class CategoryOut(BaseModel):
@@ -187,3 +188,8 @@ class UserListOut(BaseModel):
 
 class UserRoleIn(BaseModel):
     role: RoleName
+
+
+class UploadOut(BaseModel):
+    key: str
+    url: str

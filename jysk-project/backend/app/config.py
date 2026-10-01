@@ -24,6 +24,15 @@ class Settings(BaseSettings):
     SMTP_PORT: int = 1025
     SMTP_FROM: str = "noreply@jysk-clone.local"
 
+    MINIO_ENDPOINT: str = "localhost:9000"
+    MINIO_ACCESS_KEY: str = ""
+    MINIO_SECRET_KEY: str = ""
+    MINIO_BUCKET: str = "images"
+    MINIO_SECURE: bool = False
+
+    PUBLIC_API_URL: str = "http://localhost:8000"
+    MAX_UPLOAD_SIZE_MB: int = 5
+
     model_config = SettingsConfigDict(env_file=".env")
 
 
