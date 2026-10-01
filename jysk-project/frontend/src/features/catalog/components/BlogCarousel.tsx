@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { blogPostsMockData as blogPosts } from '../../data';
+import { blogPostsMockData as blogPosts } from '@/features/catalog/data/categoryPage';
 
-const BlogCarousel: React.FC = () => {
+export const BlogCarousel: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [itemsToShow, setItemsToShow] = useState(2);
 
@@ -83,5 +83,3 @@ const BlogCarousel: React.FC = () => {
     </div>
   );
 };
-
-export default BlogCarousel;

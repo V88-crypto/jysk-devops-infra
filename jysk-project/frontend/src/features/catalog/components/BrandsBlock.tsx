@@ -1,7 +1,7 @@
 import React from 'react';
-import { brandsMockData } from '../../data';
+import { brandsMockData } from '@/features/catalog/data/categoryPage';
 
-const BrandsBlock: React.FC = () => {
+export const BrandsBlock: React.FC = () => {
   return (
     <div className="w-full bg-white border-t border-gray-200 shadow-[0_-10px_15px_-3px_rgba(0,0,0,0.05)] py-10 md:py-16 xl:py-[4vw]">
       <div className="mx-auto w-[90%] xl:w-[85.93vw] grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-12 xl:gap-[3vw]">
@@ -19,5 +19,3 @@ const BrandsBlock: React.FC = () => {
     </div>
   );
 };
-
-export default BrandsBlock;

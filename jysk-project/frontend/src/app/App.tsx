@@ -21,8 +21,8 @@ import { NotFoundPage } from '@/features/notFound/NotFoundPage'
 import { AdminLayout } from '@/features/admin/AdminLayout'
 import { StorePage } from '@/features/store/StorePage'
 import { FaqPage } from '@/features/faq/FaqPage'
-import CategoriesPage from '@/features/categoriesPage/CategoriesPage'
-import CategoryPage from '@/features/categoryPage/CategoryPage'
+import { CategoriesPage } from '@/features/catalog/CategoriesPage'
+import { CategoryPage } from '@/features/catalog/CategoryPage'
 
 export function App() {
   return (

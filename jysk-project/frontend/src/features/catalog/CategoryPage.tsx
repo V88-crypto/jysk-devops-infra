@@ -1,11 +1,11 @@
 import React from 'react';
-import { productsMockData } from './data';
-import ProductCard from './components/ProductCard/ProductCard';
-import BrandsBlock from './components/BrandsBlock/BrandsBlock';
-import BlogCarousel from './components/BlogCarousel/BlogCarousel';
+import { productsMockData } from './data/categoryPage';
+import { ProductCard } from './components/ProductCard';
+import { BrandsBlock } from './components/BrandsBlock';
+import { BlogCarousel } from './components/BlogCarousel';
 import { Prefooter } from '@/shared/ui/Prefooter/Prefooter'
 
-const CategoryPage: React.FC = () => {
+export const CategoryPage: React.FC = () => {
   return (
     <main className="w-full bg-[#f3f3f3] font-sans pb-16 xl:pb-[4vw]">
       
@@ -61,5 +61,3 @@ const CategoryPage: React.FC = () => {
     </main>
   );
 };
-
-export default CategoryPage;

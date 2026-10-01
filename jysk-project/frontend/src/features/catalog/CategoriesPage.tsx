@@ -1,8 +1,8 @@
 import React from 'react';
-import { categoriesMockData } from './data';
+import { categoriesMockData } from './data/categories';
 import { Prefooter } from '@/shared/ui/Prefooter/Prefooter'
 
-const CategoriesPage: React.FC = () => {
+export const CategoriesPage: React.FC = () => {
   return (
     <main className="w-full bg-[#f3f3f3] font-sans pb-16 xl:pb-[4vw]">
       
@@ -86,5 +86,3 @@ const CategoriesPage: React.FC = () => {
     </main>
   );
 };
-
-export default CategoriesPage;

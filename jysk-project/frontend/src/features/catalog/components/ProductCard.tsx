@@ -14,7 +14,7 @@ interface Product {
   deliveryAvailable: boolean;
 }
 
-const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
+export const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
   const [isFavorite, setIsFavorite] = useState(false);
   const [currentRating, setCurrentRating] = useState(product.rating);
 
@@ -114,5 +114,3 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
     </div>
   );
 };
-
-export default ProductCard;
