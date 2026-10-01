@@ -131,6 +131,17 @@ export const profileApi = {
     }
   },
 
+  uploadAvatar(file: File): Promise<AuthUser> {
+    const body = new FormData()
+    body.append('file', file)
+
+    return apiRequest<AuthUser>('/users/me/avatar', { method: 'POST', body })
+  },
+
+  deleteAvatar(): Promise<void> {
+    return apiRequest<void>('/users/me/avatar', { method: 'DELETE' })
+  },
+
   changePassword(currentPassword: string, newPassword: string): Promise<void> {
     return apiRequest<void>('/users/me/password', {
       method: 'PUT',

@@ -2,9 +2,8 @@ import { useEffect, useState } from 'react'
 import type { FormEvent } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import { attributeService } from '@/features/admin/api/attributeService'
-import { categoryService } from '@/features/admin/api/categoryService'
-import { productService } from '@/features/admin/api/productService'
+import { catalogApi } from '@/features/admin/api/catalogApi'
+import { productApi } from '@/features/admin/api/productApi'
 
 import type { Attribute } from '@/features/admin/types/attribute'
 import type { Category } from '@/features/admin/types/category'
@@ -13,9 +12,18 @@ import { ProductFormFields } from '@/features/admin/components/EditAddProducts/c
 import { useProductFormState } from '@/features/admin/components/EditAddProducts/hooks/useProductFormState'
 import { AdminPageLayout } from '@/features/admin/components/common/AdminPageLayout'
 
-import { emptyProductFormState } from '@/features/admin/components/EditAddProducts/utils/productHelpers'
+import {
+  emptyProductFormState,
+  productErrorMessage,
+  validateProductForm,
+} from '@/features/admin/components/EditAddProducts/utils/productHelpers'
 
 import { mapFormToNewProduct } from './utils/productsMapper'
+
+interface Status {
+  type: 'success' | 'error'
+  text: string
+}
 
 export const AddProduct = () => {
   const navigate = useNavigate()
@@ -25,18 +33,21 @@ export const AddProduct = () => {
 
   const [isLoading, setIsLoading] = useState(true)
   const [isSaving, setIsSaving] = useState(false)
-  const [statusMessage, setStatusMessage] = useState('')
+  const [status, setStatus] = useState<Status | null>(null)
 
   const {
     form,
     setForm,
     selectedPhotoText,
-    setSelectedPhotoText,
     updateField,
     updateAttributeRow,
     addAttributeRow,
     clearAttributes,
     handlePhotoChange,
+    removePhoto,
+    isUploadingPhotos,
+    photoError,
+    setPhotoError,
     handleImageError,
   } = useProductFormState(attributes)
 
@@ -46,8 +57,8 @@ export const AddProduct = () => {
     const loadData = async () => {
       try {
         const [loadedCategories, loadedAttributes] = await Promise.all([
-          categoryService.getAll(),
-          attributeService.getAll(),
+          catalogApi.getCategories(),
+          catalogApi.getAttributes(),
         ])
 
         if (!isMounted) {
@@ -58,7 +69,7 @@ export const AddProduct = () => {
         setAttributes(loadedAttributes)
       } catch {
         if (isMounted) {
-          setStatusMessage('Не вдалося завантажити дані')
+          setStatus({ type: 'error', text: 'Не вдалося завантажити дані' })
         }
       } finally {
         if (isMounted) {
@@ -77,19 +88,31 @@ export const AddProduct = () => {
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
 
+    const validationError = validateProductForm(form)
+
+    if (validationError) {
+      setStatus({ type: 'error', text: validationError })
+      return
+    }
+
     setIsSaving(true)
-    setStatusMessage('')
+    setStatus(null)
 
     try {
-      const newProduct = mapFormToNewProduct(form, attributes)
+      const created = await productApi.create(mapFormToNewProduct(form))
 
-      await productService.create(newProduct)
-
-      setStatusMessage('Товар створено')
+      setStatus({ type: 'success', text: `Товар «${created.name}» створено` })
       setForm(emptyProductFormState())
-      setSelectedPhotoText('Виберіть фото... (до 4 шт.)')
-    } catch {
-      setStatusMessage('Не вдалося створити товар')
+      setPhotoError(null)
+      catalogApi
+        .getAttributes()
+        .then(setAttributes)
+        .catch(() => undefined)
+    } catch (error) {
+      setStatus({
+        type: 'error',
+        text: productErrorMessage(error, 'Не вдалося створити товар'),
+      })
     } finally {
       setIsSaving(false)
     }
@@ -115,26 +138,35 @@ export const AddProduct = () => {
           attributes={attributes}
           isLoading={isLoading}
           selectedPhotoText={selectedPhotoText}
-          showAddGalleryButton
+          isUploadingPhotos={isUploadingPhotos}
+          photoError={photoError}
           updateField={updateField}
           updateAttributeRow={updateAttributeRow}
           addAttributeRow={addAttributeRow}
           clearAttributes={clearAttributes}
           handlePhotoChange={handlePhotoChange}
+          removePhoto={removePhoto}
           handleImageError={handleImageError}
         />
 
         <div className="mt-8 flex flex-col items-center gap-3">
           <button
             type="submit"
-            disabled={isLoading || isSaving}
+            disabled={isLoading || isSaving || isUploadingPhotos}
             className="h-[52px] w-full max-w-[280px] bg-primary text-lg font-semibold text-white transition hover:bg-primary-dark disabled:cursor-not-allowed disabled:opacity-60"
           >
             {isSaving ? 'Створення...' : 'Додати товар'}
           </button>
 
-          {statusMessage && (
-            <p className="text-base text-[#555]">{statusMessage}</p>
+          {status && (
+            <p
+              role="status"
+              className={`text-base ${
+                status.type === 'error' ? 'text-red-500' : 'text-[#22aa00]'
+              }`}
+            >
+              {status.text}
+            </p>
           )}
         </div>
       </form>

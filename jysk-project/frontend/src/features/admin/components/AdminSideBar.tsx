@@ -194,9 +194,17 @@ export const AdminSideBar = ({ activeItem, onSelect }: AdminSideBarProps) => {
 
         <div className="shrink-0 border-t border-white/20 px-3 py-4">
           <div className="mb-2 flex items-center gap-3 px-2">
-            <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white text-[13px] font-semibold text-primary">
-              {userInitials}
-            </span>
+            {user?.avatar_url ? (
+              <img
+                src={user.avatar_url}
+                alt={userName}
+                className="h-9 w-9 shrink-0 rounded-full bg-white object-cover"
+              />
+            ) : (
+              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white text-[13px] font-semibold text-primary">
+                {userInitials}
+              </span>
+            )}
             <div className="min-w-0">
               <p className="truncate text-[14px] font-semibold text-white">
                 {userName}

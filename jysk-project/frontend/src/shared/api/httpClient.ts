@@ -46,11 +46,13 @@ const extractErrorMessage = async (response: Response): Promise<string> => {
 
 const send = (path: string, options: RequestInit) => {
   const token = tokenStorage.get()
+  // The browser sets the multipart boundary itself for FormData bodies.
+  const isFormData = options.body instanceof FormData
 
   return fetch(`${API_BASE_URL}${path}`, {
     ...options,
     headers: {
-      'Content-Type': 'application/json',
+      ...(isFormData ? {} : { 'Content-Type': 'application/json' }),
       ...(token ? { Authorization: `Bearer ${token}` } : {}),
       ...options.headers,
     },

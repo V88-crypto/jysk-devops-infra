@@ -2,9 +2,8 @@ import { useEffect, useState } from 'react'
 import type { FormEvent } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 
-import { attributeService } from '@/features/admin/api/attributeService'
-import { categoryService } from '@/features/admin/api/categoryService'
-import { productService } from '@/features/admin/api/productService'
+import { catalogApi } from '@/features/admin/api/catalogApi'
+import { productApi } from '@/features/admin/api/productApi'
 
 import type { Attribute } from '@/features/admin/types/attribute'
 import type { Category } from '@/features/admin/types/category'
@@ -14,7 +13,17 @@ import { ProductFormFields } from '@/features/admin/components/EditAddProducts/c
 import { useProductFormState } from '@/features/admin/components/EditAddProducts/hooks/useProductFormState'
 import { AdminPageLayout } from '@/features/admin/components/common/AdminPageLayout'
 
+import {
+  productErrorMessage,
+  validateProductForm,
+} from '@/features/admin/components/EditAddProducts/utils/productHelpers'
+
 import { mapFormToProduct, mapProductToForm } from './utils/productMapper'
+
+interface Status {
+  type: 'success' | 'error'
+  text: string
+}
 
 export const EditProduct = () => {
   const { id } = useParams()
@@ -27,7 +36,7 @@ export const EditProduct = () => {
 
   const [isLoading, setIsLoading] = useState(true)
   const [isSaving, setIsSaving] = useState(false)
-  const [statusMessage, setStatusMessage] = useState('')
+  const [status, setStatus] = useState<Status | null>(null)
 
   const {
     form,
@@ -38,6 +47,9 @@ export const EditProduct = () => {
     addAttributeRow,
     clearAttributes,
     handlePhotoChange,
+    removePhoto,
+    isUploadingPhotos,
+    photoError,
     handleImageError,
   } = useProductFormState(attributes)
 
@@ -48,9 +60,9 @@ export const EditProduct = () => {
       try {
         const [loadedProduct, loadedCategories, loadedAttributes] =
           await Promise.all([
-            productService.getById(productId),
-            categoryService.getAll(),
-            attributeService.getAll(),
+            productApi.getById(productId),
+            catalogApi.getCategories(),
+            catalogApi.getAttributes(),
           ])
 
         if (!isMounted) {
@@ -59,17 +71,14 @@ export const EditProduct = () => {
 
         setCategories(loadedCategories)
         setAttributes(loadedAttributes)
-
-        if (loadedProduct) {
-          setProduct(loadedProduct)
-          setForm(mapProductToForm(loadedProduct, loadedAttributes))
-          return
-        }
-
-        setStatusMessage('Товар не знайдено')
-      } catch {
+        setProduct(loadedProduct)
+        setForm(mapProductToForm(loadedProduct, loadedAttributes))
+      } catch (error) {
         if (isMounted) {
-          setStatusMessage('Не вдалося завантажити товар')
+          setStatus({
+            type: 'error',
+            text: productErrorMessage(error, 'Не вдалося завантажити товар'),
+          })
         }
       } finally {
         if (isMounted) {
@@ -92,19 +101,34 @@ export const EditProduct = () => {
       return
     }
 
+    const validationError = validateProductForm(form)
+
+    if (validationError) {
+      setStatus({ type: 'error', text: validationError })
+      return
+    }
+
     setIsSaving(true)
-    setStatusMessage('')
+    setStatus(null)
 
     try {
-      const updatedProduct = await productService.update(
-        mapFormToProduct(product, form, attributes),
+      const updatedProduct = await productApi.update(
+        product.id,
+        mapFormToProduct(product, form),
       )
+      const updatedAttributes = await catalogApi
+        .getAttributes()
+        .catch(() => attributes)
 
+      setAttributes(updatedAttributes)
       setProduct(updatedProduct)
-      setForm(mapProductToForm(updatedProduct, attributes))
-      setStatusMessage('Товар збережено')
-    } catch {
-      setStatusMessage('Не вдалося зберегти товар')
+      setForm(mapProductToForm(updatedProduct, updatedAttributes))
+      setStatus({ type: 'success', text: 'Товар збережено' })
+    } catch (error) {
+      setStatus({
+        type: 'error',
+        text: productErrorMessage(error, 'Не вдалося зберегти товар'),
+      })
     } finally {
       setIsSaving(false)
     }
@@ -128,27 +152,37 @@ export const EditProduct = () => {
           form={form}
           categories={categories}
           attributes={attributes}
-          isLoading={isLoading}
+          isLoading={isLoading || !product}
           selectedPhotoText={selectedPhotoText}
+          isUploadingPhotos={isUploadingPhotos}
+          photoError={photoError}
           updateField={updateField}
           updateAttributeRow={updateAttributeRow}
           addAttributeRow={addAttributeRow}
           clearAttributes={clearAttributes}
           handlePhotoChange={handlePhotoChange}
+          removePhoto={removePhoto}
           handleImageError={handleImageError}
         />
 
         <div className="mt-8 flex flex-col items-center gap-3">
           <button
             type="submit"
-            disabled={isLoading || isSaving || !product}
+            disabled={isLoading || isSaving || isUploadingPhotos || !product}
             className="h-[52px] w-full max-w-[280px] bg-primary text-lg font-semibold text-white transition hover:bg-primary-dark disabled:cursor-not-allowed disabled:opacity-60"
           >
             {isSaving ? 'Збереження...' : 'Зберегти'}
           </button>
 
-          {statusMessage && (
-            <p className="text-base text-[#555]">{statusMessage}</p>
+          {status && (
+            <p
+              role="status"
+              className={`text-base ${
+                status.type === 'error' ? 'text-red-500' : 'text-[#22aa00]'
+              }`}
+            >
+              {status.text}
+            </p>
           )}
         </div>
       </form>
