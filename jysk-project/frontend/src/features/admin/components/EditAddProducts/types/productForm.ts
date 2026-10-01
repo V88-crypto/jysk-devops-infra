@@ -14,6 +14,7 @@ export interface EditProductFormState {
   shortDescription: string
   detailedDescription: string
   price: string
+  stock: string
   discount: string
   alwaysLowPrice: boolean
   isNew: boolean
@@ -40,5 +41,7 @@ export interface AttributeRowProps {
 export interface PhotoPreviewProps {
   imageUrl: string
   imageIndex: number
+  disabled: boolean
   onError: (event: SyntheticEvent<HTMLImageElement>) => void
+  onRemove: (imageIndex: number) => void
 }

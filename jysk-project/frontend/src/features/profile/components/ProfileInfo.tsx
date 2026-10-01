@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 
 import { useAuth } from '@/shared/auth/useAuth'
+import { AvatarActions } from './AvatarActions'
 import { AvatarPlaceholder } from './AvatarPlaceholder'
 
 interface ProfileCounts {
@@ -109,20 +110,7 @@ export const ProfileInfo = ({ counts }: ProfileInfoProps) => {
                   {fullName}
                 </h2>
 
-                <a
-                  href="#"
-                  className="
-                    inline-block
-                    mt-[5px]
-                    text-[12px]
-                    lg:text-[14px]
-                    text-primary
-                    underline
-                    hover:text-primary-dark
-                  "
-                >
-                  Завантажити фото
-                </a>
+                <AvatarActions />
               </div>
             </div>
 
