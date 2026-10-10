@@ -43,7 +43,30 @@ MINIO_ROOT_PASSWORD=localadmin123456
 
 Значення у `.env.example` призначені лише для локального development-середовища. Для production необхідно використовувати окремі безпечні credentials.
 
-## 3. Запуск проєкту
+## 3. Авторизація в GitHub Container Registry (GHCR)
+
+Для запуску MinIO використовуються приватні Docker-образи з GitHub Container Registry:
+
+- `ghcr.io/v88-crypto/jysk-minio:RELEASE.2025-09-07T16-13-09Z`
+- `ghcr.io/v88-crypto/jysk-minio-mc:RELEASE.2025-08-13T08-35-41Z`
+
+Кожному учаснику необхідно мати доступ `Read` до обох пакетів у GHCR.
+
+1. У GitHub відкрийте **Settings → Developer settings → Personal access tokens → Tokens (classic)**.
+2. Створіть особистий токен із дозволом `read:packages`. Якщо організація використовує SSO, авторизуйте токен для неї.
+3. У терміналі виконайте:
+
+```bash
+read -rsp 'GitHub token: ' GHCR_TOKEN; echo
+printf '%s' "$GHCR_TOKEN" | docker login ghcr.io -u YOUR_GITHUB_USERNAME --password-stdin
+unset GHCR_TOKEN
+```
+
+Замініть `YOUR_GITHUB_USERNAME` власним GitHub-логіном. Не передавайте токен іншим учасникам, не додавайте його до Git та не вставляйте в `.env` проєкту.
+
+Після успішної авторизації можна запускати Docker Compose за інструкцією нижче. Опубліковані образи призначені для платформи `linux/amd64`.
+
+## 4. Запуск проєкту
 
 Запускайте команду з кореневої директорії репозиторію:
 
@@ -76,6 +99,21 @@ docker compose --env-file .env -f devops/docker-compose.yml up -d --build
 ---
 
 # MinIO Object Storage
+
+## Походження Docker-образів та ліцензія
+
+Для локального середовища використовуються образи MinIO Server і MinIO Client (mc), повторно опубліковані в приватному GitHub Container Registry (GHCR).
+
+Вихідний код відповідних версій:
+
+- MinIO Server: https://github.com/minio/minio/tree/RELEASE.2025-09-07T16-13-09Z
+- MinIO Client (mc): https://github.com/minio/mc/tree/RELEASE.2025-08-13T08-35-41Z
+
+Обидва проєкти поширюються за ліцензією GNU AGPLv3.
+
+Образи були повторно позначені та опубліковані з локального Docker-кешу, а не зібрані заново з вихідного коду. Їхня відповідність вихідному коду та відсутність вразливостей окремо не перевірялися.
+
+При подальшому розповсюдженні необхідно дотримуватися вимог відповідних ліцензій, зокрема щодо доступності вихідного коду.
 
 MinIO використовується як S3-compatible object storage для зберігання файлів та зображень.
 
@@ -235,5 +273,5 @@ docker compose --env-file .env -f devops/docker-compose.yml down -v
 
 # DevOps
 
-DevOps Infrastructure: **Віталій Лисак**  
+DevOps Infrastructure: **Віталій Лисак**
 Навчальний проєкт **Jysk Clone**.
