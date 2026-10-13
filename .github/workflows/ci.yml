@@ -6,6 +6,10 @@ on:
   pull_request:
     branches: [dev, main]
 
+permissions:
+  contents: read
+  packages: write
+
 jobs:
   frontend:
     name: Frontend Checks
@@ -67,3 +71,31 @@ jobs:
 
       - name: Build Frontend image
         run: docker build -f jysk-project/devops/Dockerfile.frontend -t hyggy-frontend:ci ./jysk-project/frontend
+  publish:
+    name: Publish Docker Images
+    runs-on: ubuntu-latest
+    needs: [frontend, backend, docker]
+    if: github.event_name == 'push' && github.ref == 'refs/heads/dev'
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build and Push Backend image
+        uses: docker/build-push-action@v6
+        with:
+          context: ./jysk-project/backend
+          file: ./jysk-project/devops/Dockerfile.backend
+          push: true
+          tags: ghcr.io/v88-crypto/hyggy-backend:dev
+      - name: Build and Push Frontend image
+        uses: docker/build-push-action@v6
+        with:
+          context: ./jysk-project/frontend
+          file: ./jysk-project/devops/Dockerfile.frontend
+          push: true
+          tags: ghcr.io/v88-crypto/hyggy-frontend:dev
