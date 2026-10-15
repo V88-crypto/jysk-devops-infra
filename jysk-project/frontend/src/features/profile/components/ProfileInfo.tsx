@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 
 import { useAuth } from '@/shared/auth/useAuth'
+import { ThemeSwitcher } from '@/shared/theme/ThemeSwitcher'
 import { AvatarActions } from './AvatarActions'
 import { AvatarPlaceholder } from './AvatarPlaceholder'
 
@@ -151,6 +152,24 @@ export const ProfileInfo = ({ counts }: ProfileInfoProps) => {
                 <span className={user.phone ? '' : 'text-fg-subtle'}>
                   {user.phone || 'Не вказано'}
                 </span>
+              </div>
+
+              <div
+                className="
+                  flex
+                  flex-col
+                  gap-[10px]
+                  sm:flex-row
+                  sm:items-center
+                  sm:justify-between
+                  sm:gap-[20px]
+                  text-[14px]
+                  lg:text-[16px]
+                "
+              >
+                <span className="font-medium">Тема оформлення</span>
+
+                <ThemeSwitcher className="w-full sm:w-[340px]" />
               </div>
             </div>
 

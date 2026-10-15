@@ -1,8 +1,6 @@
 import React, { useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useAuth } from '@/shared/auth/useAuth'
-import { MoonIcon, SunIcon } from '@/shared/theme/ThemeIcons'
-import { useTheme } from '@/shared/theme/useTheme'
 import { IconButton } from './IconButton'
 import { NavButton } from './NavButton'
 import { StorePanel } from './StorePanel'
@@ -22,7 +20,6 @@ export const Header: React.FC = () => {
   const navigate = useNavigate()
   const { pathname } = useLocation()
   const { isAuthenticated, isAdmin } = useAuth()
-  const { theme, toggleTheme } = useTheme()
   const [isStorePanelOpen, setIsStorePanelOpen] = useState<boolean>(false)
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false)
 
@@ -70,16 +67,6 @@ export const Header: React.FC = () => {
             />
 
             <div className="flex items-center gap-4 md:gap-[3.1vw] xl:gap-[2vw] shrink-0">
-              <IconButton
-                Icon={theme === 'dark' ? SunIcon : MoonIcon}
-                label="Тема"
-                ariaLabel={
-                  theme === 'dark'
-                    ? 'Увімкнути світлу тему'
-                    : 'Увімкнути темну тему'
-                }
-                onClick={toggleTheme}
-              />
               {isAdmin && (
                 <IconButton
                   Icon={AdminIcon}

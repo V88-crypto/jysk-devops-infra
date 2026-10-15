@@ -54,14 +54,9 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
     setPreferenceState(next)
   }, [])
 
-  const toggleTheme = useCallback(
-    () => setPreference(theme === 'dark' ? 'light' : 'dark'),
-    [setPreference, theme],
-  )
-
   const value = useMemo<ThemeContextValue>(
-    () => ({ preference, theme, setPreference, toggleTheme }),
-    [preference, theme, setPreference, toggleTheme],
+    () => ({ preference, theme, setPreference }),
+    [preference, theme, setPreference],
   )
 
   return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
