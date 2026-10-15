@@ -42,6 +42,7 @@ interface FavoriteResponse {
   }
   product: {
     name: string
+    slug: string
   }
   image_url: string | null
 }
@@ -51,8 +52,12 @@ interface MyReviewResponse {
   rating: number
   comment: string | null
   created_at: string
+  variant: {
+    id: number
+  }
   product: {
     name: string
+    slug: string
   }
   image_url: string | null
 }
@@ -101,6 +106,7 @@ export const profileApi = {
 
     return response.items.map((favorite) => ({
       variantId: favorite.variant.id,
+      productSlug: favorite.product.slug,
       name: favorite.product.name,
       sku: favorite.variant.sku,
       price: favorite.variant.price,
@@ -123,6 +129,8 @@ export const profileApi = {
       items: response.items.map((review) => ({
         id: review.id,
         productName: review.product.name,
+        productSlug: review.product.slug,
+        variantId: review.variant.id,
         image: review.image_url,
         rating: review.rating,
         comment: review.comment,

@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 
 import type { ProductSummary } from '@/features/catalog/types'
 import { formatPrice } from '@/features/catalog/utils/format'
+import { productUrl } from '@/features/catalog/utils/productUrl'
 
 interface ProductTileProps {
   product: ProductSummary
@@ -44,7 +45,7 @@ export const ProductTile = ({
       </svg>
     </button>
 
-    <Link to={`/product/${product.slug}`} className="flex flex-1 flex-col">
+    <Link to={productUrl(product.slug)} className="flex flex-1 flex-col">
       <div className="mb-4 flex aspect-square w-full items-center justify-center overflow-hidden bg-[#f7f7f7]">
         {product.imageUrl ? (
           <img

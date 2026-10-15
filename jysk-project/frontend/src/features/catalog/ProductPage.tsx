@@ -1,5 +1,5 @@
-import { useCallback, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { useCallback } from 'react'
+import { Link, useParams, useSearchParams } from 'react-router-dom'
 
 import { catalogApi, findCategoryPath } from '@/features/catalog/api/catalogApi'
 import type { ProductVariant } from '@/features/catalog/types'
@@ -28,9 +28,12 @@ export const ProductPage = () => {
     pendingSlug,
     error: favoriteError,
   } = useFavorites()
-  const [selectedVariantId, setSelectedVariantId] = useState<number | null>(
-    null,
-  )
+  // The selected variant lives in the URL (?variant=), so links from the
+  // profile open the exact colour or size and the page can be shared.
+  const [searchParams, setSearchParams] = useSearchParams()
+  const selectedVariantId = Number(searchParams.get('variant')) || null
+  const selectVariant = (variantId: number) =>
+    setSearchParams({ variant: String(variantId) }, { replace: true })
 
   if (isLoading) {
     return (
@@ -109,7 +112,7 @@ export const ProductPage = () => {
                     <button
                       key={item.id}
                       type="button"
-                      onClick={() => setSelectedVariantId(item.id)}
+                      onClick={() => selectVariant(item.id)}
                       aria-pressed={item.id === variant?.id}
                       className={`rounded-[4px] border px-4 py-2 text-sm transition ${
                         item.id === variant?.id
