@@ -3,18 +3,23 @@ import React from 'react'
 interface IconButtonProps {
   Icon: React.ElementType
   label: string
+  // Overrides the visible label for screen readers when it is too short.
+  ariaLabel?: string
   onClick?: () => void
 }
 
 export const IconButton: React.FC<IconButtonProps> = ({
   Icon,
   label,
+  ariaLabel,
   onClick,
 }) => {
   return (
     <button
       type="button"
       onClick={onClick}
+      aria-label={ariaLabel}
+      title={ariaLabel}
       className="group flex flex-col items-center justify-center text-dark transition-colors"
     >
       <Icon className="w-6 h-6 md:w-7 md:h-7 xl:w-[1.6vw] xl:h-[1.6vw] text-dark group-hover:text-primary transition-colors duration-200" />

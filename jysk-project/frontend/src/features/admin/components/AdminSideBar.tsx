@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { useAuth } from '@/shared/auth/useAuth'
+import { ThemeSwitcher } from '@/shared/theme/ThemeSwitcher'
 import {
   BOTTOM_NAV_ITEMS,
   TOP_LEVEL_NAV_ITEMS,
@@ -18,7 +19,7 @@ interface AdminSideBarProps {
 const topLevelItemClass = (isActive: boolean) =>
   `flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-left text-[15px] transition-colors ${
     isActive
-      ? 'bg-white font-semibold text-primary shadow-sm'
+      ? 'bg-surface font-semibold text-primary shadow-sm'
       : 'text-white/85 hover:bg-white/10 hover:text-white'
   }`
 
@@ -139,7 +140,7 @@ export const AdminSideBar = ({ activeItem, onSelect }: AdminSideBarProps) => {
           <button
             type="button"
             onClick={() => navigate('/')}
-            className="flex h-[38px] w-full items-center justify-center gap-2 rounded-lg border border-white/40 text-[13px] font-medium text-white transition-colors hover:bg-white hover:text-primary"
+            className="flex h-[38px] w-full items-center justify-center gap-2 rounded-lg border border-white/40 text-[13px] font-medium text-white transition-colors hover:bg-surface hover:text-primary"
           >
             <span>Перейти на сайт</span>
             <AdminNavIcon name="external" className="h-4 w-4" />
@@ -198,10 +199,10 @@ export const AdminSideBar = ({ activeItem, onSelect }: AdminSideBarProps) => {
               <img
                 src={user.avatar_url}
                 alt={userName}
-                className="h-9 w-9 shrink-0 rounded-full bg-white object-cover"
+                className="h-9 w-9 shrink-0 rounded-full bg-surface object-cover"
               />
             ) : (
-              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white text-[13px] font-semibold text-primary">
+              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-surface text-[13px] font-semibold text-primary">
                 {userInitials}
               </span>
             )}
@@ -216,6 +217,8 @@ export const AdminSideBar = ({ activeItem, onSelect }: AdminSideBarProps) => {
               )}
             </div>
           </div>
+
+          <ThemeSwitcher variant="onBrand" compact className="mb-2" />
 
           <button
             type="button"

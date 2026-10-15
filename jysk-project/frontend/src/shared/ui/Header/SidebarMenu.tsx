@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import logoImage from '@/assets/images/logo.png'
 import { catalogApi } from '@/features/catalog/api/catalogApi'
 import { useAsyncData } from '@/shared/hooks/useAsyncData'
+import { ThemeSwitcher } from '@/shared/theme/ThemeSwitcher'
 
 interface SidebarMenuProps {
   isOpen: boolean
@@ -38,7 +39,7 @@ export const SidebarMenu: React.FC<SidebarMenuProps> = ({
       ></div>
 
       <div
-        className={`fixed top-0 left-0 h-full w-full md:w-[50%] xl:w-[30vw] bg-white z-50 shadow-2xl transform transition-transform duration-300 ease-in-out ${
+        className={`fixed top-0 left-0 h-full w-full md:w-[50%] xl:w-[30vw] bg-surface z-50 shadow-2xl transform transition-transform duration-300 ease-in-out ${
           isOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
@@ -53,7 +54,7 @@ export const SidebarMenu: React.FC<SidebarMenuProps> = ({
               <img
                 src={logoImage}
                 alt="Логотип HYGGY"
-                className="w-full h-auto object-contain"
+                className="dark:invert dark:hue-rotate-180 dark:mix-blend-lighten w-full h-auto object-contain"
               />
             </button>
 
@@ -77,7 +78,7 @@ export const SidebarMenu: React.FC<SidebarMenuProps> = ({
             </button>
           </div>
 
-          <hr className="border-black/20 my-6 xl:my-[2vw] shrink-0" />
+          <hr className="border-line my-6 xl:my-[2vw] shrink-0" />
 
           <div className="flex flex-col flex-grow overflow-y-auto pb-6 custom-scrollbar">
             <nav
@@ -110,7 +111,7 @@ export const SidebarMenu: React.FC<SidebarMenuProps> = ({
               </button>
             </nav>
 
-            <hr className="border-black/20 my-6 xl:my-[2vw] shrink-0" />
+            <hr className="border-line my-6 xl:my-[2vw] shrink-0" />
 
             <nav className="flex flex-col gap-5 md:gap-6 xl:gap-[1.5vw]">
               {bottomNavItems.map((nav) => (
@@ -124,6 +125,15 @@ export const SidebarMenu: React.FC<SidebarMenuProps> = ({
                 </button>
               ))}
             </nav>
+
+            <hr className="border-line my-6 xl:my-[2vw] shrink-0" />
+
+            <div>
+              <p className="mb-3 text-sm font-medium text-fg-subtle font-inter">
+                Тема оформлення
+              </p>
+              <ThemeSwitcher />
+            </div>
           </div>
         </div>
       </div>

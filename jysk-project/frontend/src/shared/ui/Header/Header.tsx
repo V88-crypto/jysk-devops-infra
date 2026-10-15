@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useAuth } from '@/shared/auth/useAuth'
+import { MoonIcon, SunIcon } from '@/shared/theme/ThemeIcons'
+import { useTheme } from '@/shared/theme/useTheme'
 import { IconButton } from './IconButton'
 import { NavButton } from './NavButton'
 import { StorePanel } from './StorePanel'
@@ -20,6 +22,7 @@ export const Header: React.FC = () => {
   const navigate = useNavigate()
   const { pathname } = useLocation()
   const { isAuthenticated, isAdmin } = useAuth()
+  const { theme, toggleTheme } = useTheme()
   const [isStorePanelOpen, setIsStorePanelOpen] = useState<boolean>(false)
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false)
 
@@ -27,7 +30,7 @@ export const Header: React.FC = () => {
     pathname === path || pathname.startsWith(`${path}/`)
 
   return (
-    <header className="w-full shadow-sm bg-white font-sans relative z-30">
+    <header className="w-full shadow-sm bg-surface font-sans relative z-30">
       <div className="bg-primary w-full h-[35px] xl:h-[4.1vw] 2xl:h-[3.07vw]"></div>
 
       <div className="w-full border-b border-dark/50">
@@ -44,7 +47,7 @@ export const Header: React.FC = () => {
                 <img
                   src={logoImage}
                   alt="Логотип HYQGY"
-                  className="w-[62px] h-[40px] md:w-[9.6vw] md:h-[6.25vw] xl:w-[7.6vw] xl:h-[4.9vw] object-contain"
+                  className="dark:invert dark:hue-rotate-180 dark:mix-blend-lighten w-[62px] h-[40px] md:w-[9.6vw] md:h-[6.25vw] xl:w-[7.6vw] xl:h-[4.9vw] object-contain"
                 />
               </button>
 
@@ -61,12 +64,22 @@ export const Header: React.FC = () => {
 
             <HeaderSearch
               className="hidden xl:block relative xl:w-[34.9vw] shrink-0"
-              inputClassName="w-full xl:h-[3.7vw] xl:pl-[1.25vw] xl:pr-[3vw] bg-[#E0E0E0] xl:text-[0.83vw] text-dark rounded-[0.52vw] focus:outline-none focus:ring-2 focus:ring-primary transition-all placeholder:text-dark/50"
+              inputClassName="w-full xl:h-[3.7vw] xl:pl-[1.25vw] xl:pr-[3vw] bg-surface-strong xl:text-[0.83vw] text-dark rounded-[0.52vw] focus:outline-none focus:ring-2 focus:ring-primary transition-all placeholder:text-dark/50"
               buttonClassName="absolute right-5 xl:right-[1.25vw] top-1/2 -translate-y-1/2 text-dark hover:text-primary"
               iconClassName="xl:w-[1.25vw] xl:h-[1.25vw]"
             />
 
             <div className="flex items-center gap-4 md:gap-[3.1vw] xl:gap-[2vw] shrink-0">
+              <IconButton
+                Icon={theme === 'dark' ? SunIcon : MoonIcon}
+                label="Тема"
+                ariaLabel={
+                  theme === 'dark'
+                    ? 'Увімкнути світлу тему'
+                    : 'Увімкнути темну тему'
+                }
+                onClick={toggleTheme}
+              />
               {isAdmin && (
                 <IconButton
                   Icon={AdminIcon}
@@ -98,7 +111,7 @@ export const Header: React.FC = () => {
         </div>
       </div>
 
-      <div className="block xl:hidden w-full px-4 md:px-[3.1vw] py-3 md:py-[2vw] border-b border-dark/10 bg-white">
+      <div className="block xl:hidden w-full px-4 md:px-[3.1vw] py-3 md:py-[2vw] border-b border-dark/10 bg-surface">
         <HeaderSearch
           className="relative w-full flex justify-center"
           inputClassName="w-full h-[39px] md:h-[6vw] pl-4 pr-10 bg-gray-border text-sm md:text-[1.82vw] text-dark rounded-[10px] focus:outline-none focus:ring-2 focus:ring-primary"
