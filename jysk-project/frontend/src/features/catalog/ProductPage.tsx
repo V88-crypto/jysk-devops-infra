@@ -10,6 +10,7 @@ import { useAsyncData } from '@/shared/hooks/useAsyncData'
 
 import { CatalogBreadcrumbs } from './components/CatalogBreadcrumbs'
 import { ProductGallery } from './components/ProductGallery'
+import { ProductPurchase } from './components/ProductPurchase'
 import { ProductReviews } from './components/ProductReviews'
 
 const variantLabel = (variant: ProductVariant) =>
@@ -177,6 +178,10 @@ export const ProductPage = () => {
                 <p className="text-fg-subtle">Характеристики не вказані</p>
               )}
             </div>
+
+            {variant && (
+              <ProductPurchase key={variant.id} stock={variant.stock} />
+            )}
           </div>
         </div>
 
