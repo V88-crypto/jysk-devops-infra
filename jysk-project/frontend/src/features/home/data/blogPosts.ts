@@ -1,7 +1,5 @@
+import { blogImages as img } from '@/features/blog/data/blogImages'
 import type { BlogPost } from '@/shared/types/blog'
-
-const cozyRoomImage = '/images/blog-cozy-placeholder.svg'
-const sofaLightingImage = '/images/blog-sofa-placeholder.svg'
 
 export const blogPosts: BlogPost[] = [
   {
@@ -9,7 +7,7 @@ export const blogPosts: BlogPost[] = [
     title: 'Створіть Затишний Дім: 5 Порад з Вибору Меблів для Різних Кімнат',
     description:
       'Вибір меблів для вашого будинку - це не тільки питання стилю, але й комфорту та функціональності. У цьому пості ми розповімо, як підібрати ідеальні предмети для кожної кімнати вашого будинку.',
-    imageUrl: cozyRoomImage,
+    imageUrl: img.cozyCorner,
     imageAlt: 'Затишна кімната зі світлими меблями',
   },
   {
@@ -17,7 +15,7 @@ export const blogPosts: BlogPost[] = [
     title: 'Як Правильно Вибрати Освітлення для Різних Кімнат Вашої Оселі',
     description:
       'Освітлення відіграє ключову роль у створенні комфортної атмосфери у вашому будинку. Розповідаємо, як світло підкреслює стиль інтер’єру та впливає на настрій.',
-    imageUrl: sofaLightingImage,
+    imageUrl: img.dining,
     imageAlt: 'Сучасна вітальня з м’яким освітленням',
   },
   {
@@ -25,7 +23,7 @@ export const blogPosts: BlogPost[] = [
     title: 'Текстиль в Інтер’єрі: Як Додати Тепла та Характеру',
     description:
       'Пледи, подушки, штори та килими допомагають швидко оновити простір. Ділимось простими ідеями, які зроблять кімнату більш гармонійною.',
-    imageUrl: cozyRoomImage,
+    imageUrl: img.bedroomWhiteLinen,
     imageAlt: 'Домашній текстиль у світлому інтер’єрі',
   },
   {
@@ -33,7 +31,7 @@ export const blogPosts: BlogPost[] = [
     title: 'Маленька Квартира: Меблі, Які Економлять Простір',
     description:
       'Компактні рішення можуть бути стильними та практичними. Пояснюємо, на що звернути увагу під час вибору меблів для невеликих кімнат.',
-    imageUrl: sofaLightingImage,
+    imageUrl: img.storage,
     imageAlt: 'Компактний інтер’єр з функціональними меблями',
   },
   {
@@ -41,7 +39,7 @@ export const blogPosts: BlogPost[] = [
     title: 'Скандинавський Стиль: Простота, Світло та Затишок',
     description:
       'Скандинавський дизайн поєднує натуральні матеріали, спокійні кольори й продумані деталі. Ось як перенести цю естетику у власний дім.',
-    imageUrl: cozyRoomImage,
+    imageUrl: img.livingRoom,
     imageAlt: 'Скандинавський інтер’єр у світлих тонах',
   },
   {
@@ -49,7 +47,7 @@ export const blogPosts: BlogPost[] = [
     title: 'Догляд за Меблями: Як Зберегти Якість Надовго',
     description:
       'Правильний догляд допомагає меблям залишатися красивими роками. Зібрали базові поради для дерева, тканини та м’яких поверхонь.',
-    imageUrl: sofaLightingImage,
+    imageUrl: img.diningChairs,
     imageAlt: 'Догляд за меблями у домашньому інтер’єрі',
   },
 ]

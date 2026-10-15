@@ -37,6 +37,10 @@ export function BlogCategorySection({
             alt={featured.imageAlt}
             className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
           />
+          <div
+            aria-hidden="true"
+            className="absolute inset-x-0 top-0 h-2/5 bg-gradient-to-b from-white/85 via-white/50 to-transparent"
+          />
           <h3 className="absolute left-4 top-4 max-w-[85%] text-lg font-bold leading-snug text-neutral-900">
             {featured.title}
           </h3>
@@ -54,6 +58,10 @@ export function BlogCategorySection({
                 src={post.imageUrl}
                 alt={post.imageAlt}
                 className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+              />
+              <div
+                aria-hidden="true"
+                className="absolute inset-x-0 top-0 h-2/5 bg-gradient-to-b from-white/85 via-white/50 to-transparent"
               />
               <h3 className="absolute left-3 top-3 max-w-[85%] text-xs font-bold leading-snug text-neutral-900 sm:text-sm">
                 {post.title}
