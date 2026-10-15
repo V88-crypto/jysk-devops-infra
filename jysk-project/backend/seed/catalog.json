@@ -1,0 +1,1692 @@
+{
+  "categories": [
+    {
+      "name": "Меблі",
+      "slug": "mebel",
+      "children": [
+        {
+          "name": "Дивани",
+          "slug": "divany"
+        },
+        {
+          "name": "Крісла",
+          "slug": "kresla"
+        },
+        {
+          "name": "Столи",
+          "slug": "stoly"
+        }
+      ]
+    },
+    {
+      "name": "Спальня",
+      "slug": "spalnya",
+      "children": [
+        {
+          "name": "Матраци",
+          "slug": "matrasy"
+        },
+        {
+          "name": "Подушки",
+          "slug": "podushki"
+        },
+        {
+          "name": "Ковдри",
+          "slug": "odeyala"
+        }
+      ]
+    },
+    {
+      "name": "Ванна",
+      "slug": "vannaya",
+      "children": [
+        {
+          "name": "Рушники",
+          "slug": "polotentsa"
+        },
+        {
+          "name": "Килимки для ванної",
+          "slug": "kovriki-dlya-vannoy"
+        },
+        {
+          "name": "Шторки для душу",
+          "slug": "shtory-dlya-dusha"
+        }
+      ]
+    },
+    {
+      "name": "Кухня",
+      "slug": "kuhnya",
+      "children": [
+        {
+          "name": "Посуд",
+          "slug": "posuda"
+        },
+        {
+          "name": "Чашки та склянки",
+          "slug": "kruzhki-i-stakany"
+        },
+        {
+          "name": "Зберігання продуктів",
+          "slug": "hranenie-produktov"
+        }
+      ]
+    },
+    {
+      "name": "Освітлення",
+      "slug": "osveshchenie",
+      "children": [
+        {
+          "name": "Настільні лампи",
+          "slug": "nastolnye-lampy"
+        },
+        {
+          "name": "Торшери",
+          "slug": "torshery"
+        },
+        {
+          "name": "Підвісні світильники",
+          "slug": "podvesnye-svetilniki"
+        }
+      ]
+    },
+    {
+      "name": "Сад",
+      "slug": "sad",
+      "children": [
+        {
+          "name": "Садові меблі",
+          "slug": "sadovaya-mebel"
+        },
+        {
+          "name": "Парасолі від сонця",
+          "slug": "zonty-ot-solntsa"
+        },
+        {
+          "name": "Горщики та кашпо",
+          "slug": "gorshki-i-kashpo"
+        }
+      ]
+    }
+  ],
+  "products": [
+    {
+      "name": "Диван FALSLEV",
+      "slug": "divan-falslev",
+      "category": "divany",
+      "description": "Тримісний диван з тканинною оббивкою та широкими підлокітниками. Міцний каркас з масиву дерева.",
+      "variants": [
+        {
+          "sku": "FALSLEV-GREY",
+          "price": "2499.00",
+          "stock": 12,
+          "attrs": {
+            "Колір": "сірий"
+          },
+          "image": "falslev-grey.png"
+        },
+        {
+          "sku": "FALSLEV-BLUE",
+          "price": "2599.00",
+          "stock": 5,
+          "attrs": {
+            "Колір": "синій"
+          },
+          "image": "falslev-blue.png"
+        }
+      ]
+    },
+    {
+      "name": "Диван-ліжко VEJLBY",
+      "slug": "divan-krovat-vejlby",
+      "category": "divany",
+      "description": "Розкладний диван-ліжко з шухлядою для білизни. Ідеальний для невеликих квартир.",
+      "variants": [
+        {
+          "sku": "VEJLBY-DGREY-160",
+          "price": "2899.00",
+          "stock": 7,
+          "attrs": {
+            "Колір": "темно-сірий",
+            "Розмір": "160x200"
+          },
+          "image": "vejlby-dgrey-160.png"
+        },
+        {
+          "sku": "VEJLBY-BEIGE-140",
+          "price": "2699.00",
+          "stock": 0,
+          "attrs": {
+            "Колір": "бежевий",
+            "Розмір": "140x200"
+          },
+          "image": "vejlby-beige-140.png"
+        }
+      ]
+    },
+    {
+      "name": "Кутовий диван EGEDAL",
+      "slug": "uglovoy-divan-egedal",
+      "category": "divany",
+      "description": "Кутовий диван з шезлонгом праворуч. Мʼякі подушки з піни високої щільності, знімні чохли.",
+      "variants": [
+        {
+          "sku": "EGEDAL-GREY",
+          "price": "5499.00",
+          "stock": 4,
+          "attrs": {
+            "Колір": "сірий"
+          },
+          "image": "egedal-grey.png"
+        },
+        {
+          "sku": "EGEDAL-GREEN",
+          "price": "5699.00",
+          "stock": 2,
+          "attrs": {
+            "Колір": "темно-зелений"
+          },
+          "image": "egedal-green.png"
+        }
+      ]
+    },
+    {
+      "name": "Двомісний диван KARBY",
+      "slug": "dvuhmestnyy-divan-karby",
+      "category": "divany",
+      "description": "Компактний двомісний диван на металевих ніжках. Оббивка з велюру, легко чиститься.",
+      "variants": [
+        {
+          "sku": "KARBY-BEIGE",
+          "price": "1899.00",
+          "stock": 9,
+          "attrs": {
+            "Колір": "бежевий"
+          },
+          "image": "karby-beige.png"
+        },
+        {
+          "sku": "KARBY-TERRA",
+          "price": "1949.00",
+          "stock": 6,
+          "attrs": {
+            "Колір": "теракотовий"
+          },
+          "image": "karby-terra.png"
+        },
+        {
+          "sku": "KARBY-NAVY",
+          "price": "1949.00",
+          "stock": 3,
+          "attrs": {
+            "Колір": "темно-синій"
+          },
+          "image": "karby-navy.png"
+        }
+      ]
+    },
+    {
+      "name": "Крісло GISTRUP",
+      "slug": "kreslo-gistrup",
+      "category": "kresla",
+      "description": "Мʼяке крісло на деревʼяних ніжках зі знімною подушкою сидіння.",
+      "variants": [
+        {
+          "sku": "GISTRUP-GREEN",
+          "price": "899.00",
+          "stock": 20,
+          "attrs": {
+            "Колір": "зелений"
+          },
+          "image": "gistrup-green.png"
+        },
+        {
+          "sku": "GISTRUP-GREY",
+          "price": "899.00",
+          "stock": 14,
+          "attrs": {
+            "Колір": "сірий"
+          },
+          "image": "gistrup-grey.png"
+        },
+        {
+          "sku": "GISTRUP-YELLOW",
+          "price": "949.00",
+          "stock": 3,
+          "attrs": {
+            "Колір": "гірчичний"
+          },
+          "image": "gistrup-yellow.png"
+        }
+      ]
+    },
+    {
+      "name": "Крісло-гойдалка ULFBORG",
+      "slug": "kreslo-kachalka-ulfborg",
+      "category": "kresla",
+      "description": "Крісло-гойдалка з гнутого дерева з мʼякою подушкою в комплекті.",
+      "variants": [
+        {
+          "sku": "ULFBORG-NAT",
+          "price": "1199.00",
+          "stock": 8,
+          "attrs": {
+            "Колір": "натуральний"
+          },
+          "image": "ulfborg-nat.png"
+        }
+      ]
+    },
+    {
+      "name": "Крісло з високою спинкою VORUP",
+      "slug": "kreslo-vorup",
+      "category": "kresla",
+      "description": "Крісло з високою спинкою та «вухами» для читання. Ніжки з масиву бука.",
+      "variants": [
+        {
+          "sku": "VORUP-GREY",
+          "price": "1499.00",
+          "stock": 7,
+          "attrs": {
+            "Колір": "сірий"
+          },
+          "image": "vorup-grey.png"
+        },
+        {
+          "sku": "VORUP-BLUE",
+          "price": "1499.00",
+          "stock": 5,
+          "attrs": {
+            "Колір": "синій"
+          },
+          "image": "vorup-blue.png"
+        }
+      ]
+    },
+    {
+      "name": "Крісло для відпочинку TUNE",
+      "slug": "kreslo-tune",
+      "category": "kresla",
+      "description": "Легке крісло для відпочинку з оббивкою з букле на тонких деревʼяних ніжках.",
+      "variants": [
+        {
+          "sku": "TUNE-MILK",
+          "price": "1099.00",
+          "stock": 11,
+          "attrs": {
+            "Колір": "молочний"
+          },
+          "image": "tune-milk.png"
+        },
+        {
+          "sku": "TUNE-POWDER",
+          "price": "1099.00",
+          "stock": 6,
+          "attrs": {
+            "Колір": "пудровий"
+          },
+          "image": "tune-powder.png"
+        }
+      ]
+    },
+    {
+      "name": "Журнальний столик SKALS",
+      "slug": "zhurnalnyy-stolik-skals",
+      "category": "stoly",
+      "description": "Журнальний столик з дуба з нижньою полицею для журналів.",
+      "variants": [
+        {
+          "sku": "SKALS-OAK-60",
+          "price": "549.00",
+          "stock": 25,
+          "attrs": {
+            "Колір": "дуб",
+            "Розмір": "60x60"
+          },
+          "image": "skals-oak-60.png"
+        },
+        {
+          "sku": "SKALS-OAK-90",
+          "price": "749.00",
+          "stock": 10,
+          "attrs": {
+            "Колір": "дуб",
+            "Розмір": "90x60"
+          },
+          "image": "skals-oak-90.png"
+        }
+      ]
+    },
+    {
+      "name": "Обідній стіл HALDUM",
+      "slug": "obedennyy-stol-haldum",
+      "category": "stoly",
+      "description": "Розсувний обідній стіл на 6 персон з ламінованою стільницею.",
+      "variants": [
+        {
+          "sku": "HALDUM-WHITE-160",
+          "price": "1599.00",
+          "stock": 6,
+          "attrs": {
+            "Колір": "білий",
+            "Розмір": "160x90"
+          },
+          "image": "haldum-white-160.png"
+        }
+      ]
+    },
+    {
+      "name": "Круглий обідній стіл ROSKILDE",
+      "slug": "kruglyy-stol-roskilde",
+      "category": "stoly",
+      "description": "Круглий обідній стіл на одній опорі, діаметр 110 см. Підходить для 4 людей.",
+      "variants": [
+        {
+          "sku": "ROSKILDE-OAK",
+          "price": "1899.00",
+          "stock": 5,
+          "attrs": {
+            "Колір": "дуб",
+            "Розмір": "Ø110"
+          },
+          "image": "roskilde-oak.png"
+        },
+        {
+          "sku": "ROSKILDE-BLACK",
+          "price": "1899.00",
+          "stock": 3,
+          "attrs": {
+            "Колір": "чорний",
+            "Розмір": "Ø110"
+          },
+          "image": "roskilde-black.png"
+        }
+      ]
+    },
+    {
+      "name": "Приставний столик NAKSKOV",
+      "slug": "pristavnoy-stolik-nakskov",
+      "category": "stoly",
+      "description": "Невеликий круглий столик на металевих ніжках, діаметр 45 см.",
+      "variants": [
+        {
+          "sku": "NAKSKOV-WHITE",
+          "price": "299.00",
+          "stock": 18,
+          "attrs": {
+            "Колір": "білий",
+            "Розмір": "Ø45"
+          },
+          "image": "nakskov-white.png"
+        },
+        {
+          "sku": "NAKSKOV-SAGE",
+          "price": "329.00",
+          "stock": 9,
+          "attrs": {
+            "Колір": "шавлія",
+            "Розмір": "Ø45"
+          },
+          "image": "nakskov-sage.png"
+        }
+      ]
+    },
+    {
+      "name": "Матрац GOLD S30",
+      "slug": "matras-gold-s30",
+      "category": "matrasy",
+      "description": "Пружинний матрац середньої жорсткості з чохлом із трикотажу, висота 26 см.",
+      "variants": [
+        {
+          "sku": "GOLD-S30-90",
+          "price": "1299.00",
+          "stock": 15,
+          "attrs": {
+            "Розмір": "90x200"
+          },
+          "image": "gold-s30-90.png"
+        },
+        {
+          "sku": "GOLD-S30-140",
+          "price": "1899.00",
+          "stock": 9,
+          "attrs": {
+            "Розмір": "140x200"
+          },
+          "image": "gold-s30-140.png"
+        },
+        {
+          "sku": "GOLD-S30-160",
+          "price": "2099.00",
+          "stock": 4,
+          "attrs": {
+            "Розмір": "160x200"
+          },
+          "image": "gold-s30-160.png"
+        }
+      ]
+    },
+    {
+      "name": "Матрац BASIC S5",
+      "slug": "matras-basic-s5",
+      "category": "matrasy",
+      "description": "Безпружинний матрац з піни, висота 12 см. Добре підходить для гостьового ліжка.",
+      "variants": [
+        {
+          "sku": "BASIC-S5-90",
+          "price": "449.00",
+          "stock": 30,
+          "attrs": {
+            "Розмір": "90x200"
+          },
+          "image": "basic-s5-90.png"
+        },
+        {
+          "sku": "BASIC-S5-140",
+          "price": "649.00",
+          "stock": 18,
+          "attrs": {
+            "Розмір": "140x200"
+          },
+          "image": "basic-s5-140.png"
+        }
+      ]
+    },
+    {
+      "name": "Матрац PLUS F40",
+      "slug": "matras-plus-f40",
+      "category": "matrasy",
+      "description": "Матрац з незалежними пружинами та шаром піни з ефектом памʼяті, висота 30 см. Жорсткість вища за середню.",
+      "variants": [
+        {
+          "sku": "PLUS-F40-90",
+          "price": "2499.00",
+          "stock": 8,
+          "attrs": {
+            "Розмір": "90x200"
+          },
+          "image": "plus-f40-90.png"
+        },
+        {
+          "sku": "PLUS-F40-160",
+          "price": "3999.00",
+          "stock": 5,
+          "attrs": {
+            "Розмір": "160x200"
+          },
+          "image": "plus-f40-160.png"
+        }
+      ]
+    },
+    {
+      "name": "Наматрацник WELLPUR",
+      "slug": "namatrasnik-wellpur",
+      "category": "matrasy",
+      "description": "Наматрацник з піни висотою 5 см. Робить матрац мʼякшим і подовжує термін його служби.",
+      "variants": [
+        {
+          "sku": "WELLPUR-TOP-90",
+          "price": "399.00",
+          "stock": 20,
+          "attrs": {
+            "Розмір": "90x200"
+          },
+          "image": "wellpur-top-90.png"
+        },
+        {
+          "sku": "WELLPUR-TOP-160",
+          "price": "599.00",
+          "stock": 12,
+          "attrs": {
+            "Розмір": "160x200"
+          },
+          "image": "wellpur-top-160.png"
+        }
+      ]
+    },
+    {
+      "name": "Подушка ULVIG",
+      "slug": "podushka-ulvig",
+      "category": "podushki",
+      "description": "Подушка з наповнювачем з мікрофібри, чохол зі 100% бавовни.",
+      "variants": [
+        {
+          "sku": "ULVIG-5070",
+          "price": "89.00",
+          "stock": 50,
+          "attrs": {
+            "Розмір": "50x70"
+          },
+          "image": "ulvig-5070.png"
+        },
+        {
+          "sku": "ULVIG-7070",
+          "price": "109.00",
+          "stock": 35,
+          "attrs": {
+            "Розмір": "70x70"
+          },
+          "image": "ulvig-7070.png"
+        }
+      ]
+    },
+    {
+      "name": "Анатомічна подушка WELLPUR",
+      "slug": "podushka-wellpur",
+      "category": "podushki",
+      "description": "Анатомічна подушка з піни з ефектом памʼяті для комфортного сну.",
+      "variants": [
+        {
+          "sku": "WELLPUR-5030",
+          "price": "199.00",
+          "stock": 22,
+          "attrs": {
+            "Розмір": "50x30"
+          },
+          "image": "wellpur-5030.png"
+        }
+      ]
+    },
+    {
+      "name": "Декоративна подушка HJERTEGRAS",
+      "slug": "dekorativnaya-podushka-hjertegras",
+      "category": "podushki",
+      "description": "Декоративна подушка з чохлом з вельвету на блискавці, розмір 45x45 см.",
+      "variants": [
+        {
+          "sku": "HJERTEGRAS-OLIVE",
+          "price": "129.00",
+          "stock": 24,
+          "attrs": {
+            "Колір": "оливковий",
+            "Розмір": "45x45"
+          },
+          "image": "hjertegras-olive.png"
+        },
+        {
+          "sku": "HJERTEGRAS-TERRA",
+          "price": "129.00",
+          "stock": 16,
+          "attrs": {
+            "Колір": "теракотовий",
+            "Розмір": "45x45"
+          },
+          "image": "hjertegras-terra.png"
+        },
+        {
+          "sku": "HJERTEGRAS-BLUE",
+          "price": "129.00",
+          "stock": 13,
+          "attrs": {
+            "Колір": "синій",
+            "Розмір": "45x45"
+          },
+          "image": "hjertegras-blue.png"
+        }
+      ]
+    },
+    {
+      "name": "Пухова подушка FJELLSTUE",
+      "slug": "puhovaya-podushka-fjellstue",
+      "category": "podushki",
+      "description": "Мʼяка подушка з наповнювачем з пуху та пера, чохол з перкалю.",
+      "variants": [
+        {
+          "sku": "FJELLSTUE-5070",
+          "price": "349.00",
+          "stock": 10,
+          "attrs": {
+            "Розмір": "50x70"
+          },
+          "image": "fjellstue-5070.png"
+        },
+        {
+          "sku": "FJELLSTUE-7070",
+          "price": "449.00",
+          "stock": 7,
+          "attrs": {
+            "Розмір": "70x70"
+          },
+          "image": "fjellstue-7070.png"
+        }
+      ]
+    },
+    {
+      "name": "Ковдра KRONBORG CLASSIC",
+      "slug": "odeyalo-kronborg-classic",
+      "category": "odeyala",
+      "description": "Тепла ковдра з наповнювачем з поліестеру, можна прати при 60°C.",
+      "variants": [
+        {
+          "sku": "KRONBORG-CL-140",
+          "price": "249.00",
+          "stock": 28,
+          "attrs": {
+            "Розмір": "140x200"
+          },
+          "image": "kronborg-cl-140.png"
+        },
+        {
+          "sku": "KRONBORG-CL-200",
+          "price": "399.00",
+          "stock": 11,
+          "attrs": {
+            "Розмір": "200x220"
+          },
+          "image": "kronborg-cl-200.png"
+        }
+      ]
+    },
+    {
+      "name": "Літня ковдра VARDAL",
+      "slug": "letnee-odeyalo-vardal",
+      "category": "odeyala",
+      "description": "Легка літня ковдра з бавовняним чохлом. Не перегріває спекотними ночами.",
+      "variants": [
+        {
+          "sku": "VARDAL-140",
+          "price": "199.00",
+          "stock": 22,
+          "attrs": {
+            "Розмір": "140x200"
+          },
+          "image": "vardal-140.png"
+        },
+        {
+          "sku": "VARDAL-200",
+          "price": "299.00",
+          "stock": 9,
+          "attrs": {
+            "Розмір": "200x220"
+          },
+          "image": "vardal-200.png"
+        }
+      ]
+    },
+    {
+      "name": "Пухова ковдра NORDBY",
+      "slug": "puhovoe-odeyalo-nordby",
+      "category": "odeyala",
+      "description": "Дуже тепла ковдра з наповнювачем з гусячого пуху для холодної пори року.",
+      "variants": [
+        {
+          "sku": "NORDBY-140",
+          "price": "899.00",
+          "stock": 6,
+          "attrs": {
+            "Розмір": "140x200"
+          },
+          "image": "nordby-140.png"
+        },
+        {
+          "sku": "NORDBY-200",
+          "price": "1299.00",
+          "stock": 4,
+          "attrs": {
+            "Розмір": "200x220"
+          },
+          "image": "nordby-200.png"
+        }
+      ]
+    },
+    {
+      "name": "Флісовий плед ASKEBAER",
+      "slug": "pled-askebaer",
+      "category": "odeyala",
+      "description": "Мʼякий флісовий плед з бахромою, розмір 130x170 см.",
+      "variants": [
+        {
+          "sku": "ASKEBAER-GREY",
+          "price": "149.00",
+          "stock": 30,
+          "attrs": {
+            "Колір": "сірий",
+            "Розмір": "130x170"
+          },
+          "image": "askebaer-grey.png"
+        },
+        {
+          "sku": "ASKEBAER-MUSTARD",
+          "price": "149.00",
+          "stock": 18,
+          "attrs": {
+            "Колір": "гірчичний",
+            "Розмір": "130x170"
+          },
+          "image": "askebaer-mustard.png"
+        },
+        {
+          "sku": "ASKEBAER-GREEN",
+          "price": "149.00",
+          "stock": 12,
+          "attrs": {
+            "Колір": "зелений",
+            "Розмір": "130x170"
+          },
+          "image": "askebaer-green.png"
+        }
+      ]
+    },
+    {
+      "name": "Рушник UPPSALA",
+      "slug": "polotence-uppsala",
+      "category": "polotentsa",
+      "description": "Махровий рушник зі 100% бавовни, щільність 400 г/м².",
+      "variants": [
+        {
+          "sku": "UPPSALA-WHITE-50100",
+          "price": "55.00",
+          "stock": 40,
+          "attrs": {
+            "Колір": "білий",
+            "Розмір": "50x100"
+          },
+          "image": "uppsala-white-50100.png"
+        },
+        {
+          "sku": "UPPSALA-GREY-70140",
+          "price": "95.00",
+          "stock": 26,
+          "attrs": {
+            "Колір": "сірий",
+            "Розмір": "70x140"
+          },
+          "image": "uppsala-grey-70140.png"
+        },
+        {
+          "sku": "UPPSALA-BLUE-70140",
+          "price": "95.00",
+          "stock": 0,
+          "attrs": {
+            "Колір": "блакитний",
+            "Розмір": "70x140"
+          },
+          "image": "uppsala-blue-70140.png"
+        }
+      ]
+    },
+    {
+      "name": "Рушник KARLSTAD",
+      "slug": "polotence-karlstad",
+      "category": "polotentsa",
+      "description": "Щільний банний рушник преміум-класу, 500 г/м².",
+      "variants": [
+        {
+          "sku": "KARLSTAD-SAND-70140",
+          "price": "119.00",
+          "stock": 17,
+          "attrs": {
+            "Колір": "пісочний",
+            "Розмір": "70x140"
+          },
+          "image": "karlstad-sand-70140.png"
+        }
+      ]
+    },
+    {
+      "name": "Рушник для рук GISLEV",
+      "slug": "polotence-dlya-ruk-gislev",
+      "category": "polotentsa",
+      "description": "Невеликий бавовняний рушник для рук з декоративною смугою, 40x60 см.",
+      "variants": [
+        {
+          "sku": "GISLEV-WHITE-4060",
+          "price": "35.00",
+          "stock": 60,
+          "attrs": {
+            "Колір": "білий",
+            "Розмір": "40x60"
+          },
+          "image": "gislev-white-4060.png"
+        },
+        {
+          "sku": "GISLEV-MINT-4060",
+          "price": "35.00",
+          "stock": 42,
+          "attrs": {
+            "Колір": "мʼятний",
+            "Розмір": "40x60"
+          },
+          "image": "gislev-mint-4060.png"
+        }
+      ]
+    },
+    {
+      "name": "Набір рушників LUNDE",
+      "slug": "nabor-polotenets-lunde",
+      "category": "polotentsa",
+      "description": "Набір з трьох рушників різного розміру: для рук, для обличчя та банний.",
+      "variants": [
+        {
+          "sku": "LUNDE-SET-GREY",
+          "price": "249.00",
+          "stock": 14,
+          "attrs": {
+            "Колір": "сірий",
+            "Розмір": "3 шт."
+          },
+          "image": "lunde-set-grey.png"
+        },
+        {
+          "sku": "LUNDE-SET-BEIGE",
+          "price": "249.00",
+          "stock": 11,
+          "attrs": {
+            "Колір": "бежевий",
+            "Розмір": "3 шт."
+          },
+          "image": "lunde-set-beige.png"
+        }
+      ]
+    },
+    {
+      "name": "Килимок для ванної KARUP",
+      "slug": "kovrik-dlya-vannoy-karup",
+      "category": "kovriki-dlya-vannoy",
+      "description": "Мʼякий килимок для ванної з протиковзкою основою.",
+      "variants": [
+        {
+          "sku": "KARUP-GREY",
+          "price": "79.00",
+          "stock": 33,
+          "attrs": {
+            "Колір": "сірий",
+            "Розмір": "50x80"
+          },
+          "image": "karup-grey.png"
+        },
+        {
+          "sku": "KARUP-GREEN",
+          "price": "79.00",
+          "stock": 21,
+          "attrs": {
+            "Колір": "зелений",
+            "Розмір": "50x80"
+          },
+          "image": "karup-green.png"
+        }
+      ]
+    },
+    {
+      "name": "Килимок з ефектом памʼяті MOLLE",
+      "slug": "kovrik-molle",
+      "category": "kovriki-dlya-vannoy",
+      "description": "Килимок для ванної з піни з ефектом памʼяті, швидко висихає.",
+      "variants": [
+        {
+          "sku": "MOLLE-GREY",
+          "price": "129.00",
+          "stock": 19,
+          "attrs": {
+            "Колір": "сірий",
+            "Розмір": "50x80"
+          },
+          "image": "molle-grey.png"
+        },
+        {
+          "sku": "MOLLE-BLUE",
+          "price": "129.00",
+          "stock": 12,
+          "attrs": {
+            "Колір": "блакитний",
+            "Розмір": "50x80"
+          },
+          "image": "molle-blue.png"
+        }
+      ]
+    },
+    {
+      "name": "Бамбуковий килимок BAMBUS",
+      "slug": "bambukovyy-kovrik-bambus",
+      "category": "kovriki-dlya-vannoy",
+      "description": "Килимок з бамбукових рейок на неслизьких ніжках. Не боїться вологи.",
+      "variants": [
+        {
+          "sku": "BAMBUS-NAT",
+          "price": "159.00",
+          "stock": 15,
+          "attrs": {
+            "Колір": "натуральний",
+            "Розмір": "50x80"
+          },
+          "image": "bambus-nat.png"
+        }
+      ]
+    },
+    {
+      "name": "Шторка для душу GRENAA",
+      "slug": "shtora-dlya-dusha-grenaa",
+      "category": "shtory-dlya-dusha",
+      "description": "Водовідштовхувальна шторка для душу, кільця в комплекті.",
+      "variants": [
+        {
+          "sku": "GRENAA-WHITE",
+          "price": "69.00",
+          "stock": 45,
+          "attrs": {
+            "Колір": "білий",
+            "Розмір": "180x200"
+          },
+          "image": "grenaa-white.png"
+        },
+        {
+          "sku": "GRENAA-STRIPE",
+          "price": "75.00",
+          "stock": 19,
+          "attrs": {
+            "Колір": "у смужку",
+            "Розмір": "180x200"
+          },
+          "image": "grenaa-stripe.png"
+        }
+      ]
+    },
+    {
+      "name": "Шторка для душу LOVLIG",
+      "slug": "shtora-dlya-dusha-lovlig",
+      "category": "shtory-dlya-dusha",
+      "description": "Шторка для душу з поліестеру з принтом листя, 180x200 см.",
+      "variants": [
+        {
+          "sku": "LOVLIG-LEAVES",
+          "price": "99.00",
+          "stock": 17,
+          "attrs": {
+            "Колір": "зелений принт",
+            "Розмір": "180x200"
+          },
+          "image": "lovlig-leaves.png"
+        }
+      ]
+    },
+    {
+      "name": "Шторка для душу ORUP",
+      "slug": "shtora-dlya-dusha-orup",
+      "category": "shtory-dlya-dusha",
+      "description": "Однотонна шторка для душу з обтяженим низом, 180x200 см.",
+      "variants": [
+        {
+          "sku": "ORUP-GREY",
+          "price": "89.00",
+          "stock": 23,
+          "attrs": {
+            "Колір": "сірий",
+            "Розмір": "180x200"
+          },
+          "image": "orup-grey.png"
+        },
+        {
+          "sku": "ORUP-NAVY",
+          "price": "89.00",
+          "stock": 10,
+          "attrs": {
+            "Колір": "темно-синій",
+            "Розмір": "180x200"
+          },
+          "image": "orup-navy.png"
+        }
+      ]
+    },
+    {
+      "name": "Набір тарілок FREDERIK",
+      "slug": "nabor-tarelok-frederik",
+      "category": "posuda",
+      "description": "Набір з 6 обідніх тарілок з кераміки, діаметр 27 см. Можна мити в посудомийній машині.",
+      "variants": [
+        {
+          "sku": "FREDERIK-WHITE-6",
+          "price": "349.00",
+          "stock": 22,
+          "attrs": {
+            "Колір": "білий",
+            "Розмір": "6 шт."
+          },
+          "image": "frederik-white-6.png"
+        },
+        {
+          "sku": "FREDERIK-BLUE-6",
+          "price": "379.00",
+          "stock": 14,
+          "attrs": {
+            "Колір": "сіро-блакитний",
+            "Розмір": "6 шт."
+          },
+          "image": "frederik-blue-6.png"
+        }
+      ]
+    },
+    {
+      "name": "Глибока миска SKAGEN",
+      "slug": "glubokaya-miska-skagen",
+      "category": "posuda",
+      "description": "Керамічна миска з матовою глазурʼю зовні, діаметр 15 см. Для супу, салатів і сніданків.",
+      "variants": [
+        {
+          "sku": "SKAGEN-SAND-15",
+          "price": "69.00",
+          "stock": 40,
+          "attrs": {
+            "Колір": "пісочний",
+            "Розмір": "Ø15"
+          },
+          "image": "skagen-sand-15.png"
+        },
+        {
+          "sku": "SKAGEN-GREEN-15",
+          "price": "69.00",
+          "stock": 32,
+          "attrs": {
+            "Колір": "зелений",
+            "Розмір": "Ø15"
+          },
+          "image": "skagen-green-15.png"
+        }
+      ]
+    },
+    {
+      "name": "Сервірувальна страва ODDER",
+      "slug": "servirovochnoe-blyudo-odder",
+      "category": "posuda",
+      "description": "Овальна страва з порцеляни довжиною 36 см для подачі гарячого та закусок.",
+      "variants": [
+        {
+          "sku": "ODDER-WHITE-36",
+          "price": "189.00",
+          "stock": 16,
+          "attrs": {
+            "Колір": "білий",
+            "Розмір": "36x24"
+          },
+          "image": "odder-white-36.png"
+        }
+      ]
+    },
+    {
+      "name": "Чашка HELMER",
+      "slug": "kruzhka-helmer",
+      "category": "kruzhki-i-stakany",
+      "description": "Чашка з камʼяної кераміки обʼємом 350 мл зі зручною ручкою.",
+      "variants": [
+        {
+          "sku": "HELMER-WHITE-350",
+          "price": "45.00",
+          "stock": 80,
+          "attrs": {
+            "Колір": "білий",
+            "Розмір": "350 мл"
+          },
+          "image": "helmer-white-350.png"
+        },
+        {
+          "sku": "HELMER-MUSTARD-350",
+          "price": "45.00",
+          "stock": 54,
+          "attrs": {
+            "Колір": "гірчичний",
+            "Розмір": "350 мл"
+          },
+          "image": "helmer-mustard-350.png"
+        },
+        {
+          "sku": "HELMER-BLUE-350",
+          "price": "45.00",
+          "stock": 47,
+          "attrs": {
+            "Колір": "синій",
+            "Розмір": "350 мл"
+          },
+          "image": "helmer-blue-350.png"
+        }
+      ]
+    },
+    {
+      "name": "Набір склянок KLAR",
+      "slug": "nabor-stakanov-klar",
+      "category": "kruzhki-i-stakany",
+      "description": "Набір з 4 склянок з міцного скла обʼємом 300 мл.",
+      "variants": [
+        {
+          "sku": "KLAR-CLEAR-4",
+          "price": "119.00",
+          "stock": 35,
+          "attrs": {
+            "Колір": "прозорий",
+            "Розмір": "4 шт."
+          },
+          "image": "klar-clear-4.png"
+        },
+        {
+          "sku": "KLAR-SMOKE-4",
+          "price": "129.00",
+          "stock": 21,
+          "attrs": {
+            "Колір": "димчастий",
+            "Розмір": "4 шт."
+          },
+          "image": "klar-smoke-4.png"
+        }
+      ]
+    },
+    {
+      "name": "Термочашка VANDRE",
+      "slug": "termokruzhka-vandre",
+      "category": "kruzhki-i-stakany",
+      "description": "Термочашка з нержавіючої сталі обʼємом 450 мл. Зберігає напій гарячим до 6 годин.",
+      "variants": [
+        {
+          "sku": "VANDRE-BLACK-450",
+          "price": "159.00",
+          "stock": 28,
+          "attrs": {
+            "Колір": "чорний",
+            "Розмір": "450 мл"
+          },
+          "image": "vandre-black-450.png"
+        },
+        {
+          "sku": "VANDRE-GREEN-450",
+          "price": "159.00",
+          "stock": 19,
+          "attrs": {
+            "Колір": "зелений",
+            "Розмір": "450 мл"
+          },
+          "image": "vandre-green-450.png"
+        }
+      ]
+    },
+    {
+      "name": "Банка для зберігання GLASSIG",
+      "slug": "banka-dlya-hraneniya-glassig",
+      "category": "hranenie-produktov",
+      "description": "Скляна банка з бамбуковою кришкою та силіконовим ущільнювачем для круп і сипких продуктів.",
+      "variants": [
+        {
+          "sku": "GLASSIG-1L",
+          "price": "79.00",
+          "stock": 45,
+          "attrs": {
+            "Розмір": "1 л"
+          },
+          "image": "glassig-1l.png"
+        },
+        {
+          "sku": "GLASSIG-2L",
+          "price": "109.00",
+          "stock": 30,
+          "attrs": {
+            "Розмір": "2 л"
+          },
+          "image": "glassig-2l.png"
+        }
+      ]
+    },
+    {
+      "name": "Набір контейнерів BOKS",
+      "slug": "nabor-konteynerov-boks",
+      "category": "hranenie-produktov",
+      "description": "Набір з 3 харчових контейнерів різного обʼєму з герметичними кришками.",
+      "variants": [
+        {
+          "sku": "BOKS-GREY-3",
+          "price": "139.00",
+          "stock": 26,
+          "attrs": {
+            "Колір": "сіра кришка",
+            "Розмір": "3 шт."
+          },
+          "image": "boks-grey-3.png"
+        },
+        {
+          "sku": "BOKS-GREEN-3",
+          "price": "139.00",
+          "stock": 18,
+          "attrs": {
+            "Колір": "зелена кришка",
+            "Розмір": "3 шт."
+          },
+          "image": "boks-green-3.png"
+        }
+      ]
+    },
+    {
+      "name": "Хлібниця BRODLAG",
+      "slug": "hlebnitsa-brodlag",
+      "category": "hranenie-produktov",
+      "description": "Хлібниця з розсувною кришкою, довго зберігає хліб свіжим.",
+      "variants": [
+        {
+          "sku": "BRODLAG-OAK",
+          "price": "249.00",
+          "stock": 12,
+          "attrs": {
+            "Колір": "дуб"
+          },
+          "image": "brodlag-oak.png"
+        },
+        {
+          "sku": "BRODLAG-WHITE",
+          "price": "229.00",
+          "stock": 15,
+          "attrs": {
+            "Колір": "білий"
+          },
+          "image": "brodlag-white.png"
+        }
+      ]
+    },
+    {
+      "name": "Настільна лампа JULIUS",
+      "slug": "nastolnaya-lampa-julius",
+      "category": "nastolnye-lampy",
+      "description": "Настільна лампа з керамічною основою та тканинним абажуром, висота 39 см. Цоколь E27.",
+      "variants": [
+        {
+          "sku": "JULIUS-NAT",
+          "price": "299.00",
+          "stock": 20,
+          "attrs": {
+            "Колір": "натуральний"
+          },
+          "image": "julius-nat.png"
+        },
+        {
+          "sku": "JULIUS-BLACK",
+          "price": "299.00",
+          "stock": 13,
+          "attrs": {
+            "Колір": "чорний"
+          },
+          "image": "julius-black.png"
+        }
+      ]
+    },
+    {
+      "name": "Лампа для читання FOKUS",
+      "slug": "lampa-dlya-chteniya-fokus",
+      "category": "nastolnye-lampy",
+      "description": "Металева лампа з регульованим плечем і поворотним плафоном для робочого столу.",
+      "variants": [
+        {
+          "sku": "FOKUS-BLACK",
+          "price": "349.00",
+          "stock": 17,
+          "attrs": {
+            "Колір": "чорний"
+          },
+          "image": "fokus-black.png"
+        },
+        {
+          "sku": "FOKUS-WHITE",
+          "price": "349.00",
+          "stock": 11,
+          "attrs": {
+            "Колір": "білий"
+          },
+          "image": "fokus-white.png"
+        }
+      ]
+    },
+    {
+      "name": "Нічник KUGLE",
+      "slug": "nochnik-kugle",
+      "category": "nastolnye-lampy",
+      "description": "Нічник з матовою скляною кулею на деревʼяній підставці, мʼяке розсіяне світло.",
+      "variants": [
+        {
+          "sku": "KUGLE-WHITE",
+          "price": "199.00",
+          "stock": 24,
+          "attrs": {
+            "Колір": "білий"
+          },
+          "image": "kugle-white.png"
+        }
+      ]
+    },
+    {
+      "name": "Торшер SVEN",
+      "slug": "torsher-sven",
+      "category": "torshery",
+      "description": "Торшер з тканинним абажуром на металевій стійці, висота 150 см.",
+      "variants": [
+        {
+          "sku": "SVEN-BEIGE",
+          "price": "599.00",
+          "stock": 9,
+          "attrs": {
+            "Колір": "бежевий"
+          },
+          "image": "sven-beige.png"
+        },
+        {
+          "sku": "SVEN-GREY",
+          "price": "599.00",
+          "stock": 7,
+          "attrs": {
+            "Колір": "сірий"
+          },
+          "image": "sven-grey.png"
+        }
+      ]
+    },
+    {
+      "name": "Торшер-дуга BUEN",
+      "slug": "torsher-duga-buen",
+      "category": "torshery",
+      "description": "Підлоговий світильник-дуга з мармуровою основою. Освітлює диван або обідній стіл.",
+      "variants": [
+        {
+          "sku": "BUEN-BLACK",
+          "price": "1299.00",
+          "stock": 5,
+          "attrs": {
+            "Колір": "чорний"
+          },
+          "image": "buen-black.png"
+        }
+      ]
+    },
+    {
+      "name": "Торшер-тринога STATIV",
+      "slug": "torsher-trenoga-stativ",
+      "category": "torshery",
+      "description": "Торшер на трьох ніжках з масиву дуба з лляним абажуром.",
+      "variants": [
+        {
+          "sku": "STATIV-OAK",
+          "price": "849.00",
+          "stock": 8,
+          "attrs": {
+            "Колір": "дуб"
+          },
+          "image": "stativ-oak.png"
+        }
+      ]
+    },
+    {
+      "name": "Підвісний світильник KUPOL",
+      "slug": "podvesnoy-svetilnik-kupol",
+      "category": "podvesnye-svetilniki",
+      "description": "Металевий світильник-купол діаметром 38 см для кухні та їдальні.",
+      "variants": [
+        {
+          "sku": "KUPOL-BLACK",
+          "price": "399.00",
+          "stock": 14,
+          "attrs": {
+            "Колір": "чорний"
+          },
+          "image": "kupol-black.png"
+        },
+        {
+          "sku": "KUPOL-WHITE",
+          "price": "399.00",
+          "stock": 12,
+          "attrs": {
+            "Колір": "білий"
+          },
+          "image": "kupol-white.png"
+        },
+        {
+          "sku": "KUPOL-GREEN",
+          "price": "429.00",
+          "stock": 6,
+          "attrs": {
+            "Колір": "зелений"
+          },
+          "image": "kupol-green.png"
+        }
+      ]
+    },
+    {
+      "name": "Підвісний світильник RIS",
+      "slug": "podvesnoy-svetilnik-ris",
+      "category": "podvesnye-svetilniki",
+      "description": "Плетений світильник-куля з ротангу, діаметр 40 см.",
+      "variants": [
+        {
+          "sku": "RIS-NAT",
+          "price": "549.00",
+          "stock": 10,
+          "attrs": {
+            "Колір": "натуральний"
+          },
+          "image": "ris-nat.png"
+        }
+      ]
+    },
+    {
+      "name": "Підвісний світильник LINSE",
+      "slug": "podvesnoy-svetilnik-linse",
+      "category": "podvesnye-svetilniki",
+      "description": "Світильник зі скляним плафоном-кулею діаметром 25 см.",
+      "variants": [
+        {
+          "sku": "LINSE-SMOKE",
+          "price": "459.00",
+          "stock": 9,
+          "attrs": {
+            "Колір": "димчастий"
+          },
+          "image": "linse-smoke.png"
+        },
+        {
+          "sku": "LINSE-AMBER",
+          "price": "459.00",
+          "stock": 7,
+          "attrs": {
+            "Колір": "бурштиновий"
+          },
+          "image": "linse-amber.png"
+        }
+      ]
+    },
+    {
+      "name": "Садовий стілець BAKKE",
+      "slug": "sadovyy-stul-bakke",
+      "category": "sadovaya-mebel",
+      "description": "Складний садовий стілець з акації з підлокітниками. Просочений олією для захисту від вологи.",
+      "variants": [
+        {
+          "sku": "BAKKE-ACACIA",
+          "price": "599.00",
+          "stock": 16,
+          "attrs": {
+            "Колір": "акація"
+          },
+          "image": "bakke-acacia.png"
+        },
+        {
+          "sku": "BAKKE-GREY",
+          "price": "549.00",
+          "stock": 12,
+          "attrs": {
+            "Колір": "сірий"
+          },
+          "image": "bakke-grey.png"
+        }
+      ]
+    },
+    {
+      "name": "Садовий стіл VIBORG",
+      "slug": "sadovyy-stol-viborg",
+      "category": "sadovaya-mebel",
+      "description": "Обідній садовий стіл з акації на 6 персон, 180x90 см.",
+      "variants": [
+        {
+          "sku": "VIBORG-ACACIA-180",
+          "price": "2499.00",
+          "stock": 5,
+          "attrs": {
+            "Колір": "акація",
+            "Розмір": "180x90"
+          },
+          "image": "viborg-acacia-180.png"
+        }
+      ]
+    },
+    {
+      "name": "Шезлонг SOLSKIN",
+      "slug": "shezlong-solskin",
+      "category": "sadovaya-mebel",
+      "description": "Шезлонг з регульованою спинкою та сіткою з текстилену, швидко висихає після дощу.",
+      "variants": [
+        {
+          "sku": "SOLSKIN-WHITE",
+          "price": "1199.00",
+          "stock": 8,
+          "attrs": {
+            "Колір": "білий"
+          },
+          "image": "solskin-white.png"
+        },
+        {
+          "sku": "SOLSKIN-GREY",
+          "price": "1199.00",
+          "stock": 6,
+          "attrs": {
+            "Колір": "сірий"
+          },
+          "image": "solskin-grey.png"
+        }
+      ]
+    },
+    {
+      "name": "Парасоля від сонця KLINT",
+      "slug": "zont-ot-solntsa-klint",
+      "category": "zonty-ot-solntsa",
+      "description": "Садова парасоля діаметром 270 см з нахилом купола та деревʼяною стійкою.",
+      "variants": [
+        {
+          "sku": "KLINT-BEIGE-270",
+          "price": "899.00",
+          "stock": 9,
+          "attrs": {
+            "Колір": "бежевий",
+            "Розмір": "Ø270"
+          },
+          "image": "klint-beige-270.png"
+        },
+        {
+          "sku": "KLINT-GREY-270",
+          "price": "899.00",
+          "stock": 7,
+          "attrs": {
+            "Колір": "сірий",
+            "Розмір": "Ø270"
+          },
+          "image": "klint-grey-270.png"
+        }
+      ]
+    },
+    {
+      "name": "Консольна парасоля SKYGGE",
+      "slug": "konsolnyy-zont-skygge",
+      "category": "zonty-ot-solntsa",
+      "description": "Парасоля на бічній консолі діаметром 300 см, обертається на 360°.",
+      "variants": [
+        {
+          "sku": "SKYGGE-GREY-300",
+          "price": "2799.00",
+          "stock": 4,
+          "attrs": {
+            "Колір": "сірий",
+            "Розмір": "Ø300"
+          },
+          "image": "skygge-grey-300.png"
+        }
+      ]
+    },
+    {
+      "name": "Основа для парасолі TUNG",
+      "slug": "osnovanie-dlya-zonta-tung",
+      "category": "zonty-ot-solntsa",
+      "description": "Бетонна основа вагою 25 кг для парасоль зі стійкою до 48 мм.",
+      "variants": [
+        {
+          "sku": "TUNG-25",
+          "price": "399.00",
+          "stock": 15,
+          "attrs": {
+            "Колір": "антрацит",
+            "Розмір": "25 кг"
+          },
+          "image": "tung-25.png"
+        }
+      ]
+    },
+    {
+      "name": "Горщик для квітів LERKE",
+      "slug": "gorshok-dlya-tsvetov-lerke",
+      "category": "gorshki-i-kashpo",
+      "description": "Горщик з теракоти з дренажним отвором, діаметр 24 см.",
+      "variants": [
+        {
+          "sku": "LERKE-TERRA-24",
+          "price": "89.00",
+          "stock": 38,
+          "attrs": {
+            "Колір": "теракотовий",
+            "Розмір": "Ø24"
+          },
+          "image": "lerke-terra-24.png"
+        },
+        {
+          "sku": "LERKE-WHITE-24",
+          "price": "99.00",
+          "stock": 25,
+          "attrs": {
+            "Колір": "білий",
+            "Розмір": "Ø24"
+          },
+          "image": "lerke-white-24.png"
+        }
+      ]
+    },
+    {
+      "name": "Підвісне кашпо HAENG",
+      "slug": "podvesnoe-kashpo-haeng",
+      "category": "gorshki-i-kashpo",
+      "description": "Плетене підвісне кашпо з джуту на мотузках, діаметр 20 см.",
+      "variants": [
+        {
+          "sku": "HAENG-NAT-20",
+          "price": "129.00",
+          "stock": 20,
+          "attrs": {
+            "Колір": "натуральний",
+            "Розмір": "Ø20"
+          },
+          "image": "haeng-nat-20.png"
+        }
+      ]
+    },
+    {
+      "name": "Кашпо на ніжках STAND",
+      "slug": "kashpo-na-nozhkah-stand",
+      "category": "gorshki-i-kashpo",
+      "description": "Металеве кашпо на високих ніжках для великих кімнатних рослин.",
+      "variants": [
+        {
+          "sku": "STAND-WHITE",
+          "price": "249.00",
+          "stock": 14,
+          "attrs": {
+            "Колір": "білий"
+          },
+          "image": "stand-white.png"
+        },
+        {
+          "sku": "STAND-BLACK",
+          "price": "249.00",
+          "stock": 11,
+          "attrs": {
+            "Колір": "чорний"
+          },
+          "image": "stand-black.png"
+        }
+      ]
+    }
+  ]
+}
