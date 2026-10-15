@@ -17,7 +17,7 @@ services:
       - jysk_network
 
   minio:
-    image: minio/minio:latest
+    image: ghcr.io/v88-crypto/jysk-minio:RELEASE.2025-09-07T16-13-09Z
     container_name: jysk_clone_minio
     restart: always
     command: server /data --console-address ":9001"
@@ -37,7 +37,7 @@ services:
       timeout: 5s
       retries: 5
   minio-init:
-    image: minio/mc:latest
+    image: ghcr.io/v88-crypto/jysk-minio-mc:RELEASE.2025-08-13T08-35-41Z
     container_name: jysk_clone_minio_init
     depends_on:
       minio:

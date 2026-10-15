@@ -1,14 +1,22 @@
+import type {
+  ProductPayload,
+  VariantPayload,
+} from '@/features/admin/api/productApi'
 import type { Attribute } from '@/features/admin/types/attribute'
-import type { Product } from '@/features/admin/types/product'
+import type { Product, ProductVariant } from '@/features/admin/types/product'
 
 import type { EditProductFormState } from '@/features/admin/components/EditAddProducts/types/productForm'
 
 import {
+  MAX_PRODUCT_IMAGES,
   emptyProductFormState,
+  formDescription,
   getAttributeName,
   getFirstVariant,
-  createImages,
-  resolveAttributeId,
+  parsePrice,
+  parseStock,
+  toAttributePayloads,
+  toImagePayloads,
 } from '@/features/admin/components/EditAddProducts/utils/productHelpers'
 
 export const mapProductToForm = (
@@ -20,11 +28,8 @@ export const mapProductToForm = (
   const rows =
     variant?.attributes.map((attribute) => ({
       id: attribute.id,
-
       attributeId: attribute.attributeId,
-
       name: getAttributeName(attribute.attributeId, attributes),
-
       value: attribute.value,
     })) ?? []
 
@@ -37,86 +42,64 @@ export const mapProductToForm = (
       )
       .map((image) => image.imageUrl) ?? []
 
+  const emptyForm = emptyProductFormState()
+
   return {
-    ...emptyProductFormState(),
-
+    ...emptyForm,
     sku: variant?.sku ?? '',
-
     name: product.name,
-
     categoryId: String(product.categoryId),
-
     shortDescription: product.description,
-
     detailedDescription: product.description,
-
     price: variant ? String(variant.price) : '',
-
-    attributes: [...rows, ...emptyProductFormState().attributes].slice(0, 3),
-
-    imageUrls: imageUrls.slice(0, 4),
+    stock: variant ? String(variant.stock) : '',
+    attributes: [...rows, ...emptyForm.attributes].slice(
+      0,
+      Math.max(rows.length, emptyForm.attributes.length),
+    ),
+    imageUrls: imageUrls.slice(0, MAX_PRODUCT_IMAGES),
   }
 }
+
+// Variants that the form does not edit are sent back unchanged,
+// otherwise the backend would delete them.
+const keepVariant = (variant: ProductVariant): VariantPayload => ({
+  id: variant.id,
+  sku: variant.sku,
+  price: variant.price,
+  stock: variant.stock,
+  attributes: variant.attributes.map((attribute) => ({
+    id: attribute.id,
+    attributeId: attribute.attributeId,
+    value: attribute.value,
+  })),
+  images: variant.images.map((image) => ({
+    id: image.id,
+    imageUrl: image.imageUrl,
+    isPrimary: image.isPrimary,
+    sortOrder: image.sortOrder,
+  })),
+})
 
 export const mapFormToProduct = (
   product: Product,
   form: EditProductFormState,
-  attributes: Attribute[],
-): Product => {
-  const variant = getFirstVariant(product)
+): ProductPayload => {
+  const [variant, ...otherVariants] = product.variants
 
-  if (!variant) {
-    return product
-  }
-
-  const maxAttributeId = variant.attributes.reduce(
-    (maxId, attribute) => Math.max(maxId, attribute.id),
-    0,
-  )
-
-  const maxKnownAttributeId = attributes.reduce(
-    (maxId, attribute) => Math.max(maxId, attribute.id),
-    0,
-  )
-
-  const updatedAttributes = form.attributes
-    .filter((attribute) => attribute.name.trim() && attribute.value.trim())
-    .map((attribute, attributeIndex) => ({
-      id: attribute.id > 0 ? attribute.id : maxAttributeId + attributeIndex + 1,
-
-      variantId: variant.id,
-
-      attributeId: resolveAttributeId(
-        attribute,
-        attributes,
-        maxKnownAttributeId + attributeIndex + 1,
-      ),
-
-      value: attribute.value.trim(),
-    }))
-
-  const updatedVariant = {
-    ...variant,
-
+  const editedVariant: VariantPayload = {
+    id: variant?.id,
     sku: form.sku.trim(),
-
-    price: Number(form.price.replace(',', '.')) || 0,
-
-    images: createImages(form.imageUrls, variant),
-
-    attributes: updatedAttributes,
+    price: parsePrice(form.price),
+    stock: parseStock(form.stock),
+    attributes: toAttributePayloads(form.attributes),
+    images: toImagePayloads(form.imageUrls, variant?.images ?? []),
   }
 
   return {
-    ...product,
-
-    categoryId: Number(form.categoryId) || product.categoryId,
-
     name: form.name.trim(),
-
-    description:
-      form.detailedDescription.trim() || form.shortDescription.trim(),
-
-    variants: [updatedVariant, ...product.variants.slice(1)],
+    categoryId: Number(form.categoryId),
+    description: formDescription(form),
+    variants: [editedVariant, ...otherVariants.map(keepVariant)],
   }
 }

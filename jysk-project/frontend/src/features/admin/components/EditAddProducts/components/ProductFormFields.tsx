@@ -1,7 +1,13 @@
+import { useRef } from 'react'
 import type { ChangeEvent, SyntheticEvent } from 'react'
 
 import type { Attribute } from '@/features/admin/types/attribute'
 import type { Category } from '@/features/admin/types/category'
+import { ACCEPTED_IMAGE_TYPES } from '@/shared/api/uploads'
+import {
+  MAX_PRODUCT_IMAGES,
+  categoryLabel,
+} from '@/features/admin/components/EditAddProducts/utils/productHelpers'
 
 import { TextField } from './TextField'
 import { SelectField } from './SelectField'
@@ -21,7 +27,8 @@ interface ProductFormFieldsProps {
   attributes: Attribute[]
   isLoading: boolean
   selectedPhotoText: string
-  showAddGalleryButton?: boolean
+  isUploadingPhotos: boolean
+  photoError: string | null
   updateField: <Field extends keyof EditProductFormState>(
     field: Field,
     value: EditProductFormState[Field],
@@ -33,7 +40,8 @@ interface ProductFormFieldsProps {
   ) => void
   addAttributeRow: () => void
   clearAttributes: () => void
-  handlePhotoChange: (event: ChangeEvent<HTMLInputElement>) => void
+  handlePhotoChange: (event: ChangeEvent<HTMLInputElement>) => Promise<void>
+  removePhoto: (imageIndex: number) => void
   handleImageError: (event: SyntheticEvent<HTMLImageElement>) => void
 }
 
@@ -43,14 +51,22 @@ export const ProductFormFields = ({
   attributes,
   isLoading,
   selectedPhotoText,
-  showAddGalleryButton = false,
+  isUploadingPhotos,
+  photoError,
   updateField,
   updateAttributeRow,
   addAttributeRow,
   clearAttributes,
   handlePhotoChange,
+  removePhoto,
   handleImageError,
 }: ProductFormFieldsProps) => {
+  const photoInputRef = useRef<HTMLInputElement>(null)
+  const isPhotoInputDisabled =
+    isLoading ||
+    isUploadingPhotos ||
+    form.imageUrls.length >= MAX_PRODUCT_IMAGES
+
   return (
     <>
       <section className="space-y-4">
@@ -79,7 +95,7 @@ export const ProductFormFields = ({
 
           {categories.map((category) => (
             <option key={category.id} value={category.id}>
-              {category.name}
+              {categoryLabel(category, categories)}
             </option>
           ))}
         </SelectField>
@@ -94,15 +110,29 @@ export const ProductFormFields = ({
           }
         />
 
-        <TextField
-          type="number"
-          inputMode="decimal"
-          placeholder="Введіть ціну..."
-          value={form.price}
-          disabled={isLoading}
-          onChange={(event) => updateField('price', event.target.value)}
-          className="w-full sm:w-[320px]"
-        />
+        <div className="flex flex-col gap-4 sm:flex-row">
+          <TextField
+            type="number"
+            inputMode="decimal"
+            placeholder="Введіть ціну..."
+            value={form.price}
+            disabled={isLoading}
+            onChange={(event) => updateField('price', event.target.value)}
+            className="w-full sm:w-[320px]"
+          />
+
+          <TextField
+            type="number"
+            min="0"
+            step="1"
+            inputMode="numeric"
+            placeholder="Залишок, шт."
+            value={form.stock}
+            disabled={isLoading}
+            onChange={(event) => updateField('stock', event.target.value)}
+            className="w-full sm:w-[220px]"
+          />
+        </div>
       </section>
 
       <section className="mt-5 space-y-4">
@@ -150,6 +180,10 @@ export const ProductFormFields = ({
             onChange={(checked) => updateField('isGreatOffer', checked)}
           />
         </div>
+
+        <p className="text-sm text-[#8a8a8a]">
+          Знижка та позначки поки не зберігаються: бекенд їх ще не підтримує.
+        </p>
       </section>
 
       <section className="mt-7">
@@ -207,51 +241,61 @@ export const ProductFormFields = ({
       </section>
 
       <section className="mt-7">
-        <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
-          {form.imageUrls.slice(0, 4).map((imageUrl, imageIndex) => (
-            <PhotoPreview
-              key={`${imageUrl}-${imageIndex}`}
-              imageUrl={imageUrl}
-              imageIndex={imageIndex}
-              onError={handleImageError}
-            />
-          ))}
-        </div>
+        <h2 className="mb-3 text-lg font-semibold">
+          Фото товару ({form.imageUrls.length}/{MAX_PRODUCT_IMAGES})
+        </h2>
+
+        {form.imageUrls.length > 0 && (
+          <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
+            {form.imageUrls.map((imageUrl, imageIndex) => (
+              <PhotoPreview
+                key={`${imageUrl}-${imageIndex}`}
+                imageUrl={imageUrl}
+                imageIndex={imageIndex}
+                disabled={isLoading || isUploadingPhotos}
+                onError={handleImageError}
+                onRemove={removePhoto}
+              />
+            ))}
+          </div>
+        )}
 
         <div className="mt-6 flex min-h-[56px] w-full flex-col border border-[#b9b9b9] bg-[#dedede] sm:flex-row sm:items-center">
-          <label className="flex min-h-[56px] flex-1 cursor-pointer items-center overflow-hidden px-5 text-base text-[#4f4f4f]">
+          <label
+            className={`flex min-h-[56px] flex-1 items-center overflow-hidden px-5 text-base text-[#4f4f4f] ${
+              isPhotoInputDisabled ? 'cursor-not-allowed' : 'cursor-pointer'
+            }`}
+          >
             <span className="truncate">{selectedPhotoText}</span>
 
             <input
+              ref={photoInputRef}
               type="file"
               multiple
-              accept="image/*"
-              disabled={isLoading}
-              onChange={handlePhotoChange}
+              accept={ACCEPTED_IMAGE_TYPES.join(',')}
+              disabled={isPhotoInputDisabled}
+              onChange={(event) => void handlePhotoChange(event)}
               className="hidden"
             />
           </label>
 
           <button
             type="button"
-            disabled={isLoading}
+            disabled={isPhotoInputDisabled}
+            onClick={() => photoInputRef.current?.click()}
             className="m-2 h-[44px] w-[150px] rounded-[5px] bg-primary text-base font-semibold text-white transition hover:bg-primary-dark disabled:cursor-not-allowed disabled:opacity-60"
           >
-            Завантажити
+            {isUploadingPhotos ? 'Завантаження...' : 'Завантажити'}
           </button>
         </div>
 
-        {showAddGalleryButton && (
-          <div className="mt-4 flex justify-center">
-            <button
-              type="button"
-              disabled={isLoading}
-              className="h-[52px] w-full max-w-[280px] bg-primary text-base font-semibold text-white transition hover:bg-primary-dark disabled:cursor-not-allowed disabled:opacity-60"
-            >
-              Додати галерею
-            </button>
-          </div>
+        {photoError && (
+          <p className="mt-2 text-sm text-red-500">{photoError}</p>
         )}
+
+        <p className="mt-2 text-sm text-[#8a8a8a]">
+          JPEG, PNG або WEBP до 5 МБ. Перше фото буде головним.
+        </p>
       </section>
     </>
   )
