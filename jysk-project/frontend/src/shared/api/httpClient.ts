@@ -1,3 +1,4 @@
+import { translateApiMessage } from '@/shared/api/errorMessages'
 import { tokenStorage } from '@/shared/auth/tokenStorage'
 
 const API_BASE_URL =
@@ -14,10 +15,13 @@ const NO_REFRESH_PATHS = [
 
 export class ApiError extends Error {
   status: number
+  // The original backend text, for code that recognises specific errors.
+  detail: string
 
-  constructor(status: number, message: string) {
-    super(message)
+  constructor(status: number, detail: string) {
+    super(translateApiMessage(detail))
     this.status = status
+    this.detail = detail
   }
 }
 

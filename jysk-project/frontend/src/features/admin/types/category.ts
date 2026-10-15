@@ -4,3 +4,9 @@ export interface Category {
   slug: string
   parentId: number | null
 }
+
+export interface CategoryInput {
+  name: string
+  slug: string
+  parentId: number | null
+}

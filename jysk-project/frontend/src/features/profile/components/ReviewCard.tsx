@@ -1,3 +1,6 @@
+import { Link } from 'react-router-dom'
+
+import { productUrl } from '@/features/catalog/utils/productUrl'
 import type { MyReview } from '@/features/profile/types'
 import { formatDate } from '@/features/profile/utils/format'
 
@@ -29,7 +32,10 @@ export const ReviewCard = ({ review, author }: Props) => {
           </p>
         </div>
 
-        <div className="flex gap-4 lg:w-[300px] shrink-0">
+        <Link
+          to={productUrl(review.productSlug, review.variantId)}
+          className="group flex gap-4 lg:w-[300px] shrink-0"
+        >
           {review.image ? (
             <img
               src={review.image}
@@ -40,8 +46,10 @@ export const ReviewCard = ({ review, author }: Props) => {
             <div className="w-[65px] h-[90px] shrink-0 bg-[#f0f0f0]" />
           )}
 
-          <p className="text-[18px] font-bold">{review.productName}</p>
-        </div>
+          <p className="text-[18px] font-bold transition-colors group-hover:text-primary">
+            {review.productName}
+          </p>
+        </Link>
 
         <p className="flex-1 text-[17px] leading-[24px] text-[#444]">
           {review.comment || <span className="text-[#999]">Без коментаря</span>}

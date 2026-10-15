@@ -1,16 +1,14 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 
 import { clientService } from '@/features/admin/api/clientService'
-import type {
-  Client,
-  ClientPage,
-  ClientRole,
-} from '@/features/admin/types/client'
+import type { Client, ClientRole } from '@/features/admin/types/client'
+import { usePagedData } from '@/features/admin/hooks/usePagedData'
 import { ApiError } from '@/shared/api/httpClient'
 import { useAuth } from '@/shared/auth/useAuth'
 
 import { SearchField } from '@/features/admin/components/common/SearchField'
 import { AdminPageLayout } from '@/features/admin/components/common/AdminPageLayout'
+import { Pagination } from '@/features/admin/components/common/Pagination'
 
 const PAGE_SIZE = 20
 const SEARCH_DEBOUNCE_MS = 300
@@ -19,10 +17,6 @@ const ROLE_LABELS: Record<ClientRole, string> = {
   customer: 'Клієнт',
   admin: 'Адміністратор',
 }
-
-type LoadResult =
-  | { key: string; status: 'ready'; data: ClientPage }
-  | { key: string; status: 'error'; message: string }
 
 const toLoadErrorMessage = (error: unknown) =>
   error instanceof ApiError && error.status === 403
@@ -37,12 +31,8 @@ export const ClientsPage = () => {
 
   const [search, setSearch] = useState('')
   const [debouncedSearch, setDebouncedSearch] = useState('')
-  const [page, setPage] = useState(1)
-  const [result, setResult] = useState<LoadResult | null>(null)
   const [updatingId, setUpdatingId] = useState<number | null>(null)
   const [actionError, setActionError] = useState<string | null>(null)
-
-  const requestKey = `${debouncedSearch}|${page}`
 
   useEffect(() => {
     const timeoutId = window.setTimeout(
@@ -53,39 +43,20 @@ export const ClientsPage = () => {
     return () => window.clearTimeout(timeoutId)
   }, [search])
 
-  useEffect(() => {
-    let isActive = true
-    const key = `${debouncedSearch}|${page}`
+  const loadPage = useCallback(
+    (page: number) =>
+      clientService.getPage({
+        search: debouncedSearch,
+        page,
+        pageSize: PAGE_SIZE,
+      }),
+    [debouncedSearch],
+  )
+  const { page, setPage, data, error, isLoading, updateItems } =
+    usePagedData(loadPage)
 
-    clientService
-      .getPage({ search: debouncedSearch, page, pageSize: PAGE_SIZE })
-      .then((data) => {
-        if (isActive) {
-          setResult({ key, status: 'ready', data })
-        }
-      })
-      .catch((error: unknown) => {
-        if (isActive) {
-          setResult({
-            key,
-            status: 'error',
-            message: toLoadErrorMessage(error),
-          })
-        }
-      })
-
-    return () => {
-      isActive = false
-    }
-  }, [debouncedSearch, page])
-
-  const isLoading = result?.key !== requestKey
-  const clientPage = result?.status === 'ready' ? result.data : null
-  const clients = clientPage?.items ?? []
-  const total = clientPage?.total ?? 0
-  const pageCount = Math.max(1, Math.ceil(total / PAGE_SIZE))
-  const firstShown = total === 0 ? 0 : (page - 1) * PAGE_SIZE + 1
-  const lastShown = Math.min(page * PAGE_SIZE, total)
+  const clients = data?.items ?? []
+  const total = data?.total ?? 0
 
   const handleSearchChange = (value: string) => {
     setSearch(value)
@@ -109,18 +80,8 @@ export const ClientsPage = () => {
     try {
       const updated = await clientService.updateRole(client.id, role)
 
-      setResult((current) =>
-        current?.status === 'ready'
-          ? {
-              ...current,
-              data: {
-                ...current.data,
-                items: current.data.items.map((item) =>
-                  item.id === updated.id ? updated : item,
-                ),
-              },
-            }
-          : current,
+      updateItems((items) =>
+        items.map((item) => (item.id === updated.id ? updated : item)),
       )
     } catch (error) {
       setActionError(
@@ -132,13 +93,15 @@ export const ClientsPage = () => {
   }
 
   const renderStatus = () => {
-    if (result?.status === 'error' && !isLoading) {
+    if (error) {
       return (
-        <p className="px-4 py-10 text-center text-[#d33]">{result.message}</p>
+        <p className="px-4 py-10 text-center text-[#d33]">
+          {toLoadErrorMessage(error)}
+        </p>
       )
     }
 
-    if (!clientPage) {
+    if (!data) {
       return (
         <p className="px-4 py-10 text-center text-[#8a8a8a]">Завантаження...</p>
       )
@@ -182,7 +145,7 @@ export const ClientsPage = () => {
       <div className="overflow-x-auto rounded-md bg-white shadow-sm">
         <table
           className={`w-full min-w-[760px] border-collapse text-left text-sm transition-opacity ${
-            isLoading && clientPage ? 'opacity-60' : ''
+            isLoading && data ? 'opacity-60' : ''
           }`}
         >
           <thead>
@@ -257,37 +220,12 @@ export const ClientsPage = () => {
         {renderStatus()}
       </div>
 
-      {total > PAGE_SIZE && (
-        <div className="mt-4 flex flex-wrap items-center justify-between gap-3 text-sm text-[#555]">
-          <span>
-            Показано {firstShown}–{lastShown} з {total}
-          </span>
-
-          <div className="flex items-center gap-2">
-            <button
-              type="button"
-              onClick={() => setPage((current) => current - 1)}
-              disabled={page <= 1}
-              className="h-[34px] rounded-[4px] border border-[#d5d5d5] bg-white px-3 transition-colors hover:border-primary disabled:cursor-not-allowed disabled:opacity-50"
-            >
-              ‹ Назад
-            </button>
-
-            <span>
-              {page} / {pageCount}
-            </span>
-
-            <button
-              type="button"
-              onClick={() => setPage((current) => current + 1)}
-              disabled={page >= pageCount}
-              className="h-[34px] rounded-[4px] border border-[#d5d5d5] bg-white px-3 transition-colors hover:border-primary disabled:cursor-not-allowed disabled:opacity-50"
-            >
-              Далі ›
-            </button>
-          </div>
-        </div>
-      )}
+      <Pagination
+        page={page}
+        pageSize={PAGE_SIZE}
+        total={total}
+        onPageChange={setPage}
+      />
     </AdminPageLayout>
   )
 }

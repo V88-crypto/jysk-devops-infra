@@ -5,10 +5,10 @@ import { IconButton } from './IconButton'
 import { NavButton } from './NavButton'
 import { StorePanel } from './StorePanel'
 import { SidebarMenu } from './SidebarMenu'
+import { HeaderSearch } from './HeaderSearch'
 import logoImage from '@/assets/images/logo.png'
 
 import MenuIcon from '@/assets/icons/menu.svg?react'
-import SearchIcon from '@/assets/icons/search.svg?react'
 import HeartIcon from '@/assets/icons/heart.svg?react'
 import UserIcon from '@/assets/icons/user.svg?react'
 import CartIcon from '@/assets/icons/cart.svg?react'
@@ -59,16 +59,12 @@ export const Header: React.FC = () => {
               </button>
             </div>
 
-            <div className="hidden xl:block relative xl:w-[34.9vw] shrink-0">
-              <input
-                type="text"
-                placeholder="Пошук..."
-                className="w-full xl:h-[3.7vw] xl:pl-[1.25vw] xl:pr-[3vw] bg-[#E0E0E0] xl:text-[0.83vw] text-dark rounded-[0.52vw] focus:outline-none focus:ring-2 focus:ring-primary transition-all placeholder:text-dark/50"
-              />
-              <button className="absolute right-5 xl:right-[1.25vw] top-1/2 -translate-y-1/2 text-dark hover:text-primary">
-                <SearchIcon className="xl:w-[1.25vw] xl:h-[1.25vw]" />
-              </button>
-            </div>
+            <HeaderSearch
+              className="hidden xl:block relative xl:w-[34.9vw] shrink-0"
+              inputClassName="w-full xl:h-[3.7vw] xl:pl-[1.25vw] xl:pr-[3vw] bg-[#E0E0E0] xl:text-[0.83vw] text-dark rounded-[0.52vw] focus:outline-none focus:ring-2 focus:ring-primary transition-all placeholder:text-dark/50"
+              buttonClassName="absolute right-5 xl:right-[1.25vw] top-1/2 -translate-y-1/2 text-dark hover:text-primary"
+              iconClassName="xl:w-[1.25vw] xl:h-[1.25vw]"
+            />
 
             <div className="flex items-center gap-4 md:gap-[3.1vw] xl:gap-[2vw] shrink-0">
               {isAdmin && (
@@ -103,16 +99,12 @@ export const Header: React.FC = () => {
       </div>
 
       <div className="block xl:hidden w-full px-4 md:px-[3.1vw] py-3 md:py-[2vw] border-b border-dark/10 bg-white">
-        <div className="relative w-full flex justify-center">
-          <input
-            type="text"
-            placeholder="Пошук..."
-            className="w-full h-[39px] md:h-[6vw] pl-4 pr-10 bg-gray-border text-sm md:text-[1.82vw] text-dark rounded-[10px] focus:outline-none focus:ring-2 focus:ring-primary"
-          />
-          <button className="absolute right-3 top-1/2 -translate-y-1/2 text-dark">
-            <SearchIcon className="w-5 h-5 md:w-[3.1vw] md:h-[3.1vw]" />
-          </button>
-        </div>
+        <HeaderSearch
+          className="relative w-full flex justify-center"
+          inputClassName="w-full h-[39px] md:h-[6vw] pl-4 pr-10 bg-gray-border text-sm md:text-[1.82vw] text-dark rounded-[10px] focus:outline-none focus:ring-2 focus:ring-primary"
+          buttonClassName="absolute right-3 top-1/2 -translate-y-1/2 text-dark"
+          iconClassName="w-5 h-5 md:w-[3.1vw] md:h-[3.1vw]"
+        />
       </div>
 
       <div className="hidden md:block w-full">

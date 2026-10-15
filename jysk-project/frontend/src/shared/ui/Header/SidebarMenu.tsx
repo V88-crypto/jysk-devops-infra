@@ -1,6 +1,8 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import logoImage from '@/assets/images/logo.png'
+import { catalogApi } from '@/features/catalog/api/catalogApi'
+import { useAsyncData } from '@/shared/hooks/useAsyncData'
 
 interface SidebarMenuProps {
   isOpen: boolean
@@ -12,26 +14,12 @@ export const SidebarMenu: React.FC<SidebarMenuProps> = ({
   setIsOpen,
 }) => {
   const navigate = useNavigate()
+  const { data: categories, error } = useAsyncData(catalogApi.getCategories)
 
   const goTo = (path: string) => {
     setIsOpen(false)
     navigate(path)
   }
-
-  const menuItems: string[] = [
-    'Вітальня',
-    'Кухня',
-    'Спальня',
-    'Ванна',
-    'Кабінет',
-    'Двір',
-    'Вітальня',
-    'Кухня',
-    'Спальня',
-    'Ванна',
-    'Кабінет',
-    'Двір',
-  ]
 
   const bottomNavItems: { text: string; path: string }[] = [
     { text: 'Блог', path: '/blog' },
@@ -92,16 +80,34 @@ export const SidebarMenu: React.FC<SidebarMenuProps> = ({
           <hr className="border-black/20 my-6 xl:my-[2vw] shrink-0" />
 
           <div className="flex flex-col flex-grow overflow-y-auto pb-6 custom-scrollbar">
-            <nav className="flex flex-col gap-5 md:gap-6 xl:gap-[1.5vw]">
-              {menuItems.map((item, index) => (
-                <a
-                  key={index}
-                  href="#"
-                  className="text-dark text-lg md:text-xl xl:text-[1.25vw] hover:text-primary transition-colors leading-none font-inter"
+            <nav
+              aria-label="Категорії"
+              className="flex flex-col gap-5 md:gap-6 xl:gap-[1.5vw]"
+            >
+              {Boolean(error) && (
+                <p className="text-gray-medium">
+                  Не вдалося завантажити категорії
+                </p>
+              )}
+
+              {categories?.map((category) => (
+                <button
+                  key={category.id}
+                  type="button"
+                  onClick={() => goTo(`/category/${category.slug}`)}
+                  className="text-left text-dark text-lg md:text-xl xl:text-[1.25vw] hover:text-primary transition-colors leading-none font-inter"
                 >
-                  {item}
-                </a>
+                  {category.name}
+                </button>
               ))}
+
+              <button
+                type="button"
+                onClick={() => goTo('/categories')}
+                className="text-left text-primary text-lg md:text-xl xl:text-[1.25vw] hover:text-primary-dark transition-colors leading-none font-inter"
+              >
+                Усі категорії
+              </button>
             </nav>
 
             <hr className="border-black/20 my-6 xl:my-[2vw] shrink-0" />

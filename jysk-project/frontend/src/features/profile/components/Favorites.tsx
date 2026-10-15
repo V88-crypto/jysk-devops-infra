@@ -1,5 +1,7 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 
+import { productUrl } from '@/features/catalog/utils/productUrl'
 import type { FavoriteProduct } from '@/features/profile/types'
 import type { SectionState } from '@/features/profile/hooks/useProfileData'
 import { formatPrice } from '@/features/profile/utils/format'
@@ -73,21 +75,27 @@ export const Favorites = ({ state, onRemove }: FavoritesProps) => {
                 lg:h-[500px]
                 bg-[#f5f5f5]"
             >
-              {product.image ? (
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  className="
-                    w-full
-                    h-full
-                    object-cover
-                  "
-                />
-              ) : (
-                <div className="flex h-full w-full items-center justify-center text-[15px] text-[#999]">
-                  Немає фото
-                </div>
-              )}
+              <Link
+                to={productUrl(product.productSlug, product.variantId)}
+                aria-label={product.name}
+                className="block h-full w-full"
+              >
+                {product.image ? (
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                    className="
+                      w-full
+                      h-full
+                      object-cover
+                    "
+                  />
+                ) : (
+                  <div className="flex h-full w-full items-center justify-center text-[15px] text-[#999]">
+                    Немає фото
+                  </div>
+                )}
+              </Link>
 
               <button
                 type="button"
@@ -128,15 +136,18 @@ export const Favorites = ({ state, onRemove }: FavoritesProps) => {
                 flex-col
               "
             >
-              <p
+              <Link
+                to={productUrl(product.productSlug, product.variantId)}
                 className="
                   text-[20px]
                   font-bold
                   mb-[3px]
+                  transition-colors
+                  hover:text-primary
                 "
               >
                 {product.name}
-              </p>
+              </Link>
 
               <p
                 className="

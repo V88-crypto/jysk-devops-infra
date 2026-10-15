@@ -21,8 +21,10 @@ import { NotFoundPage } from '@/features/notFound/NotFoundPage'
 import { AdminLayout } from '@/features/admin/AdminLayout'
 import { StorePage } from '@/features/store/StorePage'
 import { FaqPage } from '@/features/faq/FaqPage'
-import CategoriesPage from '@/features/categoriesPage/CategoriesPage'
-import CategoryPage from '@/features/categoryPage/CategoryPage'
+import { CategoriesPage } from '@/features/catalog/CategoriesPage'
+import { CategoryPage } from '@/features/catalog/CategoryPage'
+import { ProductPage } from '@/features/catalog/ProductPage'
+import { SearchPage } from '@/features/catalog/SearchPage'
 
 export function App() {
   return (
@@ -45,7 +47,9 @@ export function App() {
             <Route path="store" element={<StorePage />} />
             <Route path="faq" element={<FaqPage />} />
             <Route path="categories" element={<CategoriesPage />} />
-            <Route path="category/:id" element={<CategoryPage />} />
+            <Route path="category/:slug" element={<CategoryPage />} />
+            <Route path="product/:slug" element={<ProductPage />} />
+            <Route path="search" element={<SearchPage />} />
 
             <Route path="blog" element={<BlogListPage />} />
             <Route path="blog/:postId" element={<BlogPostDetailPage />} />

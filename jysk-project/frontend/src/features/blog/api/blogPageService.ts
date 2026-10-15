@@ -1,4 +1,4 @@
-import { blogCatalog, blogRoomFilters } from '@/features/blog/mocks/blogCatalog'
+import { blogCatalog } from '@/features/blog/mocks/blogCatalog'
 import type { BlogPost } from '@/shared/types/blog'
 import { mockDelay } from '@/shared/api/mockDelay'
 
@@ -17,11 +17,5 @@ export const blogPageService = {
     const post = blogCatalog.find((item) => item.id === id)
 
     return post ? { ...post } : null
-  },
-
-  async getRoomFilters() {
-    await mockDelay(API_DELAY_MS)
-
-    return blogRoomFilters.map((item) => ({ ...item }))
   },
 }

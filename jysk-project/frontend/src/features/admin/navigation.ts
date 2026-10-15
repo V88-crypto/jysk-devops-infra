@@ -1,5 +1,6 @@
 export type AdminNavItemId =
   | 'products'
+  | 'categories'
   | 'warehouses'
   | 'stock'
   | 'deliveries'
@@ -19,6 +20,7 @@ export interface AdminNavItem {
 
 export const TOP_LEVEL_NAV_ITEMS: AdminNavItem[] = [
   { id: 'products', label: 'Товари' },
+  { id: 'categories', label: 'Категорії' },
 ]
 
 export const WAREHOUSE_NAV_ITEMS: AdminNavItem[] = [

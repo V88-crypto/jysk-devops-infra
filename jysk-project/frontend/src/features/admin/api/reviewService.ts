@@ -1,25 +1,48 @@
-import { mockAdminReviews } from '@/features/admin/mocks/reviews'
+import type { PageResult } from '@/features/admin/hooks/usePagedData'
 import type { Review } from '@/features/admin/types/review'
-import { mockDelay } from '@/shared/api/mockDelay'
+import { apiRequest } from '@/shared/api/httpClient'
 
-const API_DELAY_MS = 500
+interface ReviewResponse {
+  id: number
+  rating: number
+  comment: string | null
+  created_at: string
+  user: {
+    first_name: string
+    last_name: string
+  }
+  variant: {
+    sku: string
+    product_name: string
+  }
+}
+
+interface ReviewListResponse {
+  items: ReviewResponse[]
+  total: number
+}
 
 export const reviewService = {
-  async getAll(): Promise<Review[]> {
-    await mockDelay(API_DELAY_MS)
+  async getPage(page: number, pageSize: number): Promise<PageResult<Review>> {
+    const response = await apiRequest<ReviewListResponse>(
+      `/admin/reviews?page=${page}&page_size=${pageSize}`,
+    )
 
-    return mockAdminReviews.map((review) => ({ ...review }))
+    return {
+      total: response.total,
+      items: response.items.map((review) => ({
+        id: review.id,
+        rating: review.rating,
+        comment: review.comment,
+        createdAt: review.created_at,
+        authorName: `${review.user.first_name} ${review.user.last_name}`,
+        productName: review.variant.product_name,
+        sku: review.variant.sku,
+      })),
+    }
   },
 
-  async delete(id: number): Promise<void> {
-    await mockDelay(API_DELAY_MS)
-
-    const reviewIndex = mockAdminReviews.findIndex((item) => item.id === id)
-
-    if (reviewIndex === -1) {
-      throw new Error(`Review with id ${id} was not found`)
-    }
-
-    mockAdminReviews.splice(reviewIndex, 1)
+  delete(id: number): Promise<void> {
+    return apiRequest<void>(`/admin/reviews/${id}`, { method: 'DELETE' })
   },
 }

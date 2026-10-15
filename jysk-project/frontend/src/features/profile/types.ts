@@ -1,5 +1,4 @@
-export type OrderStatus =
-  'new' | 'processing' | 'shipped' | 'delivered' | 'cancelled'
+import type { OrderStatus } from '@/shared/orders/orderStatus'
 
 export interface OrderItem {
   id: number
@@ -25,6 +24,7 @@ export interface OrderList {
 
 export interface FavoriteProduct {
   variantId: number
+  productSlug: string
   name: string
   sku: string
   price: number
@@ -35,6 +35,8 @@ export interface FavoriteProduct {
 export interface MyReview {
   id: number
   productName: string
+  productSlug: string
+  variantId: number
   image: string | null
   rating: number
   comment: string | null

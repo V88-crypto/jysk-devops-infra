@@ -141,15 +141,15 @@ export const productErrorMessage = (
   fallback: string,
 ): string => {
   if (error instanceof ApiError) {
-    if (error.status === 409 && error.message.includes('SKU')) {
+    if (error.status === 409 && error.detail.includes('SKU')) {
       return 'Товар з таким артикулом вже існує'
     }
 
-    if (error.status === 409 && error.message.includes('slug')) {
+    if (error.status === 409 && error.detail.includes('slug')) {
       return 'Товар з такою назвою вже існує'
     }
 
-    if (error.status === 409 && error.message.includes('заказах')) {
+    if (error.status === 409 && error.detail.includes('заказах')) {
       return 'Товар уже є в замовленнях, його не можна видалити'
     }
 
