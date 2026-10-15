@@ -28,12 +28,12 @@ export function CategoryGroup() {
   return (
     <section className="py-16">
       <div className="mx-auto max-w-[1460px] px-6">
-        <h2 className="mx-auto mb-10 w-full max-w-[550px] text-center text-3xl font-bold">
+        <h2 className="mb-6 text-3xl font-semibold text-neutral-900 md:text-4xl">
           <Link
             to="/categories"
-            className="block bg-neutral-300 py-3 transition-colors hover:bg-neutral-400"
+            className="transition-colors hover:text-primary"
           >
-            Категорії
+            Категорії товарів
           </Link>
         </h2>
 
@@ -48,7 +48,7 @@ export function CategoryGroup() {
         )}
 
         {categories && (
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
+          <div className="grid grid-cols-1 gap-x-8 gap-y-10 md:grid-cols-2 xl:grid-cols-3">
             {categories.map((category) => (
               <CategoryCard key={category.id} category={category} />
             ))}
