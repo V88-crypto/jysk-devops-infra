@@ -27,7 +27,7 @@ IMAGE_PREFIX = "products/seed"
 PLACEHOLDER_PREFIX = "https://picsum.photos/"
 
 
-def load_catalog() -> list[dict]:
+def load_catalog() -> dict:
     with open(SEED_DIR / "catalog.json", encoding="utf-8") as file:
         return json.load(file)
 
@@ -45,9 +45,13 @@ def upload_seed_image(file_name: str) -> str:
     return public_url(key)
 
 
-def seed_categories(db: Session) -> dict[str, int]:
+def seed_categories(db: Session, extra_categories: list[dict]) -> dict[str, int]:
+    tree = CATEGORY_TREE + [
+        (item["name"], item["slug"], [(child["name"], child["slug"]) for child in item["children"]])
+        for item in extra_categories
+    ]
     category_ids = {}
-    for name, slug, children in CATEGORY_TREE:
+    for name, slug, children in tree:
         root = get_or_create_category(db, name, slug, None)
         for child_name, child_slug in children:
             category_ids[child_slug] = get_or_create_category(db, child_name, child_slug, root.id).id
@@ -108,9 +112,10 @@ def set_variant_image(db: Session, variant: ProductVariant, image_url: str) -> b
 
 def seed_catalog(db: Session) -> dict[str, int]:
     stats = {"products": 0, "variants": 0, "images": 0}
-    category_ids = seed_categories(db)
+    catalog = load_catalog()
+    category_ids = seed_categories(db, catalog["categories"])
 
-    for item in load_catalog():
+    for item in catalog["products"]:
         product, created = get_or_create_product(db, item, category_ids)
         stats["products"] += created
         for variant_data in item["variants"]:
