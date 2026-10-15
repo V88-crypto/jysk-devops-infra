@@ -1,8 +1,3 @@
-import prod1 from '@/assets/images/prod-lamp.jpg'
-import prod2 from '@/assets/images/prod-pillow.jpg'
-import prod3 from '@/assets/images/prod-sofa.jpg'
-import prod4 from '@/assets/images/prod-chair.jpg'
-
 import blogImg1 from '@/assets/images/blog1.jpg'
 import blogImg2 from '@/assets/images/blog2.jpg'
 import blogImg3 from '@/assets/images/blog3.jpg'
@@ -12,59 +7,6 @@ import hastensLogo from '@/assets/images/hastens.png'
 import svenskaLogo from '@/assets/images/svenska.png'
 import fritzLogo from '@/assets/images/fritz.png'
 import muutoLogo from '@/assets/images/muuto.png'
-
-export const productsMockData = [
-  {
-    id: '1',
-    name: 'JULIUS',
-    description: 'Лампа настільна JULIUS д.19см в.39см натуральний',
-    image: prod1,
-    price: 60,
-    oldPrice: 100,
-    discountPercent: 40,
-    isNew: true,
-    rating: 5,
-    inStock: true,
-    deliveryAvailable: true,
-  },
-  {
-    id: '2',
-    name: 'FLADSTJERNE',
-    description: 'Подушка FLADSTJERNE 30x30см в асортименті',
-    image: prod2,
-    price: 60,
-    oldPrice: 100,
-    rating: 5,
-    inStock: true,
-    deliveryAvailable: true,
-  },
-  {
-    id: '3',
-    name: 'VEJLBY',
-    description: 'Софа-ліжко VEJLBY з шезлонгом св.пісочний',
-    image: prod3,
-    price: 60,
-    oldPrice: 100,
-    discountPercent: 40,
-    isNew: true,
-    rating: 5,
-    inStock: true,
-    deliveryAvailable: true,
-  },
-  {
-    id: '4',
-    name: 'BISTRUP',
-    description: 'Стілець обідній BISTRUP оливковий/дуб',
-    image: prod4,
-    price: 60,
-    oldPrice: 100,
-    discountPercent: 40,
-    isNew: true,
-    rating: 5,
-    inStock: true,
-    deliveryAvailable: true,
-  },
-]
 
 export const brandsMockData = [
   {

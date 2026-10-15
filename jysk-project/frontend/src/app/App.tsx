@@ -46,7 +46,7 @@ export function App() {
             <Route path="store" element={<StorePage />} />
             <Route path="faq" element={<FaqPage />} />
             <Route path="categories" element={<CategoriesPage />} />
-            <Route path="category/:id" element={<CategoryPage />} />
+            <Route path="category/:slug" element={<CategoryPage />} />
             <Route path="product/:slug" element={<ProductPage />} />
 
             <Route path="blog" element={<BlogListPage />} />
