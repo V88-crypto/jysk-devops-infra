@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { useAuth } from '@/shared/auth/useAuth'
-import { ThemeSwitcher } from '@/shared/theme/ThemeSwitcher'
+import { ThemeToggle } from '@/shared/theme/ThemeToggle'
 import {
   BOTTOM_NAV_ITEMS,
   TOP_LEVEL_NAV_ITEMS,
@@ -218,7 +218,7 @@ export const AdminSideBar = ({ activeItem, onSelect }: AdminSideBarProps) => {
             </div>
           </div>
 
-          <ThemeSwitcher variant="onBrand" compact className="mb-2" />
+          <ThemeToggle variant="onBrand" className="mb-1 px-3 py-2" />
 
           <button
             type="button"

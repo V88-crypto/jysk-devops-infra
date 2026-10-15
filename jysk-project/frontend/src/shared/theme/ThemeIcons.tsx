@@ -24,10 +24,3 @@ export const MoonIcon = ({ className }: IconProps) => (
     <path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5a8.5 8.5 0 1 0 10.7 10.7z" />
   </svg>
 )
-
-export const SystemIcon = ({ className }: IconProps) => (
-  <svg {...iconProps} className={className}>
-    <rect x="3" y="4" width="18" height="12" rx="2" />
-    <path d="M8 20h8M12 16v4" />
-  </svg>
-)
