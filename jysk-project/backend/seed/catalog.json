@@ -1,0 +1,919 @@
+[
+  {
+    "name": "Диван FALSLEV",
+    "slug": "divan-falslev",
+    "category": "divany",
+    "description": "Трёхместный диван с тканевой обивкой и широкими подлокотниками. Прочный каркас из массива дерева.",
+    "variants": [
+      {
+        "sku": "FALSLEV-GREY",
+        "price": "2499.00",
+        "stock": 12,
+        "attrs": {
+          "Цвет": "серый"
+        },
+        "image": "falslev-grey.png"
+      },
+      {
+        "sku": "FALSLEV-BLUE",
+        "price": "2599.00",
+        "stock": 5,
+        "attrs": {
+          "Цвет": "синий"
+        },
+        "image": "falslev-blue.png"
+      }
+    ]
+  },
+  {
+    "name": "Диван-кровать VEJLBY",
+    "slug": "divan-krovat-vejlby",
+    "category": "divany",
+    "description": "Раскладной диван-кровать с ящиком для белья. Идеален для небольших квартир.",
+    "variants": [
+      {
+        "sku": "VEJLBY-DGREY-160",
+        "price": "2899.00",
+        "stock": 7,
+        "attrs": {
+          "Цвет": "тёмно-серый",
+          "Размер": "160x200"
+        },
+        "image": "vejlby-dgrey-160.png"
+      },
+      {
+        "sku": "VEJLBY-BEIGE-140",
+        "price": "2699.00",
+        "stock": 0,
+        "attrs": {
+          "Цвет": "бежевый",
+          "Размер": "140x200"
+        },
+        "image": "vejlby-beige-140.png"
+      }
+    ]
+  },
+  {
+    "name": "Угловой диван EGEDAL",
+    "slug": "uglovoy-divan-egedal",
+    "category": "divany",
+    "description": "Угловой диван с шезлонгом справа. Мягкие подушки из пены высокой плотности, съёмные чехлы.",
+    "variants": [
+      {
+        "sku": "EGEDAL-GREY",
+        "price": "5499.00",
+        "stock": 4,
+        "attrs": {
+          "Цвет": "серый"
+        },
+        "image": "egedal-grey.png"
+      },
+      {
+        "sku": "EGEDAL-GREEN",
+        "price": "5699.00",
+        "stock": 2,
+        "attrs": {
+          "Цвет": "тёмно-зелёный"
+        },
+        "image": "egedal-green.png"
+      }
+    ]
+  },
+  {
+    "name": "Двухместный диван KARBY",
+    "slug": "dvuhmestnyy-divan-karby",
+    "category": "divany",
+    "description": "Компактный двухместный диван на металлических ножках. Обивка из велюра, легко чистится.",
+    "variants": [
+      {
+        "sku": "KARBY-BEIGE",
+        "price": "1899.00",
+        "stock": 9,
+        "attrs": {
+          "Цвет": "бежевый"
+        },
+        "image": "karby-beige.png"
+      },
+      {
+        "sku": "KARBY-TERRA",
+        "price": "1949.00",
+        "stock": 6,
+        "attrs": {
+          "Цвет": "терракотовый"
+        },
+        "image": "karby-terra.png"
+      },
+      {
+        "sku": "KARBY-NAVY",
+        "price": "1949.00",
+        "stock": 3,
+        "attrs": {
+          "Цвет": "тёмно-синий"
+        },
+        "image": "karby-navy.png"
+      }
+    ]
+  },
+  {
+    "name": "Кресло GISTRUP",
+    "slug": "kreslo-gistrup",
+    "category": "kresla",
+    "description": "Мягкое кресло на деревянных ножках со съёмной подушкой сиденья.",
+    "variants": [
+      {
+        "sku": "GISTRUP-GREEN",
+        "price": "899.00",
+        "stock": 20,
+        "attrs": {
+          "Цвет": "зелёный"
+        },
+        "image": "gistrup-green.png"
+      },
+      {
+        "sku": "GISTRUP-GREY",
+        "price": "899.00",
+        "stock": 14,
+        "attrs": {
+          "Цвет": "серый"
+        },
+        "image": "gistrup-grey.png"
+      },
+      {
+        "sku": "GISTRUP-YELLOW",
+        "price": "949.00",
+        "stock": 3,
+        "attrs": {
+          "Цвет": "горчичный"
+        },
+        "image": "gistrup-yellow.png"
+      }
+    ]
+  },
+  {
+    "name": "Кресло-качалка ULFBORG",
+    "slug": "kreslo-kachalka-ulfborg",
+    "category": "kresla",
+    "description": "Кресло-качалка из гнутого дерева с мягкой подушкой в комплекте.",
+    "variants": [
+      {
+        "sku": "ULFBORG-NAT",
+        "price": "1199.00",
+        "stock": 8,
+        "attrs": {
+          "Цвет": "натуральный"
+        },
+        "image": "ulfborg-nat.png"
+      }
+    ]
+  },
+  {
+    "name": "Кресло с высокой спинкой VORUP",
+    "slug": "kreslo-vorup",
+    "category": "kresla",
+    "description": "Кресло с высокой спинкой и «ушами» для чтения. Ножки из массива бука.",
+    "variants": [
+      {
+        "sku": "VORUP-GREY",
+        "price": "1499.00",
+        "stock": 7,
+        "attrs": {
+          "Цвет": "серый"
+        },
+        "image": "vorup-grey.png"
+      },
+      {
+        "sku": "VORUP-BLUE",
+        "price": "1499.00",
+        "stock": 5,
+        "attrs": {
+          "Цвет": "синий"
+        },
+        "image": "vorup-blue.png"
+      }
+    ]
+  },
+  {
+    "name": "Кресло для отдыха TUNE",
+    "slug": "kreslo-tune",
+    "category": "kresla",
+    "description": "Лёгкое кресло для отдыха с обивкой из букле на тонких деревянных ножках.",
+    "variants": [
+      {
+        "sku": "TUNE-MILK",
+        "price": "1099.00",
+        "stock": 11,
+        "attrs": {
+          "Цвет": "молочный"
+        },
+        "image": "tune-milk.png"
+      },
+      {
+        "sku": "TUNE-POWDER",
+        "price": "1099.00",
+        "stock": 6,
+        "attrs": {
+          "Цвет": "пудровый"
+        },
+        "image": "tune-powder.png"
+      }
+    ]
+  },
+  {
+    "name": "Журнальный столик SKALS",
+    "slug": "zhurnalnyy-stolik-skals",
+    "category": "stoly",
+    "description": "Журнальный столик из дуба с нижней полкой для журналов.",
+    "variants": [
+      {
+        "sku": "SKALS-OAK-60",
+        "price": "549.00",
+        "stock": 25,
+        "attrs": {
+          "Цвет": "дуб",
+          "Размер": "60x60"
+        },
+        "image": "skals-oak-60.png"
+      },
+      {
+        "sku": "SKALS-OAK-90",
+        "price": "749.00",
+        "stock": 10,
+        "attrs": {
+          "Цвет": "дуб",
+          "Размер": "90x60"
+        },
+        "image": "skals-oak-90.png"
+      }
+    ]
+  },
+  {
+    "name": "Обеденный стол HALDUM",
+    "slug": "obedennyy-stol-haldum",
+    "category": "stoly",
+    "description": "Раздвижной обеденный стол на 6 персон с ламинированной столешницей.",
+    "variants": [
+      {
+        "sku": "HALDUM-WHITE-160",
+        "price": "1599.00",
+        "stock": 6,
+        "attrs": {
+          "Цвет": "белый",
+          "Размер": "160x90"
+        },
+        "image": "haldum-white-160.png"
+      }
+    ]
+  },
+  {
+    "name": "Круглый обеденный стол ROSKILDE",
+    "slug": "kruglyy-stol-roskilde",
+    "category": "stoly",
+    "description": "Круглый обеденный стол на одной опоре, диаметр 110 см. Подходит для 4 человек.",
+    "variants": [
+      {
+        "sku": "ROSKILDE-OAK",
+        "price": "1899.00",
+        "stock": 5,
+        "attrs": {
+          "Цвет": "дуб",
+          "Размер": "Ø110"
+        },
+        "image": "roskilde-oak.png"
+      },
+      {
+        "sku": "ROSKILDE-BLACK",
+        "price": "1899.00",
+        "stock": 3,
+        "attrs": {
+          "Цвет": "чёрный",
+          "Размер": "Ø110"
+        },
+        "image": "roskilde-black.png"
+      }
+    ]
+  },
+  {
+    "name": "Приставной столик NAKSKOV",
+    "slug": "pristavnoy-stolik-nakskov",
+    "category": "stoly",
+    "description": "Небольшой круглый столик на металлических ножках, диаметр 45 см.",
+    "variants": [
+      {
+        "sku": "NAKSKOV-WHITE",
+        "price": "299.00",
+        "stock": 18,
+        "attrs": {
+          "Цвет": "белый",
+          "Размер": "Ø45"
+        },
+        "image": "nakskov-white.png"
+      },
+      {
+        "sku": "NAKSKOV-SAGE",
+        "price": "329.00",
+        "stock": 9,
+        "attrs": {
+          "Цвет": "шалфей",
+          "Размер": "Ø45"
+        },
+        "image": "nakskov-sage.png"
+      }
+    ]
+  },
+  {
+    "name": "Матрас GOLD S30",
+    "slug": "matras-gold-s30",
+    "category": "matrasy",
+    "description": "Пружинный матрас средней жёсткости с чехлом из трикотажа, высота 26 см.",
+    "variants": [
+      {
+        "sku": "GOLD-S30-90",
+        "price": "1299.00",
+        "stock": 15,
+        "attrs": {
+          "Размер": "90x200"
+        },
+        "image": "gold-s30-90.png"
+      },
+      {
+        "sku": "GOLD-S30-140",
+        "price": "1899.00",
+        "stock": 9,
+        "attrs": {
+          "Размер": "140x200"
+        },
+        "image": "gold-s30-140.png"
+      },
+      {
+        "sku": "GOLD-S30-160",
+        "price": "2099.00",
+        "stock": 4,
+        "attrs": {
+          "Размер": "160x200"
+        },
+        "image": "gold-s30-160.png"
+      }
+    ]
+  },
+  {
+    "name": "Матрас BASIC S5",
+    "slug": "matras-basic-s5",
+    "category": "matrasy",
+    "description": "Беспружинный матрас из пены, высота 12 см. Хорош для гостевой кровати.",
+    "variants": [
+      {
+        "sku": "BASIC-S5-90",
+        "price": "449.00",
+        "stock": 30,
+        "attrs": {
+          "Размер": "90x200"
+        },
+        "image": "basic-s5-90.png"
+      },
+      {
+        "sku": "BASIC-S5-140",
+        "price": "649.00",
+        "stock": 18,
+        "attrs": {
+          "Размер": "140x200"
+        },
+        "image": "basic-s5-140.png"
+      }
+    ]
+  },
+  {
+    "name": "Матрас PLUS F40",
+    "slug": "matras-plus-f40",
+    "category": "matrasy",
+    "description": "Матрас с независимыми пружинами и слоем пены с эффектом памяти, высота 30 см. Жёсткость выше средней.",
+    "variants": [
+      {
+        "sku": "PLUS-F40-90",
+        "price": "2499.00",
+        "stock": 8,
+        "attrs": {
+          "Размер": "90x200"
+        },
+        "image": "plus-f40-90.png"
+      },
+      {
+        "sku": "PLUS-F40-160",
+        "price": "3999.00",
+        "stock": 5,
+        "attrs": {
+          "Размер": "160x200"
+        },
+        "image": "plus-f40-160.png"
+      }
+    ]
+  },
+  {
+    "name": "Наматрасник WELLPUR",
+    "slug": "namatrasnik-wellpur",
+    "category": "matrasy",
+    "description": "Наматрасник из пены высотой 5 см. Делает матрас мягче и продлевает срок его службы.",
+    "variants": [
+      {
+        "sku": "WELLPUR-TOP-90",
+        "price": "399.00",
+        "stock": 20,
+        "attrs": {
+          "Размер": "90x200"
+        },
+        "image": "wellpur-top-90.png"
+      },
+      {
+        "sku": "WELLPUR-TOP-160",
+        "price": "599.00",
+        "stock": 12,
+        "attrs": {
+          "Размер": "160x200"
+        },
+        "image": "wellpur-top-160.png"
+      }
+    ]
+  },
+  {
+    "name": "Подушка ULVIG",
+    "slug": "podushka-ulvig",
+    "category": "podushki",
+    "description": "Подушка с наполнителем из микрофибры, чехол из 100% хлопка.",
+    "variants": [
+      {
+        "sku": "ULVIG-5070",
+        "price": "89.00",
+        "stock": 50,
+        "attrs": {
+          "Размер": "50x70"
+        },
+        "image": "ulvig-5070.png"
+      },
+      {
+        "sku": "ULVIG-7070",
+        "price": "109.00",
+        "stock": 35,
+        "attrs": {
+          "Размер": "70x70"
+        },
+        "image": "ulvig-7070.png"
+      }
+    ]
+  },
+  {
+    "name": "Подушка анатомическая WELLPUR",
+    "slug": "podushka-wellpur",
+    "category": "podushki",
+    "description": "Анатомическая подушка из пены с эффектом памяти для комфортного сна.",
+    "variants": [
+      {
+        "sku": "WELLPUR-5030",
+        "price": "199.00",
+        "stock": 22,
+        "attrs": {
+          "Размер": "50x30"
+        },
+        "image": "wellpur-5030.png"
+      }
+    ]
+  },
+  {
+    "name": "Декоративная подушка HJERTEGRAS",
+    "slug": "dekorativnaya-podushka-hjertegras",
+    "category": "podushki",
+    "description": "Декоративная подушка с чехлом из вельвета на молнии, размер 45x45 см.",
+    "variants": [
+      {
+        "sku": "HJERTEGRAS-OLIVE",
+        "price": "129.00",
+        "stock": 24,
+        "attrs": {
+          "Цвет": "оливковый",
+          "Размер": "45x45"
+        },
+        "image": "hjertegras-olive.png"
+      },
+      {
+        "sku": "HJERTEGRAS-TERRA",
+        "price": "129.00",
+        "stock": 16,
+        "attrs": {
+          "Цвет": "терракотовый",
+          "Размер": "45x45"
+        },
+        "image": "hjertegras-terra.png"
+      },
+      {
+        "sku": "HJERTEGRAS-BLUE",
+        "price": "129.00",
+        "stock": 13,
+        "attrs": {
+          "Цвет": "синий",
+          "Размер": "45x45"
+        },
+        "image": "hjertegras-blue.png"
+      }
+    ]
+  },
+  {
+    "name": "Пуховая подушка FJELLSTUE",
+    "slug": "puhovaya-podushka-fjellstue",
+    "category": "podushki",
+    "description": "Мягкая подушка с наполнителем из пуха и пера, чехол из перкаля.",
+    "variants": [
+      {
+        "sku": "FJELLSTUE-5070",
+        "price": "349.00",
+        "stock": 10,
+        "attrs": {
+          "Размер": "50x70"
+        },
+        "image": "fjellstue-5070.png"
+      },
+      {
+        "sku": "FJELLSTUE-7070",
+        "price": "449.00",
+        "stock": 7,
+        "attrs": {
+          "Размер": "70x70"
+        },
+        "image": "fjellstue-7070.png"
+      }
+    ]
+  },
+  {
+    "name": "Одеяло KRONBORG CLASSIC",
+    "slug": "odeyalo-kronborg-classic",
+    "category": "odeyala",
+    "description": "Тёплое одеяло с наполнителем из полиэстера, можно стирать при 60°C.",
+    "variants": [
+      {
+        "sku": "KRONBORG-CL-140",
+        "price": "249.00",
+        "stock": 28,
+        "attrs": {
+          "Размер": "140x200"
+        },
+        "image": "kronborg-cl-140.png"
+      },
+      {
+        "sku": "KRONBORG-CL-200",
+        "price": "399.00",
+        "stock": 11,
+        "attrs": {
+          "Размер": "200x220"
+        },
+        "image": "kronborg-cl-200.png"
+      }
+    ]
+  },
+  {
+    "name": "Летнее одеяло VARDAL",
+    "slug": "letnee-odeyalo-vardal",
+    "category": "odeyala",
+    "description": "Лёгкое летнее одеяло с хлопковым чехлом. Не перегревает в жаркие ночи.",
+    "variants": [
+      {
+        "sku": "VARDAL-140",
+        "price": "199.00",
+        "stock": 22,
+        "attrs": {
+          "Размер": "140x200"
+        },
+        "image": "vardal-140.png"
+      },
+      {
+        "sku": "VARDAL-200",
+        "price": "299.00",
+        "stock": 9,
+        "attrs": {
+          "Размер": "200x220"
+        },
+        "image": "vardal-200.png"
+      }
+    ]
+  },
+  {
+    "name": "Пуховое одеяло NORDBY",
+    "slug": "puhovoe-odeyalo-nordby",
+    "category": "odeyala",
+    "description": "Очень тёплое одеяло с наполнителем из гусиного пуха для холодного времени года.",
+    "variants": [
+      {
+        "sku": "NORDBY-140",
+        "price": "899.00",
+        "stock": 6,
+        "attrs": {
+          "Размер": "140x200"
+        },
+        "image": "nordby-140.png"
+      },
+      {
+        "sku": "NORDBY-200",
+        "price": "1299.00",
+        "stock": 4,
+        "attrs": {
+          "Размер": "200x220"
+        },
+        "image": "nordby-200.png"
+      }
+    ]
+  },
+  {
+    "name": "Плед флисовый ASKEBAER",
+    "slug": "pled-askebaer",
+    "category": "odeyala",
+    "description": "Мягкий флисовый плед с бахромой, размер 130x170 см.",
+    "variants": [
+      {
+        "sku": "ASKEBAER-GREY",
+        "price": "149.00",
+        "stock": 30,
+        "attrs": {
+          "Цвет": "серый",
+          "Размер": "130x170"
+        },
+        "image": "askebaer-grey.png"
+      },
+      {
+        "sku": "ASKEBAER-MUSTARD",
+        "price": "149.00",
+        "stock": 18,
+        "attrs": {
+          "Цвет": "горчичный",
+          "Размер": "130x170"
+        },
+        "image": "askebaer-mustard.png"
+      },
+      {
+        "sku": "ASKEBAER-GREEN",
+        "price": "149.00",
+        "stock": 12,
+        "attrs": {
+          "Цвет": "зелёный",
+          "Размер": "130x170"
+        },
+        "image": "askebaer-green.png"
+      }
+    ]
+  },
+  {
+    "name": "Полотенце UPPSALA",
+    "slug": "polotence-uppsala",
+    "category": "polotentsa",
+    "description": "Махровое полотенце из 100% хлопка, плотность 400 г/м².",
+    "variants": [
+      {
+        "sku": "UPPSALA-WHITE-50100",
+        "price": "55.00",
+        "stock": 40,
+        "attrs": {
+          "Цвет": "белый",
+          "Размер": "50x100"
+        },
+        "image": "uppsala-white-50100.png"
+      },
+      {
+        "sku": "UPPSALA-GREY-70140",
+        "price": "95.00",
+        "stock": 26,
+        "attrs": {
+          "Цвет": "серый",
+          "Размер": "70x140"
+        },
+        "image": "uppsala-grey-70140.png"
+      },
+      {
+        "sku": "UPPSALA-BLUE-70140",
+        "price": "95.00",
+        "stock": 0,
+        "attrs": {
+          "Цвет": "голубой",
+          "Размер": "70x140"
+        },
+        "image": "uppsala-blue-70140.png"
+      }
+    ]
+  },
+  {
+    "name": "Полотенце KARLSTAD",
+    "slug": "polotence-karlstad",
+    "category": "polotentsa",
+    "description": "Плотное банное полотенце премиум-класса, 500 г/м².",
+    "variants": [
+      {
+        "sku": "KARLSTAD-SAND-70140",
+        "price": "119.00",
+        "stock": 17,
+        "attrs": {
+          "Цвет": "песочный",
+          "Размер": "70x140"
+        },
+        "image": "karlstad-sand-70140.png"
+      }
+    ]
+  },
+  {
+    "name": "Полотенце для рук GISLEV",
+    "slug": "polotence-dlya-ruk-gislev",
+    "category": "polotentsa",
+    "description": "Небольшое полотенце для рук из хлопка с декоративной полосой, 40x60 см.",
+    "variants": [
+      {
+        "sku": "GISLEV-WHITE-4060",
+        "price": "35.00",
+        "stock": 60,
+        "attrs": {
+          "Цвет": "белый",
+          "Размер": "40x60"
+        },
+        "image": "gislev-white-4060.png"
+      },
+      {
+        "sku": "GISLEV-MINT-4060",
+        "price": "35.00",
+        "stock": 42,
+        "attrs": {
+          "Цвет": "мятный",
+          "Размер": "40x60"
+        },
+        "image": "gislev-mint-4060.png"
+      }
+    ]
+  },
+  {
+    "name": "Набор полотенец LUNDE",
+    "slug": "nabor-polotenets-lunde",
+    "category": "polotentsa",
+    "description": "Набор из трёх полотенец разного размера: для рук, для лица и банное.",
+    "variants": [
+      {
+        "sku": "LUNDE-SET-GREY",
+        "price": "249.00",
+        "stock": 14,
+        "attrs": {
+          "Цвет": "серый",
+          "Размер": "3 шт."
+        },
+        "image": "lunde-set-grey.png"
+      },
+      {
+        "sku": "LUNDE-SET-BEIGE",
+        "price": "249.00",
+        "stock": 11,
+        "attrs": {
+          "Цвет": "бежевый",
+          "Размер": "3 шт."
+        },
+        "image": "lunde-set-beige.png"
+      }
+    ]
+  },
+  {
+    "name": "Коврик для ванной KARUP",
+    "slug": "kovrik-dlya-vannoy-karup",
+    "category": "kovriki-dlya-vannoy",
+    "description": "Мягкий коврик для ванной с антискользящей основой.",
+    "variants": [
+      {
+        "sku": "KARUP-GREY",
+        "price": "79.00",
+        "stock": 33,
+        "attrs": {
+          "Цвет": "серый",
+          "Размер": "50x80"
+        },
+        "image": "karup-grey.png"
+      },
+      {
+        "sku": "KARUP-GREEN",
+        "price": "79.00",
+        "stock": 21,
+        "attrs": {
+          "Цвет": "зелёный",
+          "Размер": "50x80"
+        },
+        "image": "karup-green.png"
+      }
+    ]
+  },
+  {
+    "name": "Коврик с эффектом памяти MOLLE",
+    "slug": "kovrik-molle",
+    "category": "kovriki-dlya-vannoy",
+    "description": "Коврик для ванной из пены с эффектом памяти, быстро сохнет.",
+    "variants": [
+      {
+        "sku": "MOLLE-GREY",
+        "price": "129.00",
+        "stock": 19,
+        "attrs": {
+          "Цвет": "серый",
+          "Размер": "50x80"
+        },
+        "image": "molle-grey.png"
+      },
+      {
+        "sku": "MOLLE-BLUE",
+        "price": "129.00",
+        "stock": 12,
+        "attrs": {
+          "Цвет": "голубой",
+          "Размер": "50x80"
+        },
+        "image": "molle-blue.png"
+      }
+    ]
+  },
+  {
+    "name": "Бамбуковый коврик BAMBUS",
+    "slug": "bambukovyy-kovrik-bambus",
+    "category": "kovriki-dlya-vannoy",
+    "description": "Коврик из бамбуковых реек на нескользящих ножках. Не боится влаги.",
+    "variants": [
+      {
+        "sku": "BAMBUS-NAT",
+        "price": "159.00",
+        "stock": 15,
+        "attrs": {
+          "Цвет": "натуральный",
+          "Размер": "50x80"
+        },
+        "image": "bambus-nat.png"
+      }
+    ]
+  },
+  {
+    "name": "Штора для душа GRENAA",
+    "slug": "shtora-dlya-dusha-grenaa",
+    "category": "shtory-dlya-dusha",
+    "description": "Водоотталкивающая штора для душа, кольца в комплекте.",
+    "variants": [
+      {
+        "sku": "GRENAA-WHITE",
+        "price": "69.00",
+        "stock": 45,
+        "attrs": {
+          "Цвет": "белый",
+          "Размер": "180x200"
+        },
+        "image": "grenaa-white.png"
+      },
+      {
+        "sku": "GRENAA-STRIPE",
+        "price": "75.00",
+        "stock": 19,
+        "attrs": {
+          "Цвет": "в полоску",
+          "Размер": "180x200"
+        },
+        "image": "grenaa-stripe.png"
+      }
+    ]
+  },
+  {
+    "name": "Штора для душа LOVLIG",
+    "slug": "shtora-dlya-dusha-lovlig",
+    "category": "shtory-dlya-dusha",
+    "description": "Штора для душа из полиэстера с принтом из листьев, 180x200 см.",
+    "variants": [
+      {
+        "sku": "LOVLIG-LEAVES",
+        "price": "99.00",
+        "stock": 17,
+        "attrs": {
+          "Цвет": "зелёный принт",
+          "Размер": "180x200"
+        },
+        "image": "lovlig-leaves.png"
+      }
+    ]
+  },
+  {
+    "name": "Штора для душа ORUP",
+    "slug": "shtora-dlya-dusha-orup",
+    "category": "shtory-dlya-dusha",
+    "description": "Однотонная штора для душа с утяжелённым низом, 180x200 см.",
+    "variants": [
+      {
+        "sku": "ORUP-GREY",
+        "price": "89.00",
+        "stock": 23,
+        "attrs": {
+          "Цвет": "серый",
+          "Размер": "180x200"
+        },
+        "image": "orup-grey.png"
+      },
+      {
+        "sku": "ORUP-NAVY",
+        "price": "89.00",
+        "stock": 10,
+        "attrs": {
+          "Цвет": "тёмно-синий",
+          "Размер": "180x200"
+        },
+        "image": "orup-navy.png"
+      }
+    ]
+  }
+]
