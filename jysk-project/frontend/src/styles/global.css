@@ -4,15 +4,59 @@
 @import 'tailwindcss';
 @config "../../tailwind.config.js";
 
+/* `dark:` follows the .dark class set by ThemeProvider, not the OS setting. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Theme tokens, used through the colours in tailwind.config.js. */
+:root {
+  color-scheme: light;
+  --color-page: #f3f3f3;
+  --color-surface: #ffffff;
+  --color-surface-muted: #f4f4f4;
+  --color-surface-strong: #e5e5e5;
+  --color-fg: #231f20;
+  --color-fg-muted: #555555;
+  --color-fg-subtle: #8a8a8a;
+  --color-line: #e5e5e5;
+  --color-line-strong: #c5c5c5;
+  --color-danger: #dd3333;
+  --color-danger-soft: #fdecec;
+  --color-success: #1f8a1f;
+  --color-success-soft: #eaf7ea;
+  --color-primary-soft: #eef8f8;
+  --color-primary-strong: #00787b;
+  --color-scrollbar: #d1d5db;
+}
+
+.dark {
+  color-scheme: dark;
+  --color-page: #121416;
+  --color-surface: #1b1e21;
+  --color-surface-muted: #24282c;
+  --color-surface-strong: #2e3338;
+  --color-fg: #e8eaed;
+  --color-fg-muted: #b6bbc0;
+  --color-fg-subtle: #8d949a;
+  --color-line: #30353a;
+  --color-line-strong: #4a5157;
+  --color-danger: #ff6b6b;
+  --color-danger-soft: #3a1e20;
+  --color-success: #5fd068;
+  --color-success-soft: #173019;
+  --color-primary-soft: #0f3536;
+  --color-primary-strong: #4fd3d6;
+  --color-scrollbar: #4a5157;
+}
+
 html {
-  background: #f3f3f3;
+  background: var(--color-page);
 }
 
 body {
   margin: 0;
   min-width: 320px;
-  background: #f3f3f3;
-  color: #2f2f2f;
+  background: var(--color-page);
+  color: var(--color-fg);
   font-family:
     Inter,
     ui-sans-serif,
@@ -27,8 +71,20 @@ body {
   box-sizing: border-box;
 }
 
-/* Tailwind v4 preflight resets the button cursor to `default`. */
+/* Set for two frames while the theme changes (see applyTheme). */
+.theme-switching,
+.theme-switching * {
+  transition: none !important;
+}
+
 @layer base {
+  /* Photos are a little dimmer on dark backgrounds so they don't glare.
+     Being in the base layer, any filter utility on an image wins. */
+  .dark img:not([data-theme-keep]) {
+    filter: brightness(0.92);
+  }
+
+  /* Tailwind v4 preflight resets the button cursor to `default`. */
   button:not(:disabled),
   [role='button']:not(:disabled) {
     cursor: pointer;
@@ -52,7 +108,7 @@ body {
       }
 
       &::-webkit-scrollbar-thumb {
-        background-color: #d1d5db;
+        background-color: var(--color-scrollbar);
         border-radius: 9999px;
       }
     }

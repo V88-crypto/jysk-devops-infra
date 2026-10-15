@@ -23,7 +23,7 @@ export const SuccessPage = () => {
             lg:mb-[40px]
             border-t
             border-b
-            border-[#cfcfcf]
+            border-line-strong
           "
         >
           Обліковий запис успішно створено!

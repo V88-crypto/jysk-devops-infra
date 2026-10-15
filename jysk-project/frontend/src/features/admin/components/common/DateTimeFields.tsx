@@ -9,7 +9,7 @@ interface DateTimeFieldsProps {
 }
 
 const fieldClass =
-  'h-[44px] rounded-[4px] border border-[#d5d5d5] bg-[#f4f4f4] px-3 text-sm text-[#333] outline-none focus:border-primary'
+  'h-[44px] rounded-[4px] border border-line-strong bg-surface-muted px-3 text-sm text-fg outline-none focus:border-primary'
 
 export const DateTimeFields = ({
   label,
@@ -22,9 +22,7 @@ export const DateTimeFields = ({
 }: DateTimeFieldsProps) => {
   return (
     <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-6">
-      <span className="min-w-[220px] text-sm font-medium text-[#333]">
-        {label}
-      </span>
+      <span className="min-w-[220px] text-sm font-medium text-fg">{label}</span>
 
       <div className="flex items-center gap-2">
         <input
@@ -43,7 +41,7 @@ export const DateTimeFields = ({
           className={`${fieldClass} w-[64px] text-center`}
         />
 
-        <span className="text-[#8a8a8a]">:</span>
+        <span className="text-fg-subtle">:</span>
 
         <input
           type="number"

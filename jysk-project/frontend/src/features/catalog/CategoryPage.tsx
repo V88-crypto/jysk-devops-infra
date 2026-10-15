@@ -38,7 +38,7 @@ export const CategoryPage = () => {
 
   if (isNotFound) {
     return (
-      <main className="min-h-[60vh] bg-[#f3f3f3] px-4 py-20 text-center">
+      <main className="min-h-[60vh] bg-page px-4 py-20 text-center">
         <p className="mb-4 text-[20px]">Категорію не знайдено</p>
         <Link to="/categories" className="text-primary underline">
           Перейти до категорій
@@ -59,19 +59,19 @@ export const CategoryPage = () => {
   const renderProducts = () => {
     if (error) {
       return (
-        <p className="py-16 text-center text-[#d33]">
+        <p className="py-16 text-center text-danger">
           Не вдалося завантажити товари
         </p>
       )
     }
 
     if (!data) {
-      return <p className="py-16 text-center text-[#777]">Завантаження...</p>
+      return <p className="py-16 text-center text-fg-subtle">Завантаження...</p>
     }
 
     if (data.items.length === 0) {
       return (
-        <p className="py-16 text-center text-[#777]">
+        <p className="py-16 text-center text-fg-subtle">
           У цій категорії поки немає товарів
         </p>
       )
@@ -93,17 +93,17 @@ export const CategoryPage = () => {
   }
 
   return (
-    <main className="w-full bg-[#f3f3f3] pb-16 font-sans">
+    <main className="w-full bg-page pb-16 font-sans">
       <div className="mx-auto mb-16 w-[90%] max-w-[1440px]">
         <CatalogBreadcrumbs items={breadcrumbs} />
 
         <div className="mb-8 mt-2 flex flex-col items-center gap-4 md:mb-12">
-          <h1 className="text-center font-['Inter'] text-3xl font-bold leading-none text-black md:text-[48px]">
+          <h1 className="text-center font-['Inter'] text-3xl font-bold leading-none text-fg md:text-[48px]">
             {category?.name ?? ''}
           </h1>
 
           {data && (
-            <p className="text-[#777]">{formatProductCount(data.total)}</p>
+            <p className="text-fg-subtle">{formatProductCount(data.total)}</p>
           )}
 
           {category && category.children.length > 0 && (
@@ -112,7 +112,7 @@ export const CategoryPage = () => {
                 <li key={child.id}>
                   <Link
                     to={`/category/${child.slug}`}
-                    className="block rounded-full border border-[#c5c5c5] bg-white px-4 py-1.5 text-sm transition-colors hover:border-primary hover:text-primary"
+                    className="block rounded-full border border-line-strong bg-surface px-4 py-1.5 text-sm transition-colors hover:border-primary hover:text-primary"
                   >
                     {child.name}
                   </Link>

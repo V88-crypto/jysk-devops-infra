@@ -18,7 +18,7 @@ export function BlogPostDetailPage() {
   if (isLoading) {
     return (
       <>
-        <p className="py-24 text-center text-neutral-500">Завантаження...</p>
+        <p className="py-24 text-center text-fg-subtle">Завантаження...</p>
         <Prefooter />
       </>
     )
@@ -27,7 +27,7 @@ export function BlogPostDetailPage() {
   if (!post) {
     return (
       <>
-        <div className="py-24 text-center text-neutral-500">
+        <div className="py-24 text-center text-fg-subtle">
           <p>Статтю не знайдено.</p>
           <button
             type="button"
@@ -48,7 +48,7 @@ export function BlogPostDetailPage() {
         <button
           type="button"
           onClick={() => navigate('/blog')}
-          className="mb-6 flex items-center gap-2 text-sm text-neutral-500 transition-colors hover:text-neutral-900"
+          className="mb-6 flex items-center gap-2 text-sm text-fg-subtle transition-colors hover:text-fg"
         >
           <span className="text-base">‹</span> Назад до блогу
         </button>
@@ -69,7 +69,7 @@ export function BlogPostDetailPage() {
                 {block.images.map((image, index) => (
                   <div
                     key={index}
-                    className="aspect-[4/3] overflow-hidden rounded-md bg-neutral-100"
+                    className="aspect-[4/3] overflow-hidden rounded-md bg-surface-muted"
                   >
                     <img
                       src={image}
@@ -85,7 +85,7 @@ export function BlogPostDetailPage() {
                   <h2 className="mb-3 text-xl font-bold">{block.title}</h2>
                 )}
 
-                <p className="leading-relaxed whitespace-pre-line text-neutral-700">
+                <p className="leading-relaxed whitespace-pre-line text-fg-muted">
                   {block.body}
                 </p>
               </div>

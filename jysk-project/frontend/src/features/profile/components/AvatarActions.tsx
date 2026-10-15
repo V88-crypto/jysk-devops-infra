@@ -115,7 +115,7 @@ export const AvatarActions = () => {
       </div>
 
       {error && (
-        <p className="mt-[5px] text-[12px] lg:text-[13px] text-red-500">
+        <p className="mt-[5px] text-[12px] lg:text-[13px] text-danger">
           {error}
         </p>
       )}

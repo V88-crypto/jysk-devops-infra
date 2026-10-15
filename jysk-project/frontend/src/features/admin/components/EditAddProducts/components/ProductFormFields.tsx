@@ -181,7 +181,7 @@ export const ProductFormFields = ({
           />
         </div>
 
-        <p className="text-sm text-[#8a8a8a]">
+        <p className="text-sm text-fg-subtle">
           Знижка та позначки поки не зберігаються: бекенд їх ще не підтримує.
         </p>
       </section>
@@ -260,9 +260,9 @@ export const ProductFormFields = ({
           </div>
         )}
 
-        <div className="mt-6 flex min-h-[56px] w-full flex-col border border-[#b9b9b9] bg-[#dedede] sm:flex-row sm:items-center">
+        <div className="mt-6 flex min-h-[56px] w-full flex-col border border-line-strong bg-surface-strong sm:flex-row sm:items-center">
           <label
-            className={`flex min-h-[56px] flex-1 items-center overflow-hidden px-5 text-base text-[#4f4f4f] ${
+            className={`flex min-h-[56px] flex-1 items-center overflow-hidden px-5 text-base text-fg-muted ${
               isPhotoInputDisabled ? 'cursor-not-allowed' : 'cursor-pointer'
             }`}
           >
@@ -289,11 +289,9 @@ export const ProductFormFields = ({
           </button>
         </div>
 
-        {photoError && (
-          <p className="mt-2 text-sm text-red-500">{photoError}</p>
-        )}
+        {photoError && <p className="mt-2 text-sm text-danger">{photoError}</p>}
 
-        <p className="mt-2 text-sm text-[#8a8a8a]">
+        <p className="mt-2 text-sm text-fg-subtle">
           JPEG, PNG або WEBP до 5 МБ. Перше фото буде головним.
         </p>
       </section>

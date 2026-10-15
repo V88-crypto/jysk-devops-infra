@@ -36,7 +36,7 @@ const titleClass = `
   lg:mb-[35px]
   border-t
   border-b
-  border-[#cfcfcf]
+  border-line-strong
 `
 
 const primaryButtonClass = `
@@ -80,7 +80,7 @@ const messageClass = `
   leading-[22px]
   sm:leading-[24px]
   lg:leading-[28px]
-  text-[#555]
+  text-fg-muted
   mb-[30px]
   sm:mb-[35px]
   lg:mb-[40px]
@@ -166,7 +166,7 @@ export const ResetPasswordPage = () => {
       <div className="w-full min-h-screen px-4 sm:px-6">
         <div className="w-full max-w-[1440px] mx-auto">
           <h1 className={titleClass}>Забули пароль?</h1>
-          <p className="text-center text-[16px] text-[#555]">
+          <p className="text-center text-[16px] text-fg-muted">
             Перевіряємо посилання...
           </p>
         </div>
@@ -242,20 +242,20 @@ export const ResetPasswordPage = () => {
                 text-[16px]
                 sm:text-[18px]
                 lg:text-[20px]
-                bg-[#e4e4e4]
+                bg-surface-strong
                 border
                 rounded-[5px]
                 outline-none
                 ${
                   errors.password
-                    ? 'border-red-500 focus:border-red-500'
-                    : 'border-[#c5c5c5] focus:border-[#aaa]'
+                    ? 'border-danger focus:border-danger'
+                    : 'border-line-strong focus:border-line-strong'
                 }
               `}
             />
 
             {errors.password && (
-              <p className="mt-1 text-[13px] text-red-500">
+              <p className="mt-1 text-[13px] text-danger">
                 {errors.password.message}
               </p>
             )}
@@ -278,27 +278,27 @@ export const ResetPasswordPage = () => {
                 text-[16px]
                 sm:text-[18px]
                 lg:text-[20px]
-                bg-[#e4e4e4]
+                bg-surface-strong
                 border
                 rounded-[5px]
                 outline-none
                 ${
                   errors.repeatPassword
-                    ? 'border-red-500 focus:border-red-500'
-                    : 'border-[#c5c5c5] focus:border-[#aaa]'
+                    ? 'border-danger focus:border-danger'
+                    : 'border-line-strong focus:border-line-strong'
                 }
               `}
             />
 
             {errors.repeatPassword && (
-              <p className="mt-1 text-[13px] text-red-500">
+              <p className="mt-1 text-[13px] text-danger">
                 {errors.repeatPassword.message}
               </p>
             )}
           </div>
 
           {submitError && (
-            <p className="w-full max-w-[600px] mb-[15px] text-[14px] text-red-500">
+            <p className="w-full max-w-[600px] mb-[15px] text-[14px] text-danger">
               {submitError}
             </p>
           )}

@@ -8,7 +8,7 @@ export const PhotoPreview = ({
   onRemove,
 }: PhotoPreviewProps) => {
   return (
-    <div className="relative flex h-[180px] w-full items-center justify-center bg-white sm:w-[180px]">
+    <div className="relative flex h-[180px] w-full items-center justify-center bg-surface sm:w-[180px]">
       <img
         src={imageUrl}
         alt={`Фото товару ${imageIndex + 1}`}
@@ -28,7 +28,7 @@ export const PhotoPreview = ({
         onClick={() => onRemove(imageIndex)}
         aria-label={`Видалити фото ${imageIndex + 1}`}
         title="Видалити фото"
-        className="absolute right-2 top-2 flex h-7 w-7 items-center justify-center rounded-full bg-white/90 text-lg leading-none text-[#555] shadow transition hover:bg-[#d33] hover:text-white disabled:cursor-not-allowed disabled:opacity-50"
+        className="absolute right-2 top-2 flex h-7 w-7 items-center justify-center rounded-full bg-white/90 text-lg leading-none text-ink/70 shadow transition hover:bg-danger hover:text-white disabled:cursor-not-allowed disabled:opacity-50"
       >
         ×
       </button>

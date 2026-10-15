@@ -75,7 +75,7 @@ export const WriteOffsList = ({ onAdd }: WriteOffsListProps) => {
         <div className="flex items-center gap-3">
           <h1 className="text-2xl font-semibold">Списання</h1>
 
-          <span className="flex h-6 min-w-6 items-center justify-center rounded-full bg-[#e5e5e5] px-2 text-sm font-medium text-[#555]">
+          <span className="flex h-6 min-w-6 items-center justify-center rounded-full bg-surface-strong px-2 text-sm font-medium text-fg-muted">
             {filteredWriteOffs.length}
           </span>
         </div>
@@ -89,7 +89,7 @@ export const WriteOffsList = ({ onAdd }: WriteOffsListProps) => {
         </button>
       </div>
 
-      <div className="mb-4 flex flex-wrap items-center gap-5 rounded-md bg-white px-4 py-3 shadow-sm">
+      <div className="mb-4 flex flex-wrap items-center gap-5 rounded-md bg-surface px-4 py-3 shadow-sm">
         <SearchField value={search} onChange={setSearch} />
 
         <FilterDropdown
@@ -115,16 +115,16 @@ export const WriteOffsList = ({ onAdd }: WriteOffsListProps) => {
 
         <button
           type="button"
-          className="flex items-center gap-1 text-sm font-medium text-[#333] transition-opacity hover:opacity-70"
+          className="flex items-center gap-1 text-sm font-medium text-fg transition-opacity hover:opacity-70"
         >
           Фільтр <span>+</span>
         </button>
       </div>
 
-      <div className="overflow-x-auto rounded-md bg-white shadow-sm">
+      <div className="overflow-x-auto rounded-md bg-surface shadow-sm">
         <table className="w-full min-w-[820px] border-collapse text-left text-sm">
           <thead>
-            <tr className="border-b border-[#e5e5e5] text-[#8a8a8a]">
+            <tr className="border-b border-line text-fg-subtle">
               <th className="px-4 py-3 font-normal">№</th>
               <th className="px-4 py-3 font-normal">Дата ˅</th>
               <th className="px-4 py-3 font-normal">Працівник</th>
@@ -140,7 +140,7 @@ export const WriteOffsList = ({ onAdd }: WriteOffsListProps) => {
             {filteredWriteOffs.map((writeOff) => (
               <tr
                 key={writeOff.id}
-                className="border-b border-[#f0f0f0] last:border-0"
+                className="border-b border-line last:border-0"
               >
                 <td className="px-4 py-3">{writeOff.number}</td>
                 <td className="px-4 py-3 whitespace-nowrap">
@@ -151,7 +151,7 @@ export const WriteOffsList = ({ onAdd }: WriteOffsListProps) => {
                 <td className="max-w-[160px] truncate px-4 py-3">
                   {writeOff.productsSummary}
                 </td>
-                <td className="px-4 py-3 text-[#8a8a8a]">
+                <td className="px-4 py-3 text-fg-subtle">
                   {writeOff.reasonName ?? '—'}
                 </td>
                 <td className="px-4 py-3">{writeOff.sum}₴</td>
@@ -164,13 +164,13 @@ export const WriteOffsList = ({ onAdd }: WriteOffsListProps) => {
         </table>
 
         {!isLoading && filteredWriteOffs.length === 0 && (
-          <p className="px-4 py-10 text-center text-[#8a8a8a]">
+          <p className="px-4 py-10 text-center text-fg-subtle">
             Нічого не знайдено
           </p>
         )}
 
         {isLoading && (
-          <p className="px-4 py-10 text-center text-[#8a8a8a]">
+          <p className="px-4 py-10 text-center text-fg-subtle">
             Завантаження...
           </p>
         )}

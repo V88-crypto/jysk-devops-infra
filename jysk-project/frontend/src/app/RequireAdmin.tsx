@@ -12,7 +12,7 @@ export const RequireAdmin = ({ children }: { children: ReactNode }) => {
 
   if (!user) {
     return (
-      <div className="flex min-h-screen items-center justify-center text-[#8a8a8a]">
+      <div className="flex min-h-screen items-center justify-center text-fg-subtle">
         Завантаження...
       </div>
     )

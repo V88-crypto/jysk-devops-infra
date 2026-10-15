@@ -110,7 +110,7 @@ export const AddWriteOffForm = ({ onBack, onSaved }: AddWriteOffFormProps) => {
         <span className="text-lg">‹</span> Додавання списання
       </button>
 
-      <div className="mb-6 border-t border-[#e0e0e0]" />
+      <div className="mb-6 border-t border-line" />
 
       <form
         onSubmit={(event) => void handleSubmit(event)}
@@ -127,7 +127,7 @@ export const AddWriteOffForm = ({ onBack, onSaved }: AddWriteOffFormProps) => {
         />
 
         <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-6">
-          <span className="min-w-[220px] text-sm font-medium text-[#333]">
+          <span className="min-w-[220px] text-sm font-medium text-fg">
             Склад
           </span>
 
@@ -151,7 +151,7 @@ export const AddWriteOffForm = ({ onBack, onSaved }: AddWriteOffFormProps) => {
         </div>
 
         <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-6">
-          <span className="min-w-[220px] text-sm font-medium text-[#333]">
+          <span className="min-w-[220px] text-sm font-medium text-fg">
             Причина
           </span>
 
@@ -175,7 +175,7 @@ export const AddWriteOffForm = ({ onBack, onSaved }: AddWriteOffFormProps) => {
         </div>
 
         <div className="flex flex-col gap-2 sm:flex-row sm:gap-6">
-          <span className="min-w-[220px] pt-2 text-sm font-medium text-[#333]">
+          <span className="min-w-[220px] pt-2 text-sm font-medium text-fg">
             Коментар
           </span>
 
@@ -184,14 +184,14 @@ export const AddWriteOffForm = ({ onBack, onSaved }: AddWriteOffFormProps) => {
             onChange={(event) => setComment(event.target.value)}
             placeholder="Введіть текст..."
             rows={4}
-            className="w-full max-w-[520px] resize-none rounded-[4px] border border-[#d5d5d5] bg-[#f4f4f4] px-3 py-2 text-sm text-[#333] outline-none placeholder:text-[#8a8a8a] focus:border-primary"
+            className="w-full max-w-[520px] resize-none rounded-[4px] border border-line-strong bg-surface-muted px-3 py-2 text-sm text-fg outline-none placeholder:text-fg-subtle focus:border-primary"
           />
         </div>
 
         <div className="overflow-x-auto">
           <table className="w-full min-w-[640px] border-collapse text-sm">
             <thead>
-              <tr className="text-left text-[#8a8a8a]">
+              <tr className="text-left text-fg-subtle">
                 <th className="px-2 py-2 font-normal">Найменування</th>
                 <th className="px-2 py-2 font-normal">Фасування</th>
                 <th className="px-2 py-2 font-normal">Кількість</th>
@@ -279,7 +279,7 @@ export const AddWriteOffForm = ({ onBack, onSaved }: AddWriteOffFormProps) => {
                       type="button"
                       onClick={() => removeRow(row.id)}
                       aria-label="Видалити рядок"
-                      className="text-[#8a8a8a] transition-colors hover:text-[#e31b23]"
+                      className="text-fg-subtle transition-colors hover:text-danger"
                     >
                       🗑
                     </button>

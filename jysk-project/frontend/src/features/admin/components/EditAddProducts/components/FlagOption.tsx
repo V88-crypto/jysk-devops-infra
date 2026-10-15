@@ -1,7 +1,7 @@
 import type { FlagOptionProps } from '@/features/admin/components/EditAddProducts/types/productForm'
 
 const flagTextClass =
-  'flex h-[52px] w-[280px] items-center border border-[#b9b9b9] bg-[#dedede] px-5 text-lg text-[#333]'
+  'flex h-[52px] w-[280px] items-center border border-line-strong bg-surface-strong px-5 text-lg text-fg'
 
 export const FlagOption = ({
   checked,
@@ -10,7 +10,7 @@ export const FlagOption = ({
   tone = 'teal',
   onChange,
 }: FlagOptionProps) => {
-  const checkboxTone = tone === 'black' ? 'accent-black' : 'accent-primary'
+  const checkboxTone = tone === 'black' ? 'accent-fg' : 'accent-primary'
 
   return (
     <label className="flex w-[320px] items-center gap-4">

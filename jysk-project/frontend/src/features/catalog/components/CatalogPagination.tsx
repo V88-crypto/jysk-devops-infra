@@ -9,11 +9,11 @@ const pageButtonClass = (isActive: boolean) =>
   `flex h-10 w-10 items-center justify-center rounded-[10px] border font-['Inter'] text-lg transition-colors ${
     isActive
       ? 'border-primary bg-primary text-white'
-      : 'border-black bg-[#E0E0E0] text-black hover:bg-gray-300'
+      : 'border-line-strong bg-surface-strong text-fg hover:bg-line-strong'
   }`
 
 const arrowClass =
-  'p-2 text-black transition-colors hover:text-primary disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:text-black'
+  'p-2 text-fg transition-colors hover:text-primary disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:text-fg'
 
 export const CatalogPagination = ({
   page,

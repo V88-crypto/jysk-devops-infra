@@ -95,7 +95,7 @@ export const ClientsPage = () => {
   const renderStatus = () => {
     if (error) {
       return (
-        <p className="px-4 py-10 text-center text-[#d33]">
+        <p className="px-4 py-10 text-center text-danger">
           {toLoadErrorMessage(error)}
         </p>
       )
@@ -103,13 +103,13 @@ export const ClientsPage = () => {
 
     if (!data) {
       return (
-        <p className="px-4 py-10 text-center text-[#8a8a8a]">Завантаження...</p>
+        <p className="px-4 py-10 text-center text-fg-subtle">Завантаження...</p>
       )
     }
 
     if (clients.length === 0) {
       return (
-        <p className="px-4 py-10 text-center text-[#8a8a8a]">
+        <p className="px-4 py-10 text-center text-fg-subtle">
           Нічого не знайдено
         </p>
       )
@@ -123,12 +123,12 @@ export const ClientsPage = () => {
       <div className="mb-6 flex items-center gap-3">
         <h1 className="text-2xl font-semibold">Клієнти</h1>
 
-        <span className="flex h-6 min-w-6 items-center justify-center rounded-full bg-[#e5e5e5] px-2 text-sm font-medium text-[#555]">
+        <span className="flex h-6 min-w-6 items-center justify-center rounded-full bg-surface-strong px-2 text-sm font-medium text-fg-muted">
           {total}
         </span>
       </div>
 
-      <div className="mb-4 flex flex-wrap items-center gap-5 rounded-md bg-white px-4 py-3 shadow-sm">
+      <div className="mb-4 flex flex-wrap items-center gap-5 rounded-md bg-surface px-4 py-3 shadow-sm">
         <SearchField
           value={search}
           onChange={handleSearchChange}
@@ -137,19 +137,19 @@ export const ClientsPage = () => {
       </div>
 
       {actionError && (
-        <p className="mb-4 rounded-md bg-[#fdecec] px-4 py-3 text-sm text-[#d33]">
+        <p className="mb-4 rounded-md bg-danger-soft px-4 py-3 text-sm text-danger">
           {actionError}
         </p>
       )}
 
-      <div className="overflow-x-auto rounded-md bg-white shadow-sm">
+      <div className="overflow-x-auto rounded-md bg-surface shadow-sm">
         <table
           className={`w-full min-w-[760px] border-collapse text-left text-sm transition-opacity ${
             isLoading && data ? 'opacity-60' : ''
           }`}
         >
           <thead>
-            <tr className="border-b border-[#e5e5e5] text-[#8a8a8a]">
+            <tr className="border-b border-line text-fg-subtle">
               <th className="px-4 py-3 font-normal">Ім'я</th>
               <th className="px-4 py-3 font-normal">Прізвище</th>
               <th className="px-4 py-3 font-normal">Пошта</th>
@@ -166,18 +166,18 @@ export const ClientsPage = () => {
               return (
                 <tr
                   key={client.id}
-                  className="border-b border-[#f0f0f0] last:border-0"
+                  className="border-b border-line last:border-0"
                 >
                   <td className="px-4 py-3">
                     {client.firstName}
                     {isCurrentUser && (
-                      <span className="ml-2 text-xs text-[#8a8a8a]">(ви)</span>
+                      <span className="ml-2 text-xs text-fg-subtle">(ви)</span>
                     )}
                   </td>
                   <td className="px-4 py-3">{client.lastName}</td>
                   <td className="px-4 py-3">{client.email}</td>
                   <td className="px-4 py-3">
-                    {client.phone || <span className="text-[#b0b0b0]">—</span>}
+                    {client.phone || <span className="text-fg-subtle">—</span>}
                   </td>
                   <td className="px-4 py-3">{formatDate(client.createdAt)}</td>
                   <td className="px-4 py-3">
@@ -198,8 +198,8 @@ export const ClientsPage = () => {
                       }
                       className={`h-[34px] rounded-[4px] border px-2 text-sm outline-none transition-colors focus:border-primary disabled:cursor-not-allowed disabled:opacity-60 ${
                         client.role === 'admin'
-                          ? 'border-primary bg-[#e6f7f7] font-medium text-[#00787b]'
-                          : 'border-[#d5d5d5] bg-[#f4f4f4] text-[#333]'
+                          ? 'border-primary bg-primary-soft font-medium text-primary-strong'
+                          : 'border-line-strong bg-surface-muted text-fg'
                       }`}
                     >
                       {(Object.keys(ROLE_LABELS) as ClientRole[]).map(

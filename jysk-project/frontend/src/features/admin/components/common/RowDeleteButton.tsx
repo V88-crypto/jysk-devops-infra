@@ -13,7 +13,7 @@ export const RowDeleteButton = ({
       onClick={onClick}
       disabled={disabled}
       aria-label="Видалити"
-      className="text-[#8a8a8a] transition-colors hover:text-[#e31b23] disabled:cursor-not-allowed disabled:opacity-50"
+      className="text-fg-subtle transition-colors hover:text-danger disabled:cursor-not-allowed disabled:opacity-50"
     >
       <svg
         aria-hidden="true"

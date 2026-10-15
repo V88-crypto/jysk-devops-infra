@@ -23,7 +23,7 @@ export const PasswordResetSuccessPage = () => {
             lg:mb-[30px]
             border-t
             border-b
-            border-[#cfcfcf]
+            border-line-strong
           "
         >
           Пароль успішно змінено

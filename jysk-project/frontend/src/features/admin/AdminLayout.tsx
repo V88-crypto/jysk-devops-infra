@@ -39,7 +39,7 @@ const ComingSoonPage = ({ itemId }: { itemId: AdminNavItemId }) => {
 
   return (
     <AdminPageLayout>
-      <div className="flex min-h-[60vh] items-center justify-center text-[#8a8a8a]">
+      <div className="flex min-h-[60vh] items-center justify-center text-fg-subtle">
         Розділ «{label}» у розробці
       </div>
     </AdminPageLayout>

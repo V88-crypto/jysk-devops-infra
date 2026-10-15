@@ -14,8 +14,8 @@ import {
 } from './editProfileSchema'
 
 const inputClass = (hasError: boolean) =>
-  `w-full h-[48px] px-[16px] rounded-[4px] border bg-[#e4e4e4] outline-none transition ${
-    hasError ? 'border-red-500' : 'border-[#c5c5c5] focus:border-primary'
+  `w-full h-[48px] px-[16px] rounded-[4px] border bg-surface-strong outline-none transition ${
+    hasError ? 'border-danger' : 'border-line-strong focus:border-primary'
   }`
 
 const EditProfileFields = ({ user }: { user: AuthUser }) => {
@@ -77,7 +77,7 @@ const EditProfileFields = ({ user }: { user: AuthUser }) => {
           />
 
           {errors.firstName && (
-            <p className="mt-1 text-sm text-red-500">
+            <p className="mt-1 text-sm text-danger">
               {errors.firstName.message}
             </p>
           )}
@@ -92,7 +92,7 @@ const EditProfileFields = ({ user }: { user: AuthUser }) => {
           />
 
           {errors.lastName && (
-            <p className="mt-1 text-sm text-red-500">
+            <p className="mt-1 text-sm text-danger">
               {errors.lastName.message}
             </p>
           )}
@@ -104,9 +104,9 @@ const EditProfileFields = ({ user }: { user: AuthUser }) => {
             value={user.email}
             readOnly
             aria-readonly="true"
-            className={`${inputClass(false)} cursor-not-allowed text-[#777]`}
+            className={`${inputClass(false)} cursor-not-allowed text-fg-subtle`}
           />
-          <p className="mt-1 text-sm text-[#888]">
+          <p className="mt-1 text-sm text-fg-subtle">
             Електронну пошту змінити не можна
           </p>
         </div>
@@ -120,11 +120,11 @@ const EditProfileFields = ({ user }: { user: AuthUser }) => {
           />
 
           {errors.phone && (
-            <p className="mt-1 text-sm text-red-500">{errors.phone.message}</p>
+            <p className="mt-1 text-sm text-danger">{errors.phone.message}</p>
           )}
         </div>
 
-        {submitError && <p className="text-sm text-red-500">{submitError}</p>}
+        {submitError && <p className="text-sm text-danger">{submitError}</p>}
 
         <div className="flex gap-[12px] mt-[10px]">
           <button

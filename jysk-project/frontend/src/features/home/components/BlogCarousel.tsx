@@ -23,7 +23,7 @@ export function BlogCarousel({ posts }: BlogCarouselProps) {
         className="absolute left-0 top-1/2 -translate-y-1/2 z-10 flex h-16 w-12 items-center justify-center bg-transparent opacity-100 transition-opacity hover:cursor-pointer hover:opacity-60 disabled:cursor-default disabled:opacity-30 sm:w-16 md:w-[70px]"
         disabled={!swiper}
       >
-        <span className="block h-9 w-9 rotate-[135deg] border-r-[3px] border-b-[3px] border-black" />
+        <span className="block h-9 w-9 rotate-[135deg] border-r-[3px] border-b-[3px] border-line-strong" />
       </button>
 
       <div className="px-10 xl:px-16">
@@ -60,7 +60,7 @@ export function BlogCarousel({ posts }: BlogCarouselProps) {
         className="absolute right-0 top-1/2 -translate-y-1/2 z-10 flex h-16 w-12 items-center justify-center bg-transparent opacity-100 transition-opacity hover:cursor-pointer hover:opacity-60 disabled:cursor-default disabled:opacity-30 sm:w-16 md:w-[70px]"
         disabled={!swiper}
       >
-        <span className="block h-9 w-9 -rotate-45 border-r-[3px] border-b-[3px] border-black" />
+        <span className="block h-9 w-9 -rotate-45 border-r-[3px] border-b-[3px] border-line-strong" />
       </button>
     </div>
   )

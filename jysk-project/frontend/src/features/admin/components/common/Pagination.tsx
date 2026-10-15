@@ -6,7 +6,7 @@ interface PaginationProps {
 }
 
 const buttonClass =
-  'h-[34px] rounded-[4px] border border-[#d5d5d5] bg-white px-3 transition-colors hover:border-primary disabled:cursor-not-allowed disabled:opacity-50'
+  'h-[34px] rounded-[4px] border border-line-strong bg-surface px-3 transition-colors hover:border-primary disabled:cursor-not-allowed disabled:opacity-50'
 
 export const Pagination = ({
   page,
@@ -23,7 +23,7 @@ export const Pagination = ({
   const lastShown = Math.min(page * pageSize, total)
 
   return (
-    <div className="mt-4 flex flex-wrap items-center justify-between gap-3 text-sm text-[#555]">
+    <div className="mt-4 flex flex-wrap items-center justify-between gap-3 text-sm text-fg-muted">
       <span>
         Показано {firstShown}–{lastShown} з {total}
       </span>

@@ -58,7 +58,7 @@ export const ReviewsPage = () => {
   const renderStatus = () => {
     if (error) {
       return (
-        <p className="px-4 py-10 text-center text-[#d33]">
+        <p className="px-4 py-10 text-center text-danger">
           Не вдалося завантажити відгуки
         </p>
       )
@@ -66,13 +66,13 @@ export const ReviewsPage = () => {
 
     if (!data) {
       return (
-        <p className="px-4 py-10 text-center text-[#8a8a8a]">Завантаження...</p>
+        <p className="px-4 py-10 text-center text-fg-subtle">Завантаження...</p>
       )
     }
 
     if (reviews.length === 0) {
       return (
-        <p className="px-4 py-10 text-center text-[#8a8a8a]">
+        <p className="px-4 py-10 text-center text-fg-subtle">
           Відгуків поки немає
         </p>
       )
@@ -86,25 +86,25 @@ export const ReviewsPage = () => {
       <div className="mb-6 flex items-center gap-3">
         <h1 className="text-2xl font-semibold">Відгуки</h1>
 
-        <span className="flex h-6 min-w-6 items-center justify-center rounded-full bg-[#e5e5e5] px-2 text-sm font-medium text-[#555]">
+        <span className="flex h-6 min-w-6 items-center justify-center rounded-full bg-surface-strong px-2 text-sm font-medium text-fg-muted">
           {total}
         </span>
       </div>
 
       {actionError && (
-        <p className="mb-4 rounded-md bg-[#fdecec] px-4 py-3 text-sm text-[#d33]">
+        <p className="mb-4 rounded-md bg-danger-soft px-4 py-3 text-sm text-danger">
           {actionError}
         </p>
       )}
 
-      <div className="overflow-x-auto rounded-md bg-white shadow-sm">
+      <div className="overflow-x-auto rounded-md bg-surface shadow-sm">
         <table
           className={`w-full min-w-[820px] border-collapse text-left text-sm transition-opacity ${
             isLoading && data ? 'opacity-60' : ''
           }`}
         >
           <thead>
-            <tr className="border-b border-[#e5e5e5] text-[#8a8a8a]">
+            <tr className="border-b border-line text-fg-subtle">
               <th className="px-4 py-3 font-normal">Товар</th>
               <th className="px-4 py-3 font-normal">Автор</th>
               <th className="px-4 py-3 font-normal">Рейтинг</th>
@@ -118,19 +118,19 @@ export const ReviewsPage = () => {
             {reviews.map((review) => (
               <tr
                 key={review.id}
-                className="border-b border-[#f0f0f0] last:border-0"
+                className="border-b border-line last:border-0"
               >
                 <td className="px-4 py-3">
                   <p>{review.productName}</p>
-                  <p className="text-xs text-[#8a8a8a]">{review.sku}</p>
+                  <p className="text-xs text-fg-subtle">{review.sku}</p>
                 </td>
                 <td className="px-4 py-3">{review.authorName}</td>
                 <td className="px-4 py-3">
                   <StarRating rating={review.rating} />
                 </td>
-                <td className="max-w-[320px] px-4 py-3 text-[#555]">
+                <td className="max-w-[320px] px-4 py-3 text-fg-muted">
                   {review.comment || (
-                    <span className="text-[#b0b0b0]">Без коментаря</span>
+                    <span className="text-fg-subtle">Без коментаря</span>
                   )}
                 </td>
                 <td className="px-4 py-3 whitespace-nowrap">

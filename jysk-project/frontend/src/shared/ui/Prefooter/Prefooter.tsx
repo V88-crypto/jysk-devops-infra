@@ -6,7 +6,7 @@ import DocumentIcon from '@/assets/icons/document.svg?react'
 export const Prefooter: React.FC = () => {
   return (
     <section className="w-full font-sans">
-      <div className="w-full bg-white px-5 py-10 md:px-10 xl:px-[7.03%] xl:py-[4vw] relative z-10">
+      <div className="w-full bg-surface px-5 py-10 md:px-10 xl:px-[7.03%] xl:py-[4vw] relative z-10">
         <div className="grid grid-cols-2 md:grid-cols-3 gap-x-2 gap-y-8 md:gap-x-6 xl:gap-[2vw] justify-items-center">
           <div className="flex flex-col items-center text-center col-span-1">
             <div className="flex items-center justify-center h-[60px] md:h-[75px] xl:h-[4.68vw] mb-3 md:mb-4 xl:mb-[1.25vw]">
@@ -45,12 +45,12 @@ export const Prefooter: React.FC = () => {
         <div className="absolute top-0 left-0 w-full h-[6px] md:h-[10px] bg-gradient-to-b from-black/10 to-transparent pointer-events-none"></div>
 
         <div className="px-5 py-10 md:px-10 xl:px-[7.03%] xl:pt-[3.38vw] xl:pb-[2.5vw] flex flex-col items-center text-center relative z-10">
-          <h2 className="text-black font-bold text-[12px] md:text-[20px] xl:text-[1.45vw] mb-3 md:mb-4 xl:mb-[1.25vw] w-full md:max-w-[90%] xl:max-w-[80%]">
+          <h2 className="text-fg font-bold text-[12px] md:text-[20px] xl:text-[1.45vw] mb-3 md:mb-4 xl:mb-[1.25vw] w-full md:max-w-[90%] xl:max-w-[80%]">
             Підпишись на розсилку новин та отримай код на безкоштовну доставку
             для свого першого замовлення!
           </h2>
 
-          <p className="text-black text-[10px] md:text-[14px] xl:text-[1.25vw] font-normal mb-6 md:mb-8 xl:mb-[2.08vw] w-full md:max-w-[90%] xl:max-w-[70%]">
+          <p className="text-fg text-[10px] md:text-[14px] xl:text-[1.25vw] font-normal mb-6 md:mb-8 xl:mb-[2.08vw] w-full md:max-w-[90%] xl:max-w-[70%]">
             Підпишіться на нашу розсилку та отримайте бонус! 10% знижка на перше
             замовлення, ексклюзивні пропозиції та ранній доступ до розпродажів.
             Введіть свій email нижче та почніть отримувати переваги!
@@ -81,7 +81,7 @@ export const Prefooter: React.FC = () => {
           </form>
         </div>
 
-        <hr className="border-black/50 w-full" />
+        <hr className="border-line-strong w-full" />
 
         <div className="w-full h-[5.6vw] md:h-[9.1vw] xl:h-[3.5vw]"></div>
       </div>

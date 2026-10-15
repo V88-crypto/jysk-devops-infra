@@ -59,9 +59,9 @@ export const Favorites = ({ state, onRemove }: FavoritesProps) => {
             key={product.variantId}
             className="
                 w-full
-                bg-white
+                bg-surface
                 border
-                border-[#dedede]
+                border-line
                 shadow-[0_1px_3px_rgba(0,0,0,0.15)]
                 relative
             "
@@ -73,7 +73,7 @@ export const Favorites = ({ state, onRemove }: FavoritesProps) => {
                 sm:h-[340px]
                 md:h-[420px]
                 lg:h-[500px]
-                bg-[#f5f5f5]"
+                bg-surface-muted"
             >
               <Link
                 to={productUrl(product.productSlug, product.variantId)}
@@ -91,7 +91,7 @@ export const Favorites = ({ state, onRemove }: FavoritesProps) => {
                     "
                   />
                 ) : (
-                  <div className="flex h-full w-full items-center justify-center text-[15px] text-[#999]">
+                  <div className="flex h-full w-full items-center justify-center text-[15px] text-fg-subtle">
                     Немає фото
                   </div>
                 )}
@@ -152,7 +152,7 @@ export const Favorites = ({ state, onRemove }: FavoritesProps) => {
               <p
                 className="
                     text-[15px]
-                    text-[#555]
+                    text-fg-muted
                     mt-[4px]
                 "
               >
@@ -168,7 +168,7 @@ export const Favorites = ({ state, onRemove }: FavoritesProps) => {
               <p className="mt-[6px] flex items-center gap-[5px] text-[17px]">
                 <span
                   className={`w-[6px] h-[6px] rounded-full ${
-                    product.inStock ? 'bg-[#19c514]' : 'bg-red-500'
+                    product.inStock ? 'bg-[#19c514]' : 'bg-danger'
                   }`}
                 />
                 {product.inStock ? 'В наявності' : 'Немає в наявності'}
@@ -200,7 +200,7 @@ export const Favorites = ({ state, onRemove }: FavoritesProps) => {
       </h2>
 
       {removeError && (
-        <p className="mb-[15px] text-[14px] text-red-500">{removeError}</p>
+        <p className="mb-[15px] text-[14px] text-danger">{removeError}</p>
       )}
 
       {renderContent()}

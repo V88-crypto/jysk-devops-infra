@@ -37,7 +37,7 @@ export const ProductPage = () => {
 
   if (isLoading) {
     return (
-      <main className="min-h-[60vh] bg-[#f3f3f3] px-4 py-20 text-center text-[#777]">
+      <main className="min-h-[60vh] bg-page px-4 py-20 text-center text-fg-subtle">
         Завантаження...
       </main>
     )
@@ -47,7 +47,7 @@ export const ProductPage = () => {
     const isNotFound = error instanceof ApiError && error.status === 404
 
     return (
-      <main className="min-h-[60vh] bg-[#f3f3f3] px-4 py-20 text-center">
+      <main className="min-h-[60vh] bg-page px-4 py-20 text-center">
         <p className="mb-4 text-[20px]">
           {isNotFound ? 'Товар не знайдено' : 'Не вдалося завантажити товар'}
         </p>
@@ -73,7 +73,7 @@ export const ProductPage = () => {
   const isProductFavorite = isFavorite(product.slug)
 
   return (
-    <main className="bg-[#f3f3f3] pb-16">
+    <main className="bg-page pb-16">
       <div className="mx-auto w-[90%] max-w-[1440px]">
         <CatalogBreadcrumbs items={breadcrumbs} />
 
@@ -90,7 +90,7 @@ export const ProductPage = () => {
                 {product.name}
               </h1>
               {variant && (
-                <p className="mt-1 text-sm text-[#888]">
+                <p className="mt-1 text-sm text-fg-subtle">
                   Артикул: {variant.sku}
                 </p>
               )}
@@ -101,7 +101,7 @@ export const ProductPage = () => {
                 {formatPrice(variant.price)}
               </p>
             ) : (
-              <p className="text-[#777]">Товар тимчасово недоступний</p>
+              <p className="text-fg-subtle">Товар тимчасово недоступний</p>
             )}
 
             {product.variants.length > 1 && (
@@ -117,7 +117,7 @@ export const ProductPage = () => {
                       className={`rounded-[4px] border px-4 py-2 text-sm transition ${
                         item.id === variant?.id
                           ? 'border-primary bg-primary text-white'
-                          : 'border-[#c5c5c5] bg-white hover:border-primary'
+                          : 'border-line-strong bg-surface hover:border-primary'
                       }`}
                     >
                       {variantLabel(item)}
@@ -131,7 +131,7 @@ export const ProductPage = () => {
               <p className="flex items-center gap-2">
                 <span
                   className={`h-2.5 w-2.5 rounded-full ${
-                    variant.stock > 0 ? 'bg-[#19c514]' : 'bg-red-500'
+                    variant.stock > 0 ? 'bg-[#19c514]' : 'bg-danger'
                   }`}
                 />
                 {variant.stock > 0
@@ -157,24 +157,24 @@ export const ProductPage = () => {
                   {isProductFavorite ? 'В обраному' : 'Додати в обране'}
                 </button>
                 {favoriteError && (
-                  <p className="mt-2 text-sm text-red-500">{favoriteError}</p>
+                  <p className="mt-2 text-sm text-danger">{favoriteError}</p>
                 )}
               </div>
             )}
 
-            <div className="bg-white p-5">
+            <div className="bg-surface p-5">
               <h2 className="mb-3 text-[20px] font-bold">Характеристики</h2>
               {variant && variant.attributes.length > 0 ? (
                 <dl className="grid grid-cols-[minmax(120px,40%)_1fr] gap-x-4 gap-y-2">
                   {variant.attributes.map((attribute) => (
                     <div key={attribute.name} className="contents">
-                      <dt className="text-[#777]">{attribute.name}</dt>
+                      <dt className="text-fg-subtle">{attribute.name}</dt>
                       <dd>{attribute.value}</dd>
                     </div>
                   ))}
                 </dl>
               ) : (
-                <p className="text-[#777]">Характеристики не вказані</p>
+                <p className="text-fg-subtle">Характеристики не вказані</p>
               )}
             </div>
           </div>
@@ -183,7 +183,7 @@ export const ProductPage = () => {
         {product.description && (
           <section className="mt-12">
             <h2 className="mb-4 text-[26px] font-bold lg:text-[32px]">Опис</h2>
-            <p className="max-w-[900px] whitespace-pre-line text-[17px] leading-[28px] text-[#444]">
+            <p className="max-w-[900px] whitespace-pre-line text-[17px] leading-[28px] text-fg-muted">
               {product.description}
             </p>
           </section>

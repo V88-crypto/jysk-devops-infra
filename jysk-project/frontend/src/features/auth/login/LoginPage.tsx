@@ -63,7 +63,7 @@ export const LoginPage = () => {
             lg:mb-[30px]
             border-t
             border-b
-            border-[#cfcfcf]
+            border-line-strong
           "
         >
           Вхід
@@ -97,20 +97,20 @@ export const LoginPage = () => {
                 text-[16px]
                 sm:text-[18px]
                 lg:text-[20px]
-                bg-[#e4e4e4]
+                bg-surface-strong
                 border
                 rounded-[5px]
                 outline-none
                 ${
                   errors.email
-                    ? 'border-red-500 focus:border-red-500'
-                    : 'border-[#c5c5c5] focus:border-[#aaa]'
+                    ? 'border-danger focus:border-danger'
+                    : 'border-line-strong focus:border-line-strong'
                 }
               `}
             />
 
             {errors.email && (
-              <p className="mt-1 text-[13px] text-red-500">
+              <p className="mt-1 text-[13px] text-danger">
                 {errors.email.message}
               </p>
             )}
@@ -140,27 +140,27 @@ export const LoginPage = () => {
                 text-[16px]
                 sm:text-[18px]
                 lg:text-[20px]
-                bg-[#e4e4e4]
+                bg-surface-strong
                 border
                 rounded-[5px]
                 outline-none
                 ${
                   errors.password
-                    ? 'border-red-500 focus:border-red-500'
-                    : 'border-[#c5c5c5] focus:border-[#aaa]'
+                    ? 'border-danger focus:border-danger'
+                    : 'border-line-strong focus:border-line-strong'
                 }
               `}
             />
 
             {errors.password && (
-              <p className="mt-1 text-[13px] text-red-500">
+              <p className="mt-1 text-[13px] text-danger">
                 {errors.password.message}
               </p>
             )}
           </div>
 
           {submitError && (
-            <p className="w-full max-w-[600px] mb-[15px] text-[14px] text-red-500">
+            <p className="w-full max-w-[600px] mb-[15px] text-[14px] text-danger">
               {submitError}
             </p>
           )}
@@ -245,7 +245,7 @@ export const LoginPage = () => {
               leading-[24px]
               sm:leading-[28px]
               lg:leading-[30px]
-              text-[#555]
+              text-fg-muted
             "
           >
             <li>Відстежуйте ваші посилки від замовлення до доставки</li>
@@ -269,14 +269,14 @@ export const LoginPage = () => {
               sm:mt-[50px]
               lg:mt-[55px]
               rounded-[5px]
-              bg-[#e4e4e4]
+              bg-surface-strong
               border
-              border-[#c5c5c5]
-              text-[#555]
+              border-line-strong
+              text-fg-muted
               text-[16px]
               sm:text-[18px]
               lg:text-[20px]
-              hover:bg-[#d8d8d8]
+              hover:bg-surface-strong
               transition-colors
             "
           >

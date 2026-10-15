@@ -47,7 +47,7 @@ export const ConfirmEmailPage = () => {
             lg:mb-[40px]
             border-t
             border-b
-            border-[#cfcfcf]
+            border-line-strong
           "
         >
           Підтвердження облікового запису
@@ -65,7 +65,7 @@ export const ConfirmEmailPage = () => {
             leading-[18px]
             sm:leading-[20px]
             lg:leading-[22px]
-            text-[#555]
+            text-fg-muted
             mb-[35px]
             sm:mb-[40px]
             lg:mb-[45px]
@@ -98,20 +98,20 @@ export const ConfirmEmailPage = () => {
                 text-[16px]
                 sm:text-[18px]
                 lg:text-[20px]
-                bg-[#e4e4e4]
+                bg-surface-strong
                 border
                 rounded-[5px]
                 outline-none
                 ${
                   errors.code
-                    ? 'border-red-500 focus:border-red-500'
-                    : 'border-[#c5c5c5] focus:border-[#aaa]'
+                    ? 'border-danger focus:border-danger'
+                    : 'border-line-strong focus:border-line-strong'
                 }
               `}
             />
 
             {errors.code && (
-              <p className="mt-1 text-[13px] text-red-500">
+              <p className="mt-1 text-[13px] text-danger">
                 {errors.code.message}
               </p>
             )}

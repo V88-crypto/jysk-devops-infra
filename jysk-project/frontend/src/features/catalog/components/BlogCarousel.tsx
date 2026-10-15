@@ -35,8 +35,8 @@ export const BlogCarousel: React.FC = () => {
   const visiblePosts = blogPosts.slice(currentIndex, currentIndex + itemsToShow)
 
   return (
-    <div className="w-full bg-[#f3f3f3] py-10 md:py-16 xl:py-[4vw] flex flex-col items-center">
-      <h2 className="font-['Raleway'] font-bold text-3xl md:text-[48px] xl:text-[2.5vw] text-[#231F20] mb-8 xl:mb-[2.5vw]">
+    <div className="w-full bg-page py-10 md:py-16 xl:py-[4vw] flex flex-col items-center">
+      <h2 className="font-['Raleway'] font-bold text-3xl md:text-[48px] xl:text-[2.5vw] text-fg mb-8 xl:mb-[2.5vw]">
         Блог
       </h2>
 
@@ -64,7 +64,7 @@ export const BlogCarousel: React.FC = () => {
         <div className="flex flex-1 gap-6 xl:gap-[2vw] overflow-hidden">
           {visiblePosts.map((post) => (
             <div key={post.id} className="flex flex-col flex-1 min-w-0">
-              <div className="relative w-full aspect-810/477 overflow-hidden bg-gray-200">
+              <div className="relative w-full aspect-810/477 overflow-hidden bg-surface-strong">
                 <img
                   src={post.image}
                   alt={post.title}
@@ -73,14 +73,14 @@ export const BlogCarousel: React.FC = () => {
                 <div
                   className={`absolute top-4 md:top-6 xl:top-[2vw] max-w-[75%] ${post.titleAlign === 'left' ? 'left-4 md:left-8 xl:left-[2.5vw]' : 'right-4 md:right-8 xl:right-[2.5vw] text-right'}`}
                 >
-                  <h3 className="font-['Raleway'] font-bold text-xs sm:text-sm md:text-lg xl:text-[1.25vw] text-[#231F20] leading-tight drop-shadow-sm bg-white/60 p-1 md:bg-transparent">
+                  <h3 className="font-['Raleway'] font-bold text-xs sm:text-sm md:text-lg xl:text-[1.25vw] text-ink leading-tight drop-shadow-sm bg-white/60 p-1 md:bg-transparent">
                     {post.title}
                   </h3>
                 </div>
               </div>
 
-              <div className="w-full bg-[#D9D9D9] p-6 xl:p-[2vw] grow">
-                <p className="font-['Raleway'] font-normal text-sm md:text-[20px] xl:text-[1.04vw] text-[#231F20] leading-relaxed text-justify">
+              <div className="w-full bg-surface-strong p-6 xl:p-[2vw] grow">
+                <p className="font-['Raleway'] font-normal text-sm md:text-[20px] xl:text-[1.04vw] text-fg leading-relaxed text-justify">
                   {post.description}
                 </p>
               </div>

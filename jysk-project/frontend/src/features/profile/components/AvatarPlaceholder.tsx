@@ -8,7 +8,7 @@ export const AvatarPlaceholder = ({
   <div
     role="img"
     aria-label="Фото профілю не завантажено"
-    className={`overflow-hidden rounded-full bg-[#e2e2e2] ${className}`}
+    className={`overflow-hidden rounded-full bg-surface-strong ${className}`}
   >
     <svg viewBox="0 0 100 100" aria-hidden="true" className="h-full w-full">
       <circle cx="50" cy="38" r="18" fill="#a9a9a9" />

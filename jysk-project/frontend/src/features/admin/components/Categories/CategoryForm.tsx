@@ -53,14 +53,14 @@ export const CategoryForm = ({
   return (
     <form
       onSubmit={handleSubmit}
-      className="mb-6 rounded-md bg-white p-5 shadow-sm"
+      className="mb-6 rounded-md bg-surface p-5 shadow-sm"
     >
       <h2 className="mb-4 text-lg font-semibold">
         {editing ? `Редагування: ${editing.name}` : 'Нова категорія'}
       </h2>
 
       <div className="grid gap-4 md:grid-cols-3">
-        <label className="flex flex-col gap-1.5 text-sm font-medium text-[#333]">
+        <label className="flex flex-col gap-1.5 text-sm font-medium text-fg">
           Назва
           <input
             value={name}
@@ -71,7 +71,7 @@ export const CategoryForm = ({
           />
         </label>
 
-        <label className="flex flex-col gap-1.5 text-sm font-medium text-[#333]">
+        <label className="flex flex-col gap-1.5 text-sm font-medium text-fg">
           Slug
           <input
             value={slug}
@@ -82,7 +82,7 @@ export const CategoryForm = ({
           />
         </label>
 
-        <label className="flex flex-col gap-1.5 text-sm font-medium text-[#333]">
+        <label className="flex flex-col gap-1.5 text-sm font-medium text-fg">
           Батьківська категорія
           <select
             value={parentId ?? ''}
@@ -105,7 +105,7 @@ export const CategoryForm = ({
       </div>
 
       {validationError && (
-        <p role="alert" className="mt-3 text-sm text-[#d33]">
+        <p role="alert" className="mt-3 text-sm text-danger">
           {validationError}
         </p>
       )}
@@ -124,7 +124,7 @@ export const CategoryForm = ({
             type="button"
             onClick={onCancel}
             disabled={isSaving}
-            className="h-[40px] rounded-[4px] border border-[#c5c5c5] px-6 text-sm transition hover:border-primary hover:text-primary"
+            className="h-[40px] rounded-[4px] border border-line-strong px-6 text-sm transition hover:border-primary hover:text-primary"
           >
             Скасувати
           </button>

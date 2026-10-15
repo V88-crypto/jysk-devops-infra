@@ -70,9 +70,9 @@ export const ProfileInfo = ({ counts }: ProfileInfoProps) => {
               lg:w-1/2
               min-h-[300px]
               lg:min-h-[400px]
-              bg-white
+              bg-surface
               border
-              border-[#e5e5e5]
+              border-line
               shadow-[0_2px_2px_rgba(0,0,0,0.2)]
               p-[30px]
               lg:p-[40px]
@@ -148,7 +148,7 @@ export const ProfileInfo = ({ counts }: ProfileInfoProps) => {
               >
                 <span className="font-medium">Номер телефону</span>
 
-                <span className={user.phone ? '' : 'text-[#999]'}>
+                <span className={user.phone ? '' : 'text-fg-subtle'}>
                   {user.phone || 'Не вказано'}
                 </span>
               </div>
@@ -209,9 +209,9 @@ export const ProfileInfo = ({ counts }: ProfileInfoProps) => {
               lg:w-1/2
               min-h-[300px]
               lg:min-h-[400px]
-              bg-white
+              bg-surface
               border
-              border-[#e5e5e5]
+              border-line
               shadow-[0_2px_2px_rgba(0,0,0,0.2)]
               p-[30px]
               lg:p-[40px]

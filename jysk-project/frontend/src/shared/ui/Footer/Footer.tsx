@@ -153,17 +153,17 @@ export const Footer: React.FC = () => {
           <img
             src={visaLogo}
             alt="Visa"
-            className="w-[40.5px] h-[28.3px] md:w-[8.8vw] md:h-[6.1vw] xl:w-[4.68vw] xl:h-[3.12vw] bg-white rounded-[5px] xl:rounded-[0.26vw] object-cover shrink-0"
+            className="w-[40.5px] h-[28.3px] md:w-[8.8vw] md:h-[6.1vw] xl:w-[4.68vw] xl:h-[3.12vw] bg-surface rounded-[5px] xl:rounded-[0.26vw] object-cover shrink-0"
           />
           <img
             src={mastercardLogo}
             alt="Mastercard"
-            className="w-[40.5px] h-[28.3px] md:w-[8.8vw] md:h-[6.1vw] xl:w-[4.68vw] xl:h-[3.12vw] bg-white rounded-[5px] xl:rounded-[0.26vw] object-cover shrink-0"
+            className="w-[40.5px] h-[28.3px] md:w-[8.8vw] md:h-[6.1vw] xl:w-[4.68vw] xl:h-[3.12vw] bg-surface rounded-[5px] xl:rounded-[0.26vw] object-cover shrink-0"
           />
           <img
             src={gpayLogo}
             alt="G Pay"
-            className="w-[45px] h-[28px] md:w-[9.8vw] md:h-[6vw] xl:w-[5.2vw] xl:h-[3.12vw] bg-white rounded-[5px] xl:rounded-[0.26vw] object-cover shrink-0"
+            className="w-[45px] h-[28px] md:w-[9.8vw] md:h-[6vw] xl:w-[5.2vw] xl:h-[3.12vw] bg-surface rounded-[5px] xl:rounded-[0.26vw] object-cover shrink-0"
           />
         </div>
 

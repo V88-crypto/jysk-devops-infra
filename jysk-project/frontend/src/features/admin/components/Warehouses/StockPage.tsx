@@ -52,12 +52,12 @@ export const StockPage = () => {
       <div className="mb-6 flex items-center gap-3">
         <h1 className="text-2xl font-semibold">Залишки</h1>
 
-        <span className="flex h-6 min-w-6 items-center justify-center rounded-full bg-[#e5e5e5] px-2 text-sm font-medium text-[#555]">
+        <span className="flex h-6 min-w-6 items-center justify-center rounded-full bg-surface-strong px-2 text-sm font-medium text-fg-muted">
           {filteredItems.length}
         </span>
       </div>
 
-      <div className="mb-4 flex flex-wrap items-center gap-5 rounded-md bg-white px-4 py-3 shadow-sm">
+      <div className="mb-4 flex flex-wrap items-center gap-5 rounded-md bg-surface px-4 py-3 shadow-sm">
         <SearchField value={search} onChange={setSearch} />
 
         <FilterDropdown
@@ -76,16 +76,16 @@ export const StockPage = () => {
 
         <button
           type="button"
-          className="flex items-center gap-1 text-sm font-medium text-[#333] transition-opacity hover:opacity-70"
+          className="flex items-center gap-1 text-sm font-medium text-fg transition-opacity hover:opacity-70"
         >
           Фільтр <span>+</span>
         </button>
       </div>
 
-      <div className="overflow-x-auto rounded-md bg-white shadow-sm">
+      <div className="overflow-x-auto rounded-md bg-surface shadow-sm">
         <table className="w-full min-w-[760px] border-collapse text-left text-sm">
           <thead>
-            <tr className="border-b border-[#e5e5e5] text-[#8a8a8a]">
+            <tr className="border-b border-line text-fg-subtle">
               <th className="px-4 py-3 font-normal">Назва ˅</th>
               <th className="px-4 py-3 font-normal">Категорія</th>
               <th className="px-4 py-3 font-normal">Залишки</th>
@@ -98,10 +98,7 @@ export const StockPage = () => {
 
           <tbody>
             {filteredItems.map((item) => (
-              <tr
-                key={item.id}
-                className="border-b border-[#f0f0f0] last:border-0"
-              >
+              <tr key={item.id} className="border-b border-line last:border-0">
                 <td className="px-4 py-3">{item.productName}</td>
                 <td className="px-4 py-3">{item.categoryName}</td>
                 <td className="px-4 py-3">{item.quantity} шт.</td>
@@ -122,13 +119,13 @@ export const StockPage = () => {
         </table>
 
         {!isLoading && filteredItems.length === 0 && (
-          <p className="px-4 py-10 text-center text-[#8a8a8a]">
+          <p className="px-4 py-10 text-center text-fg-subtle">
             Нічого не знайдено
           </p>
         )}
 
         {isLoading && (
-          <p className="px-4 py-10 text-center text-[#8a8a8a]">
+          <p className="px-4 py-10 text-center text-fg-subtle">
             Завантаження...
           </p>
         )}

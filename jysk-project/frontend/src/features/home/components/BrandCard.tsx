@@ -16,7 +16,7 @@ export function BrandCard({ brand }: BrandCardProps) {
 
       <h3 className="sr-only">{brand.name}</h3>
 
-      <p className="mt-7 w-full text-left text-sm leading-5 text-neutral-700">
+      <p className="mt-7 w-full text-left text-sm leading-5 text-fg-muted">
         {brand.description}
       </p>
     </article>

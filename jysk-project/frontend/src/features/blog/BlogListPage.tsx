@@ -21,12 +21,12 @@ export function BlogListPage() {
 
   return (
     <>
-      <div className="bg-[#f3f3f3] px-6 py-10 text-center">
+      <div className="bg-page px-6 py-10 text-center">
         <h1 className="text-4xl font-bold">Блог</h1>
-        <p className="mt-2 text-neutral-500">Ідеї за кімнатами</p>
+        <p className="mt-2 text-fg-subtle">Ідеї за кімнатами</p>
       </div>
 
-      <div className="bg-white">
+      <div className="bg-surface">
         <div className="mx-auto max-w-[1460px] px-6 py-8">
           <div className="flex flex-wrap justify-center gap-3">
             {blogCategoryTabs.map((tab) => (
@@ -37,7 +37,7 @@ export function BlogListPage() {
                 className={`h-[40px] rounded-sm px-6 text-sm font-semibold transition-colors ${
                   activeTab === tab
                     ? 'bg-primary text-white'
-                    : 'bg-neutral-200 text-neutral-700 hover:bg-neutral-300'
+                    : 'bg-surface-strong text-fg-muted hover:bg-line-strong'
                 }`}
               >
                 {tab}
@@ -46,13 +46,13 @@ export function BlogListPage() {
           </div>
         </div>
 
-        <div className="border-t border-neutral-300" />
+        <div className="border-t border-line-strong" />
       </div>
 
-      <div className="bg-[#f3f3f3] px-6 py-10">
+      <div className="bg-page px-6 py-10">
         <div className="mx-auto max-w-[1460px]">
           {isLoading || !posts ? (
-            <p className="text-center text-neutral-500">Завантаження...</p>
+            <p className="text-center text-fg-subtle">Завантаження...</p>
           ) : (
             <div className="flex flex-col gap-14">
               {blogCategoryTabs.map((tab) => (
