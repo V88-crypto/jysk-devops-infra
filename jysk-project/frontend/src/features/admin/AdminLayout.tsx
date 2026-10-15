@@ -19,6 +19,7 @@ import { OrdersPage } from './components/Orders/OrdersPage'
 import { BlogsPage } from './components/Blogs/BlogsPage'
 import { ReviewsPage } from './components/Reviews/ReviewsPage'
 import { ProductsPage } from './components/EditAddProducts/ProductsPage'
+import { CategoriesPage } from './components/Categories/CategoriesPage'
 import { AdminPageLayout } from './components/common/AdminPageLayout'
 import type { AdminNavItem, AdminNavItemId } from './navigation'
 import {
@@ -68,6 +69,7 @@ export const AdminLayout = () => {
         <Route index element={<Navigate to="/admin/stock" replace />} />
 
         <Route path="products/*" element={<ProductsPage />} />
+        <Route path="categories" element={<CategoriesPage />} />
 
         <Route path="warehouses" element={<WarehousesListPage />} />
         <Route path="stock" element={<StockPage />} />
