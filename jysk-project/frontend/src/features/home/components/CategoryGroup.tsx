@@ -1,14 +1,12 @@
-import { categories as defaultCategories } from '@/features/home/data/categories'
-import type { Category } from '@/features/home/types'
-import { CategoryCard } from './CategoryCard'
+import { Link } from 'react-router-dom'
 
-interface CategoryGroupProps {
-  categories?: Category[]
-}
+import { catalogApi } from '@/features/catalog/api/catalogApi'
+import { CategoryTile } from '@/features/catalog/components/CategoryTile'
+import { useAsyncData } from '@/shared/hooks/useAsyncData'
 
-export function CategoryGroup({
-  categories = defaultCategories,
-}: CategoryGroupProps) {
+export function CategoryGroup() {
+  const { data: categories, error } = useAsyncData(catalogApi.getCategories)
+
   return (
     <section className="py-16">
       <div className="mx-auto max-w-[1460px] px-6">
@@ -16,10 +14,27 @@ export function CategoryGroup({
           Категорії
         </h2>
 
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
-          {categories.map((category) => (
-            <CategoryCard key={category.id} category={category} />
-          ))}
+        {error ? (
+          <p className="text-center text-[#d33]">
+            Не вдалося завантажити категорії
+          </p>
+        ) : !categories ? (
+          <p className="text-center text-[#777]">Завантаження...</p>
+        ) : (
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
+            {categories.map((category) => (
+              <CategoryTile key={category.id} category={category} />
+            ))}
+          </div>
+        )}
+
+        <div className="mt-10 text-center">
+          <Link
+            to="/categories"
+            className="inline-block rounded-[4px] border border-primary px-8 py-3 font-semibold text-primary transition hover:bg-primary hover:text-white"
+          >
+            Усі категорії
+          </Link>
         </div>
       </div>
     </section>

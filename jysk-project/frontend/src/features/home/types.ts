@@ -1,10 +1,3 @@
-export interface Category {
-  id: string
-  name: string
-  imageUrl: string
-  imageAlt: string
-}
-
 export interface About {
   title: string
   description: string
