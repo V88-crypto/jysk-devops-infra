@@ -78,14 +78,14 @@ export const ProductPage = () => {
       <div className="mx-auto w-[90%] max-w-[1440px]">
         <CatalogBreadcrumbs items={breadcrumbs} />
 
-        <div className="grid gap-8 lg:grid-cols-2 lg:gap-12">
+        <div className="grid gap-8 lg:grid-cols-2 lg:grid-rows-[auto_1fr] lg:gap-x-12 lg:gap-y-10">
           <ProductGallery
             key={variant?.id ?? 'none'}
             images={variant?.images ?? []}
             name={product.name}
           />
 
-          <div className="flex flex-col gap-5">
+          <div className="flex flex-col gap-5 lg:row-span-2">
             <div>
               <h1 className="text-[28px] font-bold leading-tight lg:text-[40px]">
                 {product.name}
@@ -183,16 +183,19 @@ export const ProductPage = () => {
               <ProductPurchase key={variant.id} stock={variant.stock} />
             )}
           </div>
-        </div>
 
-        {product.description && (
-          <section className="mt-12">
-            <h2 className="mb-4 text-[26px] font-bold lg:text-[32px]">Опис</h2>
-            <p className="max-w-[900px] whitespace-pre-line text-[17px] leading-[28px] text-fg-muted">
-              {product.description}
-            </p>
-          </section>
-        )}
+          {/* Under the photo on wide screens, after the buy block on phones. */}
+          {product.description && (
+            <section className="lg:col-start-1 lg:row-start-2">
+              <h2 className="mb-4 text-[26px] font-bold lg:text-[32px]">
+                Опис
+              </h2>
+              <p className="whitespace-pre-line text-[17px] leading-[28px] text-fg-muted">
+                {product.description}
+              </p>
+            </section>
+          )}
+        </div>
 
         <ProductReviews slug={product.slug} variantId={variant?.id ?? null} />
       </div>
