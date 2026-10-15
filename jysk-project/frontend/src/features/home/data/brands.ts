@@ -1,33 +1,35 @@
+import fritzLogo from '@/assets/images/fritz.png'
+import hastensLogo from '@/assets/images/hastens.png'
+import muutoLogo from '@/assets/images/muuto.png'
+import svenskaLogo from '@/assets/images/svenska.png'
 import type { Brand } from '@/features/home/types'
-
-const placeholderLogo = '/images/brand-placeholder.svg'
 
 export const brands: Brand[] = [
   {
     id: 1,
     name: 'Hästens',
-    logoUrl: placeholderLogo,
+    logoUrl: hastensLogo,
     description:
       'Бренд, відомий своїми розкішними матрацами, які роблять із натуральних матеріалів з акцентом на якість та комфорт.',
   },
   {
     id: 2,
     name: 'Svenska Hem',
-    logoUrl: placeholderLogo,
+    logoUrl: svenskaLogo,
     description:
       'Бренд пропонує широкий вибір меблів та товарів для дому, що поєднують стиль та функціональність.',
   },
   {
     id: 3,
     name: 'Fritz Hansen',
-    logoUrl: placeholderLogo,
+    logoUrl: fritzLogo,
     description:
       'Знаменита меблева компанія, що виробляє дизайнерські меблі та аксесуари, включаючи культові вироби від відомих дизайнерів.',
   },
   {
     id: 4,
     name: 'MUUTO',
-    logoUrl: placeholderLogo,
+    logoUrl: muutoLogo,
     description:
       'Пропонує сучасні меблі, освітлення та аксесуари з акцентом на скандинавський дизайн та простоту.',
   },
