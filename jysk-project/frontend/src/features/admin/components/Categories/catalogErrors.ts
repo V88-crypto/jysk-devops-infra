@@ -12,7 +12,7 @@ const CONFLICT_MESSAGES: [string, string][] = [
 export const catalogErrorMessage = (error: unknown, fallback: string) => {
   if (error instanceof ApiError && error.status === 409) {
     const match = CONFLICT_MESSAGES.find(([fragment]) =>
-      error.message.includes(fragment),
+      error.detail.includes(fragment),
     )
 
     return match?.[1] ?? fallback
