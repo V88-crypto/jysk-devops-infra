@@ -94,10 +94,10 @@ export const EditEmployeeForm = ({
         <span className="text-lg">‹</span> Редагування картки працівника
       </button>
 
-      <div className="mb-6 border-t border-[#e0e0e0]" />
+      <div className="mb-6 border-t border-line" />
 
       {isLoading || !form ? (
-        <p className="text-[#8a8a8a]">Завантаження...</p>
+        <p className="text-fg-subtle">Завантаження...</p>
       ) : (
         <form
           onSubmit={(event) => void handleSubmit(event)}

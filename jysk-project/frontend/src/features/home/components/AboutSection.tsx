@@ -8,10 +8,10 @@ interface AboutSectionProps {
 export function AboutSection({ about = defaultAbout }: AboutSectionProps) {
   return (
     <section>
-      <div aria-hidden="true" className="h-px w-full bg-neutral-400" />
+      <div aria-hidden="true" className="h-px w-full bg-line-strong" />
 
       <div className="mx-auto grid max-w-[1460px] grid-cols-1 items-center gap-6 px-6 py-10 md:grid-cols-2 md:gap-7 md:py-14 lg:gap-8">
-        <div className="overflow-hidden bg-neutral-100">
+        <div className="overflow-hidden bg-surface-muted">
           <img
             src={about.imageUrl}
             alt={about.imageAlt}
@@ -21,16 +21,16 @@ export function AboutSection({ about = defaultAbout }: AboutSectionProps) {
         </div>
 
         <div>
-          <h2 className="text-3xl font-bold leading-tight text-neutral-800">
+          <h2 className="text-3xl font-bold leading-tight text-fg">
             {about.title}
           </h2>
-          <p className="mt-5 text-base leading-7 text-neutral-700 lg:text-lg">
+          <p className="mt-5 text-base leading-7 text-fg-muted lg:text-lg">
             {about.description}
           </p>
         </div>
       </div>
 
-      <div aria-hidden="true" className="h-px w-full bg-neutral-400" />
+      <div aria-hidden="true" className="h-px w-full bg-line-strong" />
     </section>
   )
 }

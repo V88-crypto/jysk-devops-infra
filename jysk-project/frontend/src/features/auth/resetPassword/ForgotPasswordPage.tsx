@@ -62,7 +62,7 @@ export const ForgotPasswordPage = () => {
             lg:mb-[35px]
             border-t
             border-b
-            border-[#cfcfcf]
+            border-line-strong
           "
         >
           {sentToEmail ? 'Перевірте пошту' : 'Забули пароль?'}
@@ -81,16 +81,14 @@ export const ForgotPasswordPage = () => {
                 leading-[22px]
                 sm:leading-[24px]
                 lg:leading-[28px]
-                text-[#555]
+                text-fg-muted
                 mb-[30px]
                 sm:mb-[35px]
                 lg:mb-[40px]
               "
             >
               Якщо обліковий запис з адресою{' '}
-              <span className="font-bold text-[#202020] break-all">
-                {sentToEmail}
-              </span>{' '}
+              <span className="font-bold text-fg break-all">{sentToEmail}</span>{' '}
               існує, ми надіслали на неї лист із посиланням для зміни пароля.
               Посилання діє 60 хвилин.
             </p>
@@ -150,7 +148,7 @@ export const ForgotPasswordPage = () => {
                 leading-[16px]
                 sm:leading-[18px]
                 lg:leading-[20px]
-                text-[#555]
+                text-fg-muted
                 mb-[30px]
                 sm:mb-[35px]
                 lg:mb-[40px]
@@ -182,27 +180,27 @@ export const ForgotPasswordPage = () => {
                     text-[16px]
                     sm:text-[18px]
                     lg:text-[20px]
-                    bg-[#e4e4e4]
+                    bg-surface-strong
                     border
                     rounded-[5px]
                     outline-none
                     ${
                       errors.email
-                        ? 'border-red-500 focus:border-red-500'
-                        : 'border-[#c5c5c5] focus:border-[#aaa]'
+                        ? 'border-danger focus:border-danger'
+                        : 'border-line-strong focus:border-line-strong'
                     }
                   `}
                 />
 
                 {errors.email && (
-                  <p className="mt-1 text-[13px] text-red-500">
+                  <p className="mt-1 text-[13px] text-danger">
                     {errors.email.message}
                   </p>
                 )}
               </div>
 
               {submitError && (
-                <p className="w-full max-w-[600px] mb-[15px] text-[14px] text-red-500">
+                <p className="w-full max-w-[600px] mb-[15px] text-[14px] text-danger">
                   {submitError}
                 </p>
               )}

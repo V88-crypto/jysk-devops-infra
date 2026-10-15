@@ -79,7 +79,7 @@ export const OrdersPage = () => {
   const renderStatus = () => {
     if (error) {
       return (
-        <p className="px-4 py-10 text-center text-[#d33]">
+        <p className="px-4 py-10 text-center text-danger">
           Не вдалося завантажити замовлення
         </p>
       )
@@ -87,13 +87,13 @@ export const OrdersPage = () => {
 
     if (!data) {
       return (
-        <p className="px-4 py-10 text-center text-[#8a8a8a]">Завантаження...</p>
+        <p className="px-4 py-10 text-center text-fg-subtle">Завантаження...</p>
       )
     }
 
     if (orders.length === 0) {
       return (
-        <p className="px-4 py-10 text-center text-[#8a8a8a]">
+        <p className="px-4 py-10 text-center text-fg-subtle">
           {statusFilter
             ? 'Замовлень з таким статусом немає'
             : 'Замовлень поки немає'}
@@ -109,12 +109,12 @@ export const OrdersPage = () => {
       <div className="mb-6 flex items-center gap-3">
         <h1 className="text-2xl font-semibold">Замовлення</h1>
 
-        <span className="flex h-6 min-w-6 items-center justify-center rounded-full bg-[#e5e5e5] px-2 text-sm font-medium text-[#555]">
+        <span className="flex h-6 min-w-6 items-center justify-center rounded-full bg-surface-strong px-2 text-sm font-medium text-fg-muted">
           {total}
         </span>
       </div>
 
-      <div className="mb-4 flex flex-wrap items-center gap-5 rounded-md bg-white px-4 py-3 shadow-sm">
+      <div className="mb-4 flex flex-wrap items-center gap-5 rounded-md bg-surface px-4 py-3 shadow-sm">
         <FilterDropdown
           label={statusFilter ? ORDER_STATUS_LABELS[statusFilter] : 'Статус'}
           options={STATUS_OPTIONS}
@@ -124,19 +124,19 @@ export const OrdersPage = () => {
       </div>
 
       {actionError && (
-        <p className="mb-4 rounded-md bg-[#fdecec] px-4 py-3 text-sm text-[#d33]">
+        <p className="mb-4 rounded-md bg-danger-soft px-4 py-3 text-sm text-danger">
           {actionError}
         </p>
       )}
 
-      <div className="overflow-x-auto rounded-md bg-white shadow-sm">
+      <div className="overflow-x-auto rounded-md bg-surface shadow-sm">
         <table
           className={`w-full min-w-[860px] border-collapse text-left text-sm transition-opacity ${
             isLoading && data ? 'opacity-60' : ''
           }`}
         >
           <thead>
-            <tr className="border-b border-[#e5e5e5] text-[#8a8a8a]">
+            <tr className="border-b border-line text-fg-subtle">
               <th className="px-4 py-3 font-normal">№</th>
               <th className="px-4 py-3 font-normal">Дата</th>
               <th className="px-4 py-3 font-normal">Клієнт</th>
@@ -157,12 +157,12 @@ export const OrdersPage = () => {
 
               return (
                 <Fragment key={order.id}>
-                  <tr className="border-b border-[#f0f0f0]">
+                  <tr className="border-b border-line">
                     <td className="px-4 py-3 font-medium">№{order.id}</td>
                     <td className="px-4 py-3">{formatDate(order.createdAt)}</td>
                     <td className="px-4 py-3">
                       <p>{order.customerName}</p>
-                      <p className="text-xs text-[#8a8a8a]">
+                      <p className="text-xs text-fg-subtle">
                         {order.customerEmail}
                       </p>
                     </td>
@@ -181,13 +181,13 @@ export const OrdersPage = () => {
                             event.target.value as OrderStatus,
                           )
                         }
-                        className={`h-[34px] rounded-[4px] border border-[#d5d5d5] bg-[#f4f4f4] px-2 text-sm font-medium outline-none focus:border-primary disabled:cursor-not-allowed disabled:opacity-60 ${ORDER_STATUS_COLORS[order.status]}`}
+                        className={`h-[34px] rounded-[4px] border border-line-strong bg-surface-muted px-2 text-sm font-medium outline-none focus:border-primary disabled:cursor-not-allowed disabled:opacity-60 ${ORDER_STATUS_COLORS[order.status]}`}
                       >
                         {ORDER_STATUSES.map((status) => (
                           <option
                             key={status}
                             value={status}
-                            className="text-[#333]"
+                            className="text-fg"
                           >
                             {ORDER_STATUS_LABELS[status]}
                           </option>
@@ -209,9 +209,9 @@ export const OrdersPage = () => {
                   </tr>
 
                   {isExpanded && (
-                    <tr className="border-b border-[#f0f0f0] bg-[#fafafa]">
+                    <tr className="border-b border-line bg-surface-muted">
                       <td colSpan={7} className="px-4 py-4">
-                        <p className="mb-3 text-[#555]">
+                        <p className="mb-3 text-fg-muted">
                           Адреса доставки: {order.address}
                         </p>
 
@@ -222,7 +222,7 @@ export const OrdersPage = () => {
                                 <td className="py-1 pr-4">
                                   {item.productName}
                                 </td>
-                                <td className="py-1 pr-4 text-[#8a8a8a]">
+                                <td className="py-1 pr-4 text-fg-subtle">
                                   {item.sku}
                                 </td>
                                 <td className="py-1 pr-4">

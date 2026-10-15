@@ -46,28 +46,28 @@ export const AttributesPanel = ({
   }
 
   return (
-    <section className="mt-8 rounded-md bg-white p-5 shadow-sm">
+    <section className="mt-8 rounded-md bg-surface p-5 shadow-sm">
       <div className="mb-1 flex items-center gap-3">
         <h2 className="text-lg font-semibold">Атрибути товарів</h2>
 
-        <span className="flex h-6 min-w-6 items-center justify-center rounded-full bg-[#e5e5e5] px-2 text-sm font-medium text-[#555]">
+        <span className="flex h-6 min-w-6 items-center justify-center rounded-full bg-surface-strong px-2 text-sm font-medium text-fg-muted">
           {attributes?.length ?? 0}
         </span>
       </div>
 
-      <p className="mb-4 text-sm text-[#8a8a8a]">
+      <p className="mb-4 text-sm text-fg-subtle">
         Характеристики варіантів, наприклад колір або розмір. Значення задаються
         у формі товару.
       </p>
 
       {loadError && (
-        <p className="mb-4 text-sm text-[#d33]">
+        <p className="mb-4 text-sm text-danger">
           Не вдалося завантажити атрибути
         </p>
       )}
 
       {!attributes && !loadError && (
-        <p className="mb-4 text-sm text-[#8a8a8a]">Завантаження...</p>
+        <p className="mb-4 text-sm text-fg-subtle">Завантаження...</p>
       )}
 
       {attributes && attributes.length > 0 && (
@@ -75,7 +75,7 @@ export const AttributesPanel = ({
           {attributes.map((attribute) => (
             <li
               key={attribute.id}
-              className="rounded-full bg-[#eef8f8] px-3 py-1 text-sm text-primary-hover"
+              className="rounded-full bg-primary-soft px-3 py-1 text-sm text-primary-hover"
             >
               {attribute.name}
             </li>
@@ -106,7 +106,7 @@ export const AttributesPanel = ({
       </form>
 
       {error && (
-        <p role="alert" className="mt-3 text-sm text-[#d33]">
+        <p role="alert" className="mt-3 text-sm text-danger">
           {error}
         </p>
       )}

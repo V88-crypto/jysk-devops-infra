@@ -8,7 +8,7 @@ interface BrandsSectionProps {
 
 export function BrandsSection({ brands = defaultBrands }: BrandsSectionProps) {
   return (
-    <section className="border-y border-neutral-300 bg-white">
+    <section className="border-y border-line-strong bg-surface">
       <div className="mx-auto max-w-[1460px] px-6 py-8 md:py-10">
         <div className="grid grid-cols-1 items-stretch gap-y-8 sm:grid-cols-2 sm:gap-x-10 lg:grid-cols-4 lg:gap-x-16">
           {brands.map((brand) => (

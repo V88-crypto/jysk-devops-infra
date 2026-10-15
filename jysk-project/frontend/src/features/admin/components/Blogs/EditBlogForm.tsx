@@ -202,10 +202,10 @@ export const EditBlogForm = ({
         <span className="text-lg">‹</span> Редагування блогу
       </button>
 
-      <div className="mb-6 border-t border-[#e0e0e0]" />
+      <div className="mb-6 border-t border-line" />
 
       {isLoading || !form ? (
-        <p className="text-[#8a8a8a]">Завантаження...</p>
+        <p className="text-fg-subtle">Завантаження...</p>
       ) : (
         <form
           onSubmit={(event) => void handleSubmit(event)}
@@ -243,7 +243,7 @@ export const EditBlogForm = ({
             <div className="flex flex-wrap items-start gap-3">
               {form.imageUrl && (
                 <div className="flex items-start gap-2">
-                  <div className="h-[100px] w-[140px] overflow-hidden rounded bg-neutral-100">
+                  <div className="h-[100px] w-[140px] overflow-hidden rounded bg-surface-muted">
                     <img
                       src={form.imageUrl}
                       alt={form.imageAlt}
@@ -286,7 +286,7 @@ export const EditBlogForm = ({
                       {block.images.map((image, imageIndex) => (
                         <div
                           key={`${block.id}-${imageIndex}`}
-                          className="h-[100px] w-[140px] overflow-hidden rounded bg-neutral-100"
+                          className="h-[100px] w-[140px] overflow-hidden rounded bg-surface-muted"
                         >
                           <img
                             src={image}
@@ -318,7 +318,7 @@ export const EditBlogForm = ({
                 ) : (
                   <div
                     key={block.id}
-                    className="rounded-md border border-[#e0e0e0] bg-white p-4 shadow-sm"
+                    className="rounded-md border border-line bg-surface p-4 shadow-sm"
                   >
                     <input
                       type="text"
@@ -327,7 +327,7 @@ export const EditBlogForm = ({
                         updateBlock(block.id, 'title', event.target.value)
                       }
                       placeholder="Заголовок блоку"
-                      className="mb-2 w-full border-none bg-transparent text-base font-semibold text-[#202020] outline-none placeholder:text-[#8a8a8a]"
+                      className="mb-2 w-full border-none bg-transparent text-base font-semibold text-fg outline-none placeholder:text-fg-subtle"
                     />
 
                     <textarea
@@ -337,7 +337,7 @@ export const EditBlogForm = ({
                       }
                       placeholder="Текст блоку"
                       rows={6}
-                      className="w-full resize-none border-none bg-transparent text-sm text-[#555] outline-none placeholder:text-[#8a8a8a]"
+                      className="w-full resize-none border-none bg-transparent text-sm text-fg-muted outline-none placeholder:text-fg-subtle"
                     />
 
                     <div className="mt-2 flex justify-end">
@@ -382,7 +382,7 @@ export const EditBlogForm = ({
               {form.keywords.map((keyword, index) => (
                 <span
                   key={index}
-                  className="flex items-center gap-2 rounded-full border border-[#d5d5d5] bg-white px-3 py-1.5 text-sm"
+                  className="flex items-center gap-2 rounded-full border border-line-strong bg-surface px-3 py-1.5 text-sm"
                 >
                   <input
                     type="text"
@@ -391,14 +391,14 @@ export const EditBlogForm = ({
                       updateKeyword(index, event.target.value)
                     }
                     placeholder="Ключове слово"
-                    className="w-[100px] border-none bg-transparent text-[#333] outline-none placeholder:text-[#8a8a8a]"
+                    className="w-[100px] border-none bg-transparent text-fg outline-none placeholder:text-fg-subtle"
                   />
 
                   <button
                     type="button"
                     onClick={() => removeKeyword(index)}
                     aria-label="Видалити ключове слово"
-                    className="text-[#8a8a8a] transition-colors hover:text-[#e31b23]"
+                    className="text-fg-subtle transition-colors hover:text-danger"
                   >
                     ×
                   </button>

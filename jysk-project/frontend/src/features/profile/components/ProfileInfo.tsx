@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 
 import { useAuth } from '@/shared/auth/useAuth'
+import { ThemeToggle } from '@/shared/theme/ThemeToggle'
 import { AvatarActions } from './AvatarActions'
 import { AvatarPlaceholder } from './AvatarPlaceholder'
 
@@ -70,9 +71,9 @@ export const ProfileInfo = ({ counts }: ProfileInfoProps) => {
               lg:w-1/2
               min-h-[300px]
               lg:min-h-[400px]
-              bg-white
+              bg-surface
               border
-              border-[#e5e5e5]
+              border-line
               shadow-[0_2px_2px_rgba(0,0,0,0.2)]
               p-[30px]
               lg:p-[40px]
@@ -112,6 +113,8 @@ export const ProfileInfo = ({ counts }: ProfileInfoProps) => {
 
                 <AvatarActions />
               </div>
+
+              <ThemeToggle className="ml-auto self-start" />
             </div>
 
             <div
@@ -136,7 +139,6 @@ export const ProfileInfo = ({ counts }: ProfileInfoProps) => {
 
                 <span className="break-all text-right">{user.email}</span>
               </div>
-
               <div
                 className="
                   flex
@@ -148,10 +150,10 @@ export const ProfileInfo = ({ counts }: ProfileInfoProps) => {
               >
                 <span className="font-medium">Номер телефону</span>
 
-                <span className={user.phone ? '' : 'text-[#999]'}>
+                <span className={user.phone ? '' : 'text-fg-subtle'}>
                   {user.phone || 'Не вказано'}
                 </span>
-              </div>
+              </div>{' '}
             </div>
 
             <div
@@ -209,9 +211,9 @@ export const ProfileInfo = ({ counts }: ProfileInfoProps) => {
               lg:w-1/2
               min-h-[300px]
               lg:min-h-[400px]
-              bg-white
+              bg-surface
               border
-              border-[#e5e5e5]
+              border-line
               shadow-[0_2px_2px_rgba(0,0,0,0.2)]
               p-[30px]
               lg:p-[40px]

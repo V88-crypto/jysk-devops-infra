@@ -10,7 +10,7 @@ interface CategoryCardProps {
 export function CategoryCard({ category }: CategoryCardProps) {
   return (
     <Link to={`/category/${category.slug}`} className="group block">
-      <div className="aspect-[3/2] overflow-hidden bg-neutral-100">
+      <div className="aspect-[3/2] overflow-hidden bg-surface-muted">
         <img
           src={getCategoryImage(category.slug)}
           alt={category.name}
@@ -18,7 +18,7 @@ export function CategoryCard({ category }: CategoryCardProps) {
           className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105 motion-reduce:transition-none"
         />
       </div>
-      <h3 className="mt-4 text-lg font-semibold text-neutral-900 transition-colors group-hover:text-primary">
+      <h3 className="mt-4 text-lg font-semibold text-fg transition-colors group-hover:text-primary">
         {category.name}
       </h3>
     </Link>

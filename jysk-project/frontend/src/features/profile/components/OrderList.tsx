@@ -44,9 +44,9 @@ export const OrderList = ({ state }: OrderListProps) => {
               className="
                 w-full
                 min-h-[55px]
-                bg-white
+                bg-surface
                 border
-                border-[#d5d5d5]
+                border-line-strong
                 px-[18px]
                 sm:px-[25px]
                 flex
@@ -54,7 +54,7 @@ export const OrderList = ({ state }: OrderListProps) => {
                 justify-between
                 gap-[10px]
                 text-left
-                hover:bg-[#fafafa]
+                hover:bg-surface-muted
                 transition-colors
               "
             >
@@ -118,10 +118,10 @@ export const OrderList = ({ state }: OrderListProps) => {
               <div
                 className="
                   w-full
-                  bg-white
+                  bg-surface
                   border
                   border-t-0
-                  border-[#d5d5d5]
+                  border-line-strong
                   px-[18px]
                   sm:px-[25px]
                   py-[20px]
@@ -174,7 +174,7 @@ export const OrderList = ({ state }: OrderListProps) => {
                       text-[12px]
                       sm:text-[14px]
                       lg:text-[15px]
-                      text-[#555]
+                      text-fg-muted
                     "
                   >
                     Адреса доставки: {order.address}
@@ -193,7 +193,7 @@ export const OrderList = ({ state }: OrderListProps) => {
                         justify-between
                         gap-[15px]
                         py-[10px]
-                        ${index !== 0 ? 'border-t border-[#bdbdbd]' : ''}
+                        ${index !== 0 ? 'border-t border-line-strong' : ''}
                       `}
                     >
                       <div className="w-[60%]">
@@ -214,7 +214,7 @@ export const OrderList = ({ state }: OrderListProps) => {
                             text-[10px]
                             sm:text-[12px]
                             lg:text-[14px]
-                            text-[#555]
+                            text-fg-muted
                           "
                         >
                           Артикул: {item.sku}

@@ -8,7 +8,7 @@ export const RowEditButton = ({ onClick }: RowEditButtonProps = {}) => {
       type="button"
       onClick={onClick}
       aria-label="Редагувати"
-      className="text-[#8a8a8a] transition-colors hover:text-primary"
+      className="text-fg-subtle transition-colors hover:text-primary"
     >
       <svg
         aria-hidden="true"

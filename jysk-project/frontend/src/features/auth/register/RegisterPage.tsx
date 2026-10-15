@@ -85,7 +85,7 @@ export const RegisterPage = () => {
             lg:mb-[40px]
             border-t
             border-b
-            border-[#cfcfcf]
+            border-line-strong
           "
         >
           Створити обліковий запис
@@ -111,20 +111,20 @@ export const RegisterPage = () => {
                 text-[16px]
                 sm:text-[18px]
                 lg:text-[20px]
-                bg-[#e4e4e4]
+                bg-surface-strong
                 border
                 rounded-[5px]
                 outline-none
                 ${
                   errors.email
-                    ? 'border-red-500'
-                    : 'border-[#c5c5c5] focus:border-[#aaa]'
+                    ? 'border-danger'
+                    : 'border-line-strong focus:border-line-strong'
                 }
               `}
             />
 
             {errors.email && (
-              <p className="mt-1 text-[13px] text-red-500">
+              <p className="mt-1 text-[13px] text-danger">
                 {errors.email.message}
               </p>
             )}
@@ -146,20 +146,20 @@ export const RegisterPage = () => {
                 text-[16px]
                 sm:text-[18px]
                 lg:text-[20px]
-                bg-[#e4e4e4]
+                bg-surface-strong
                 border
                 rounded-[5px]
                 outline-none
                 ${
                   errors.password
-                    ? 'border-red-500'
-                    : 'border-[#c5c5c5] focus:border-[#aaa]'
+                    ? 'border-danger'
+                    : 'border-line-strong focus:border-line-strong'
                 }
               `}
             />
 
             {errors.password && (
-              <p className="mt-1 text-[13px] text-red-500">
+              <p className="mt-1 text-[13px] text-danger">
                 {errors.password.message}
               </p>
             )}
@@ -181,20 +181,20 @@ export const RegisterPage = () => {
                 text-[16px]
                 sm:text-[18px]
                 lg:text-[20px]
-                bg-[#e4e4e4]
+                bg-surface-strong
                 border
                 rounded-[5px]
                 outline-none
                 ${
                   errors.repeatPassword
-                    ? 'border-red-500'
-                    : 'border-[#c5c5c5] focus:border-[#aaa]'
+                    ? 'border-danger'
+                    : 'border-line-strong focus:border-line-strong'
                 }
               `}
             />
 
             {errors.repeatPassword && (
-              <p className="mt-1 text-[13px] text-red-500">
+              <p className="mt-1 text-[13px] text-danger">
                 {errors.repeatPassword.message}
               </p>
             )}
@@ -216,20 +216,20 @@ export const RegisterPage = () => {
                 text-[16px]
                 sm:text-[18px]
                 lg:text-[20px]
-                bg-[#e4e4e4]
+                bg-surface-strong
                 border
                 rounded-[5px]
                 outline-none
                 ${
                   errors.name
-                    ? 'border-red-500'
-                    : 'border-[#c5c5c5] focus:border-[#aaa]'
+                    ? 'border-danger'
+                    : 'border-line-strong focus:border-line-strong'
                 }
               `}
             />
 
             {errors.name && (
-              <p className="mt-1 text-[13px] text-red-500">
+              <p className="mt-1 text-[13px] text-danger">
                 {errors.name.message}
               </p>
             )}
@@ -259,7 +259,7 @@ export const RegisterPage = () => {
                   lg:text-[20px]
                   leading-[18px]
                   sm:leading-[20px]
-                  text-[#555]
+                  text-fg-muted
                 "
               >
                 <input
@@ -284,7 +284,7 @@ export const RegisterPage = () => {
               </label>
 
               {errors.acceptedTerms && (
-                <p className="mt-1 text-[13px] text-red-500">
+                <p className="mt-1 text-[13px] text-danger">
                   {errors.acceptedTerms.message}
                 </p>
               )}
@@ -299,7 +299,7 @@ export const RegisterPage = () => {
                 lg:text-[20px]
                 leading-[18px]
                 sm:leading-[20px]
-                text-[#555]
+                text-fg-muted
               "
             >
               <input
@@ -327,7 +327,7 @@ export const RegisterPage = () => {
                 lg:text-[20px]
                 leading-[18px]
                 sm:leading-[20px]
-                text-[#555]
+                text-fg-muted
               "
             >
               <input
@@ -353,7 +353,7 @@ export const RegisterPage = () => {
           </div>
 
           {submitError && (
-            <p className="w-full max-w-[600px] mb-[15px] text-[14px] text-red-500">
+            <p className="w-full max-w-[600px] mb-[15px] text-[14px] text-danger">
               {submitError}
             </p>
           )}

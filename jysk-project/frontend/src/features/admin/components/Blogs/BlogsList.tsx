@@ -53,7 +53,7 @@ export const BlogsList = ({ onEdit }: BlogsListProps) => {
         <div className="flex items-center gap-3">
           <h1 className="text-2xl font-semibold">Блоги</h1>
 
-          <span className="flex h-6 min-w-6 items-center justify-center rounded-full bg-[#e5e5e5] px-2 text-sm font-medium text-[#555]">
+          <span className="flex h-6 min-w-6 items-center justify-center rounded-full bg-surface-strong px-2 text-sm font-medium text-fg-muted">
             {filteredPosts.length}
           </span>
         </div>
@@ -66,14 +66,14 @@ export const BlogsList = ({ onEdit }: BlogsListProps) => {
         </button>
       </div>
 
-      <div className="mb-4 flex flex-wrap items-center gap-5 rounded-md bg-white px-4 py-3 shadow-sm">
+      <div className="mb-4 flex flex-wrap items-center gap-5 rounded-md bg-surface px-4 py-3 shadow-sm">
         <SearchField value={search} onChange={setSearch} />
       </div>
 
-      <div className="overflow-x-auto rounded-md bg-white shadow-sm">
+      <div className="overflow-x-auto rounded-md bg-surface shadow-sm">
         <table className="w-full min-w-[760px] border-collapse text-left text-sm">
           <thead>
-            <tr className="border-b border-[#e5e5e5] text-[#8a8a8a]">
+            <tr className="border-b border-line text-fg-subtle">
               <th className="px-4 py-3 font-normal">Заголовок блогу ˅</th>
               <th className="px-4 py-3 font-normal">Категорія</th>
               <th className="px-4 py-3 font-normal">Ключові слова</th>
@@ -84,10 +84,7 @@ export const BlogsList = ({ onEdit }: BlogsListProps) => {
 
           <tbody>
             {filteredPosts.map((post) => (
-              <tr
-                key={post.id}
-                className="border-b border-[#f0f0f0] last:border-0"
-              >
+              <tr key={post.id} className="border-b border-line last:border-0">
                 <td className="px-4 py-3">
                   <div className="flex items-center gap-3">
                     <img
@@ -117,13 +114,13 @@ export const BlogsList = ({ onEdit }: BlogsListProps) => {
         </table>
 
         {!isLoading && filteredPosts.length === 0 && (
-          <p className="px-4 py-10 text-center text-[#8a8a8a]">
+          <p className="px-4 py-10 text-center text-fg-subtle">
             Нічого не знайдено
           </p>
         )}
 
         {isLoading && (
-          <p className="px-4 py-10 text-center text-[#8a8a8a]">
+          <p className="px-4 py-10 text-center text-fg-subtle">
             Завантаження...
           </p>
         )}

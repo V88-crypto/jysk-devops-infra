@@ -162,7 +162,7 @@ export const AddProduct = () => {
             <p
               role="status"
               className={`text-base ${
-                status.type === 'error' ? 'text-red-500' : 'text-[#22aa00]'
+                status.type === 'error' ? 'text-danger' : 'text-success'
               }`}
             >
               {status.text}

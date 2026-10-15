@@ -25,8 +25,8 @@ export const PhotoUploadRow = ({
   }
 
   return (
-    <div className="flex min-h-[48px] w-full flex-col border border-[#b9b9b9] bg-[#f4f4f4] sm:flex-row sm:items-center">
-      <label className="flex min-h-[48px] flex-1 cursor-pointer items-center overflow-hidden px-4 text-sm text-[#4f4f4f]">
+    <div className="flex min-h-[48px] w-full flex-col border border-line-strong bg-surface-muted sm:flex-row sm:items-center">
+      <label className="flex min-h-[48px] flex-1 cursor-pointer items-center overflow-hidden px-4 text-sm text-fg-muted">
         <span className="truncate">{selectedText}</span>
 
         <input

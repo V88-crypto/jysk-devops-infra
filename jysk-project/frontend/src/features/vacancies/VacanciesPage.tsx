@@ -12,7 +12,7 @@ import { departmentCards, bannerData, jobSections } from './data'
 
 export const VacanciesPage: React.FC = () => {
   return (
-    <main className="w-full bg-[#f3f3f3] font-sans">
+    <main className="w-full bg-page font-sans">
       <div className="w-full px-4 md:px-8 xl:px-[7.03vw] py-4 md:py-6 xl:py-[1.5vw] flex items-center gap-2 text-xs md:text-sm xl:text-[0.83vw] text-dark/60">
         <Link to="/" className="hover:text-primary transition-colors">
           Домашня сторінка
@@ -22,7 +22,7 @@ export const VacanciesPage: React.FC = () => {
       </div>
 
       <div className="w-full px-0 md:px-8 xl:px-[7.03vw] flex justify-center">
-        <div className="w-full xl:w-[85.93vw] h-[64.68vw] md:h-[40vw] lg:h-[35vw] xl:h-[21.6vw] bg-gray-300 overflow-hidden md:rounded-lg xl:rounded-none">
+        <div className="w-full xl:w-[85.93vw] h-[64.68vw] md:h-[40vw] lg:h-[35vw] xl:h-[21.6vw] bg-line-strong overflow-hidden md:rounded-lg xl:rounded-none">
           <img
             src={heroImage}
             alt="Команда за роботою"
@@ -31,11 +31,11 @@ export const VacanciesPage: React.FC = () => {
         </div>
       </div>
 
-      <h1 className="text-center font-bold text-[#000000] mt-8 md:mt-12 lg:mt-16 xl:mt-[4.16vw] text-2xl md:text-3xl lg:text-4xl xl:text-[2.08vw] font-['Inter']">
+      <h1 className="text-center font-bold text-fg mt-8 md:mt-12 lg:mt-16 xl:mt-[4.16vw] text-2xl md:text-3xl lg:text-4xl xl:text-[2.08vw] font-['Inter']">
         Працюй з нами
       </h1>
 
-      <div className="mx-auto w-[90%] md:w-[85%] lg:w-[80%] xl:w-[77.44vw] mt-6 md:mt-8 lg:mt-10 xl:mt-[2vw] text-[#000000] font-['Inter'] font-normal text-sm md:text-sm lg:text-base xl:text-[1.25vw] leading-normal md:leading-relaxed xl:leading-[2.08vw] text-justify flex flex-col gap-4 md:gap-6 xl:gap-[1.5vw]">
+      <div className="mx-auto w-[90%] md:w-[85%] lg:w-[80%] xl:w-[77.44vw] mt-6 md:mt-8 lg:mt-10 xl:mt-[2vw] text-fg font-['Inter'] font-normal text-sm md:text-sm lg:text-base xl:text-[1.25vw] leading-normal md:leading-relaxed xl:leading-[2.08vw] text-justify flex flex-col gap-4 md:gap-6 xl:gap-[1.5vw]">
         <p>
           Ми – сучасний і динамічний інтернет-магазин, який активно зростає та
           шукає талановитих і мотивованих людей. Якщо ти готовий долучитися до
@@ -59,23 +59,23 @@ export const VacanciesPage: React.FC = () => {
         </p>
       </div>
 
-      <div className="w-full bg-white mt-10 md:mt-16 xl:mt-[4.16vw] py-10 md:py-16 xl:py-[3.12vw] border-t border-b border-gray-200">
+      <div className="w-full bg-surface mt-10 md:mt-16 xl:mt-[4.16vw] py-10 md:py-16 xl:py-[3.12vw] border-t border-b border-line">
         <div className="mx-auto w-[90%] xl:w-[77.44vw] flex flex-col md:flex-row items-center justify-between gap-10 md:gap-4 xl:gap-0">
           <div className="flex flex-col items-center">
-            <GlobeIcon className="w-16 h-16 md:w-12 md:h-12 lg:w-16 lg:h-16 xl:w-[3.9vw] xl:h-[3.9vw] text-[#231F20] mb-3 md:mb-4 xl:mb-[1.04vw]" />
-            <h3 className="font-['Raleway'] font-bold text-lg md:text-xs lg:text-sm xl:text-[1.25vw] text-[#231F20] text-center tracking-wide uppercase">
+            <GlobeIcon className="w-16 h-16 md:w-12 md:h-12 lg:w-16 lg:h-16 xl:w-[3.9vw] xl:h-[3.9vw] text-fg mb-3 md:mb-4 xl:mb-[1.04vw]" />
+            <h3 className="font-['Raleway'] font-bold text-lg md:text-xs lg:text-sm xl:text-[1.25vw] text-fg text-center tracking-wide uppercase">
               Міжнародні можливості
             </h3>
           </div>
           <div className="flex flex-col items-center">
-            <StairsIcon className="w-24 h-12 md:w-16 md:h-8 lg:w-20 lg:h-10 xl:w-[5.93vw] xl:h-[3.02vw] text-[#231F20] mb-3 md:mb-4 xl:mb-[1.04vw]" />
-            <h3 className="font-['Raleway'] font-bold text-lg md:text-xs lg:text-sm xl:text-[1.25vw] text-[#231F20] text-center tracking-wide uppercase">
+            <StairsIcon className="w-24 h-12 md:w-16 md:h-8 lg:w-20 lg:h-10 xl:w-[5.93vw] xl:h-[3.02vw] text-fg mb-3 md:mb-4 xl:mb-[1.04vw]" />
+            <h3 className="font-['Raleway'] font-bold text-lg md:text-xs lg:text-sm xl:text-[1.25vw] text-fg text-center tracking-wide uppercase">
               Стрімка кар'єра
             </h3>
           </div>
           <div className="flex flex-col items-center">
-            <TeamIcon className="w-24 h-16 md:w-16 md:h-10 lg:w-20 lg:h-14 xl:w-[5.88vw] xl:h-[4.07vw] text-[#231F20] mb-3 md:mb-4 xl:mb-[1.04vw]" />
-            <h3 className="font-['Raleway'] font-bold text-lg md:text-xs lg:text-sm xl:text-[1.25vw] text-[#231F20] text-center tracking-wide uppercase">
+            <TeamIcon className="w-24 h-16 md:w-16 md:h-10 lg:w-20 lg:h-14 xl:w-[5.88vw] xl:h-[4.07vw] text-fg mb-3 md:mb-4 xl:mb-[1.04vw]" />
+            <h3 className="font-['Raleway'] font-bold text-lg md:text-xs lg:text-sm xl:text-[1.25vw] text-fg text-center tracking-wide uppercase">
               Командний дух
             </h3>
           </div>
@@ -95,7 +95,7 @@ export const VacanciesPage: React.FC = () => {
             />
             <div className="absolute inset-0 bg-hover-overlay opacity-0 group-hover:opacity-40 transition-opacity duration-300 mix-blend-multiply"></div>
             <div className="absolute bottom-4 md:bottom-4 lg:bottom-6 xl:bottom-[1.5vw] left-0 w-full flex justify-center z-10 pointer-events-none">
-              <h3 className="font-['Inter'] font-black text-[#FFFFFF] text-2xl md:text-base lg:text-xl xl:text-[2.08vw] uppercase text-center drop-shadow-md">
+              <h3 className="font-['Inter'] font-black text-white text-2xl md:text-base lg:text-xl xl:text-[2.08vw] uppercase text-center drop-shadow-md">
                 {card.title}
               </h3>
             </div>
@@ -105,7 +105,7 @@ export const VacanciesPage: React.FC = () => {
 
       <div className="mx-auto w-full md:w-[90%] lg:w-[90%] xl:w-[86.35vw] mt-12 md:mt-24 lg:mt-24 xl:mt-[6vw] flex flex-col mb-12 md:mb-16 lg:mb-0 xl:mb-[2vw]">
         <div className="bg-transparent lg:bg-primary py-8 md:py-8 lg:py-12 xl:px-[5vw] xl:py-[3vw] flex flex-col justify-center items-center">
-          <h2 className="font-['Inter'] font-bold text-2xl md:text-2xl lg:text-3xl xl:text-[1.875vw] lg:mb-4 xl:mb-[1.5vw] uppercase text-[#000000] lg:text-white text-center bg-[#f3f3f3] md:bg-transparent w-full py-4 md:py-0">
+          <h2 className="font-['Inter'] font-bold text-2xl md:text-2xl lg:text-3xl xl:text-[1.875vw] lg:mb-4 xl:mb-[1.5vw] uppercase text-fg lg:text-white text-center bg-page md:bg-transparent w-full py-4 md:py-0">
             {bannerData.top.title}
           </h2>
           <p className="hidden lg:block font-['Inter'] text-sm lg:text-sm xl:text-[1.25vw] leading-relaxed xl:leading-[2.08vw] text-justify lg:text-center text-white px-8 xl:px-0">
@@ -129,11 +129,11 @@ export const VacanciesPage: React.FC = () => {
                 />
               </div>
 
-              <div className="w-full lg:w-1/2 bg-transparent lg:bg-white flex flex-col justify-start lg:justify-center items-center lg:items-start px-5 py-8 md:px-6 md:py-8 lg:px-10 xl:px-[4vw] xl:py-[4vw] md:bg-white md:rounded-b-lg lg:rounded-none md:mb-8 lg:mb-0">
-                <h3 className="hidden lg:block font-['Inter'] font-bold text-lg lg:text-xl xl:text-[1.875vw] text-[#000000] text-left mb-4 xl:mb-[2vw] uppercase w-full">
+              <div className="w-full lg:w-1/2 bg-transparent lg:bg-surface flex flex-col justify-start lg:justify-center items-center lg:items-start px-5 py-8 md:px-6 md:py-8 lg:px-10 xl:px-[4vw] xl:py-[4vw] md:bg-surface md:rounded-b-lg lg:rounded-none md:mb-8 lg:mb-0">
+                <h3 className="hidden lg:block font-['Inter'] font-bold text-lg lg:text-xl xl:text-[1.875vw] text-fg text-left mb-4 xl:mb-[2vw] uppercase w-full">
                   {section.title}
                 </h3>
-                <p className="font-['Inter'] text-sm md:text-sm lg:text-base xl:text-[1.25vw] leading-normal md:leading-relaxed xl:leading-[2.08vw] text-justify text-[#000000]">
+                <p className="font-['Inter'] text-sm md:text-sm lg:text-base xl:text-[1.25vw] leading-normal md:leading-relaxed xl:leading-[2.08vw] text-justify text-fg">
                   {section.description}
                 </p>
               </div>

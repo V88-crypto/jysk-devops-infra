@@ -14,14 +14,14 @@ const SearchResults = ({ query }: { query: string }) => {
 
   if (error) {
     return (
-      <p className="py-16 text-center text-[#d33]">
+      <p className="py-16 text-center text-danger">
         Не вдалося виконати пошук, спробуйте ще раз
       </p>
     )
   }
 
   if (!data) {
-    return <p className="py-16 text-center text-[#777]">Пошук...</p>
+    return <p className="py-16 text-center text-fg-subtle">Пошук...</p>
   }
 
   if (data.items.length === 0) {
@@ -39,7 +39,7 @@ const SearchResults = ({ query }: { query: string }) => {
 
   return (
     <div className={`transition-opacity ${isLoading ? 'opacity-60' : ''}`}>
-      <p className="mb-6 text-center text-[#777]">
+      <p className="mb-6 text-center text-fg-subtle">
         Знайдено {formatProductCount(data.total)}
       </p>
       <ProductGrid products={data.items} />
@@ -58,18 +58,18 @@ export const SearchPage = () => {
   const query = searchParams.get('q')?.trim() ?? ''
 
   return (
-    <main className="min-h-[60vh] w-full bg-[#f3f3f3] pb-16 font-sans">
+    <main className="min-h-[60vh] w-full bg-page pb-16 font-sans">
       <div className="mx-auto w-[90%] max-w-[1440px]">
         <CatalogBreadcrumbs items={[{ label: 'Пошук' }]} />
 
-        <h1 className="mb-4 mt-2 text-center font-['Inter'] text-3xl font-bold text-black md:text-[40px]">
+        <h1 className="mb-4 mt-2 text-center font-['Inter'] text-3xl font-bold text-fg md:text-[40px]">
           {query ? `Результати пошуку: «${query}»` : 'Пошук товарів'}
         </h1>
 
         {query ? (
           <SearchResults query={query} />
         ) : (
-          <p className="py-16 text-center text-[#777]">
+          <p className="py-16 text-center text-fg-subtle">
             Введіть назву товару в рядку пошуку
           </p>
         )}

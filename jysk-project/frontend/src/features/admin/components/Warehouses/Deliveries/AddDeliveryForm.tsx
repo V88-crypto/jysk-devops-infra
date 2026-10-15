@@ -27,10 +27,10 @@ interface AddDeliveryFormProps {
 }
 
 const fieldClass =
-  'h-[44px] w-full rounded-[4px] border border-[#d5d5d5] bg-[#f4f4f4] px-3 text-sm text-[#333] outline-none focus:border-primary'
+  'h-[44px] w-full rounded-[4px] border border-line-strong bg-surface-muted px-3 text-sm text-fg outline-none focus:border-primary'
 
 const inputClass =
-  'h-[40px] w-full rounded-[4px] border border-[#d5d5d5] bg-[#f4f4f4] px-2 text-sm text-[#333] outline-none focus:border-primary'
+  'h-[40px] w-full rounded-[4px] border border-line-strong bg-surface-muted px-2 text-sm text-fg outline-none focus:border-primary'
 
 export const AddDeliveryForm = ({ onBack, onSaved }: AddDeliveryFormProps) => {
   const { data: products } = useAsyncData(productService.getAll)
@@ -111,7 +111,7 @@ export const AddDeliveryForm = ({ onBack, onSaved }: AddDeliveryFormProps) => {
         <span className="text-lg">‹</span> Додавання постачання
       </button>
 
-      <div className="mb-6 border-t border-[#e0e0e0]" />
+      <div className="mb-6 border-t border-line" />
 
       <form
         onSubmit={(event) => void handleSubmit(event)}
@@ -128,7 +128,7 @@ export const AddDeliveryForm = ({ onBack, onSaved }: AddDeliveryFormProps) => {
         />
 
         <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-6">
-          <span className="min-w-[220px] text-sm font-medium text-[#333]">
+          <span className="min-w-[220px] text-sm font-medium text-fg">
             Постачальник
           </span>
 
@@ -152,7 +152,7 @@ export const AddDeliveryForm = ({ onBack, onSaved }: AddDeliveryFormProps) => {
         </div>
 
         <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-6">
-          <span className="min-w-[220px] text-sm font-medium text-[#333]">
+          <span className="min-w-[220px] text-sm font-medium text-fg">
             Склад
           </span>
 
@@ -176,7 +176,7 @@ export const AddDeliveryForm = ({ onBack, onSaved }: AddDeliveryFormProps) => {
         </div>
 
         <div className="flex flex-col gap-2 sm:flex-row sm:gap-6">
-          <span className="min-w-[220px] pt-2 text-sm font-medium text-[#333]">
+          <span className="min-w-[220px] pt-2 text-sm font-medium text-fg">
             Коментар
           </span>
 
@@ -185,14 +185,14 @@ export const AddDeliveryForm = ({ onBack, onSaved }: AddDeliveryFormProps) => {
             onChange={(event) => setComment(event.target.value)}
             placeholder="Введіть текст..."
             rows={4}
-            className="w-full max-w-[520px] resize-none rounded-[4px] border border-[#d5d5d5] bg-[#f4f4f4] px-3 py-2 text-sm text-[#333] outline-none placeholder:text-[#8a8a8a] focus:border-primary"
+            className="w-full max-w-[520px] resize-none rounded-[4px] border border-line-strong bg-surface-muted px-3 py-2 text-sm text-fg outline-none placeholder:text-fg-subtle focus:border-primary"
           />
         </div>
 
         <div className="overflow-x-auto">
           <table className="w-full min-w-[920px] border-collapse text-sm">
             <thead>
-              <tr className="text-left text-[#8a8a8a]">
+              <tr className="text-left text-fg-subtle">
                 <th className="px-2 py-2 font-normal">Найменування</th>
                 <th className="px-2 py-2 font-normal">Фасування</th>
                 <th className="px-2 py-2 font-normal">Кількість</th>
@@ -275,7 +275,7 @@ export const AddDeliveryForm = ({ onBack, onSaved }: AddDeliveryFormProps) => {
                       />
                     </td>
 
-                    <td className="text-center text-[#8a8a8a]">×</td>
+                    <td className="text-center text-fg-subtle">×</td>
 
                     <td className="px-2 py-2">
                       <input
@@ -289,18 +289,18 @@ export const AddDeliveryForm = ({ onBack, onSaved }: AddDeliveryFormProps) => {
                       />
                     </td>
 
-                    <td className="text-center text-[#8a8a8a]">=</td>
+                    <td className="text-center text-fg-subtle">=</td>
 
                     <td className="px-2 py-2">
                       <input
                         type="text"
                         readOnly
                         value={sumWithoutTax.toFixed(2)}
-                        className={`${inputClass} bg-[#ececec] text-[#666]`}
+                        className={`${inputClass} bg-surface-strong text-fg-muted`}
                       />
                     </td>
 
-                    <td className="text-center text-[#8a8a8a]">×</td>
+                    <td className="text-center text-fg-subtle">×</td>
 
                     <td className="px-2 py-2">
                       <input
@@ -314,14 +314,14 @@ export const AddDeliveryForm = ({ onBack, onSaved }: AddDeliveryFormProps) => {
                       />
                     </td>
 
-                    <td className="text-center text-[#8a8a8a]">=</td>
+                    <td className="text-center text-fg-subtle">=</td>
 
                     <td className="px-2 py-2">
                       <input
                         type="text"
                         readOnly
                         value={totalSum.toFixed(2)}
-                        className={`${inputClass} bg-[#ececec] text-[#666]`}
+                        className={`${inputClass} bg-surface-strong text-fg-muted`}
                       />
                     </td>
 
@@ -330,7 +330,7 @@ export const AddDeliveryForm = ({ onBack, onSaved }: AddDeliveryFormProps) => {
                         type="button"
                         onClick={() => removeRow(row.id)}
                         aria-label="Видалити рядок"
-                        className="text-[#8a8a8a] transition-colors hover:text-[#e31b23]"
+                        className="text-fg-subtle transition-colors hover:text-danger"
                       >
                         🗑
                       </button>

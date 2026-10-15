@@ -27,7 +27,7 @@ export const ProductGrid = ({ products }: ProductGridProps) => {
   return (
     <>
       {error && (
-        <p role="alert" className="mb-4 w-full text-center text-red-500">
+        <p role="alert" className="mb-4 w-full text-center text-danger">
           {error}
         </p>
       )}

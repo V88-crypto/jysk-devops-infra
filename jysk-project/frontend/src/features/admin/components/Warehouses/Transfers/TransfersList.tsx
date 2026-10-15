@@ -54,7 +54,7 @@ export const TransfersList = ({ onAdd }: TransfersListProps) => {
         <div className="flex items-center gap-3">
           <h1 className="text-2xl font-semibold">Переміщення</h1>
 
-          <span className="flex h-6 min-w-6 items-center justify-center rounded-full bg-[#e5e5e5] px-2 text-sm font-medium text-[#555]">
+          <span className="flex h-6 min-w-6 items-center justify-center rounded-full bg-surface-strong px-2 text-sm font-medium text-fg-muted">
             {filteredTransfers.length}
           </span>
         </div>
@@ -68,7 +68,7 @@ export const TransfersList = ({ onAdd }: TransfersListProps) => {
         </button>
       </div>
 
-      <div className="mb-4 flex flex-wrap items-center gap-5 rounded-md bg-white px-4 py-3 shadow-sm">
+      <div className="mb-4 flex flex-wrap items-center gap-5 rounded-md bg-surface px-4 py-3 shadow-sm">
         <SearchField value={search} onChange={setSearch} />
 
         <FilterDropdown
@@ -80,16 +80,16 @@ export const TransfersList = ({ onAdd }: TransfersListProps) => {
 
         <button
           type="button"
-          className="flex items-center gap-1 text-sm font-medium text-[#333] transition-opacity hover:opacity-70"
+          className="flex items-center gap-1 text-sm font-medium text-fg transition-opacity hover:opacity-70"
         >
           Фільтр <span>+</span>
         </button>
       </div>
 
-      <div className="overflow-x-auto rounded-md bg-white shadow-sm">
+      <div className="overflow-x-auto rounded-md bg-surface shadow-sm">
         <table className="w-full min-w-[720px] border-collapse text-left text-sm">
           <thead>
-            <tr className="border-b border-[#e5e5e5] text-[#8a8a8a]">
+            <tr className="border-b border-line text-fg-subtle">
               <th className="px-4 py-3 font-normal">Дата ˅</th>
               <th className="px-4 py-3 font-normal">Найменування</th>
               <th className="px-4 py-3 font-normal">Сума</th>
@@ -103,7 +103,7 @@ export const TransfersList = ({ onAdd }: TransfersListProps) => {
             {filteredTransfers.map((transfer) => (
               <tr
                 key={transfer.id}
-                className="border-b border-[#f0f0f0] last:border-0"
+                className="border-b border-line last:border-0"
               >
                 <td className="px-4 py-3 whitespace-nowrap">
                   {formatDocumentDate(transfer.date)}
@@ -123,13 +123,13 @@ export const TransfersList = ({ onAdd }: TransfersListProps) => {
         </table>
 
         {!isLoading && filteredTransfers.length === 0 && (
-          <p className="px-4 py-10 text-center text-[#8a8a8a]">
+          <p className="px-4 py-10 text-center text-fg-subtle">
             Нічого не знайдено
           </p>
         )}
 
         {isLoading && (
-          <p className="px-4 py-10 text-center text-[#8a8a8a]">
+          <p className="px-4 py-10 text-center text-fg-subtle">
             Завантаження...
           </p>
         )}

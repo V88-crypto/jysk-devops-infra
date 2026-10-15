@@ -164,7 +164,7 @@ export const CategoriesPage = () => {
   const renderStatus = () => {
     if (loadError.categories) {
       return (
-        <p className="px-4 py-10 text-center text-[#d33]">
+        <p className="px-4 py-10 text-center text-danger">
           Не вдалося завантажити категорії
         </p>
       )
@@ -172,13 +172,13 @@ export const CategoriesPage = () => {
 
     if (!categories) {
       return (
-        <p className="px-4 py-10 text-center text-[#8a8a8a]">Завантаження...</p>
+        <p className="px-4 py-10 text-center text-fg-subtle">Завантаження...</p>
       )
     }
 
     if (categories.length === 0) {
       return (
-        <p className="px-4 py-10 text-center text-[#8a8a8a]">
+        <p className="px-4 py-10 text-center text-fg-subtle">
           Категорій поки немає
         </p>
       )
@@ -192,7 +192,7 @@ export const CategoriesPage = () => {
       <div className="mb-6 flex items-center gap-3">
         <h1 className="text-2xl font-semibold">Категорії</h1>
 
-        <span className="flex h-6 min-w-6 items-center justify-center rounded-full bg-[#e5e5e5] px-2 text-sm font-medium text-[#555]">
+        <span className="flex h-6 min-w-6 items-center justify-center rounded-full bg-surface-strong px-2 text-sm font-medium text-fg-muted">
           {categories?.length ?? 0}
         </span>
       </div>
@@ -211,18 +211,18 @@ export const CategoriesPage = () => {
           role="status"
           className={`mb-4 rounded-md px-4 py-3 text-sm ${
             message.type === 'error'
-              ? 'bg-[#fdecec] text-[#d33]'
-              : 'bg-[#eaf7ea] text-[#1f7a1f]'
+              ? 'bg-danger-soft text-danger'
+              : 'bg-success-soft text-success'
           }`}
         >
           {message.text}
         </p>
       )}
 
-      <div className="overflow-x-auto rounded-md bg-white shadow-sm">
+      <div className="overflow-x-auto rounded-md bg-surface shadow-sm">
         <table className="w-full min-w-[640px] border-collapse text-left text-sm">
           <thead>
-            <tr className="border-b border-[#e5e5e5] text-[#8a8a8a]">
+            <tr className="border-b border-line text-fg-subtle">
               <th className="px-4 py-3 font-normal">Назва</th>
               <th className="px-4 py-3 font-normal">Slug</th>
               <th className="px-4 py-3 font-normal">Батьківська</th>
@@ -234,8 +234,8 @@ export const CategoriesPage = () => {
             {rows.map(({ category, depth }) => (
               <tr
                 key={category.id}
-                className={`border-b border-[#f0f0f0] last:border-0 ${
-                  editing?.id === category.id ? 'bg-[#eef8f8]' : ''
+                className={`border-b border-line last:border-0 ${
+                  editing?.id === category.id ? 'bg-primary-soft' : ''
                 }`}
               >
                 <td className="px-4 py-3">
@@ -243,12 +243,12 @@ export const CategoriesPage = () => {
                     style={{ paddingLeft: `${depth * 20}px` }}
                     className={depth === 0 ? 'font-semibold' : ''}
                   >
-                    {depth > 0 && <span className="text-[#b0b0b0]">└ </span>}
+                    {depth > 0 && <span className="text-fg-subtle">└ </span>}
                     {category.name}
                   </span>
                 </td>
-                <td className="px-4 py-3 text-[#555]">{category.slug}</td>
-                <td className="px-4 py-3 text-[#555]">
+                <td className="px-4 py-3 text-fg-muted">{category.slug}</td>
+                <td className="px-4 py-3 text-fg-muted">
                   {category.parentId === null
                     ? '—'
                     : nameById.get(category.parentId)}

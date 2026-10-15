@@ -11,20 +11,20 @@ export function BlogCard({ post }: BlogCardProps) {
 
   return (
     <article className="flex h-full flex-col">
-      <div className="group relative aspect-[523/307] overflow-hidden bg-neutral-100">
+      <div className="group relative aspect-[523/307] overflow-hidden bg-surface-muted">
         <img
           src={post.imageUrl}
           alt={post.imageAlt}
           loading="lazy"
           className="h-full w-full object-cover transition-transform duration-300 ease-out group-hover:scale-105 motion-reduce:transition-none"
         />
-        <h3 className="blog-card-title absolute left-[18px] top-[15px] max-w-[88%] text-[16px] font-bold leading-[1.12] text-neutral-900 md:max-w-[425px] md:text-[17px]">
+        <h3 className="blog-card-title absolute left-[18px] top-[15px] max-w-[88%] text-[16px] font-bold leading-[1.12] text-ink md:max-w-[425px] md:text-[17px]">
           {post.title}
         </h3>
       </div>
 
-      <div className="mt-[25px] flex h-[87px] items-center bg-[#dedede] px-[16px] py-3">
-        <p className="blog-card-description text-left text-[13px] leading-[15px] text-neutral-700">
+      <div className="mt-[25px] flex h-[87px] items-center bg-surface-strong px-[16px] py-3">
+        <p className="blog-card-description text-left text-[13px] leading-[15px] text-fg-muted">
           {post.description}
         </p>
       </div>

@@ -10,7 +10,7 @@ export const SearchField = ({
   placeholder = 'Швидкий пошук',
 }: SearchFieldProps) => {
   return (
-    <label className="flex min-w-[220px] flex-1 items-center gap-2 rounded-md border border-[#e5e5e5] px-3 py-2 text-sm text-[#8a8a8a]">
+    <label className="flex min-w-[220px] flex-1 items-center gap-2 rounded-md border border-line px-3 py-2 text-sm text-fg-subtle">
       <svg
         aria-hidden="true"
         viewBox="0 0 20 20"
@@ -26,7 +26,7 @@ export const SearchField = ({
         value={value}
         onChange={(event) => onChange(event.target.value)}
         placeholder={placeholder}
-        className="w-full text-[#202020] outline-none placeholder:text-[#8a8a8a]"
+        className="w-full text-fg outline-none placeholder:text-fg-subtle"
       />
     </label>
   )

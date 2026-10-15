@@ -30,7 +30,7 @@ export function BlogCategorySection({
         <button
           type="button"
           onClick={() => navigate(`/blog/${featured.id}`)}
-          className="group relative aspect-[4/3] overflow-hidden rounded-md bg-neutral-100 text-left focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary md:aspect-auto md:h-full"
+          className="group relative aspect-[4/3] overflow-hidden rounded-md bg-surface-muted text-left focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary md:aspect-auto md:h-full"
         >
           <img
             src={featured.imageUrl}
@@ -39,9 +39,9 @@ export function BlogCategorySection({
           />
           <div
             aria-hidden="true"
-            className="absolute inset-x-0 top-0 h-2/5 bg-gradient-to-b from-white/85 via-white/50 to-transparent"
+            className="absolute inset-x-0 top-0 h-2/5 bg-gradient-to-b from-surface/85 via-surface/50 to-transparent"
           />
-          <h3 className="absolute left-4 top-4 max-w-[85%] text-lg font-bold leading-snug text-neutral-900">
+          <h3 className="absolute left-4 top-4 max-w-[85%] text-lg font-bold leading-snug text-fg">
             {featured.title}
           </h3>
         </button>
@@ -52,7 +52,7 @@ export function BlogCategorySection({
               key={post.id}
               type="button"
               onClick={() => navigate(`/blog/${post.id}`)}
-              className="group relative aspect-square overflow-hidden rounded-md bg-neutral-100 text-left focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary md:aspect-auto"
+              className="group relative aspect-square overflow-hidden rounded-md bg-surface-muted text-left focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary md:aspect-auto"
             >
               <img
                 src={post.imageUrl}
@@ -61,9 +61,9 @@ export function BlogCategorySection({
               />
               <div
                 aria-hidden="true"
-                className="absolute inset-x-0 top-0 h-2/5 bg-gradient-to-b from-white/85 via-white/50 to-transparent"
+                className="absolute inset-x-0 top-0 h-2/5 bg-gradient-to-b from-surface/85 via-surface/50 to-transparent"
               />
-              <h3 className="absolute left-3 top-3 max-w-[85%] text-xs font-bold leading-snug text-neutral-900 sm:text-sm">
+              <h3 className="absolute left-3 top-3 max-w-[85%] text-xs font-bold leading-snug text-fg sm:text-sm">
                 {post.title}
               </h3>
             </button>

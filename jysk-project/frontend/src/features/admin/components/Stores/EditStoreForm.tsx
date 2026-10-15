@@ -116,10 +116,10 @@ export const EditStoreForm = ({
         <span className="text-lg">‹</span> Редагування магазину
       </button>
 
-      <div className="mb-6 border-t border-[#e0e0e0]" />
+      <div className="mb-6 border-t border-line" />
 
       {isLoading || !form ? (
-        <p className="text-[#8a8a8a]">Завантаження...</p>
+        <p className="text-fg-subtle">Завантаження...</p>
       ) : (
         <form
           onSubmit={(event) => void handleSubmit(event)}
@@ -150,7 +150,7 @@ export const EditStoreForm = ({
             </select>
           </LabeledField>
 
-          <p className="text-sm text-[#8a8a8a]">
+          <p className="text-sm text-fg-subtle">
             Поточна адреса: {form.street} {form.houseNumber}, {form.city}
           </p>
 
@@ -178,17 +178,17 @@ export const EditStoreForm = ({
           </LabeledField>
 
           <div>
-            <span className="mb-3 block text-sm font-medium text-[#333]">
+            <span className="mb-3 block text-sm font-medium text-fg">
               Робочі години:
             </span>
 
             <div className="flex flex-col gap-3">
               {form.workingHours.map((item) => (
                 <div key={item.day}>
-                  <span className="text-xs text-[#8a8a8a]">{item.day}:</span>
+                  <span className="text-xs text-fg-subtle">{item.day}:</span>
 
                   <div className="mt-1 flex flex-wrap items-center gap-3">
-                    <span className="text-sm text-[#333]">Початок</span>
+                    <span className="text-sm text-fg">Початок</span>
 
                     <input
                       type="time"
@@ -203,7 +203,7 @@ export const EditStoreForm = ({
                       className={`${fieldClass} w-[120px]`}
                     />
 
-                    <span className="text-sm text-[#333]">Кінець</span>
+                    <span className="text-sm text-fg">Кінець</span>
 
                     <input
                       type="time"

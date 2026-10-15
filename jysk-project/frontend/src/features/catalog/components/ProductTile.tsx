@@ -17,14 +17,14 @@ export const ProductTile = ({
   isFavoritePending,
   onToggleFavorite,
 }: ProductTileProps) => (
-  <article className="relative flex flex-col border border-transparent bg-white p-4 transition-shadow hover:border-gray-200 hover:shadow-lg">
+  <article className="relative flex flex-col border border-transparent bg-surface p-4 transition-shadow hover:border-line hover:shadow-lg">
     <button
       type="button"
       onClick={onToggleFavorite}
       disabled={isFavoritePending}
       aria-pressed={isFavorite}
       aria-label={isFavorite ? 'Прибрати з обраного' : 'Додати в обране'}
-      className="absolute right-4 top-4 z-10 disabled:opacity-50"
+      className="absolute right-4 top-4 z-10 flex h-11 w-11 items-center justify-center rounded-full bg-surface/90 shadow-sm transition-transform hover:scale-105 disabled:opacity-50"
     >
       <svg
         aria-hidden="true"
@@ -34,7 +34,7 @@ export const ProductTile = ({
         className={`h-7 w-7 transition-colors ${
           isFavorite
             ? 'fill-primary stroke-primary'
-            : 'fill-none stroke-black hover:stroke-primary'
+            : 'fill-none stroke-fg hover:stroke-primary'
         }`}
       >
         <path
@@ -46,7 +46,7 @@ export const ProductTile = ({
     </button>
 
     <Link to={productUrl(product.slug)} className="flex flex-1 flex-col">
-      <div className="mb-4 flex aspect-square w-full items-center justify-center overflow-hidden bg-[#f7f7f7]">
+      <div className="mb-4 flex aspect-square w-full items-center justify-center overflow-hidden bg-surface-muted">
         {product.imageUrl ? (
           <img
             src={product.imageUrl}
@@ -55,15 +55,15 @@ export const ProductTile = ({
             className="max-h-full max-w-full object-contain"
           />
         ) : (
-          <span className="text-sm text-[#999]">Немає фото</span>
+          <span className="text-sm text-fg-subtle">Немає фото</span>
         )}
       </div>
 
-      <h3 className="mb-2 line-clamp-2 min-h-12 font-['Raleway'] text-base font-bold uppercase text-[#231F20] md:text-[18px]">
+      <h3 className="mb-2 line-clamp-2 min-h-12 font-['Raleway'] text-base font-bold uppercase text-fg md:text-[18px]">
         {product.name}
       </h3>
 
-      <p className="mt-auto font-['Raleway'] text-lg font-bold text-black md:text-[20px]">
+      <p className="mt-auto font-['Raleway'] text-lg font-bold text-fg md:text-[20px]">
         {product.priceFrom === null
           ? 'Ціну уточнюйте'
           : `від ${formatPrice(product.priceFrom)}`}

@@ -98,7 +98,7 @@ export const ProductReviews = ({ slug, variantId }: ProductReviewsProps) => {
         <h2 className="text-[26px] font-bold lg:text-[32px]">Відгуки</h2>
 
         {reviews && reviews.total > 0 && (
-          <span className="flex items-center gap-2 text-[16px] text-[#555]">
+          <span className="flex items-center gap-2 text-[16px] text-fg-muted">
             <Stars rating={reviews.averageRating} />
             {reviews.averageRating.toLocaleString('uk-UA', {
               maximumFractionDigits: 1,
@@ -111,24 +111,24 @@ export const ProductReviews = ({ slug, variantId }: ProductReviewsProps) => {
       <div className="grid gap-8 lg:grid-cols-[1fr_380px]">
         <div className="flex flex-col gap-4">
           {isLoading && !reviews && (
-            <p className="text-[#777]">Завантаження відгуків...</p>
+            <p className="text-fg-subtle">Завантаження відгуків...</p>
           )}
 
           {!isLoading && !reviews && (
-            <p className="text-[#d33]">Не вдалося завантажити відгуки</p>
+            <p className="text-danger">Не вдалося завантажити відгуки</p>
           )}
 
           {reviews && reviews.items.length === 0 && (
-            <p className="bg-white px-5 py-8 text-center text-[#777]">
+            <p className="bg-surface px-5 py-8 text-center text-fg-subtle">
               Відгуків ще немає. Будьте першим!
             </p>
           )}
 
           {reviews?.items.map((review) => (
-            <article key={review.id} className="bg-white p-5">
+            <article key={review.id} className="bg-surface p-5">
               <div className="flex flex-wrap items-center justify-between gap-2">
                 <span className="font-semibold">{review.author}</span>
-                <span className="text-sm text-[#888]">
+                <span className="text-sm text-fg-subtle">
                   {formatDate(review.createdAt)}
                 </span>
               </div>
@@ -136,7 +136,7 @@ export const ProductReviews = ({ slug, variantId }: ProductReviewsProps) => {
               <Stars rating={review.rating} className="mt-1 text-[20px]" />
 
               {review.comment && (
-                <p className="mt-2 leading-[24px] text-[#444]">
+                <p className="mt-2 leading-[24px] text-fg-muted">
                   {review.comment}
                 </p>
               )}
@@ -144,7 +144,7 @@ export const ProductReviews = ({ slug, variantId }: ProductReviewsProps) => {
           ))}
         </div>
 
-        <div className="h-fit bg-white p-5">
+        <div className="h-fit bg-surface p-5">
           <h3 className="mb-4 text-[20px] font-bold">Залишити відгук</h3>
 
           {isAuthenticated ? (
@@ -164,7 +164,7 @@ export const ProductReviews = ({ slug, variantId }: ProductReviewsProps) => {
                 disabled={isSending}
                 placeholder="Ваш коментар (необов'язково)"
                 rows={4}
-                className="w-full resize-y rounded-[4px] border border-[#c5c5c5] bg-[#f4f4f4] p-3 outline-none focus:border-primary"
+                className="w-full resize-y rounded-[4px] border border-line-strong bg-surface-muted p-3 outline-none focus:border-primary"
               />
 
               {formMessage && (
@@ -172,8 +172,8 @@ export const ProductReviews = ({ slug, variantId }: ProductReviewsProps) => {
                   role="status"
                   className={`text-sm ${
                     formMessage.type === 'error'
-                      ? 'text-red-500'
-                      : 'text-[#22aa00]'
+                      ? 'text-danger'
+                      : 'text-success'
                   }`}
                 >
                   {formMessage.text}
@@ -189,7 +189,7 @@ export const ProductReviews = ({ slug, variantId }: ProductReviewsProps) => {
               </button>
             </form>
           ) : (
-            <p className="text-[#555]">
+            <p className="text-fg-muted">
               <Link to="/login" className="text-primary underline">
                 Увійдіть
               </Link>

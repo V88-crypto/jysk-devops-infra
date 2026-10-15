@@ -113,7 +113,7 @@ export const ProductsList = ({ onAdd, onEdit }: ProductsListProps) => {
   const renderStatus = () => {
     if (result?.status === 'error' && !isLoading) {
       return (
-        <p className="px-4 py-10 text-center text-[#d33]">
+        <p className="px-4 py-10 text-center text-danger">
           Не вдалося завантажити товари
         </p>
       )
@@ -121,13 +121,13 @@ export const ProductsList = ({ onAdd, onEdit }: ProductsListProps) => {
 
     if (!productPage) {
       return (
-        <p className="px-4 py-10 text-center text-[#8a8a8a]">Завантаження...</p>
+        <p className="px-4 py-10 text-center text-fg-subtle">Завантаження...</p>
       )
     }
 
     if (products.length === 0) {
       return (
-        <p className="px-4 py-10 text-center text-[#8a8a8a]">
+        <p className="px-4 py-10 text-center text-fg-subtle">
           Нічого не знайдено
         </p>
       )
@@ -142,7 +142,7 @@ export const ProductsList = ({ onAdd, onEdit }: ProductsListProps) => {
         <div className="flex items-center gap-3">
           <h1 className="text-2xl font-semibold">Товари</h1>
 
-          <span className="flex h-6 min-w-6 items-center justify-center rounded-full bg-[#e5e5e5] px-2 text-sm font-medium text-[#555]">
+          <span className="flex h-6 min-w-6 items-center justify-center rounded-full bg-surface-strong px-2 text-sm font-medium text-fg-muted">
             {total}
           </span>
         </div>
@@ -156,7 +156,7 @@ export const ProductsList = ({ onAdd, onEdit }: ProductsListProps) => {
         </button>
       </div>
 
-      <div className="mb-4 flex flex-wrap items-center gap-5 rounded-md bg-white px-4 py-3 shadow-sm">
+      <div className="mb-4 flex flex-wrap items-center gap-5 rounded-md bg-surface px-4 py-3 shadow-sm">
         <SearchField
           value={search}
           onChange={handleSearchChange}
@@ -165,19 +165,19 @@ export const ProductsList = ({ onAdd, onEdit }: ProductsListProps) => {
       </div>
 
       {actionError && (
-        <p className="mb-4 rounded-md bg-[#fdecec] px-4 py-3 text-sm text-[#d33]">
+        <p className="mb-4 rounded-md bg-danger-soft px-4 py-3 text-sm text-danger">
           {actionError}
         </p>
       )}
 
-      <div className="overflow-x-auto rounded-md bg-white shadow-sm">
+      <div className="overflow-x-auto rounded-md bg-surface shadow-sm">
         <table
           className={`w-full min-w-[720px] border-collapse text-left text-sm transition-opacity ${
             isLoading && productPage ? 'opacity-60' : ''
           }`}
         >
           <thead>
-            <tr className="border-b border-[#e5e5e5] text-[#8a8a8a]">
+            <tr className="border-b border-line text-fg-subtle">
               <th className="w-[64px] px-4 py-3 font-normal">Фото</th>
               <th className="px-4 py-3 font-normal">Назва</th>
               <th className="px-4 py-3 font-normal">Артикул</th>
@@ -196,7 +196,7 @@ export const ProductsList = ({ onAdd, onEdit }: ProductsListProps) => {
               return (
                 <tr
                   key={product.id}
-                  className="border-b border-[#f0f0f0] last:border-0"
+                  className="border-b border-line last:border-0"
                 >
                   <td className="px-4 py-2">
                     {imageUrl ? (
@@ -209,7 +209,7 @@ export const ProductsList = ({ onAdd, onEdit }: ProductsListProps) => {
                         className="h-10 w-10 rounded object-cover"
                       />
                     ) : (
-                      <span className="block h-10 w-10 rounded bg-[#f0f0f0]" />
+                      <span className="block h-10 w-10 rounded bg-surface-strong" />
                     )}
                   </td>
                   <td className="px-4 py-3">{product.name}</td>
@@ -237,7 +237,7 @@ export const ProductsList = ({ onAdd, onEdit }: ProductsListProps) => {
       </div>
 
       {total > PAGE_SIZE && (
-        <div className="mt-4 flex flex-wrap items-center justify-between gap-3 text-sm text-[#555]">
+        <div className="mt-4 flex flex-wrap items-center justify-between gap-3 text-sm text-fg-muted">
           <span>
             Показано {(page - 1) * PAGE_SIZE + 1}–
             {Math.min(page * PAGE_SIZE, total)} з {total}
@@ -248,7 +248,7 @@ export const ProductsList = ({ onAdd, onEdit }: ProductsListProps) => {
               type="button"
               onClick={() => setPage((current) => current - 1)}
               disabled={page <= 1}
-              className="h-[34px] rounded-[4px] border border-[#d5d5d5] bg-white px-3 transition-colors hover:border-primary disabled:cursor-not-allowed disabled:opacity-50"
+              className="h-[34px] rounded-[4px] border border-line-strong bg-surface px-3 transition-colors hover:border-primary disabled:cursor-not-allowed disabled:opacity-50"
             >
               ‹ Назад
             </button>
@@ -261,7 +261,7 @@ export const ProductsList = ({ onAdd, onEdit }: ProductsListProps) => {
               type="button"
               onClick={() => setPage((current) => current + 1)}
               disabled={page >= pageCount}
-              className="h-[34px] rounded-[4px] border border-[#d5d5d5] bg-white px-3 transition-colors hover:border-primary disabled:cursor-not-allowed disabled:opacity-50"
+              className="h-[34px] rounded-[4px] border border-line-strong bg-surface px-3 transition-colors hover:border-primary disabled:cursor-not-allowed disabled:opacity-50"
             >
               Далі ›
             </button>

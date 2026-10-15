@@ -55,7 +55,7 @@ export const StoresList = ({ onEdit }: StoresListProps) => {
         <div className="flex items-center gap-3">
           <h1 className="text-2xl font-semibold">Магазини</h1>
 
-          <span className="flex h-6 min-w-6 items-center justify-center rounded-full bg-[#e5e5e5] px-2 text-sm font-medium text-[#555]">
+          <span className="flex h-6 min-w-6 items-center justify-center rounded-full bg-surface-strong px-2 text-sm font-medium text-fg-muted">
             {filteredStores.length}
           </span>
         </div>
@@ -68,21 +68,21 @@ export const StoresList = ({ onEdit }: StoresListProps) => {
         </button>
       </div>
 
-      <div className="mb-4 flex flex-wrap items-center gap-5 rounded-md bg-white px-4 py-3 shadow-sm">
+      <div className="mb-4 flex flex-wrap items-center gap-5 rounded-md bg-surface px-4 py-3 shadow-sm">
         <SearchField value={search} onChange={setSearch} />
 
         <button
           type="button"
-          className="flex items-center gap-1 text-sm font-medium text-[#333] transition-opacity hover:opacity-70"
+          className="flex items-center gap-1 text-sm font-medium text-fg transition-opacity hover:opacity-70"
         >
           Фільтр <span>+</span>
         </button>
       </div>
 
-      <div className="overflow-x-auto rounded-md bg-white shadow-sm">
+      <div className="overflow-x-auto rounded-md bg-surface shadow-sm">
         <table className="w-full min-w-[700px] border-collapse text-left text-sm">
           <thead>
-            <tr className="border-b border-[#e5e5e5] text-[#8a8a8a]">
+            <tr className="border-b border-line text-fg-subtle">
               <th className="px-4 py-3 font-normal">№</th>
               <th className="px-4 py-3 font-normal">Назва ˅</th>
               <th className="px-4 py-3 font-normal">Вулиця</th>
@@ -94,10 +94,7 @@ export const StoresList = ({ onEdit }: StoresListProps) => {
 
           <tbody>
             {filteredStores.map((store, index) => (
-              <tr
-                key={store.id}
-                className="border-b border-[#f0f0f0] last:border-0"
-              >
+              <tr key={store.id} className="border-b border-line last:border-0">
                 <td className="px-4 py-3">{index + 1}</td>
                 <td className="px-4 py-3">{store.name}</td>
                 <td className="px-4 py-3">{store.street}</td>
@@ -114,13 +111,13 @@ export const StoresList = ({ onEdit }: StoresListProps) => {
         </table>
 
         {!isLoading && filteredStores.length === 0 && (
-          <p className="px-4 py-10 text-center text-[#8a8a8a]">
+          <p className="px-4 py-10 text-center text-fg-subtle">
             Нічого не знайдено
           </p>
         )}
 
         {isLoading && (
-          <p className="px-4 py-10 text-center text-[#8a8a8a]">
+          <p className="px-4 py-10 text-center text-fg-subtle">
             Завантаження...
           </p>
         )}

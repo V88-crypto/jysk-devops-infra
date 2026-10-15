@@ -11,8 +11,8 @@ import {
 } from './changePasswordSchema'
 
 const inputClass = (hasError: boolean) =>
-  `w-full h-[48px] px-[16px] rounded-[4px] border bg-[#e4e4e4] outline-none transition ${
-    hasError ? 'border-red-500' : 'border-[#c5c5c5] focus:border-primary'
+  `w-full h-[48px] px-[16px] rounded-[4px] border bg-surface-strong outline-none transition ${
+    hasError ? 'border-danger' : 'border-line-strong focus:border-primary'
   }`
 
 const toErrorMessage = (error: unknown) => {
@@ -84,7 +84,7 @@ export const ChangePasswordForm = ({ email }: { email: string }) => {
             className={inputClass(Boolean(errors.currentPassword))}
           />
           {errors.currentPassword && (
-            <p className="mt-1 text-sm text-red-500">
+            <p className="mt-1 text-sm text-danger">
               {errors.currentPassword.message}
             </p>
           )}
@@ -99,7 +99,7 @@ export const ChangePasswordForm = ({ email }: { email: string }) => {
             className={inputClass(Boolean(errors.password))}
           />
           {errors.password && (
-            <p className="mt-1 text-sm text-red-500">
+            <p className="mt-1 text-sm text-danger">
               {errors.password.message}
             </p>
           )}
@@ -114,16 +114,16 @@ export const ChangePasswordForm = ({ email }: { email: string }) => {
             className={inputClass(Boolean(errors.repeatPassword))}
           />
           {errors.repeatPassword && (
-            <p className="mt-1 text-sm text-red-500">
+            <p className="mt-1 text-sm text-danger">
               {errors.repeatPassword.message}
             </p>
           )}
         </div>
 
-        {submitError && <p className="text-sm text-red-500">{submitError}</p>}
+        {submitError && <p className="text-sm text-danger">{submitError}</p>}
 
         {isChanged && (
-          <p className="text-sm font-semibold text-[#22aa00]">
+          <p className="text-sm font-semibold text-success">
             Пароль успішно змінено
           </p>
         )}

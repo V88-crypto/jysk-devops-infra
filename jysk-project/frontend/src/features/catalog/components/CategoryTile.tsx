@@ -25,10 +25,10 @@ export const CategoryTile = ({ category }: CategoryTileProps) => {
   const imageUrl = preview?.items[0]?.imageUrl ?? null
 
   return (
-    <article className="flex flex-col bg-white">
+    <article className="flex flex-col bg-surface">
       <Link
         to={`/category/${category.slug}`}
-        className="group relative block aspect-530/477 w-full overflow-hidden bg-[#e5e5e5]"
+        className="group relative block aspect-530/477 w-full overflow-hidden bg-surface-strong"
       >
         {imageUrl && (
           <img
@@ -38,7 +38,7 @@ export const CategoryTile = ({ category }: CategoryTileProps) => {
           />
         )}
 
-        <span className="absolute left-4 top-4 bg-white/85 px-3 py-1 font-['Raleway'] text-lg font-bold text-[#231F20] md:left-6 md:top-6 md:text-[28px]">
+        <span className="absolute left-4 top-4 bg-white/85 px-3 py-1 font-['Raleway'] text-lg font-bold text-ink md:left-6 md:top-6 md:text-[28px]">
           {category.name}
         </span>
       </Link>
@@ -49,7 +49,7 @@ export const CategoryTile = ({ category }: CategoryTileProps) => {
             <li key={child.id}>
               <Link
                 to={`/category/${child.slug}`}
-                className="block rounded-full border border-[#c5c5c5] px-3 py-1 text-sm transition-colors hover:border-primary hover:text-primary"
+                className="block rounded-full border border-line-strong px-3 py-1 text-sm transition-colors hover:border-primary hover:text-primary"
               >
                 {child.name}
               </Link>

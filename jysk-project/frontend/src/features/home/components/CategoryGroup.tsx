@@ -28,7 +28,7 @@ export function CategoryGroup() {
   return (
     <section className="py-16">
       <div className="mx-auto max-w-[1460px] px-6">
-        <h2 className="mb-6 text-3xl font-semibold text-neutral-900 md:text-4xl">
+        <h2 className="mb-6 text-3xl font-semibold text-fg md:text-4xl">
           <Link
             to="/categories"
             className="transition-colors hover:text-primary"
@@ -38,13 +38,13 @@ export function CategoryGroup() {
         </h2>
 
         {Boolean(error) && (
-          <p className="text-center text-[#d33]">
+          <p className="text-center text-danger">
             Не вдалося завантажити категорії
           </p>
         )}
 
         {!error && !categories && (
-          <p className="text-center text-[#777]">Завантаження...</p>
+          <p className="text-center text-fg-subtle">Завантаження...</p>
         )}
 
         {categories && (

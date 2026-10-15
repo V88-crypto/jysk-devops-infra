@@ -11,7 +11,7 @@ type Props = {
 
 export const ReviewCard = ({ review, author }: Props) => {
   return (
-    <article className="bg-white border border-[#dedede] shadow-[0_1px_4px_rgba(0,0,0,0.15)] p-5">
+    <article className="bg-surface border border-line shadow-[0_1px_4px_rgba(0,0,0,0.15)] p-5">
       <div className="flex flex-col lg:flex-row gap-8">
         <div className="lg:w-[160px] shrink-0">
           <h3 className="text-[20px] font-semibold">{author}</h3>
@@ -27,7 +27,7 @@ export const ReviewCard = ({ review, author }: Props) => {
             ))}
           </div>
 
-          <p className="mt-2 text-[14px] text-[#888]">
+          <p className="mt-2 text-[14px] text-fg-subtle">
             {formatDate(review.date)}
           </p>
         </div>
@@ -43,7 +43,7 @@ export const ReviewCard = ({ review, author }: Props) => {
               className="w-[65px] h-[90px] object-contain shrink-0"
             />
           ) : (
-            <div className="w-[65px] h-[90px] shrink-0 bg-[#f0f0f0]" />
+            <div className="w-[65px] h-[90px] shrink-0 bg-surface-strong" />
           )}
 
           <p className="text-[18px] font-bold transition-colors group-hover:text-primary">
@@ -51,8 +51,10 @@ export const ReviewCard = ({ review, author }: Props) => {
           </p>
         </Link>
 
-        <p className="flex-1 text-[17px] leading-[24px] text-[#444]">
-          {review.comment || <span className="text-[#999]">Без коментаря</span>}
+        <p className="flex-1 text-[17px] leading-[24px] text-fg-muted">
+          {review.comment || (
+            <span className="text-fg-subtle">Без коментаря</span>
+          )}
         </p>
       </div>
     </article>

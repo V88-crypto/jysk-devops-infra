@@ -11,7 +11,7 @@ export const ProductGallery = ({ images, name }: ProductGalleryProps) => {
 
   if (!current) {
     return (
-      <div className="flex aspect-square w-full items-center justify-center bg-white text-[#999]">
+      <div className="flex aspect-square w-full items-center justify-center bg-surface text-fg-subtle">
         Немає фото
       </div>
     )
@@ -19,7 +19,7 @@ export const ProductGallery = ({ images, name }: ProductGalleryProps) => {
 
   return (
     <div>
-      <div className="aspect-square w-full overflow-hidden bg-white">
+      <div className="aspect-square w-full overflow-hidden bg-surface">
         <img src={current} alt={name} className="h-full w-full object-cover" />
       </div>
 
@@ -32,10 +32,10 @@ export const ProductGallery = ({ images, name }: ProductGalleryProps) => {
               onClick={() => setSelectedIndex(index)}
               aria-label={`Фото ${index + 1}`}
               aria-pressed={image === current}
-              className={`aspect-square overflow-hidden border-2 bg-white transition ${
+              className={`aspect-square overflow-hidden border-2 bg-surface transition ${
                 image === current
                   ? 'border-primary'
-                  : 'border-transparent hover:border-[#ccc]'
+                  : 'border-transparent hover:border-line-strong'
               }`}
             >
               <img src={image} alt="" className="h-full w-full object-cover" />
