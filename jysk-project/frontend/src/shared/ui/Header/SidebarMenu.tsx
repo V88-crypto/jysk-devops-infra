@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import logoImage from '@/assets/images/logo.png'
+import { catalogApi } from '@/features/catalog/api/catalogApi'
+import { useAsyncData } from '@/shared/hooks/useAsyncData'
 
 interface SidebarMenuProps {
   isOpen: boolean
@@ -12,26 +14,13 @@ export const SidebarMenu: React.FC<SidebarMenuProps> = ({
   setIsOpen,
 }) => {
   const navigate = useNavigate()
+  const { data: categories, error } = useAsyncData(catalogApi.getCategories)
+  const [expandedId, setExpandedId] = useState<number | null>(null)
 
   const goTo = (path: string) => {
     setIsOpen(false)
     navigate(path)
   }
-
-  const menuItems: string[] = [
-    'Вітальня',
-    'Кухня',
-    'Спальня',
-    'Ванна',
-    'Кабінет',
-    'Двір',
-    'Вітальня',
-    'Кухня',
-    'Спальня',
-    'Ванна',
-    'Кабінет',
-    'Двір',
-  ]
 
   const bottomNavItems: { text: string; path: string }[] = [
     { text: 'Блог', path: '/blog' },
@@ -92,16 +81,85 @@ export const SidebarMenu: React.FC<SidebarMenuProps> = ({
           <hr className="border-black/20 my-6 xl:my-[2vw] shrink-0" />
 
           <div className="flex flex-col flex-grow overflow-y-auto pb-6 custom-scrollbar">
-            <nav className="flex flex-col gap-5 md:gap-6 xl:gap-[1.5vw]">
-              {menuItems.map((item, index) => (
-                <a
-                  key={index}
-                  href="#"
-                  className="text-dark text-lg md:text-xl xl:text-[1.25vw] hover:text-primary transition-colors leading-none font-inter"
-                >
-                  {item}
-                </a>
-              ))}
+            <nav
+              aria-label="Категорії"
+              className="flex flex-col gap-5 md:gap-6 xl:gap-[1.5vw]"
+            >
+              {Boolean(error) && (
+                <p className="text-gray-medium">
+                  Не вдалося завантажити категорії
+                </p>
+              )}
+
+              {categories?.map((category) => {
+                const isExpanded = expandedId === category.id
+
+                return (
+                  <div key={category.id}>
+                    <div className="flex items-center justify-between gap-4">
+                      <button
+                        type="button"
+                        onClick={() => goTo(`/category/${category.slug}`)}
+                        className="text-left text-dark text-lg md:text-xl xl:text-[1.25vw] hover:text-primary transition-colors leading-none font-inter"
+                      >
+                        {category.name}
+                      </button>
+
+                      {category.children.length > 0 && (
+                        <button
+                          type="button"
+                          onClick={() =>
+                            setExpandedId(isExpanded ? null : category.id)
+                          }
+                          aria-expanded={isExpanded}
+                          aria-label={`Підкатегорії: ${category.name}`}
+                          className="text-dark hover:text-primary transition-colors shrink-0"
+                        >
+                          <svg
+                            aria-hidden="true"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="1.8"
+                            className={`w-5 h-5 xl:w-[1.1vw] xl:h-[1.1vw] transition-transform duration-200 ${
+                              isExpanded ? 'rotate-180' : ''
+                            }`}
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M6 9l6 6 6-6"
+                            />
+                          </svg>
+                        </button>
+                      )}
+                    </div>
+
+                    {isExpanded && (
+                      <div className="mt-4 ml-4 flex flex-col gap-3 border-l border-black/15 pl-4 xl:mt-[1vw] xl:gap-[0.8vw]">
+                        {category.children.map((child) => (
+                          <button
+                            key={child.id}
+                            type="button"
+                            onClick={() => goTo(`/category/${child.slug}`)}
+                            className="text-left text-gray-medium text-base md:text-lg xl:text-[1vw] hover:text-primary transition-colors leading-none font-inter"
+                          >
+                            {child.name}
+                          </button>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                )
+              })}
+
+              <button
+                type="button"
+                onClick={() => goTo('/categories')}
+                className="text-left text-primary text-lg md:text-xl xl:text-[1.25vw] hover:text-primary-dark transition-colors leading-none font-inter"
+              >
+                Усі категорії
+              </button>
             </nav>
 
             <hr className="border-black/20 my-6 xl:my-[2vw] shrink-0" />
