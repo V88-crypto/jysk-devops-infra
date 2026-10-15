@@ -5,13 +5,11 @@ import { useAsyncData } from '@/shared/hooks/useAsyncData'
 import { blogPageService } from './api/blogPageService'
 import { blogCategoryTabs } from './mocks/blogCatalog'
 import { BlogCategorySection } from './components/BlogCategorySection'
-import { RoomFilterRow } from './components/RoomFilterRow'
 
 const sectionId = (tab: string) => `blog-section-${tab}`
 
 export function BlogListPage() {
   const { data: posts, isLoading } = useAsyncData(blogPageService.getCatalog)
-  const { data: roomFilters } = useAsyncData(blogPageService.getRoomFilters)
   const [activeTab, setActiveTab] = useState<string>(blogCategoryTabs[0])
 
   const handleTabClick = (tab: string) => {
@@ -46,8 +44,6 @@ export function BlogListPage() {
               </button>
             ))}
           </div>
-
-          <RoomFilterRow items={roomFilters ?? []} />
         </div>
 
         <div className="border-t border-neutral-300" />

@@ -1,18 +1,8 @@
 import type { BlogPost } from '@/shared/types/blog'
-import type { BlogRoomFilter } from '@/features/blog/types'
 import { blogImages as img } from '@/features/blog/data/blogImages'
 
 export const blogCategoryTabs = ['Для дому', 'Для саду', 'Для сну'] as const
 export type BlogCategoryTab = (typeof blogCategoryTabs)[number]
-
-export const blogRoomFilters: BlogRoomFilter[] = [
-  { id: 'living-room', name: 'Вітальня', imageUrl: img.livingRoom },
-  { id: 'kitchen', name: 'Кухня', imageUrl: img.kitchen },
-  { id: 'bedroom', name: 'Спальня', imageUrl: img.bedroom },
-  { id: 'bathroom', name: 'Ванна', imageUrl: img.bathroom },
-  { id: 'office', name: 'Кабінет', imageUrl: img.office },
-  { id: 'yard', name: 'Двір', imageUrl: img.gardenTableGrass },
-]
 
 type ContentBlocks = NonNullable<BlogPost['contentBlocks']>
 
