@@ -166,3 +166,23 @@ export const findCategory = (
 
   return null
 }
+
+// Path from the top-level category down to the one with the given id.
+export const findCategoryPath = (
+  categories: CategoryNode[],
+  categoryId: number,
+): CategoryNode[] => {
+  for (const category of categories) {
+    if (category.id === categoryId) {
+      return [category]
+    }
+
+    const childPath = findCategoryPath(category.children, categoryId)
+
+    if (childPath.length) {
+      return [category, ...childPath]
+    }
+  }
+
+  return []
+}

@@ -1,13 +1,14 @@
 import { useCallback, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 
-import { catalogApi, findCategory } from '@/features/catalog/api/catalogApi'
+import { catalogApi, findCategoryPath } from '@/features/catalog/api/catalogApi'
 import type { ProductVariant } from '@/features/catalog/types'
 import { useFavorites } from '@/features/catalog/hooks/useFavorites'
 import { formatPrice } from '@/features/catalog/utils/format'
 import { ApiError } from '@/shared/api/httpClient'
 import { useAsyncData } from '@/shared/hooks/useAsyncData'
 
+import { CatalogBreadcrumbs } from './components/CatalogBreadcrumbs'
 import { ProductGallery } from './components/ProductGallery'
 import { ProductReviews } from './components/ProductReviews'
 
@@ -15,37 +16,6 @@ const variantLabel = (variant: ProductVariant) =>
   variant.attributes.length
     ? variant.attributes.map((attribute) => attribute.value).join(' / ')
     : variant.sku
-
-const Breadcrumbs = ({
-  category,
-  productName,
-}: {
-  category: { name: string; slug: string } | null
-  productName: string
-}) => (
-  <nav className="flex flex-wrap items-center gap-2 py-4 text-sm text-dark/60">
-    <Link to="/" className="transition-colors hover:text-primary">
-      Домашня сторінка
-    </Link>
-    <span>&gt;</span>
-    <Link to="/categories" className="transition-colors hover:text-primary">
-      Категорії
-    </Link>
-    {category && (
-      <>
-        <span>&gt;</span>
-        <Link
-          to={`/category/${category.slug}`}
-          className="transition-colors hover:text-primary"
-        >
-          {category.name}
-        </Link>
-      </>
-    )}
-    <span>&gt;</span>
-    <span className="text-dark">{productName}</span>
-  </nav>
-)
 
 export const ProductPage = () => {
   const { slug = '' } = useParams()
@@ -89,15 +59,20 @@ export const ProductPage = () => {
     product.variants.find((item) => item.id === selectedVariantId) ??
     product.variants[0] ??
     null
-  const category = categories
-    ? findCategory(categories, (item) => item.id === product.categoryId)
-    : null
+  const breadcrumbs = [
+    { label: 'Категорії', to: '/categories' },
+    ...findCategoryPath(categories ?? [], product.categoryId).map((item) => ({
+      label: item.name,
+      to: `/category/${item.slug}`,
+    })),
+    { label: product.name },
+  ]
   const isProductFavorite = isFavorite(product.slug)
 
   return (
     <main className="bg-[#f3f3f3] pb-16">
       <div className="mx-auto w-[90%] max-w-[1440px]">
-        <Breadcrumbs category={category} productName={product.name} />
+        <CatalogBreadcrumbs items={breadcrumbs} />
 
         <div className="grid gap-8 lg:grid-cols-2 lg:gap-12">
           <ProductGallery
