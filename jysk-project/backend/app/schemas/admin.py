@@ -5,7 +5,7 @@ from pydantic import BaseModel, ConfigDict, Field, model_validator
 
 from app.schemas.base import Money
 from app.schemas.catalog import ImageOut
-from app.schemas.order import OrderAddressOut, OrderItemOut
+from app.schemas.order import OrderOut as BaseOrderOut
 from app.schemas.user import UserOut
 
 OrderStatus = Literal["new", "processing", "shipped", "delivered", "cancelled"]
@@ -158,14 +158,8 @@ class OrderUserOut(BaseModel):
     email: str
 
 
-class OrderOut(BaseModel):
-    id: int
-    status: str
-    total_price: Money
-    created_at: datetime
+class OrderOut(BaseOrderOut):
     user: OrderUserOut
-    address: OrderAddressOut
-    items: list[OrderItemOut]
 
 
 class OrderListOut(BaseModel):

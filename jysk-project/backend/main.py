@@ -6,7 +6,18 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
 from app.core.storage import StorageUnavailableError, ensure_bucket
-from app.routers import admin, auth, catalog, favorites, files, orders, reviews, users
+from app.routers import (
+    admin,
+    auth,
+    cart,
+    catalog,
+    favorites,
+    files,
+    orders,
+    pickup_points,
+    reviews,
+    users,
+)
 
 logging.basicConfig(level=logging.WARNING, format="%(levelname)s:     %(name)s - %(message)s")
 logging.getLogger("app").setLevel(logging.INFO)
@@ -46,7 +57,9 @@ app.include_router(auth.router)
 app.include_router(catalog.router)
 app.include_router(users.router)
 app.include_router(reviews.router)
+app.include_router(cart.router)
 app.include_router(orders.router)
+app.include_router(pickup_points.router)
 app.include_router(favorites.router)
 app.include_router(files.router)
 app.include_router(admin.router)

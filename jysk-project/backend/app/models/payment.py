@@ -11,7 +11,7 @@ class Payment(Base):
     provider = Column("Provider", String(64), nullable=False)
     payment_method = Column("PaymentMethod", String(64), nullable=True)
     amount = Column("Amount", DECIMAL(10, 2), nullable=False)
-    currency = Column("Currency", String(8), nullable=False, server_default="RON")
+    currency = Column("Currency", String(8), nullable=False, server_default="UAH")
     status = Column("Status", String(32), nullable=False)
     payment_token = Column("PaymentToken", String(255), nullable=True)
     transaction_id = Column("TransactionId", String(255), nullable=True)
