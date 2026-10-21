@@ -31,8 +31,8 @@ PRODUCTS = [
         "category": "divany",
         "description": "Трёхместный диван с тканевой обивкой и широкими подлокотниками. Прочный каркас из массива дерева.",
         "variants": [
-            {"sku": "FALSLEV-GREY", "price": "2499.00", "stock": 12, "attrs": {"Цвет": "серый"}},
-            {"sku": "FALSLEV-BLUE", "price": "2599.00", "stock": 5, "attrs": {"Цвет": "синий"}},
+            {"sku": "FALSLEV-GREY", "price": "22499.00", "stock": 12, "attrs": {"Цвет": "серый"}},
+            {"sku": "FALSLEV-BLUE", "price": "23399.00", "stock": 5, "attrs": {"Цвет": "синий"}},
         ],
     },
     {
@@ -41,8 +41,8 @@ PRODUCTS = [
         "category": "divany",
         "description": "Раскладной диван-кровать с ящиком для белья. Идеален для небольших квартир.",
         "variants": [
-            {"sku": "VEJLBY-DGREY-160", "price": "2899.00", "stock": 7, "attrs": {"Цвет": "тёмно-серый", "Размер": "160x200"}},
-            {"sku": "VEJLBY-BEIGE-140", "price": "2699.00", "stock": 0, "attrs": {"Цвет": "бежевый", "Размер": "140x200"}},
+            {"sku": "VEJLBY-DGREY-160", "price": "26099.00", "stock": 7, "attrs": {"Цвет": "тёмно-серый", "Размер": "160x200"}},
+            {"sku": "VEJLBY-BEIGE-140", "price": "24299.00", "stock": 0, "attrs": {"Цвет": "бежевый", "Размер": "140x200"}},
         ],
     },
     {
@@ -51,9 +51,9 @@ PRODUCTS = [
         "category": "kresla",
         "description": "Мягкое кресло на деревянных ножках со съёмной подушкой сиденья.",
         "variants": [
-            {"sku": "GISTRUP-GREEN", "price": "899.00", "stock": 20, "attrs": {"Цвет": "зелёный"}},
-            {"sku": "GISTRUP-GREY", "price": "899.00", "stock": 14, "attrs": {"Цвет": "серый"}},
-            {"sku": "GISTRUP-YELLOW", "price": "949.00", "stock": 3, "attrs": {"Цвет": "горчичный"}},
+            {"sku": "GISTRUP-GREEN", "price": "8099.00", "stock": 20, "attrs": {"Цвет": "зелёный"}},
+            {"sku": "GISTRUP-GREY", "price": "8099.00", "stock": 14, "attrs": {"Цвет": "серый"}},
+            {"sku": "GISTRUP-YELLOW", "price": "8549.00", "stock": 3, "attrs": {"Цвет": "горчичный"}},
         ],
     },
     {
@@ -62,7 +62,7 @@ PRODUCTS = [
         "category": "kresla",
         "description": "Кресло-качалка из гнутого дерева с мягкой подушкой в комплекте.",
         "variants": [
-            {"sku": "ULFBORG-NAT", "price": "1199.00", "stock": 8, "attrs": {"Цвет": "натуральный"}},
+            {"sku": "ULFBORG-NAT", "price": "10799.00", "stock": 8, "attrs": {"Цвет": "натуральный"}},
         ],
     },
     {
@@ -71,8 +71,8 @@ PRODUCTS = [
         "category": "stoly",
         "description": "Журнальный столик из дуба с нижней полкой для журналов.",
         "variants": [
-            {"sku": "SKALS-OAK-60", "price": "549.00", "stock": 25, "attrs": {"Цвет": "дуб", "Размер": "60x60"}},
-            {"sku": "SKALS-OAK-90", "price": "749.00", "stock": 10, "attrs": {"Цвет": "дуб", "Размер": "90x60"}},
+            {"sku": "SKALS-OAK-60", "price": "4949.00", "stock": 25, "attrs": {"Цвет": "дуб", "Размер": "60x60"}},
+            {"sku": "SKALS-OAK-90", "price": "6749.00", "stock": 10, "attrs": {"Цвет": "дуб", "Размер": "90x60"}},
         ],
     },
     {
@@ -81,7 +81,7 @@ PRODUCTS = [
         "category": "stoly",
         "description": "Раздвижной обеденный стол на 6 персон с ламинированной столешницей.",
         "variants": [
-            {"sku": "HALDUM-WHITE-160", "price": "1599.00", "stock": 6, "attrs": {"Цвет": "белый", "Размер": "160x90"}},
+            {"sku": "HALDUM-WHITE-160", "price": "14399.00", "stock": 6, "attrs": {"Цвет": "белый", "Размер": "160x90"}},
         ],
     },
     {
@@ -90,9 +90,9 @@ PRODUCTS = [
         "category": "matrasy",
         "description": "Пружинный матрас средней жёсткости с чехлом из трикотажа, высота 26 см.",
         "variants": [
-            {"sku": "GOLD-S30-90", "price": "1299.00", "stock": 15, "attrs": {"Размер": "90x200"}},
-            {"sku": "GOLD-S30-140", "price": "1899.00", "stock": 9, "attrs": {"Размер": "140x200"}},
-            {"sku": "GOLD-S30-160", "price": "2099.00", "stock": 4, "attrs": {"Размер": "160x200"}},
+            {"sku": "GOLD-S30-90", "price": "11699.00", "stock": 15, "attrs": {"Размер": "90x200"}},
+            {"sku": "GOLD-S30-140", "price": "17099.00", "stock": 9, "attrs": {"Размер": "140x200"}},
+            {"sku": "GOLD-S30-160", "price": "18899.00", "stock": 4, "attrs": {"Размер": "160x200"}},
         ],
     },
     {
@@ -101,8 +101,8 @@ PRODUCTS = [
         "category": "matrasy",
         "description": "Беспружинный матрас из пены, высота 12 см. Хорош для гостевой кровати.",
         "variants": [
-            {"sku": "BASIC-S5-90", "price": "449.00", "stock": 30, "attrs": {"Размер": "90x200"}},
-            {"sku": "BASIC-S5-140", "price": "649.00", "stock": 18, "attrs": {"Размер": "140x200"}},
+            {"sku": "BASIC-S5-90", "price": "4049.00", "stock": 30, "attrs": {"Размер": "90x200"}},
+            {"sku": "BASIC-S5-140", "price": "5849.00", "stock": 18, "attrs": {"Размер": "140x200"}},
         ],
     },
     {
@@ -111,8 +111,8 @@ PRODUCTS = [
         "category": "podushki",
         "description": "Подушка с наполнителем из микрофибры, чехол из 100% хлопка.",
         "variants": [
-            {"sku": "ULVIG-5070", "price": "89.00", "stock": 50, "attrs": {"Размер": "50x70"}},
-            {"sku": "ULVIG-7070", "price": "109.00", "stock": 35, "attrs": {"Размер": "70x70"}},
+            {"sku": "ULVIG-5070", "price": "809.00", "stock": 50, "attrs": {"Размер": "50x70"}},
+            {"sku": "ULVIG-7070", "price": "989.00", "stock": 35, "attrs": {"Размер": "70x70"}},
         ],
     },
     {
@@ -121,7 +121,7 @@ PRODUCTS = [
         "category": "podushki",
         "description": "Анатомическая подушка из пены с эффектом памяти для комфортного сна.",
         "variants": [
-            {"sku": "WELLPUR-5030", "price": "199.00", "stock": 22, "attrs": {"Размер": "50x30"}},
+            {"sku": "WELLPUR-5030", "price": "1799.00", "stock": 22, "attrs": {"Размер": "50x30"}},
         ],
     },
     {
@@ -130,8 +130,8 @@ PRODUCTS = [
         "category": "odeyala",
         "description": "Тёплое одеяло с наполнителем из полиэстера, можно стирать при 60°C.",
         "variants": [
-            {"sku": "KRONBORG-CL-140", "price": "249.00", "stock": 28, "attrs": {"Размер": "140x200"}},
-            {"sku": "KRONBORG-CL-200", "price": "399.00", "stock": 11, "attrs": {"Размер": "200x220"}},
+            {"sku": "KRONBORG-CL-140", "price": "2249.00", "stock": 28, "attrs": {"Размер": "140x200"}},
+            {"sku": "KRONBORG-CL-200", "price": "3599.00", "stock": 11, "attrs": {"Размер": "200x220"}},
         ],
     },
     {
@@ -140,9 +140,9 @@ PRODUCTS = [
         "category": "polotentsa",
         "description": "Махровое полотенце из 100% хлопка, плотность 400 г/м².",
         "variants": [
-            {"sku": "UPPSALA-WHITE-50100", "price": "55.00", "stock": 40, "attrs": {"Цвет": "белый", "Размер": "50x100"}},
-            {"sku": "UPPSALA-GREY-70140", "price": "95.00", "stock": 26, "attrs": {"Цвет": "серый", "Размер": "70x140"}},
-            {"sku": "UPPSALA-BLUE-70140", "price": "95.00", "stock": 0, "attrs": {"Цвет": "голубой", "Размер": "70x140"}},
+            {"sku": "UPPSALA-WHITE-50100", "price": "499.00", "stock": 40, "attrs": {"Цвет": "белый", "Размер": "50x100"}},
+            {"sku": "UPPSALA-GREY-70140", "price": "859.00", "stock": 26, "attrs": {"Цвет": "серый", "Размер": "70x140"}},
+            {"sku": "UPPSALA-BLUE-70140", "price": "859.00", "stock": 0, "attrs": {"Цвет": "голубой", "Размер": "70x140"}},
         ],
     },
     {
@@ -151,7 +151,7 @@ PRODUCTS = [
         "category": "polotentsa",
         "description": "Плотное банное полотенце премиум-класса, 500 г/м².",
         "variants": [
-            {"sku": "KARLSTAD-SAND-70140", "price": "119.00", "stock": 17, "attrs": {"Цвет": "песочный", "Размер": "70x140"}},
+            {"sku": "KARLSTAD-SAND-70140", "price": "1079.00", "stock": 17, "attrs": {"Цвет": "песочный", "Размер": "70x140"}},
         ],
     },
     {
@@ -160,8 +160,8 @@ PRODUCTS = [
         "category": "kovriki-dlya-vannoy",
         "description": "Мягкий коврик для ванной с антискользящей основой.",
         "variants": [
-            {"sku": "KARUP-GREY", "price": "79.00", "stock": 33, "attrs": {"Цвет": "серый", "Размер": "50x80"}},
-            {"sku": "KARUP-GREEN", "price": "79.00", "stock": 21, "attrs": {"Цвет": "зелёный", "Размер": "50x80"}},
+            {"sku": "KARUP-GREY", "price": "719.00", "stock": 33, "attrs": {"Цвет": "серый", "Размер": "50x80"}},
+            {"sku": "KARUP-GREEN", "price": "719.00", "stock": 21, "attrs": {"Цвет": "зелёный", "Размер": "50x80"}},
         ],
     },
     {
@@ -170,8 +170,8 @@ PRODUCTS = [
         "category": "shtory-dlya-dusha",
         "description": "Водоотталкивающая штора для душа, кольца в комплекте.",
         "variants": [
-            {"sku": "GRENAA-WHITE", "price": "69.00", "stock": 45, "attrs": {"Цвет": "белый", "Размер": "180x200"}},
-            {"sku": "GRENAA-STRIPE", "price": "75.00", "stock": 19, "attrs": {"Цвет": "в полоску", "Размер": "180x200"}},
+            {"sku": "GRENAA-WHITE", "price": "629.00", "stock": 45, "attrs": {"Цвет": "белый", "Размер": "180x200"}},
+            {"sku": "GRENAA-STRIPE", "price": "679.00", "stock": 19, "attrs": {"Цвет": "в полоску", "Размер": "180x200"}},
         ],
     },
 ]

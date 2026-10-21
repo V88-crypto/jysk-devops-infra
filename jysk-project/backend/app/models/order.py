@@ -1,4 +1,4 @@
-from sqlalchemy import DECIMAL, Column, DateTime, ForeignKey, Integer, String, func
+from sqlalchemy import DECIMAL, Column, DateTime, ForeignKey, Integer, String, Text, func
 from sqlalchemy.orm import relationship
 
 from app.database import Base
@@ -22,9 +22,18 @@ class Order(Base):
 
     id = Column("Id", Integer, primary_key=True)
     user_id = Column("UserId", Integer, ForeignKey("Users.Id"), nullable=False)
-    address_id = Column("AddressId", Integer, ForeignKey("Addresses.Id"), nullable=False)
+    address_id = Column("AddressId", Integer, ForeignKey("Addresses.Id"), nullable=True)
     status = Column("Status", String(32), nullable=False, server_default="new")
     total_price = Column("TotalPrice", DECIMAL(10, 2), nullable=False)
+    recipient_first_name = Column("RecipientFirstName", String(100), nullable=True)
+    recipient_last_name = Column("RecipientLastName", String(100), nullable=True)
+    recipient_phone = Column("RecipientPhone", String(32), nullable=True)
+    recipient_email = Column("RecipientEmail", String(255), nullable=True)
+    delivery_method = Column(
+        "DeliveryMethod", String(16), nullable=False, server_default="courier"
+    )
+    pickup_point = Column("PickupPoint", String(64), nullable=True)
+    comment = Column("Comment", Text, nullable=True)
     created_at = Column("CreatedAt", DateTime, nullable=False, server_default=func.now())
 
     items = relationship("OrderItem", cascade="all, delete-orphan")

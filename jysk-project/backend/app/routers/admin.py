@@ -8,6 +8,7 @@ from app.core.deps import ADMIN_ROLE, require_admin
 from app.core.storage import public_url, upload_image
 from app.core.uploads import read_image_upload
 from app.database import get_db
+from app.models.cart import CartItem
 from app.models.catalog import (
     Attribute,
     Category,
@@ -17,7 +18,7 @@ from app.models.catalog import (
     VariantAttribute,
 )
 from app.models.favorite import Favorite
-from app.models.order import Address, Order, OrderItem
+from app.models.order import Order, OrderItem
 from app.models.review import Review
 from app.models.user import Role, User
 from app.schemas.admin import (
@@ -28,12 +29,9 @@ from app.schemas.admin import (
     CategoryListOut,
     CategoryOut,
     ImageIn,
-    OrderAddressOut,
-    OrderItemOut,
     OrderListOut,
     OrderOut,
     OrderStatusIn,
-    OrderUserOut,
     ProductIn,
     ProductListOut,
     ProductOut,
@@ -52,6 +50,7 @@ from app.schemas.admin import (
 )
 from app.schemas.catalog import ImageOut
 from app.schemas.user import UserOut
+from app.services.orders import cancel_order, load_order, orders_to_out
 
 router = APIRouter(
     prefix="/admin",
@@ -396,6 +395,8 @@ def delete_variants(db: Session, variants: list[ProductVariant]) -> None:
             db.delete(review)
         for favorite in db.query(Favorite).filter(Favorite.variant_id == variant.id).all():
             db.delete(favorite)
+        for cart_item in db.query(CartItem).filter(CartItem.variant_id == variant.id).all():
+            db.delete(cart_item)
         db.delete(variant)
 
 
@@ -548,71 +549,6 @@ def delete_review(review_id: int, db: Session = Depends(get_db)):
     return Response(status_code=status.HTTP_204_NO_CONTENT)
 
 
-def orders_to_out(db: Session, orders: list[Order]) -> list[OrderOut]:
-    user_ids = {order.user_id for order in orders}
-    address_ids = {order.address_id for order in orders}
-    variant_ids = {item.variant_id for order in orders for item in order.items}
-
-    users = {}
-    if user_ids:
-        users = {user.id: user for user in db.query(User).filter(User.id.in_(user_ids))}
-    addresses = {}
-    if address_ids:
-        addresses = {
-            address.id: address
-            for address in db.query(Address).filter(Address.id.in_(address_ids))
-        }
-    variants = {}
-    if variant_ids:
-        rows = (
-            db.query(ProductVariant.id, ProductVariant.sku, Product.name)
-            .join(Product, ProductVariant.product_id == Product.id)
-            .filter(ProductVariant.id.in_(variant_ids))
-            .all()
-        )
-        variants = {row[0]: (row[1], row[2]) for row in rows}
-
-    result = []
-    for order in orders:
-        user = users[order.user_id]
-        address = addresses[order.address_id]
-        items = []
-        for item in sorted(order.items, key=lambda item: item.id):
-            sku, product_name = variants.get(item.variant_id, ("", ""))
-            items.append(
-                OrderItemOut(
-                    id=item.id,
-                    variant_id=item.variant_id,
-                    sku=sku,
-                    product_name=product_name,
-                    quantity=item.quantity,
-                    price=item.price,
-                )
-            )
-        result.append(
-            OrderOut(
-                id=order.id,
-                status=order.status,
-                total_price=order.total_price,
-                created_at=order.created_at,
-                user=OrderUserOut(
-                    id=user.id,
-                    first_name=user.first_name,
-                    last_name=user.last_name,
-                    email=user.email,
-                ),
-                address=OrderAddressOut(
-                    id=address.id,
-                    city=address.city,
-                    address=address.address,
-                    postal_code=address.postal_code,
-                ),
-                items=items,
-            )
-        )
-    return result
-
-
 @router.get("/orders", response_model=OrderListOut)
 def list_orders(
     page: int = Query(default=1, ge=1),
@@ -633,7 +569,10 @@ def list_orders(
         .all()
     )
     return OrderListOut(
-        items=orders_to_out(db, orders), total=total, page=page, page_size=page_size
+        items=orders_to_out(db, orders, include_user=True),
+        total=total,
+        page=page,
+        page_size=page_size,
     )
 
 
@@ -647,24 +586,23 @@ def get_order(order_id: int, db: Session = Depends(get_db)):
     )
     if order is None:
         raise not_found("Заказ не найден")
-    return orders_to_out(db, [order])[0]
+    return orders_to_out(db, [order], include_user=True)[0]
 
 
 @router.patch("/orders/{order_id}/status", response_model=OrderOut)
 def update_order_status(order_id: int, data: OrderStatusIn, db: Session = Depends(get_db)):
-    order = (
-        db.query(Order)
-        .filter(Order.id == order_id)
-        .options(selectinload(Order.items))
-        .first()
-    )
+    order = load_order(db, order_id, lock=True)
     if order is None:
         raise not_found("Заказ не найден")
+    if order.status == "cancelled" and data.status != "cancelled":
+        raise conflict("Отменённый заказ нельзя перевести в другой статус")
 
-    order.status = data.status
+    if data.status == "cancelled" and order.status != "cancelled":
+        cancel_order(db, order)
+    else:
+        order.status = data.status
     db.commit()
-    db.refresh(order)
-    return orders_to_out(db, [order])[0]
+    return orders_to_out(db, [load_order(db, order_id)], include_user=True)[0]
 
 
 @router.get("/users", response_model=UserListOut)
