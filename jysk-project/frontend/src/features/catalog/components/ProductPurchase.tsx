@@ -6,6 +6,7 @@ type Fulfilment = 'delivery' | 'pickup'
 
 interface ProductPurchaseProps {
   stock: number
+  onAddToCart: (quantity: number) => void
 }
 
 const iconProps = {
@@ -125,10 +126,9 @@ const Option = ({
   )
 }
 
-export const ProductPurchase = ({ stock }: ProductPurchaseProps) => {
+export const ProductPurchase = ({ stock, onAddToCart }: ProductPurchaseProps) => {
   const [fulfilment, setFulfilment] = useState<Fulfilment>('delivery')
   const [quantity, setQuantity] = useState(1)
-  const [showCartNotice, setShowCartNotice] = useState(false)
 
   const inStock = stock > 0
   const maxQuantity = Math.max(stock, 1)
@@ -226,22 +226,12 @@ export const ProductPurchase = ({ stock }: ProductPurchaseProps) => {
           <button
             type="button"
             disabled={!inStock}
-            onClick={() => setShowCartNotice(true)}
+            onClick={() => onAddToCart(quantity)}
             className="h-[52px] flex-1 rounded-md bg-primary px-6 font-semibold text-white transition-colors hover:bg-primary-dark disabled:cursor-not-allowed disabled:opacity-50"
           >
             Додати до кошика
           </button>
         </div>
-
-        {showCartNotice && (
-          <p
-            role="status"
-            className="mt-3 rounded-md bg-primary-soft px-4 py-3 text-sm text-primary-strong"
-          >
-            Кошик ще в розробці: оформлення замовлень з’явиться, щойно його
-            підтримає бекенд.
-          </p>
-        )}
       </div>
 
       <ul className="flex flex-col gap-4 border-t border-line pt-5">

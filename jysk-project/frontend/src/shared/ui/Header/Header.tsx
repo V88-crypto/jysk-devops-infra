@@ -8,6 +8,9 @@ import { SidebarMenu } from './SidebarMenu'
 import { HeaderSearch } from './HeaderSearch'
 import logoImage from '@/assets/images/logo.png'
 
+import { useCartStore } from '@/store/useCartStore'
+import { CartDrawer } from '@/features/cart/CartDrawer'
+
 import MenuIcon from '@/assets/icons/menu.svg?react'
 import HeartIcon from '@/assets/icons/heart.svg?react'
 import UserIcon from '@/assets/icons/user.svg?react'
@@ -22,6 +25,10 @@ export const Header: React.FC = () => {
   const { isAuthenticated, isAdmin } = useAuth()
   const [isStorePanelOpen, setIsStorePanelOpen] = useState<boolean>(false)
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false)
+  
+  const [isCartOpen, setIsCartOpen] = useState<boolean>(false)
+  
+  const totalItems = useCartStore((state) => state.totalItems())
 
   const isActivePath = (path: string) =>
     pathname === path || pathname.startsWith(`${path}/`)
@@ -92,7 +99,19 @@ export const Header: React.FC = () => {
                   onClick={() => navigate('/login')}
                 />
               )}
-              <IconButton Icon={CartIcon} label="Кошик" />
+              
+              <div className="relative">
+                <IconButton 
+                  Icon={CartIcon} 
+                  label="Кошик" 
+                  onClick={() => setIsCartOpen(true)} 
+                />
+                {totalItems > 0 && (
+                  <span className="absolute -right-1 -top-1 pointer-events-none flex h-5 w-5 items-center justify-center rounded-full bg-primary text-[11px] font-bold text-white">
+                    {totalItems}
+                  </span>
+                )}
+              </div>
             </div>
           </div>
         </div>
@@ -156,6 +175,8 @@ export const Header: React.FC = () => {
         onClose={() => setIsStorePanelOpen(false)}
       />
       <SidebarMenu isOpen={isMenuOpen} setIsOpen={setIsMenuOpen} />
+
+      <CartDrawer isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
     </header>
   )
 }

@@ -1,5 +1,5 @@
 import { useCallback } from 'react'
-import { Link, useParams, useSearchParams } from 'react-router-dom'
+import { Link, useParams, useSearchParams, useNavigate } from 'react-router-dom'
 
 import { catalogApi, findCategoryPath } from '@/features/catalog/api/catalogApi'
 import type { ProductVariant } from '@/features/catalog/types'
@@ -7,6 +7,9 @@ import { useFavorites } from '@/features/catalog/hooks/useFavorites'
 import { formatPrice } from '@/features/catalog/utils/format'
 import { ApiError } from '@/shared/api/httpClient'
 import { useAsyncData } from '@/shared/hooks/useAsyncData'
+import { useAuth } from '@/shared/auth/useAuth'
+
+import { useCartStore } from '@/store/useCartStore'
 
 import { CatalogBreadcrumbs } from './components/CatalogBreadcrumbs'
 import { ProductGallery } from './components/ProductGallery'
@@ -20,6 +23,9 @@ const variantLabel = (variant: ProductVariant) =>
 
 export const ProductPage = () => {
   const { slug = '' } = useParams()
+  const navigate = useNavigate()
+  const { isAuthenticated } = useAuth()
+  
   const fetchProduct = useCallback(() => catalogApi.getProduct(slug), [slug])
   const { data: product, isLoading, error } = useAsyncData(fetchProduct)
   const { data: categories } = useAsyncData(catalogApi.getCategories)
@@ -29,12 +35,13 @@ export const ProductPage = () => {
     pendingSlug,
     error: favoriteError,
   } = useFavorites()
-  // The selected variant lives in the URL (?variant=), so links from the
-  // profile open the exact colour or size and the page can be shared.
+  
   const [searchParams, setSearchParams] = useSearchParams()
   const selectedVariantId = Number(searchParams.get('variant')) || null
   const selectVariant = (variantId: number) =>
     setSearchParams({ variant: String(variantId) }, { replace: true })
+
+  const addItem = useCartStore((state) => state.addItem)
 
   if (isLoading) {
     return (
@@ -63,6 +70,24 @@ export const ProductPage = () => {
     product.variants.find((item) => item.id === selectedVariantId) ??
     product.variants[0] ??
     null
+
+  const handleAddToCart = (quantity: number) => {
+    if (!isAuthenticated) {
+      navigate('/login');
+      return;
+    }
+
+    if (!variant) return;
+
+    addItem({
+      id: variant.id, 
+      name: `${product.name} ${variantLabel(variant)}`.trim(),
+      price: variant.price,
+      imageUrl: variant.images[0] || '/placeholder.png',
+      sku: variant.sku,
+    }, quantity);
+  };
+
   const breadcrumbs = [
     { label: 'Категорії', to: '/categories' },
     ...findCategoryPath(categories ?? [], product.categoryId).map((item) => ({
@@ -115,7 +140,7 @@ export const ProductPage = () => {
                       type="button"
                       onClick={() => selectVariant(item.id)}
                       aria-pressed={item.id === variant?.id}
-                      className={`rounded-[4px] border px-4 py-2 text-sm transition ${
+                      className={`rounded-sm border px-4 py-2 text-sm transition ${
                         item.id === variant?.id
                           ? 'border-primary bg-primary text-white'
                           : 'border-line-strong bg-surface hover:border-primary'
@@ -150,7 +175,7 @@ export const ProductPage = () => {
                     void toggleFavorite(product.slug, async () => variant.id)
                   }
                   aria-pressed={isProductFavorite}
-                  className="flex h-[48px] items-center gap-2 rounded-[4px] border border-primary px-6 font-semibold text-primary transition hover:bg-primary hover:text-white disabled:cursor-not-allowed disabled:opacity-60"
+                  className="flex h-[48px] items-center gap-2 rounded-sm border border-primary px-6 font-semibold text-primary transition hover:bg-primary hover:text-white disabled:cursor-not-allowed disabled:opacity-60"
                 >
                   <span className="text-[20px] leading-none">
                     {isProductFavorite ? '♥' : '♡'}
@@ -180,11 +205,14 @@ export const ProductPage = () => {
             </div>
 
             {variant && (
-              <ProductPurchase key={variant.id} stock={variant.stock} />
+              <ProductPurchase 
+                key={variant.id} 
+                stock={variant.stock} 
+                onAddToCart={handleAddToCart}
+              />
             )}
           </div>
 
-          {/* Under the photo on wide screens, after the buy block on phones. */}
           {product.description && (
             <section className="lg:col-start-1 lg:row-start-2">
               <h2 className="mb-4 text-[26px] font-bold lg:text-[32px]">

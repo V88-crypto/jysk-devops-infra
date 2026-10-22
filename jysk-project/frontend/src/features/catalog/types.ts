@@ -49,3 +49,12 @@ export interface Page<T> {
   items: T[]
   total: number
 }
+
+export interface CartItem {
+  id: number;           
+  name: string;
+  price: number;
+  imageUrl: string;
+  quantity: number;
+  sku?: string;         
+}
