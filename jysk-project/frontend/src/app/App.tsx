@@ -25,6 +25,7 @@ import { CategoriesPage } from '@/features/catalog/CategoriesPage'
 import { CategoryPage } from '@/features/catalog/CategoryPage'
 import { ProductPage } from '@/features/catalog/ProductPage'
 import { SearchPage } from '@/features/catalog/SearchPage'
+import { CheckoutPage } from '@/features/checkout/CheckoutPage' 
 
 export function App() {
   return (
@@ -50,6 +51,9 @@ export function App() {
             <Route path="category/:slug" element={<CategoryPage />} />
             <Route path="product/:slug" element={<ProductPage />} />
             <Route path="search" element={<SearchPage />} />
+
+            {/* Роут для страницы оформления заказа */}
+            <Route path="checkout" element={<CheckoutPage />} />
 
             <Route path="blog" element={<BlogListPage />} />
             <Route path="blog/:postId" element={<BlogPostDetailPage />} />
