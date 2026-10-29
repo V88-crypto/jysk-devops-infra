@@ -51,10 +51,13 @@ export interface Page<T> {
 }
 
 export interface CartItem {
-  id: number;           
-  name: string;
-  price: number;
-  imageUrl: string;
-  quantity: number;
-  sku?: string;         
+  id: number
+  variantId: number
+  name: string
+  price: number
+  imageUrl: string | null
+  quantity: number
+  sku: string
+  productSlug: string
+  available: boolean
 }

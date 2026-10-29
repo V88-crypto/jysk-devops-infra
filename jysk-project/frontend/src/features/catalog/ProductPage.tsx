@@ -42,6 +42,8 @@ export const ProductPage = () => {
     setSearchParams({ variant: String(variantId) }, { replace: true })
 
   const addItem = useCartStore((state) => state.addItem)
+  const pendingVariantId = useCartStore((state) => state.pendingVariantId)
+  const cartError = useCartStore((state) => state.error)
 
   if (isLoading) {
     return (
@@ -71,21 +73,15 @@ export const ProductPage = () => {
     product.variants[0] ??
     null
 
-  const handleAddToCart = (quantity: number) => {
+  const handleAddToCart = async (quantity: number) => {
     if (!isAuthenticated) {
-      navigate('/login');
+      navigate('/register')
       return;
     }
 
     if (!variant) return;
 
-    addItem({
-      id: variant.id, 
-      name: `${product.name} ${variantLabel(variant)}`.trim(),
-      price: variant.price,
-      imageUrl: variant.images[0] || '/placeholder.png',
-      sku: variant.sku,
-    }, quantity);
+    await addItem(variant.id, quantity)
   };
 
   const breadcrumbs = [
@@ -209,7 +205,13 @@ export const ProductPage = () => {
                 key={variant.id} 
                 stock={variant.stock} 
                 onAddToCart={handleAddToCart}
+                isAdding={pendingVariantId === variant.id}
               />
+            )}
+            {cartError && (
+              <p className="text-sm text-danger" role="alert">
+                {cartError}
+              </p>
             )}
           </div>
 

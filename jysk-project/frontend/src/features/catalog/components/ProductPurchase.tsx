@@ -6,7 +6,8 @@ type Fulfilment = 'delivery' | 'pickup'
 
 interface ProductPurchaseProps {
   stock: number
-  onAddToCart: (quantity: number) => void
+  onAddToCart: (quantity: number) => void | Promise<void>
+  isAdding?: boolean
 }
 
 const iconProps = {
@@ -126,7 +127,11 @@ const Option = ({
   )
 }
 
-export const ProductPurchase = ({ stock, onAddToCart }: ProductPurchaseProps) => {
+export const ProductPurchase = ({
+  stock,
+  onAddToCart,
+  isAdding = false,
+}: ProductPurchaseProps) => {
   const [fulfilment, setFulfilment] = useState<Fulfilment>('delivery')
   const [quantity, setQuantity] = useState(1)
 
@@ -225,11 +230,11 @@ export const ProductPurchase = ({ stock, onAddToCart }: ProductPurchaseProps) =>
 
           <button
             type="button"
-            disabled={!inStock}
+            disabled={!inStock || isAdding}
             onClick={() => onAddToCart(quantity)}
             className="h-[52px] flex-1 rounded-md bg-primary px-6 font-semibold text-white transition-colors hover:bg-primary-dark disabled:cursor-not-allowed disabled:opacity-50"
           >
-            Додати до кошика
+            {isAdding ? 'Додавання...' : 'Додати до кошика'}
           </button>
         </div>
       </div>
