@@ -3,11 +3,19 @@ import type { ReactNode } from 'react'
 
 import { useAuth } from '@/shared/auth/useAuth'
 
-export const RequireAuth = ({ children }: { children: ReactNode }) => {
+interface RequireAuthProps {
+  children: ReactNode
+  redirectTo?: string
+}
+
+export const RequireAuth = ({
+  children,
+  redirectTo = '/login',
+}: RequireAuthProps) => {
   const { isAuthenticated } = useAuth()
 
   if (!isAuthenticated) {
-    return <Navigate to="/login" replace />
+    return <Navigate to={redirectTo} replace />
   }
 
   return <>{children}</>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCartStore } from '@/store/useCartStore';
+import { useAuth } from '@/shared/auth/useAuth';
 
 interface CartDrawerProps {
   isOpen: boolean;
@@ -9,11 +10,21 @@ interface CartDrawerProps {
 
 export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
   const navigate = useNavigate();
-  const { items, updateQuantity, removeItem, totalPrice } = useCartStore();
+  const { isAuthenticated } = useAuth();
+  const {
+    items,
+    isLoading,
+    pendingVariantId,
+    error,
+    updateQuantity,
+    removeItem,
+    clearCart,
+    totalPrice,
+  } = useCartStore();
 
   const handleCheckout = () => {
     onClose();
-    navigate('/checkout');
+    navigate(isAuthenticated ? '/checkout' : '/register');
   };
 
   return (
@@ -41,14 +52,17 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
         </div>
 
         <div className="flex-1 overflow-y-auto p-5">
-          {items.length === 0 ? (
+          {isLoading ? (
+            <p className="mt-10 text-center text-fg-subtle">Завантаження...</p>
+          ) : items.length === 0 ? (
             <p className="mt-10 text-center text-fg-subtle">Ваш кошик порожній</p>
           ) : (
             <ul className="flex flex-col gap-6">
               {items.map((item) => (
                 <li key={item.id} className="flex items-center gap-4 border-b border-line pb-4 last:border-0">
                   <button
-                    onClick={() => removeItem(item.id)}
+                    onClick={() => void removeItem(item.variantId)}
+                    disabled={pendingVariantId === item.variantId}
                     className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-line-strong text-fg-subtle hover:border-danger hover:text-danger"
                     aria-label="Видалити товар"
                   >
@@ -56,7 +70,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
                   </button>
 
                   <img
-                    src={item.imageUrl}
+                    src={item.imageUrl ?? '/placeholder.png'}
                     alt={item.name}
                     className="h-16 w-16 shrink-0 object-cover"
                   />
@@ -68,15 +82,16 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
                     <div className="mt-2 flex items-center justify-between">
                       <div className="flex h-8 items-center rounded border border-line-strong">
                         <button
-                          onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                          disabled={item.quantity <= 1}
+                          onClick={() => void updateQuantity(item.variantId, item.quantity - 1)}
+                          disabled={item.quantity <= 1 || pendingVariantId === item.variantId}
                           className="flex w-8 items-center justify-center text-lg hover:text-primary disabled:opacity-30"
                         >
                           −
                         </button>
                         <span className="w-6 text-center text-sm font-medium">{item.quantity}</span>
                         <button
-                          onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                          onClick={() => void updateQuantity(item.variantId, item.quantity + 1)}
+                          disabled={pendingVariantId === item.variantId}
                           className="flex w-8 items-center justify-center text-lg hover:text-primary"
                         >
                           +
@@ -90,10 +105,23 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
               ))}
             </ul>
           )}
+          {error && (
+            <p className="mt-4 text-sm text-danger" role="alert">
+              {error}
+            </p>
+          )}
         </div>
 
         {items.length > 0 && (
           <div className="border-t border-line bg-surface p-5">
+            <button
+              type="button"
+              onClick={() => void clearCart()}
+              disabled={isLoading}
+              className="mb-4 text-sm text-fg-subtle underline hover:text-danger disabled:opacity-50"
+            >
+              Очистити кошик
+            </button>
             <div className="mb-4 flex items-center justify-between text-lg font-bold">
               <span>Усього</span>
               <span>{totalPrice()} грн</span>

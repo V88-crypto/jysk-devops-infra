@@ -83,7 +83,7 @@ export const CheckoutPage: React.FC = () => {
             <h3 className="text-lg font-bold mb-4">Ваш замовлення</h3>
             <div className="flex flex-col gap-3 mb-6 max-h-[300px] overflow-y-auto">
               {items.map(item => (
-                <div key={item.id} className="flex items-center justify-between text-sm">
+                <div key={item.variantId} className="flex items-center justify-between text-sm">
                   <span className="truncate max-w-[180px]">{item.name} (x{item.quantity})</span>
                   <span className="font-bold">{item.price * item.quantity} грн</span>
                 </div>

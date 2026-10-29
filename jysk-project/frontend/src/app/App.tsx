@@ -52,8 +52,14 @@ export function App() {
             <Route path="product/:slug" element={<ProductPage />} />
             <Route path="search" element={<SearchPage />} />
 
-            {/* Роут для страницы оформления заказа */}
-            <Route path="checkout" element={<CheckoutPage />} />
+            <Route
+              path="checkout"
+              element={
+                <RequireAuth redirectTo="/register">
+                  <CheckoutPage />
+                </RequireAuth>
+              }
+            />
 
             <Route path="blog" element={<BlogListPage />} />
             <Route path="blog/:postId" element={<BlogPostDetailPage />} />
