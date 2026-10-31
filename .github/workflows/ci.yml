@@ -70,7 +70,7 @@ jobs:
         run: docker build -f jysk-project/devops/Dockerfile.backend -t hyggy-backend:ci ./jysk-project/backend
 
       - name: Build Frontend image
-        run: docker build -f jysk-project/devops/Dockerfile.frontend -t hyggy-frontend:ci ./jysk-project/frontend
+        run: docker build -f jysk-project/devops/Dockerfile.frontend.prod -t hyggy-frontend:ci ./jysk-project/frontend
   publish:
     name: Publish Docker Images
     runs-on: ubuntu-latest
