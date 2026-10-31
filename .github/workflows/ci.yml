@@ -103,7 +103,7 @@ jobs:
         run: docker build -f jysk-project/devops/Dockerfile.frontend.prod -t hyggy-frontend:security ./jysk-project/frontend
 
       - name: Scan Backend image
-        uses: aquasecurity/trivy-action@0.33.1
+        uses: aquasecurity/trivy-action@0.35.0
         with:
           image-ref: hyggy-backend:security
           format: table
@@ -112,7 +112,7 @@ jobs:
           exit-code: '0'
 
       - name: Scan Frontend image
-        uses: aquasecurity/trivy-action@0.33.1
+        uses: aquasecurity/trivy-action@0.35.0
         with:
           image-ref: hyggy-frontend:security
           format: table
