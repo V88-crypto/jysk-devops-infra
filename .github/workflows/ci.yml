@@ -111,6 +111,6 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: ./jysk-project/frontend
-          file: ./jysk-project/devops/Dockerfile.frontend
+          file: ./jysk-project/devops/Dockerfile.frontend.prod
           push: true
           tags: ghcr.io/v88-crypto/hyggy-frontend:dev
