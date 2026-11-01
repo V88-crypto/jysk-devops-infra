@@ -86,6 +86,40 @@ jobs:
           curl --fail --show-error http://127.0.0.1:13000/ -o /dev/null
           curl --fail --show-error http://127.0.0.1:13000/products -o /dev/null
 
+  security:
+    name: Trivy Security Scan
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Build Backend image
+        run: docker build -f jysk-project/devops/Dockerfile.backend -t hyggy-backend:security ./jysk-project/backend
+
+      - name: Build Frontend image
+        run: docker build -f jysk-project/devops/Dockerfile.frontend.prod -t hyggy-frontend:security ./jysk-project/frontend
+
+      - name: Scan Backend image
+        uses: aquasecurity/trivy-action@0.35.0
+        with:
+          image-ref: hyggy-backend:security
+          format: table
+          severity: HIGH,CRITICAL
+          vuln-type: os,library
+          exit-code: '0'
+
+      - name: Scan Frontend image
+        uses: aquasecurity/trivy-action@0.35.0
+        with:
+          image-ref: hyggy-frontend:security
+          format: table
+          severity: HIGH,CRITICAL
+          vuln-type: os,library
+          exit-code: '0'
+
   publish:
     name: Publish Docker Images
     runs-on: ubuntu-latest
