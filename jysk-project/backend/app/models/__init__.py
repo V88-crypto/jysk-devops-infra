@@ -1,4 +1,5 @@
 # Пакет моделей SQLAlchemy (таблицы БД).
+from app.models.blog import BlogCategory, BlogContentBlock, BlogContentBlockImage, BlogPost
 from app.models.cart import Cart, CartItem
 from app.models.catalog import (
     Attribute,
@@ -18,6 +19,10 @@ from app.models.user import Role, User
 __all__ = [
     "Address",
     "Attribute",
+    "BlogCategory",
+    "BlogContentBlock",
+    "BlogContentBlockImage",
+    "BlogPost",
     "Cart",
     "CartItem",
     "Category",
