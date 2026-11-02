@@ -1,13 +1,13 @@
-import re
-
 from fastapi import APIRouter, Depends, File, Form, HTTPException, Query, Response, UploadFile, status
 from sqlalchemy import or_
 from sqlalchemy.orm import Session, selectinload
 
 from app.core.deps import ADMIN_ROLE, require_admin
+from app.core.slugs import make_slug
 from app.core.storage import public_url, upload_image
 from app.core.uploads import read_image_upload
 from app.database import get_db
+from app.models.blog import BlogCategory, BlogPost
 from app.models.cart import CartItem
 from app.models.catalog import (
     Attribute,
@@ -48,8 +48,27 @@ from app.schemas.admin import (
     VariantIn,
     VariantOut,
 )
+from app.schemas.blog import (
+    BlogCategoryIn,
+    BlogCategoryListOut,
+    BlogCategoryOut,
+    BlogPostIn,
+    BlogPostListOut,
+    BlogPostOut,
+)
 from app.schemas.catalog import ImageOut
 from app.schemas.user import UserOut
+from app.services.blog import (
+    CATEGORY_NOT_FOUND,
+    POST_NOT_FOUND,
+    category_list_out,
+    create_post,
+    find_category_by_slug,
+    load_post,
+    post_to_out,
+    posts_page,
+    update_post,
+)
 from app.services.orders import cancel_order, load_order, orders_to_out
 
 router = APIRouter(
@@ -58,26 +77,12 @@ router = APIRouter(
     dependencies=[Depends(require_admin)],
 )
 
-TRANSLIT = {
-    "а": "a", "б": "b", "в": "v", "г": "g", "д": "d", "е": "e", "ё": "e",
-    "ж": "zh", "з": "z", "и": "i", "й": "y", "к": "k", "л": "l", "м": "m",
-    "н": "n", "о": "o", "п": "p", "р": "r", "с": "s", "т": "t", "у": "u",
-    "ф": "f", "х": "h", "ц": "ts", "ч": "ch", "ш": "sh", "щ": "sch",
-    "ъ": "", "ы": "y", "ь": "", "э": "e", "ю": "yu", "я": "ya",
-    "і": "i", "ї": "yi", "є": "ye", "ґ": "g",
-}
-
 PRODUCT_OPTIONS = (
     selectinload(Product.variants).selectinload(ProductVariant.images),
     selectinload(Product.variants)
     .selectinload(ProductVariant.attributes)
     .selectinload(VariantAttribute.attribute),
 )
-
-
-def make_slug(name: str) -> str:
-    text = "".join(TRANSLIT.get(char, char) for char in name.lower())
-    return re.sub(r"[^a-z0-9]+", "-", text).strip("-")
 
 
 def build_slug(name: str, slug: str | None) -> str:
@@ -663,3 +668,125 @@ def upload_admin_file(file: UploadFile = File(), folder: UploadFolder = Form()):
     data, content_type = read_image_upload(file)
     key = upload_image(data, content_type, folder)
     return UploadOut(key=key, url=public_url(key))
+
+
+def check_blog_category_unique(
+    db: Session, name: str, slug: str, exclude_id: int | None = None
+) -> None:
+    query = db.query(BlogCategory).filter(
+        or_(BlogCategory.name == name, BlogCategory.slug == slug)
+    )
+    if exclude_id is not None:
+        query = query.filter(BlogCategory.id != exclude_id)
+    existing = query.first()
+    if existing is None:
+        return
+    if existing.name.casefold() == name.casefold():
+        raise conflict("Категорія з такою назвою вже існує")
+    raise conflict("Категорія з таким slug вже існує")
+
+
+@router.get("/blog-categories", response_model=BlogCategoryListOut)
+def list_admin_blog_categories(db: Session = Depends(get_db)):
+    return category_list_out(db)
+
+
+@router.post(
+    "/blog-categories", response_model=BlogCategoryOut, status_code=status.HTTP_201_CREATED
+)
+def create_blog_category(data: BlogCategoryIn, db: Session = Depends(get_db)):
+    slug = make_slug(data.name)
+    if not slug:
+        raise HTTPException(
+            status_code=status.HTTP_422_UNPROCESSABLE_CONTENT,
+            detail="Не вдалося сформувати slug із назви категорії",
+        )
+    check_blog_category_unique(db, data.name, slug)
+
+    category = BlogCategory(name=data.name, slug=slug)
+    db.add(category)
+    db.commit()
+    db.refresh(category)
+    return category
+
+
+@router.put("/blog-categories/{category_id}", response_model=BlogCategoryOut)
+def update_blog_category(
+    category_id: int, data: BlogCategoryIn, db: Session = Depends(get_db)
+):
+    category = get_or_404(db, BlogCategory, category_id, CATEGORY_NOT_FOUND)
+    check_blog_category_unique(db, data.name, category.slug, exclude_id=category_id)
+
+    category.name = data.name
+    db.commit()
+    db.refresh(category)
+    return category
+
+
+@router.delete("/blog-categories/{category_id}", status_code=status.HTTP_204_NO_CONTENT)
+def delete_blog_category(category_id: int, db: Session = Depends(get_db)):
+    category = get_or_404(db, BlogCategory, category_id, CATEGORY_NOT_FOUND)
+    if db.query(BlogPost.id).filter(BlogPost.category_id == category_id).first() is not None:
+        raise conflict("У категорії є статті, її не можна видалити")
+
+    db.delete(category)
+    db.commit()
+    return Response(status_code=status.HTTP_204_NO_CONTENT)
+
+
+@router.get("/blog-posts", response_model=BlogPostListOut)
+def list_admin_blog_posts(
+    page: int = Query(default=1, ge=1),
+    page_size: int = Query(default=20, ge=1, le=100),
+    search: str | None = None,
+    category: str | None = None,
+    db: Session = Depends(get_db),
+):
+    query = db.query(BlogPost)
+    if search:
+        query = query.filter(BlogPost.title.like(f"%{search}%"))
+    if category is not None:
+        category_obj = find_category_by_slug(db, category)
+        if category_obj is None:
+            raise not_found(CATEGORY_NOT_FOUND)
+        query = query.filter(BlogPost.category_id == category_obj.id)
+    return posts_page(query, page, page_size)
+
+
+@router.get("/blog-posts/{post_id}", response_model=BlogPostOut)
+def get_admin_blog_post(post_id: int, db: Session = Depends(get_db)):
+    post = load_post(db, post_id)
+    if post is None:
+        raise not_found(POST_NOT_FOUND)
+    return post_to_out(post)
+
+
+@router.post("/blog-posts", response_model=BlogPostOut, status_code=status.HTTP_201_CREATED)
+def create_admin_blog_post(data: BlogPostIn, db: Session = Depends(get_db)):
+    get_or_404(db, BlogCategory, data.category_id, CATEGORY_NOT_FOUND)
+    post = create_post(db, data)
+    db.commit()
+    return post_to_out(load_post(db, post.id))
+
+
+@router.put("/blog-posts/{post_id}", response_model=BlogPostOut)
+def update_admin_blog_post(post_id: int, data: BlogPostIn, db: Session = Depends(get_db)):
+    post = load_post(db, post_id)
+    if post is None:
+        raise not_found(POST_NOT_FOUND)
+    get_or_404(db, BlogCategory, data.category_id, CATEGORY_NOT_FOUND)
+
+    update_post(post, data)
+    db.commit()
+    return post_to_out(load_post(db, post_id))
+
+
+@router.delete("/blog-posts/{post_id}", status_code=status.HTTP_204_NO_CONTENT)
+def delete_admin_blog_post(post_id: int, db: Session = Depends(get_db)):
+    post = load_post(db, post_id)
+    if post is None:
+        raise not_found(POST_NOT_FOUND)
+
+    db.delete(post)
+    db.commit()
+    return Response(status_code=status.HTTP_204_NO_CONTENT)

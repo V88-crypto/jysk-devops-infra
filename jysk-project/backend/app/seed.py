@@ -4,6 +4,7 @@ from sqlalchemy.orm import Session
 
 from app.core.security import hash_password
 from app.database import SessionLocal
+from app.models.blog import BlogPost
 from app.models.catalog import (
     Attribute,
     Category,
@@ -13,6 +14,7 @@ from app.models.catalog import (
     VariantAttribute,
 )
 from app.models.user import Role, User
+from app.seed_blog import seed_blog
 
 ADMIN_ROLE = "admin"
 ADMIN_EMAIL = "admin@jysk.local"
@@ -270,13 +272,15 @@ def main() -> None:
     db = SessionLocal()
     try:
         seed(db)
+        seed_blog(db)
         db.commit()
         print(
             "Seed OK:",
             db.query(Category).count(), "categories,",
             db.query(Product).count(), "products,",
             db.query(ProductVariant).count(), "variants,",
-            db.query(User).count(), "users",
+            db.query(User).count(), "users,",
+            db.query(BlogPost).count(), "blog posts",
         )
     except Exception:
         db.rollback()

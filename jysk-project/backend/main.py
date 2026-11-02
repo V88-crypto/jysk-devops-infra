@@ -1,14 +1,17 @@
 import logging
 from contextlib import asynccontextmanager
+from pathlib import Path
 
 from fastapi import FastAPI, Request, status
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
+from fastapi.staticfiles import StaticFiles
 
 from app.core.storage import StorageUnavailableError, ensure_bucket
 from app.routers import (
     admin,
     auth,
+    blog,
     cart,
     catalog,
     favorites,
@@ -21,6 +24,8 @@ from app.routers import (
 
 logging.basicConfig(level=logging.WARNING, format="%(levelname)s:     %(name)s - %(message)s")
 logging.getLogger("app").setLevel(logging.INFO)
+
+STATIC_DIR = Path(__file__).resolve().parent / "static"
 
 
 @asynccontextmanager
@@ -62,7 +67,10 @@ app.include_router(orders.router)
 app.include_router(pickup_points.router)
 app.include_router(favorites.router)
 app.include_router(files.router)
+app.include_router(blog.router)
 app.include_router(admin.router)
+
+app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
 
 
 @app.get("/")
