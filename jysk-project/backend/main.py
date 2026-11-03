@@ -14,6 +14,7 @@ from app.routers import (
     blog,
     cart,
     catalog,
+    delivery,
     favorites,
     files,
     orders,
@@ -64,6 +65,7 @@ app.include_router(users.router)
 app.include_router(reviews.router)
 app.include_router(cart.router)
 app.include_router(orders.router)
+app.include_router(delivery.router)
 app.include_router(pickup_points.router)
 app.include_router(favorites.router)
 app.include_router(files.router)

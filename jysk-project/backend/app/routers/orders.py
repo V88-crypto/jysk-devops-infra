@@ -5,7 +5,7 @@ from sqlalchemy.orm import Session, selectinload
 
 from app.core.deps import get_current_user
 from app.database import get_db
-from app.models.order import Address, Order, OrderItem
+from app.models.order import Order, OrderItem
 from app.models.user import User
 from app.schemas.cart import StockIssue
 from app.schemas.order import OrderCreate, OrderListOut, OrderOut
@@ -16,6 +16,7 @@ from app.services.cart import (
     stock_conflict,
     touch_cart,
 )
+from app.services.delivery import delivery_address, delivery_price
 from app.services.orders import (
     CANCELLABLE_STATUSES,
     cancel_order,
@@ -97,27 +98,23 @@ def create_order(
         raise stock_conflict(issues)
 
     address_id = None
-    if data.delivery_method == "courier":
-        street = data.address.address
-        if data.address.apartment:
-            street = f"{street}, {data.address.apartment}"
-        address = Address(
-            city=data.address.city,
-            address=street,
-            postal_code=data.address.postal_code,
-            provider="courier",
-        )
+    address = delivery_address(data)
+    if address is not None:
         db.add(address)
         db.flush()
         address_id = address.id
 
-    total_price = sum(
+    items_total = sum(
         (variants[item.variant_id].price * item.quantity for item in items), Decimal("0")
     )
+    shipping = delivery_price(data.delivery_method, items_total)
+    total_price = items_total + shipping
     order = Order(
         user_id=current_user.id,
         address_id=address_id,
         status="new",
+        items_total=items_total,
+        delivery_price=shipping,
         total_price=total_price,
         recipient_first_name=data.recipient.first_name,
         recipient_last_name=data.recipient.last_name,
