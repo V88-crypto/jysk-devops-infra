@@ -17,6 +17,7 @@ from app.schemas.order import (
     PaymentOut,
     RecipientOut,
 )
+from app.services.delivery import department_number, vat_amount
 
 CANCELLABLE_STATUSES = ("new", "processing")
 
@@ -135,7 +136,10 @@ def orders_to_out(db: Session, orders: list[Order], include_user: bool = False) 
         fields = {
             "id": order.id,
             "status": order.status,
+            "items_total": order.items_total,
+            "delivery_price": order.delivery_price,
             "total_price": order.total_price,
+            "vat_amount": vat_amount(order.total_price),
             "created_at": order.created_at,
             "recipient": RecipientOut(
                 first_name=order.recipient_first_name,
@@ -152,6 +156,8 @@ def orders_to_out(db: Session, orders: list[Order], include_user: bool = False) 
                 city=address.city,
                 address=address.address,
                 postal_code=address.postal_code,
+                provider=address.provider,
+                department_number=department_number(order.delivery_method, address),
             ),
             "comment": order.comment,
             "payment": None

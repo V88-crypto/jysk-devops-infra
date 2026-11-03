@@ -2,17 +2,42 @@ import re
 from datetime import datetime
 from typing import Literal
 
-from pydantic import BaseModel, EmailStr, Field, field_validator, model_validator
+from pydantic import BaseModel, ConfigDict, EmailStr, Field, field_validator, model_validator
 from pydantic_core import PydanticCustomError
 
 from app.core.pickup_points import find_pickup_point
 from app.schemas.base import Money
 
-DeliveryMethod = Literal["courier", "pickup"]
+DeliveryMethod = Literal["np_courier", "np_department", "pickup"]
 PaymentMethod = Literal["cash_on_delivery", "card"]
 
 PHONE_SEPARATORS = re.compile(r"[\s()-]")
 UA_PHONE = re.compile(r"(?:\+?380|0)([0-9]{9})")
+
+DELIVERY_DETAILS = {
+    "np_courier": "address",
+    "np_department": "department",
+    "pickup": "pickup_point",
+}
+MISSING_DETAIL = {
+    "address": ("address_required", "Для доставки кур'єром потрібно вказати адресу"),
+    "department": (
+        "department_required",
+        "Для доставки у відділення потрібно вказати місто та номер відділення",
+    ),
+    "pickup_point": ("pickup_point_required", "Для самовивозу потрібно обрати пункт видачі"),
+}
+EXTRA_DETAIL = {
+    "address": ("address_not_allowed", "Адресу вказують лише для доставки кур'єром"),
+    "department": (
+        "department_not_allowed",
+        "Відділення вказують лише для доставки у відділення Нової пошти",
+    ),
+    "pickup_point": (
+        "pickup_point_not_allowed",
+        "Пункт самовивозу вказується лише для самовивозу",
+    ),
+}
 
 
 class RecipientIn(BaseModel):
@@ -33,16 +58,41 @@ class RecipientIn(BaseModel):
 
 
 class AddressIn(BaseModel):
+    model_config = ConfigDict(str_strip_whitespace=True)
+
     city: str = Field(min_length=1, max_length=255)
-    address: str = Field(min_length=1, max_length=400)
-    apartment: str | None = Field(default=None, max_length=100)
+    street: str = Field(min_length=1, max_length=255)
+    house: str = Field(min_length=1, max_length=20)
+    apartment: str | None = Field(default=None, max_length=20)
     postal_code: str | None = Field(default=None, max_length=16)
+
+    @field_validator("apartment", "postal_code")
+    @classmethod
+    def empty_to_none(cls, value: str | None) -> str | None:
+        return value or None
+
+
+class DepartmentIn(BaseModel):
+    model_config = ConfigDict(str_strip_whitespace=True)
+
+    city: str = Field(min_length=1, max_length=255)
+    number: int
+
+    @field_validator("number")
+    @classmethod
+    def check_number(cls, value: int) -> int:
+        if not 1 <= value <= 99999:
+            raise PydanticCustomError(
+                "department_number_invalid", "Номер відділення має бути від 1 до 99999"
+            )
+        return value
 
 
 class OrderCreate(BaseModel):
     recipient: RecipientIn
     delivery_method: DeliveryMethod
     address: AddressIn | None = None
+    department: DepartmentIn | None = None
     pickup_point: str | None = None
     payment_method: PaymentMethod
     comment: str | None = Field(default=None, max_length=1000)
@@ -57,27 +107,13 @@ class OrderCreate(BaseModel):
 
     @model_validator(mode="after")
     def check_delivery(self):
-        if self.delivery_method == "courier":
-            if self.address is None:
-                raise PydanticCustomError(
-                    "address_required", "Для доставки кур'єром потрібно вказати адресу"
-                )
-            if self.pickup_point is not None:
-                raise PydanticCustomError(
-                    "pickup_point_not_allowed",
-                    "Пункт самовивозу вказується лише для самовивозу",
-                )
-            return self
-
-        if self.address is not None:
-            raise PydanticCustomError(
-                "address_not_allowed", "Для самовивозу адреса не потрібна"
-            )
-        if self.pickup_point is None:
-            raise PydanticCustomError(
-                "pickup_point_required", "Для самовивозу потрібно обрати пункт видачі"
-            )
-        if find_pickup_point(self.pickup_point) is None:
+        needed = DELIVERY_DETAILS[self.delivery_method]
+        if getattr(self, needed) is None:
+            raise PydanticCustomError(*MISSING_DETAIL[needed])
+        for field in DELIVERY_DETAILS.values():
+            if field != needed and getattr(self, field) is not None:
+                raise PydanticCustomError(*EXTRA_DETAIL[field])
+        if self.pickup_point is not None and find_pickup_point(self.pickup_point) is None:
             raise PydanticCustomError("pickup_point_unknown", "Такого пункту самовивозу немає")
         return self
 
@@ -116,6 +152,8 @@ class OrderAddressOut(BaseModel):
     city: str
     address: str
     postal_code: str | None
+    provider: str | None
+    department_number: int | None
 
 
 class OrderItemOut(BaseModel):
@@ -130,7 +168,10 @@ class OrderItemOut(BaseModel):
 class OrderOut(BaseModel):
     id: int
     status: str
+    items_total: Money
+    delivery_price: Money
     total_price: Money
+    vat_amount: Money
     created_at: datetime
     recipient: RecipientOut
     delivery_method: str

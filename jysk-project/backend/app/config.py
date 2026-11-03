@@ -1,3 +1,5 @@
+from decimal import Decimal
+
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -32,6 +34,11 @@ class Settings(BaseSettings):
 
     PUBLIC_API_URL: str = "http://localhost:8000"
     MAX_UPLOAD_SIZE_MB: int = 5
+
+    DELIVERY_PRICE_NP_COURIER: Decimal = Decimal("150")
+    DELIVERY_PRICE_NP_DEPARTMENT: Decimal = Decimal("80")
+    FREE_DELIVERY_FROM: Decimal = Decimal("5000")
+    VAT_RATE: Decimal = Decimal("20")
 
     model_config = SettingsConfigDict(env_file=".env")
 

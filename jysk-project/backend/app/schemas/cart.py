@@ -38,6 +38,8 @@ class CartOut(BaseModel):
     items: list[CartItemOut]
     total_items: int
     subtotal: Money
+    vat_amount: Money
+    free_delivery_from: Money
     has_unavailable: bool
 
 

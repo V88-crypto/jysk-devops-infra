@@ -5,6 +5,7 @@ from sqlalchemy import func
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
+from app.config import settings
 from app.models.cart import Cart, CartItem
 from app.models.catalog import Image, Product, ProductVariant
 from app.schemas.cart import (
@@ -16,6 +17,7 @@ from app.schemas.cart import (
     StockConflictOut,
     StockIssue,
 )
+from app.services.delivery import vat_amount
 
 STOCK_CONFLICT_RESPONSES = {status.HTTP_409_CONFLICT: {"model": StockConflictOut}}
 
@@ -103,9 +105,12 @@ def cart_to_out(db: Session, items: list[CartItem]) -> CartOut:
             )
         )
 
+    subtotal = sum((item.line_total for item in result), Decimal("0"))
     return CartOut(
         items=result,
         total_items=sum(item.quantity for item in result),
-        subtotal=sum((item.line_total for item in result), Decimal("0")),
+        subtotal=subtotal,
+        vat_amount=vat_amount(subtotal),
+        free_delivery_from=settings.FREE_DELIVERY_FROM,
         has_unavailable=any(not item.available for item in result),
     )
