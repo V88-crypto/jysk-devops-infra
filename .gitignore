@@ -1,0 +1,18 @@
+# Kubernetes secrets
+/k8s/secrets.yaml
+/k8s/*secret*.yaml
+!/k8s/secrets.example.yaml
+
+# Local backups
+/k8s/*.bak
+/k8s/*.local-backup
+/k8s/*.backup
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Private keys
+*.pem
+*.key

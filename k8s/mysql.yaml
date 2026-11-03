@@ -1,0 +1,81 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql
+  namespace: hyggy
+spec:
+  clusterIP: None
+  selector:
+    app: hyggy-mysql
+  ports:
+    - name: mysql
+      port: 3306
+      targetPort: 3306
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mysql
+  namespace: hyggy
+spec:
+  serviceName: mysql
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hyggy-mysql
+  template:
+    metadata:
+      labels:
+        app: hyggy-mysql
+    spec:
+      containers:
+        - name: mysql
+          image: mysql:8.0-debian
+          ports:
+            - containerPort: 3306
+              name: mysql
+          env:
+            - name: MYSQL_DATABASE
+              value: hyggy
+            - name: MYSQL_USER
+              value: hyggy
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: hyggy-secrets
+                  key: MYSQL_PASSWORD
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: hyggy-secrets
+                  key: MYSQL_ROOT_PASSWORD
+          resources:
+            requests:
+              cpu: 100m
+              memory: 512Mi
+            limits:
+              cpu: "1"
+              memory: 2Gi
+          volumeMounts:
+            - name: mysql-data
+              mountPath: /var/lib/mysql
+          readinessProbe:
+            tcpSocket:
+              port: 3306
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          startupProbe:
+            tcpSocket:
+              port: 3306
+            periodSeconds: 5
+            failureThreshold: 60
+  volumeClaimTemplates:
+    - metadata:
+        name: mysql-data
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        storageClassName: local-path
+        resources:
+          requests:
+            storage: 5Gi

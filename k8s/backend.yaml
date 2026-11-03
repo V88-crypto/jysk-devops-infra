@@ -1,0 +1,82 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend
+  namespace: hyggy
+spec:
+  selector:
+    app: hyggy-backend
+  ports:
+    - name: http
+      port: 8000
+      targetPort: 8000
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+  namespace: hyggy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hyggy-backend
+  template:
+    metadata:
+      labels:
+        app: hyggy-backend
+    spec:
+      imagePullSecrets:
+        - name: ghcr-credentials
+      containers:
+        - name: backend
+          image: ghcr.io/v88-crypto/hyggy-backend:dev
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8000
+              name: http
+          env:
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: hyggy-secrets
+                  key: DATABASE_URL
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: hyggy-secrets
+                  key: JWT_SECRET
+            - name: MINIO_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: hyggy-secrets
+                  key: MINIO_ACCESS_KEY
+            - name: MINIO_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: hyggy-secrets
+                  key: MINIO_SECRET_KEY
+            - name: MINIO_ENDPOINT
+              valueFrom:
+                configMapKeyRef:
+                  name: hyggy-config
+                  key: MINIO_ENDPOINT
+            - name: MINIO_SECURE
+              valueFrom:
+                configMapKeyRef:
+                  name: hyggy-config
+                  key: MINIO_SECURE
+            - name: MINIO_BUCKET
+              valueFrom:
+                configMapKeyRef:
+                  name: hyggy-config
+                  key: MINIO_BUCKET
+            - name: PUBLIC_API_URL
+              value: "/api"
+          resources:
+            requests:
+              cpu: 100m
+              memory: 256Mi
+            limits:
+              cpu: "1"
+              memory: 1Gi
