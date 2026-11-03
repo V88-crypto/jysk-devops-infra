@@ -3,6 +3,7 @@ import { apiRequest } from '@/shared/api/httpClient'
 import type {
   FavoriteProduct,
   MyReviewList,
+  Order,
   OrderList,
 } from '@/features/profile/types'
 import type { OrderStatus } from '@/shared/orders/orderStatus'
@@ -19,11 +20,16 @@ interface OrderResponse {
   status: OrderStatus
   total_price: number
   created_at: string
+  // Pickup orders have no address, only a pickup point.
   address: {
     city: string
     address: string
     postal_code: string | null
-  }
+  } | null
+  pickup_point: {
+    name: string
+    address: string
+  } | null
   items: {
     id: number
     sku: string
@@ -68,12 +74,34 @@ export interface ProfileUpdatePayload {
   phone: string | null
 }
 
-const formatAddress = ({
-  city,
-  address,
-  postal_code,
-}: OrderResponse['address']) =>
-  [postal_code, city, address].filter(Boolean).join(', ')
+const formatAddress = ({ address, pickup_point }: OrderResponse) => {
+  if (pickup_point) {
+    return `Самовивіз: ${pickup_point.name}, ${pickup_point.address}`
+  }
+
+  if (!address) {
+    return '—'
+  }
+
+  return [address.postal_code, address.city, address.address]
+    .filter(Boolean)
+    .join(', ')
+}
+
+const mapOrder = (order: OrderResponse): Order => ({
+  id: order.id,
+  date: order.created_at,
+  status: order.status,
+  totalPrice: order.total_price,
+  address: formatAddress(order),
+  items: order.items.map((item) => ({
+    id: item.id,
+    name: item.product_name,
+    sku: item.sku,
+    quantity: item.quantity,
+    price: item.price,
+  })),
+})
 
 export const profileApi = {
   async getOrders(): Promise<OrderList> {
@@ -83,21 +111,16 @@ export const profileApi = {
 
     return {
       total: response.total,
-      items: response.items.map((order) => ({
-        id: order.id,
-        date: order.created_at,
-        status: order.status,
-        totalPrice: order.total_price,
-        address: formatAddress(order.address),
-        items: order.items.map((item) => ({
-          id: item.id,
-          name: item.product_name,
-          sku: item.sku,
-          quantity: item.quantity,
-          price: item.price,
-        })),
-      })),
+      items: response.items.map(mapOrder),
     }
+  },
+
+  async cancelOrder(orderId: number): Promise<Order> {
+    return mapOrder(
+      await apiRequest<OrderResponse>(`/orders/${orderId}/cancel`, {
+        method: 'PATCH',
+      }),
+    )
   },
 
   async getFavorites(): Promise<FavoriteProduct[]> {

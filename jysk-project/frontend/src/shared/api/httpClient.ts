@@ -45,6 +45,15 @@ const extractErrorMessage = async (response: Response): Promise<string> => {
     return detail
   }
 
+  // 422 validation errors come as a list; stock conflicts as an object.
+  if (Array.isArray(detail) && typeof detail[0]?.msg === 'string') {
+    return detail[0].msg
+  }
+
+  if (typeof detail?.message === 'string') {
+    return detail.message
+  }
+
   return `Помилка запиту (${response.status})`
 }
 

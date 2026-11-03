@@ -16,16 +16,33 @@ const EditBlogRoute = () => {
   )
 }
 
+const AddBlogRoute = () => {
+  const navigate = useNavigate()
+
+  return (
+    <EditBlogForm
+      onBack={() => navigate('/admin/blogs')}
+      onSaved={() => navigate('/admin/blogs')}
+    />
+  )
+}
+
 const BlogsListRoute = () => {
   const navigate = useNavigate()
 
-  return <BlogsList onEdit={(id) => navigate(`/admin/blogs/${id}/edit`)} />
+  return (
+    <BlogsList
+      onAdd={() => navigate('/admin/blogs/new')}
+      onEdit={(id) => navigate(`/admin/blogs/${id}/edit`)}
+    />
+  )
 }
 
 export const BlogsPage = () => {
   return (
     <Routes>
       <Route index element={<BlogsListRoute />} />
+      <Route path="new" element={<AddBlogRoute />} />
       <Route path=":id/edit" element={<EditBlogRoute />} />
     </Routes>
   )

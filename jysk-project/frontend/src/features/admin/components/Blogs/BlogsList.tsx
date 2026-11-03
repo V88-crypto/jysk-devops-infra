@@ -10,14 +10,20 @@ import { RowDeleteButton } from '@/features/admin/components/common/RowDeleteBut
 import { AdminPageLayout } from '@/features/admin/components/common/AdminPageLayout'
 
 interface BlogsListProps {
+  onAdd: () => void
   onEdit: (postId: number) => void
 }
 
-export const BlogsList = ({ onEdit }: BlogsListProps) => {
-  const { data: posts, isLoading } = useAsyncData(blogPostService.getAll)
+export const BlogsList = ({ onAdd, onEdit }: BlogsListProps) => {
+  const {
+    data: posts,
+    isLoading,
+    error: loadError,
+  } = useAsyncData(blogPostService.getAll)
 
   const [search, setSearch] = useState('')
   const [deletingId, setDeletingId] = useState<number | null>(null)
+  const [actionError, setActionError] = useState<string | null>(null)
   const [deletedIds, setDeletedIds] = useState<ReadonlySet<number>>(
     () => new Set(),
   )
@@ -38,10 +44,15 @@ export const BlogsList = ({ onEdit }: BlogsListProps) => {
 
   const handleDelete = async (id: number) => {
     setDeletingId(id)
+    setActionError(null)
 
     try {
       await blogPostService.delete(id)
       setDeletedIds((current) => new Set(current).add(id))
+    } catch (error) {
+      setActionError(
+        error instanceof Error ? error.message : 'Не вдалося видалити блог',
+      )
     } finally {
       setDeletingId(null)
     }
@@ -60,6 +71,7 @@ export const BlogsList = ({ onEdit }: BlogsListProps) => {
 
         <button
           type="button"
+          onClick={onAdd}
           className="h-[40px] rounded-[4px] bg-primary px-6 text-sm font-semibold text-white transition hover:bg-primary-dark"
         >
           Додати
@@ -69,6 +81,12 @@ export const BlogsList = ({ onEdit }: BlogsListProps) => {
       <div className="mb-4 flex flex-wrap items-center gap-5 rounded-md bg-surface px-4 py-3 shadow-sm">
         <SearchField value={search} onChange={setSearch} />
       </div>
+
+      {actionError && (
+        <p className="mb-4 rounded-md bg-danger-soft px-4 py-3 text-sm text-danger">
+          {actionError}
+        </p>
+      )}
 
       <div className="overflow-x-auto rounded-md bg-surface shadow-sm">
         <table className="w-full min-w-[760px] border-collapse text-left text-sm">
@@ -97,7 +115,7 @@ export const BlogsList = ({ onEdit }: BlogsListProps) => {
                 </td>
                 <td className="px-4 py-3">{post.category ?? '—'}</td>
                 <td className="px-4 py-3">
-                  {post.keywords?.join(', ') ?? '—'}
+                  {post.keywords?.length ? post.keywords.join(', ') : '—'}
                 </td>
                 <td className="px-4 py-3 text-right">
                   <RowEditButton onClick={() => onEdit(post.id)} />
@@ -113,7 +131,13 @@ export const BlogsList = ({ onEdit }: BlogsListProps) => {
           </tbody>
         </table>
 
-        {!isLoading && filteredPosts.length === 0 && (
+        {!isLoading && Boolean(loadError) && (
+          <p className="px-4 py-10 text-center text-danger">
+            Не вдалося завантажити блоги
+          </p>
+        )}
+
+        {!isLoading && !loadError && filteredPosts.length === 0 && (
           <p className="px-4 py-10 text-center text-fg-subtle">
             Нічого не знайдено
           </p>
