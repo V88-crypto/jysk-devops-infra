@@ -19,3 +19,5 @@ bcrypt==4.0.1         # passlib 1.7.4 несовместим с bcrypt 5.x, по
 python-multipart      # нужен FastAPI для OAuth2-формы (эндпоинт /auth/token)
 
 minio
+
+rapidfuzz

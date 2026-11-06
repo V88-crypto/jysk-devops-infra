@@ -27,6 +27,12 @@ class ProductListOut(BaseModel):
     total: int
     page: int
     page_size: int
+    did_you_mean: str | None = None
+
+
+class ProductSuggestOut(BaseModel):
+    items: list[ProductListItem]
+    did_you_mean: str | None = None
 
 
 class ImageOut(BaseModel):
