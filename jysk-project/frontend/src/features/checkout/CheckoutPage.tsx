@@ -262,13 +262,6 @@ export const CheckoutPage: React.FC = () => {
             </label>
           </div>
 
-          {/* The backend has only a test payment provider: it marks card orders as paid right away. */}
-          {formData.paymentType === 'card' && (
-            <p className="text-sm text-fg-subtle">
-              Оплата працює в тестовому режимі: дані картки не потрібні, кошти не списуються, а замовлення одразу позначається як оплачене.
-            </p>
-          )}
-
           <label className="flex items-center gap-3 cursor-pointer text-sm">
             <input
               required
