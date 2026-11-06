@@ -6,6 +6,8 @@ import type {
   Order,
   OrderList,
 } from '@/features/profile/types'
+import { formatOrderAddress } from '@/shared/orders/orderAddress'
+import type { OrderDeliveryResponse } from '@/shared/orders/orderAddress'
 import type { OrderStatus } from '@/shared/orders/orderStatus'
 
 const MAX_PAGE_SIZE = 100
@@ -15,21 +17,11 @@ interface PageResponse<T> {
   total: number
 }
 
-interface OrderResponse {
+interface OrderResponse extends OrderDeliveryResponse {
   id: number
   status: OrderStatus
   total_price: number
   created_at: string
-  // Pickup orders have no address, only a pickup point.
-  address: {
-    city: string
-    address: string
-    postal_code: string | null
-  } | null
-  pickup_point: {
-    name: string
-    address: string
-  } | null
   items: {
     id: number
     sku: string
@@ -74,26 +66,12 @@ export interface ProfileUpdatePayload {
   phone: string | null
 }
 
-const formatAddress = ({ address, pickup_point }: OrderResponse) => {
-  if (pickup_point) {
-    return `Самовивіз: ${pickup_point.name}, ${pickup_point.address}`
-  }
-
-  if (!address) {
-    return '—'
-  }
-
-  return [address.postal_code, address.city, address.address]
-    .filter(Boolean)
-    .join(', ')
-}
-
 const mapOrder = (order: OrderResponse): Order => ({
   id: order.id,
   date: order.created_at,
   status: order.status,
   totalPrice: order.total_price,
-  address: formatAddress(order),
+  address: formatOrderAddress(order),
   items: order.items.map((item) => ({
     id: item.id,
     name: item.product_name,
