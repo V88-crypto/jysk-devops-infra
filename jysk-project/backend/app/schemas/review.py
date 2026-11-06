@@ -2,6 +2,8 @@ from datetime import datetime
 
 from pydantic import BaseModel, Field
 
+from app.core.media import OptionalPublicUrl
+
 
 class ReviewCreate(BaseModel):
     variant_id: int
@@ -35,7 +37,7 @@ class MyReviewOut(BaseModel):
     created_at: datetime
     variant: ReviewVariantOut
     product: ReviewProductOut
-    image_url: str | None
+    image_url: OptionalPublicUrl
 
 
 class MyReviewListOut(BaseModel):

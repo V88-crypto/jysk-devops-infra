@@ -4,6 +4,8 @@ from typing import Literal
 from pydantic import BaseModel, ConfigDict, field_validator, model_validator
 from pydantic_core import PydanticCustomError
 
+from app.core.media import PublicUrl
+
 BlockType = Literal["text", "gallery"]
 
 TITLE_LIMIT = 255
@@ -190,7 +192,7 @@ class BlogContentBlockOut(BaseModel):
     title: str | None
     body: str | None
     sort_order: int
-    images: list[str]
+    images: list[PublicUrl]
 
 
 class BlogPostSummaryOut(BaseModel):
@@ -198,7 +200,7 @@ class BlogPostSummaryOut(BaseModel):
     slug: str
     title: str
     description: str | None
-    image_url: str
+    image_url: PublicUrl
     image_alt: str | None
     category: BlogCategoryOut
     keywords: list[str]

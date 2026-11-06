@@ -3,6 +3,8 @@ from datetime import datetime
 import email_validator
 from pydantic import BaseModel, ConfigDict, EmailStr, Field, field_validator
 
+from app.core.media import OptionalPublicUrl
+
 if "local" in email_validator.SPECIAL_USE_DOMAIN_NAMES:
     email_validator.SPECIAL_USE_DOMAIN_NAMES.remove("local")
 
@@ -71,7 +73,7 @@ class UserOut(BaseModel):
     last_name: str
     email: EmailStr
     phone: str | None
-    avatar_url: str | None
+    avatar_url: OptionalPublicUrl
     role_id: int
     role: str
     created_at: datetime

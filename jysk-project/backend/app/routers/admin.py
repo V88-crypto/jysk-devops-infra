@@ -4,6 +4,7 @@ from sqlalchemy.orm import Session, selectinload
 
 from app.core.deps import ADMIN_ROLE, require_admin
 from app.core.slugs import make_slug
+from app.core.media import to_stored
 from app.core.storage import public_url, upload_image
 from app.core.uploads import read_image_upload
 from app.database import get_db
@@ -306,7 +307,7 @@ def create_variant(db: Session, product_id: int, data: VariantIn) -> None:
         db.add(
             Image(
                 variant_id=variant.id,
-                image_url=image.image_url,
+                image_url=to_stored(image.image_url),
                 is_primary=image.is_primary,
                 sort_order=image.sort_order,
             )
@@ -338,14 +339,14 @@ def sync_images(db: Session, variant: ProductVariant, images: list[ImageIn]) -> 
             db.add(
                 Image(
                     variant_id=variant.id,
-                    image_url=image_data.image_url,
+                    image_url=to_stored(image_data.image_url),
                     is_primary=image_data.is_primary,
                     sort_order=image_data.sort_order,
                 )
             )
         else:
             image = existing[image_data.id]
-            image.image_url = image_data.image_url
+            image.image_url = to_stored(image_data.image_url)
             image.is_primary = image_data.is_primary
             image.sort_order = image_data.sort_order
 

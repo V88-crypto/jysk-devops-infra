@@ -9,9 +9,10 @@ from app.core.storage import (
     StorageUnavailableError,
     delete_object,
     key_from_url,
-    public_url,
+    stored_url,
     upload_image,
 )
+from app.core.media import to_stored
 from app.core.uploads import read_image_upload
 from app.database import get_db
 from app.models.catalog import Image, Product, ProductVariant
@@ -56,6 +57,8 @@ def update_profile(
                 status_code=status.HTTP_422_UNPROCESSABLE_CONTENT,
                 detail=f"Поле {field} нельзя очистить",
             )
+        if field == "avatar_url":
+            value = to_stored(value)
         setattr(current_user, field, value)
 
     db.commit()
@@ -135,7 +138,7 @@ def upload_avatar(
     old_key = own_avatar_key(current_user)
     key = upload_image(data, content_type, f"avatars/{current_user.id}")
 
-    current_user.avatar_url = public_url(key)
+    current_user.avatar_url = stored_url(key)
     db.commit()
     db.refresh(current_user)
 

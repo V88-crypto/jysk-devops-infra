@@ -17,7 +17,7 @@ from pathlib import Path
 from sqlalchemy.orm import Session
 
 from app.config import settings
-from app.core.storage import ensure_bucket, get_client, public_url
+from app.core.storage import ensure_bucket, get_client, stored_url
 from app.database import SessionLocal
 from app.models.catalog import Attribute, Image, Product, ProductVariant, VariantAttribute
 from app.seed import get_or_create_attribute, get_or_create_category
@@ -46,7 +46,7 @@ def upload_seed_image(file_name: str) -> str:
         length=len(data),
         content_type="image/png",
     )
-    return public_url(key)
+    return stored_url(key)
 
 
 def rename_attributes(db: Session) -> None:

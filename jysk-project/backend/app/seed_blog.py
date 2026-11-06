@@ -1,6 +1,5 @@
 from sqlalchemy.orm import Session
 
-from app.config import settings
 from app.core.slugs import make_slug
 from app.database import SessionLocal
 from app.models.blog import BlogCategory, BlogContentBlock, BlogPost
@@ -231,7 +230,7 @@ POSTS = [
 
 
 def static_url(file_name: str) -> str:
-    return f"{settings.PUBLIC_API_URL.rstrip('/')}/static/blog/{file_name}"
+    return f"/static/blog/{file_name}"
 
 
 def get_or_create_blog_category(db: Session, name: str) -> BlogCategory:

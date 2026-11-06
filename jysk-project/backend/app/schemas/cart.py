@@ -1,5 +1,6 @@
 from pydantic import BaseModel, Field
 
+from app.core.media import OptionalPublicUrl
 from app.schemas.base import Money
 
 
@@ -28,7 +29,7 @@ class CartProductOut(BaseModel):
 class CartItemOut(BaseModel):
     variant: CartVariantOut
     product: CartProductOut
-    image_url: str | None
+    image_url: OptionalPublicUrl
     quantity: int
     line_total: Money
     available: bool
