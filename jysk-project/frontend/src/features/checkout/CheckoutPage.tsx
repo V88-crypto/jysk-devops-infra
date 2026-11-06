@@ -2,6 +2,7 @@ import React, { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCartStore } from '@/store/useCartStore';
 import { useAsyncData } from '@/shared/hooks/useAsyncData';
+import { useAuth } from '@/shared/auth/useAuth';
 import { checkoutApi } from './api/checkoutApi';
 import type { CreatedOrder, DeliveryMethodCode, PaymentMethod } from './api/checkoutApi';
 
@@ -45,6 +46,22 @@ export const CheckoutPage: React.FC = () => {
   const [order, setOrder] = useState<CreatedOrder | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // The profile arrives after the first render, so it is copied in once it
+  // loads. Only empty fields are filled, never what the buyer has typed.
+  const { user } = useAuth();
+  const [prefilledUserId, setPrefilledUserId] = useState<number | null>(null);
+
+  if (user && user.id !== prefilledUserId) {
+    setPrefilledUserId(user.id);
+    setFormData((current) => ({
+      ...current,
+      firstName: current.firstName || user.first_name,
+      lastName: current.lastName || user.last_name,
+      email: current.email || user.email,
+      phone: current.phone || user.phone || '',
+    }));
+  }
 
   const subtotal = totalPrice();
   const fetchDeliveryMethods = useCallback(
