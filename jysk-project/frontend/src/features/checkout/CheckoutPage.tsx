@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCartStore } from '@/store/useCartStore';
 import { useAsyncData } from '@/shared/hooks/useAsyncData';
@@ -37,15 +37,15 @@ export const CheckoutPage: React.FC = () => {
     departmentNumber: '',
     pickupPoint: '',
     paymentType: 'card' as PaymentMethod,
-    cardNumber: '',
-    cardDate: '',
-    cardCvv: '',
     acceptTerms: false,
   });
 
   const [order, setOrder] = useState<CreatedOrder | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  // State updates are async, so a fast double click or Enter could start a
+  // second order before the button gets disabled. The ref blocks it at once.
+  const isSubmittingRef = useRef(false);
 
   // The profile arrives after the first render, so it is copied in once it
   // loads. Only empty fields are filled, never what the buyer has typed.
@@ -84,6 +84,9 @@ export const CheckoutPage: React.FC = () => {
   };
 
   const submitOrder = async () => {
+    if (isSubmittingRef.current) return;
+
+    isSubmittingRef.current = true;
     setIsSubmitting(true);
     setError(null);
 
@@ -112,6 +115,7 @@ export const CheckoutPage: React.FC = () => {
           : 'Не вдалося оформити замовлення. Спробуйте ще раз.',
       );
     } finally {
+      isSubmittingRef.current = false;
       setIsSubmitting(false);
       // The order empties the cart on the server; a stock conflict changes it too.
       void loadCart();
@@ -152,7 +156,7 @@ export const CheckoutPage: React.FC = () => {
       {step === 'address' && (
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-3">
           <form onSubmit={handleNextStep} className="lg:col-span-2 flex flex-col gap-4">
-            <h1 className="text-2xl font-bold mb-2">Адреса тата</h1>
+            <h1 className="text-2xl font-bold mb-2">Адреса та контакти</h1>
             <div className="grid grid-cols-2 gap-4">
               <input required name="firstName" placeholder="Ім'я*" value={formData.firstName} onChange={handleChange} className={inputClass} />
               <input required name="lastName" placeholder="Прізвище*" value={formData.lastName} onChange={handleChange} className={inputClass} />
@@ -174,7 +178,7 @@ export const CheckoutPage: React.FC = () => {
           </form>
 
           <div className="rounded-lg border border-line bg-surface p-6 h-fit">
-            <h3 className="text-lg font-bold mb-4">Ваш замовлення</h3>
+            <h3 className="text-lg font-bold mb-4">Ваше замовлення</h3>
             <div className="flex flex-col gap-3 mb-6 max-h-[300px] overflow-y-auto">
               {items.map(item => (
                 <div key={item.variantId} className="flex items-center justify-between text-sm">
@@ -250,7 +254,7 @@ export const CheckoutPage: React.FC = () => {
           <div className="flex flex-col gap-3">
             <label className="flex items-center gap-3 p-4 border rounded cursor-pointer bg-surface hover:border-primary">
               <input type="radio" name="paymentType" value="card" checked={formData.paymentType === 'card'} onChange={handleChange} />
-              <span>Оплата карткою онлайн</span>
+              <span>Оплата карткою онлайн (тестовий режим)</span>
             </label>
             <label className="flex items-center gap-3 p-4 border rounded cursor-pointer bg-surface hover:border-primary">
               <input type="radio" name="paymentType" value="cash_on_delivery" checked={formData.paymentType === 'cash_on_delivery'} onChange={handleChange} />
@@ -258,14 +262,11 @@ export const CheckoutPage: React.FC = () => {
             </label>
           </div>
 
+          {/* The backend has only a test payment provider: it marks card orders as paid right away. */}
           {formData.paymentType === 'card' && (
-            <>
-              <input required name="cardNumber" placeholder="Номер карти (XXXX XXXX XXXX XXXX)*" value={formData.cardNumber} onChange={handleChange} className={inputClass} />
-              <div className="grid grid-cols-2 gap-4">
-                <input required name="cardDate" placeholder="MM/YY*" value={formData.cardDate} onChange={handleChange} className={inputClass} />
-                <input required name="cardCvv" placeholder="CVV*" value={formData.cardCvv} onChange={handleChange} className={inputClass} />
-              </div>
-            </>
+            <p className="text-sm text-fg-subtle">
+              Оплата працює в тестовому режимі: дані картки не потрібні, кошти не списуються, а замовлення одразу позначається як оплачене.
+            </p>
           )}
 
           <label className="flex items-center gap-3 cursor-pointer text-sm">
@@ -291,10 +292,11 @@ export const CheckoutPage: React.FC = () => {
 
       {step === 'success' && order && (
         <div className="max-w-xl mx-auto text-center flex flex-col items-center gap-4 py-10">
-          <h1 className="text-3xl font-bold text-green-600">
-            {formData.paymentType === 'card' ? 'Оплата успішна!' : 'Замовлення оформлено!'}
-          </h1>
+          <h1 className="text-3xl font-bold text-green-600">Замовлення оформлено!</h1>
           <p className="text-xl font-semibold">Замовлення №{order.id}</p>
+          {formData.paymentType === 'card' && (
+            <p className="text-fg-subtle">Тестову оплату зараховано, реальні кошти не списувалися</p>
+          )}
           <p className="text-fg-subtle">Сума замовлення: {order.totalPrice} грн</p>
           {/* The backend sends no order emails yet, so point to the profile instead. */}
           <p className="text-fg-subtle">Статус замовлення можна переглянути в особистому кабінеті</p>
