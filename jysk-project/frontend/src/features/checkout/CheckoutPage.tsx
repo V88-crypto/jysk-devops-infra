@@ -254,7 +254,7 @@ export const CheckoutPage: React.FC = () => {
           <div className="flex flex-col gap-3">
             <label className="flex items-center gap-3 p-4 border rounded cursor-pointer bg-surface hover:border-primary">
               <input type="radio" name="paymentType" value="card" checked={formData.paymentType === 'card'} onChange={handleChange} />
-              <span>Оплата карткою онлайн (тестовий режим)</span>
+              <span>Оплата карткою онлайн</span>
             </label>
             <label className="flex items-center gap-3 p-4 border rounded cursor-pointer bg-surface hover:border-primary">
               <input type="radio" name="paymentType" value="cash_on_delivery" checked={formData.paymentType === 'cash_on_delivery'} onChange={handleChange} />
@@ -294,9 +294,6 @@ export const CheckoutPage: React.FC = () => {
         <div className="max-w-xl mx-auto text-center flex flex-col items-center gap-4 py-10">
           <h1 className="text-3xl font-bold text-green-600">Замовлення оформлено!</h1>
           <p className="text-xl font-semibold">Замовлення №{order.id}</p>
-          {formData.paymentType === 'card' && (
-            <p className="text-fg-subtle">Тестову оплату зараховано, реальні кошти не списувалися</p>
-          )}
           <p className="text-fg-subtle">Сума замовлення: {order.totalPrice} грн</p>
           {/* The backend sends no order emails yet, so point to the profile instead. */}
           <p className="text-fg-subtle">Статус замовлення можна переглянути в особистому кабінеті</p>
