@@ -5,6 +5,7 @@ Revises: a099e40352e8
 Create Date: 2026-11-06 12:00:00.000000
 
 """
+import os
 from typing import Sequence, Union
 from urllib.parse import urlsplit
 
@@ -19,6 +20,7 @@ depends_on: Union[str, Sequence[str], None] = None
 
 
 MEDIA_PREFIXES = ("/static/", "/files/")
+OWN_HOSTS = ("localhost", "127.0.0.1", "0.0.0.0", "backend", "hyggy.pp.ua")
 URL_COLUMNS = (
     ("Images", "ImageUrl"),
     ("Users", "AvatarUrl"),
@@ -27,17 +29,38 @@ URL_COLUMNS = (
 )
 
 
-def relative_url(value: str) -> str:
-    parts = urlsplit(value)
-    if parts.scheme not in ("http", "https") and not parts.netloc:
+def own_hosts_and_prefixes() -> tuple[set[str], list[str]]:
+    hosts = set(OWN_HOSTS)
+    prefixes = {"", "/api"}
+    try:
+        public = urlsplit(os.environ.get("PUBLIC_API_URL", ""))
+        public_host = public.hostname
+    except ValueError:
+        return hosts, sorted(prefixes, key=len, reverse=True)
+    if public_host:
+        hosts.add(public_host)
+    prefixes.add(public.path.rstrip("/"))
+    return hosts, sorted(prefixes, key=len, reverse=True)
+
+
+def relative_url(value: str | None) -> str | None:
+    if not value:
         return value
-    positions = [parts.path.find(prefix) for prefix in MEDIA_PREFIXES if prefix in parts.path]
-    if not positions:
+    hosts, prefixes = own_hosts_and_prefixes()
+    try:
+        parts = urlsplit(value)
+        host = parts.hostname
+    except ValueError:
         return value
-    result = parts.path[min(positions):]
-    if parts.query:
-        result = f"{result}?{parts.query}"
-    return result
+    if parts.scheme not in ("", "http", "https"):
+        return value
+    if (parts.scheme or parts.netloc) and host not in hosts:
+        return value
+    for prefix in prefixes:
+        rest = parts.path[len(prefix):]
+        if parts.path.startswith(prefix) and rest.startswith(MEDIA_PREFIXES):
+            return f"{rest}?{parts.query}" if parts.query else rest
+    return value
 
 
 def upgrade() -> None:

@@ -21,3 +21,5 @@ python-multipart      # нужен FastAPI для OAuth2-формы (эндпо�
 minio
 
 rapidfuzz
+
+pytest

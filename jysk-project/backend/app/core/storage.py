@@ -9,7 +9,7 @@ from minio import Minio
 from minio.error import MinioException, S3Error
 
 from app.config import settings
-from app.core.media import to_public, to_stored
+from app.core.media import own_media_path, to_public
 
 logger = logging.getLogger(__name__)
 
@@ -137,8 +137,8 @@ def is_safe_key(key: str) -> bool:
 
 
 def key_from_url(url: str | None) -> str | None:
-    stored = to_stored(url)
-    if not stored or not stored.startswith(FILES_PREFIX):
+    path = own_media_path(url)
+    if path is None or not path.startswith(FILES_PREFIX):
         return None
-    key = stored[len(FILES_PREFIX):]
+    key = path[len(FILES_PREFIX):]
     return key if is_safe_key(key) else None
