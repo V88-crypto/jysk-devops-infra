@@ -1,9 +1,11 @@
 import type { PageResult } from '@/features/admin/hooks/usePagedData'
 import type { AdminOrder } from '@/features/admin/types/order'
 import { apiRequest } from '@/shared/api/httpClient'
+import { formatOrderAddress } from '@/shared/orders/orderAddress'
+import type { OrderDeliveryResponse } from '@/shared/orders/orderAddress'
 import type { OrderStatus } from '@/shared/orders/orderStatus'
 
-interface OrderResponse {
+interface OrderResponse extends OrderDeliveryResponse {
   id: number
   status: OrderStatus
   total_price: number
@@ -12,11 +14,6 @@ interface OrderResponse {
     first_name: string
     last_name: string
     email: string
-  }
-  address: {
-    city: string
-    address: string
-    postal_code: string | null
   }
   items: {
     id: number
@@ -39,13 +36,7 @@ const toOrder = (order: OrderResponse): AdminOrder => ({
   createdAt: order.created_at,
   customerName: `${order.user.first_name} ${order.user.last_name}`,
   customerEmail: order.user.email,
-  address: [
-    order.address.postal_code,
-    order.address.city,
-    order.address.address,
-  ]
-    .filter(Boolean)
-    .join(', '),
+  address: formatOrderAddress(order),
   items: order.items.map((item) => ({
     id: item.id,
     sku: item.sku,

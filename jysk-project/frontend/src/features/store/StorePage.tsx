@@ -77,6 +77,8 @@ export const StorePage: React.FC = () => {
                     </p>
                     <a
                       href={storeMockData.mapLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="text-primary hover:underline mt-1"
                     >
                       Як знайти магазин

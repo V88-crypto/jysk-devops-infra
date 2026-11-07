@@ -1,3 +1,7 @@
+import storeImage from '@/assets/images/store-zhytomyr.jpg'
+
+const STORE_MAP_QUERY = 'ТЦ Олді, вул. Михайла Грушевського, 5, Житомир, 10002'
+
 export interface WorkingHour {
   day: string
   hours: string
@@ -20,8 +24,8 @@ export const storeMockData: StoreDetails = {
   name: 'HYGGY Житомир ТЦ Олді',
   address: 'вул. Михайла Грушевського, 5 10002 Житомир',
   phone: '+380442470786',
-  mapLink: '#',
-  image: '/src/assets/images/store-zhytomyr.jpg',
+  mapLink: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(STORE_MAP_QUERY)}`,
+  image: storeImage,
   workingHours: [
     { day: 'Понеділок', hours: '10:00 - 20:00' },
     { day: 'Вівторок', hours: '10:00 - 20:00' },

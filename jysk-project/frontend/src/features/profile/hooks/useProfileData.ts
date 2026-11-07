@@ -60,5 +60,23 @@ export const useProfileData = () => {
     )
   }, [])
 
-  return { orders, favorites, reviews, removeFavorite }
+  const cancelOrder = useCallback(async (orderId: number) => {
+    const cancelledOrder = await profileApi.cancelOrder(orderId)
+
+    setOrders((state) =>
+      state.status === 'ready'
+        ? {
+            status: 'ready',
+            data: {
+              ...state.data,
+              items: state.data.items.map((order) =>
+                order.id === orderId ? cancelledOrder : order,
+              ),
+            },
+          }
+        : state,
+    )
+  }, [])
+
+  return { orders, favorites, reviews, removeFavorite, cancelOrder }
 }

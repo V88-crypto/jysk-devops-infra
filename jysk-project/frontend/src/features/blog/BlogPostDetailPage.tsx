@@ -3,17 +3,14 @@ import { useNavigate, useParams } from 'react-router-dom'
 
 import { Prefooter } from '@/shared/ui/Prefooter/Prefooter'
 import { useAsyncData } from '@/shared/hooks/useAsyncData'
-import { blogPageService } from './api/blogPageService'
+import { blogApi } from '@/shared/api/blogApi'
 
 export function BlogPostDetailPage() {
-  const { postId } = useParams<{ postId: string }>()
+  const { postId = '' } = useParams<{ postId: string }>()
   const navigate = useNavigate()
 
-  const fetchPost = useCallback(
-    () => blogPageService.getPostById(Number(postId)),
-    [postId],
-  )
-  const { data: post, isLoading } = useAsyncData(fetchPost)
+  const fetchPost = useCallback(() => blogApi.getPost(postId), [postId])
+  const { data: post, isLoading, error } = useAsyncData(fetchPost)
 
   if (isLoading) {
     return (
@@ -28,7 +25,9 @@ export function BlogPostDetailPage() {
     return (
       <>
         <div className="py-24 text-center text-fg-subtle">
-          <p>Статтю не знайдено.</p>
+          <p>
+            {error ? 'Не вдалося завантажити статтю.' : 'Статтю не знайдено.'}
+          </p>
           <button
             type="button"
             onClick={() => navigate('/blog')}

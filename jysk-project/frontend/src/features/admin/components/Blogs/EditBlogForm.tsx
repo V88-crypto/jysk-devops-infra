@@ -3,7 +3,9 @@ import type { FormEvent } from 'react'
 
 import { blogCategoryService } from '@/features/admin/api/blogCategoryService'
 import { blogPostService } from '@/features/admin/api/blogPostService'
+import { uploadApi } from '@/features/admin/api/uploadApi'
 
+import { uploadErrorMessage, validateImageFile } from '@/shared/api/uploads'
 import { useAsyncData } from '@/shared/hooks/useAsyncData'
 
 import { fieldClass } from '@/features/admin/components/common/formFieldStyles'
@@ -14,14 +16,15 @@ import { RowDeleteButton } from '@/features/admin/components/common/RowDeleteBut
 import type { BlogContentBlock, BlogPost } from '@/shared/types/blog'
 
 interface EditBlogFormProps {
-  postId: number
+  // Without a post id the form creates a new post.
+  postId?: number
   onBack: () => void
   onSaved: () => void
 }
 
 interface BlogFormState {
   title: string
-  category: string
+  categoryId: string
   imageUrl: string
   imageAlt: string
   contentBlocks: BlogContentBlock[]
@@ -37,25 +40,61 @@ const dangerButtonClass =
 const nextId = (items: { id: number }[]) =>
   items.reduce((max, item) => Math.max(max, item.id), 0) + 1
 
+const emptyForm = (): BlogFormState => ({
+  title: '',
+  categoryId: '',
+  imageUrl: '',
+  imageAlt: '',
+  contentBlocks: [],
+  keywords: [],
+})
+
+// Checks every file first so a bad one doesn't leave half the batch uploaded.
+const uploadBlogImages = async (files: File[]): Promise<string[]> => {
+  const invalidFileError = files.map(validateImageFile).find(Boolean)
+
+  if (invalidFileError) {
+    throw new Error(invalidFileError)
+  }
+
+  try {
+    return await Promise.all(
+      files.map((file) => uploadApi.uploadImage(file, 'blog')),
+    )
+  } catch (error) {
+    throw new Error(uploadErrorMessage(error), { cause: error })
+  }
+}
+
+const errorText = (error: unknown, fallback: string) =>
+  error instanceof Error ? error.message : fallback
+
 export const EditBlogForm = ({
   postId,
   onBack,
   onSaved,
 }: EditBlogFormProps) => {
-  const fetchPost = useCallback(() => blogPostService.getById(postId), [postId])
+  const fetchPost = useCallback(
+    () => (postId ? blogPostService.getById(postId) : Promise.resolve(null)),
+    [postId],
+  )
 
   const { data: post, isLoading: isPostLoading } = useAsyncData(fetchPost)
   const { data: categories } = useAsyncData(blogCategoryService.getAll)
 
-  const [form, setForm] = useState<BlogFormState | null>(null)
+  const [form, setForm] = useState<BlogFormState | null>(() =>
+    postId ? null : emptyForm(),
+  )
   const [formSourcePost, setFormSourcePost] = useState<BlogPost | null>(null)
   const [isSaving, setIsSaving] = useState(false)
+  const [uploadingCount, setUploadingCount] = useState(0)
+  const [formError, setFormError] = useState<string | null>(null)
 
   if (post && post !== formSourcePost) {
     setFormSourcePost(post)
     setForm({
       title: post.title,
-      category: post.category ?? '',
+      categoryId: post.categoryId ? String(post.categoryId) : '',
       imageUrl: post.imageUrl,
       imageAlt: post.imageAlt,
       contentBlocks: (post.contentBlocks ?? []).map((block) => ({
@@ -100,6 +139,23 @@ export const EditBlogForm = ({
       }
 
       return { ...current, contentBlocks: [...current.contentBlocks, newBlock] }
+    })
+  }
+
+  const appendBlockImages = (blockId: number, urls: string[]) => {
+    setForm((current) => {
+      if (!current) {
+        return current
+      }
+
+      return {
+        ...current,
+        contentBlocks: current.contentBlocks.map((block) =>
+          block.id === blockId
+            ? { ...block, images: [...block.images, ...urls] }
+            : block,
+        ),
+      }
     })
   }
 
@@ -164,33 +220,99 @@ export const EditBlogForm = ({
     setForm((current) => (current ? { ...current, keywords: [] } : current))
   }
 
+  const uploadImages = async (
+    files: File[],
+    onUploaded: (urls: string[]) => void,
+  ) => {
+    if (!files.length) {
+      return
+    }
+
+    setFormError(null)
+    setUploadingCount((count) => count + 1)
+
+    try {
+      onUploaded(await uploadBlogImages(files))
+    } catch (error) {
+      setFormError(errorText(error, 'Не вдалося завантажити фото'))
+    } finally {
+      setUploadingCount((count) => count - 1)
+    }
+  }
+
+  const validateForm = (current: BlogFormState): string | null => {
+    if (!current.title.trim()) {
+      return 'Введіть заголовок блогу'
+    }
+
+    if (!current.categoryId) {
+      return 'Виберіть категорію'
+    }
+
+    if (!current.imageUrl) {
+      return 'Завантажте обкладинку блогу'
+    }
+
+    if (!current.contentBlocks.length) {
+      return 'Додайте хоча б один блок вмісту'
+    }
+
+    return null
+  }
+
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
 
-    if (!post || !form) {
+    if (!form) {
+      return
+    }
+
+    const validationError = validateForm(form)
+
+    if (validationError) {
+      setFormError(validationError)
       return
     }
 
     setIsSaving(true)
+    setFormError(null)
+
+    const input = {
+      title: form.title,
+      categoryId: Number(form.categoryId),
+      description: post?.description ?? null,
+      imageUrl: form.imageUrl,
+      imageAlt: form.imageAlt,
+      keywords: form.keywords.filter((keyword) => keyword.trim()),
+      isPublished: post?.isPublished ?? true,
+      contentBlocks: form.contentBlocks,
+    }
 
     try {
-      await blogPostService.update({
-        ...post,
-        title: form.title,
-        category: form.category || undefined,
-        imageUrl: form.imageUrl,
-        imageAlt: form.imageAlt,
-        contentBlocks: form.contentBlocks,
-        keywords: form.keywords.filter((keyword) => keyword.trim()),
-      })
+      if (post) {
+        await blogPostService.update(post.id, input)
+      } else {
+        await blogPostService.create(input)
+      }
 
       onSaved()
+    } catch (error) {
+      setFormError(errorText(error, 'Не вдалося зберегти блог'))
     } finally {
       setIsSaving(false)
     }
   }
 
+  const isNotFound = Boolean(postId) && !isPostLoading && !post
   const isLoading = isPostLoading || !form
+  const isUploading = uploadingCount > 0
+
+  const renderStatus = () =>
+    isNotFound ? (
+      <p className="text-fg-subtle">Блог не знайдено</p>
+    ) : (
+      <p className="text-fg-subtle">Завантаження...</p>
+    )
 
   return (
     <AdminPageLayout>
@@ -199,13 +321,14 @@ export const EditBlogForm = ({
         onClick={onBack}
         className="mb-4 flex items-center gap-2 text-2xl font-semibold transition-opacity hover:opacity-70"
       >
-        <span className="text-lg">‹</span> Редагування блогу
+        <span className="text-lg">‹</span>{' '}
+        {postId ? 'Редагування блогу' : 'Додавання блогу'}
       </button>
 
       <div className="mb-6 border-t border-line" />
 
       {isLoading || !form ? (
-        <p className="text-fg-subtle">Завантаження...</p>
+        renderStatus()
       ) : (
         <form
           onSubmit={(event) => void handleSubmit(event)}
@@ -222,16 +345,16 @@ export const EditBlogForm = ({
           />
 
           <select
-            value={form.category}
+            value={form.categoryId}
             onChange={(event) =>
-              setForm({ ...form, category: event.target.value })
+              setForm({ ...form, categoryId: event.target.value })
             }
             className={fieldClass}
           >
             <option value="">Виберіть категорію</option>
 
             {(categories ?? []).map((category) => (
-              <option key={category.id} value={category.name}>
+              <option key={category.id} value={category.id}>
                 {category.name}
               </option>
             ))}
@@ -264,11 +387,13 @@ export const EditBlogForm = ({
                   const file = files[0]
 
                   if (file) {
-                    setForm({
-                      ...form,
-                      imageUrl: URL.createObjectURL(file),
-                      imageAlt: file.name,
-                    })
+                    void uploadImages([file], ([url]) =>
+                      setForm((current) =>
+                        current
+                          ? { ...current, imageUrl: url, imageAlt: file.name }
+                          : current,
+                      ),
+                    )
                   }
                 }}
               />
@@ -302,16 +427,11 @@ export const EditBlogForm = ({
                     <div className="mt-3">
                       <PhotoUploadRow
                         multiple
-                        onFilesSelected={(files) => {
-                          if (!files.length) {
-                            return
-                          }
-
-                          updateBlock(block.id, 'images', [
-                            ...block.images,
-                            ...files.map((file) => URL.createObjectURL(file)),
-                          ])
-                        }}
+                        onFilesSelected={(files) =>
+                          void uploadImages(files, (urls) =>
+                            appendBlockImages(block.id, urls),
+                          )
+                        }
                       />
                     </div>
                   </div>
@@ -425,12 +545,22 @@ export const EditBlogForm = ({
             </div>
           </div>
 
+          {formError && (
+            <p role="alert" className="text-sm text-danger">
+              {formError}
+            </p>
+          )}
+
           <button
             type="submit"
-            disabled={isSaving}
+            disabled={isSaving || isUploading}
             className="h-[44px] w-[160px] rounded-[4px] bg-primary text-sm font-semibold text-white transition hover:bg-primary-dark disabled:cursor-not-allowed disabled:opacity-60"
           >
-            {isSaving ? 'Збереження...' : 'Зберегти'}
+            {isUploading
+              ? 'Завантаження фото...'
+              : isSaving
+                ? 'Збереження...'
+                : 'Зберегти'}
           </button>
         </form>
       )}

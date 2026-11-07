@@ -16,15 +16,17 @@ interface AdminSideBarProps {
   onSelect: (id: AdminNavItemId) => void
 }
 
+// Sizes are tuned so the whole menu, with the warehouse group open, fits a
+// 1366x768 laptop screen without scrolling.
 const topLevelItemClass = (isActive: boolean) =>
-  `flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-left text-[15px] transition-colors ${
+  `flex w-full items-center gap-3 rounded-lg px-3 py-1.5 text-left text-[15px] leading-5 transition-colors ${
     isActive
       ? 'bg-surface font-semibold text-primary shadow-sm'
       : 'text-white/85 hover:bg-white/10 hover:text-white'
   }`
 
 const subItemClass = (isActive: boolean) =>
-  `rounded-md px-3 py-1.5 text-left text-[14px] transition-colors ${
+  `rounded-md px-3 py-1 text-left text-[14px] transition-colors ${
     isActive
       ? 'bg-white/20 font-semibold text-white'
       : 'text-white/70 hover:bg-white/10 hover:text-white'
@@ -127,29 +129,31 @@ export const AdminSideBar = ({ activeItem, onSelect }: AdminSideBarProps) => {
           isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
-        <div className="shrink-0 px-4 pb-5 pt-6">
-          <div className="mb-4 flex items-center gap-2 px-1 text-white">
+        <div className="shrink-0 px-4 py-4">
+          <div className="flex items-center gap-2 px-1 text-white">
             <span className="text-[20px] font-bold tracking-[0.2em]">
               HYGGY
             </span>
             <span className="rounded bg-white/20 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider">
               Admin
             </span>
-          </div>
 
-          <button
-            type="button"
-            onClick={() => navigate('/')}
-            className="flex h-[38px] w-full items-center justify-center gap-2 rounded-lg border border-white/40 text-[13px] font-medium text-white transition-colors hover:bg-surface hover:text-primary"
-          >
-            <span>Перейти на сайт</span>
-            <AdminNavIcon name="external" className="h-4 w-4" />
-          </button>
+            <button
+              type="button"
+              onClick={() => navigate('/')}
+              aria-label="Перейти на сайт"
+              title="Перейти на сайт"
+              className="ml-auto flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-white/40 text-white transition-colors hover:bg-surface hover:text-primary"
+            >
+              <AdminNavIcon name="external" className="h-4 w-4" />
+            </button>
+          </div>
         </div>
 
         <div className="mx-4 h-px shrink-0 bg-white/20" />
 
-        <nav className="flex flex-1 flex-col gap-1 overflow-y-auto px-3 py-4">
+        {/* On very short screens the menu still scrolls, just without a visible scrollbar. */}
+        <nav className="flex flex-1 flex-col gap-0.5 overflow-y-auto px-3 py-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           {TOP_LEVEL_NAV_ITEMS.map(renderTopLevelItem)}
 
           <div>
@@ -157,7 +161,7 @@ export const AdminSideBar = ({ activeItem, onSelect }: AdminSideBarProps) => {
               type="button"
               onClick={() => setIsWarehousesOpen((prev) => !prev)}
               aria-expanded={isWarehousesOpen}
-              className={`flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-left text-[15px] transition-colors hover:bg-white/10 ${
+              className={`flex w-full items-center gap-3 rounded-lg px-3 py-1.5 text-left text-[15px] leading-5 transition-colors hover:bg-white/10 ${
                 isWarehouseSectionActive
                   ? 'font-semibold text-white'
                   : 'text-white/85 hover:text-white'
@@ -174,7 +178,7 @@ export const AdminSideBar = ({ activeItem, onSelect }: AdminSideBarProps) => {
             </button>
 
             {isWarehousesOpen && (
-              <div className="mb-1 ml-[22px] mt-1 flex flex-col gap-0.5 border-l border-white/25 pl-3">
+              <div className="mb-0.5 ml-[22px] mt-0.5 flex flex-col gap-0.5 border-l border-white/25 pl-3">
                 {WAREHOUSE_NAV_ITEMS.map((item) => (
                   <button
                     key={item.id}
@@ -193,7 +197,7 @@ export const AdminSideBar = ({ activeItem, onSelect }: AdminSideBarProps) => {
           {BOTTOM_NAV_ITEMS.map(renderTopLevelItem)}
         </nav>
 
-        <div className="shrink-0 border-t border-white/20 px-3 py-4">
+        <div className="shrink-0 border-t border-white/20 px-3 py-3">
           <div className="mb-2 flex items-center gap-3 px-2">
             {user?.avatar_url ? (
               <img
@@ -218,16 +222,18 @@ export const AdminSideBar = ({ activeItem, onSelect }: AdminSideBarProps) => {
             </div>
           </div>
 
-          <ThemeToggle variant="onBrand" className="mb-1 px-3 py-2" />
+          <div className="flex items-center justify-between">
+            <ThemeToggle variant="onBrand" className="px-2 py-1.5" />
 
-          <button
-            type="button"
-            onClick={handleLogout}
-            className="flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-left text-[15px] text-white/85 transition-colors hover:bg-white/10 hover:text-white"
-          >
-            <AdminNavIcon name="logout" />
-            <span>Вихід</span>
-          </button>
+            <button
+              type="button"
+              onClick={handleLogout}
+              className="flex items-center gap-2 rounded-lg px-3 py-1.5 text-left text-[15px] text-white/85 transition-colors hover:bg-white/10 hover:text-white"
+            >
+              <AdminNavIcon name="logout" />
+              <span>Вихід</span>
+            </button>
+          </div>
         </div>
       </aside>
     </>

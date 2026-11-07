@@ -2,21 +2,64 @@ import { useState } from 'react'
 
 import { Prefooter } from '@/shared/ui/Prefooter/Prefooter'
 import { useAsyncData } from '@/shared/hooks/useAsyncData'
-import { blogPageService } from './api/blogPageService'
-import { blogCategoryTabs } from './mocks/blogCatalog'
+import { blogApi } from '@/shared/api/blogApi'
 import { BlogCategorySection } from './components/BlogCategorySection'
 
-const sectionId = (tab: string) => `blog-section-${tab}`
+const sectionId = (slug: string) => `blog-section-${slug}`
+
+const loadBlog = async () => {
+  const [categories, posts] = await Promise.all([
+    blogApi.getCategories(),
+    blogApi.getPosts(),
+  ])
+
+  // Empty categories have no section to scroll to, so they get no tab.
+  const tabs = categories.filter((category) =>
+    posts.some((post) => post.categoryId === category.id),
+  )
+
+  return { tabs, posts }
+}
 
 export function BlogListPage() {
-  const { data: posts, isLoading } = useAsyncData(blogPageService.getCatalog)
-  const [activeTab, setActiveTab] = useState<string>(blogCategoryTabs[0])
+  const { data: blog, isLoading, error } = useAsyncData(loadBlog)
+  const [activeTab, setActiveTab] = useState<string | null>(null)
 
-  const handleTabClick = (tab: string) => {
-    setActiveTab(tab)
+  const tabs = blog?.tabs ?? []
+  const currentTab = activeTab ?? tabs[0]?.slug
+
+  const handleTabClick = (slug: string) => {
+    setActiveTab(slug)
     document
-      .getElementById(sectionId(tab))
+      .getElementById(sectionId(slug))
       ?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }
+
+  const renderContent = () => {
+    if (error) {
+      return (
+        <p className="text-center text-fg-subtle">
+          Не вдалося завантажити блог
+        </p>
+      )
+    }
+
+    if (isLoading || !blog) {
+      return <p className="text-center text-fg-subtle">Завантаження...</p>
+    }
+
+    return (
+      <div className="flex flex-col gap-14">
+        {tabs.map((tab) => (
+          <BlogCategorySection
+            key={tab.id}
+            id={sectionId(tab.slug)}
+            title={tab.name}
+            posts={blog.posts.filter((post) => post.categoryId === tab.id)}
+          />
+        ))}
+      </div>
+    )
   }
 
   return (
@@ -29,18 +72,18 @@ export function BlogListPage() {
       <div className="bg-surface">
         <div className="mx-auto max-w-[1460px] px-6 py-8">
           <div className="flex flex-wrap justify-center gap-3">
-            {blogCategoryTabs.map((tab) => (
+            {tabs.map((tab) => (
               <button
-                key={tab}
+                key={tab.id}
                 type="button"
-                onClick={() => handleTabClick(tab)}
+                onClick={() => handleTabClick(tab.slug)}
                 className={`h-[40px] rounded-sm px-6 text-sm font-semibold transition-colors ${
-                  activeTab === tab
+                  currentTab === tab.slug
                     ? 'bg-primary text-white'
                     : 'bg-surface-strong text-fg-muted hover:bg-line-strong'
                 }`}
               >
-                {tab}
+                {tab.name}
               </button>
             ))}
           </div>
@@ -50,22 +93,7 @@ export function BlogListPage() {
       </div>
 
       <div className="bg-page px-6 py-10">
-        <div className="mx-auto max-w-[1460px]">
-          {isLoading || !posts ? (
-            <p className="text-center text-fg-subtle">Завантаження...</p>
-          ) : (
-            <div className="flex flex-col gap-14">
-              {blogCategoryTabs.map((tab) => (
-                <BlogCategorySection
-                  key={tab}
-                  id={sectionId(tab)}
-                  title={tab}
-                  posts={posts.filter((post) => post.category === tab)}
-                />
-              ))}
-            </div>
-          )}
-        </div>
+        <div className="mx-auto max-w-[1460px]">{renderContent()}</div>
       </div>
 
       <Prefooter />

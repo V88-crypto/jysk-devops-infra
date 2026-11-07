@@ -7,17 +7,45 @@ import {
   ORDER_STATUS_COLORS,
   ORDER_STATUS_LABELS,
 } from '@/shared/orders/orderStatus'
+import type { OrderStatus } from '@/shared/orders/orderStatus'
 import { SectionStatus } from './SectionStatus'
+
+// The backend lets a customer cancel only orders that haven't shipped yet.
+const CANCELLABLE_STATUSES: OrderStatus[] = ['new', 'processing']
 
 interface OrderListProps {
   state: SectionState<OrderListData>
+  onCancel: (orderId: number) => Promise<void>
 }
 
-export const OrderList = ({ state }: OrderListProps) => {
+export const OrderList = ({ state, onCancel }: OrderListProps) => {
   const [expandedOrderId, setExpandedOrderId] = useState<number | null>(null)
+  const [cancellingId, setCancellingId] = useState<number | null>(null)
+  const [cancelError, setCancelError] = useState<string | null>(null)
 
   const toggleOrder = (orderId: number) => {
     setExpandedOrderId((currentId) => (currentId === orderId ? null : orderId))
+  }
+
+  const handleCancel = async (orderId: number) => {
+    if (!window.confirm(`Скасувати замовлення №${orderId}?`)) {
+      return
+    }
+
+    setCancellingId(orderId)
+    setCancelError(null)
+
+    try {
+      await onCancel(orderId)
+    } catch (error) {
+      setCancelError(
+        error instanceof Error
+          ? error.message
+          : 'Не вдалося скасувати замовлення. Спробуйте ще раз.',
+      )
+    } finally {
+      setCancellingId(null)
+    }
   }
 
   const renderContent = () => {
@@ -179,6 +207,33 @@ export const OrderList = ({ state }: OrderListProps) => {
                   >
                     Адреса доставки: {order.address}
                   </p>
+
+                  {CANCELLABLE_STATUSES.includes(order.status) && (
+                    <button
+                      type="button"
+                      onClick={() => handleCancel(order.id)}
+                      disabled={cancellingId === order.id}
+                      className="
+                        mt-[20px]
+                        w-[150px]
+                        h-[45px]
+                        rounded-[5px]
+                        bg-primary
+                        text-white
+                        text-[14px]
+                        lg:text-[16px]
+                        font-bold
+                        hover:bg-primary-dark
+                        transition-colors
+                        disabled:cursor-not-allowed
+                        disabled:opacity-60
+                      "
+                    >
+                      {cancellingId === order.id
+                        ? 'Скасування...'
+                        : 'Скасувати'}
+                    </button>
+                  )}
                 </div>
 
                 <div className="w-full">
@@ -273,6 +328,10 @@ export const OrderList = ({ state }: OrderListProps) => {
       >
         Мої замовлення
       </h2>
+
+      {cancelError && (
+        <p className="mb-[15px] text-[14px] text-danger">{cancelError}</p>
+      )}
 
       {renderContent()}
     </div>

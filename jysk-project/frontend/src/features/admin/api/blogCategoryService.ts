@@ -1,13 +1,13 @@
-import { mockBlogCategories } from '@/features/admin/mocks/blogCategories'
-import type { BlogCategory } from '@/features/admin/mocks/blogCategories'
-import { mockDelay } from '@/shared/api/mockDelay'
-
-const API_DELAY_MS = 500
+import type { ListResponse } from '@/shared/api/blogApi'
+import { apiRequest } from '@/shared/api/httpClient'
+import type { BlogCategory } from '@/shared/types/blog'
 
 export const blogCategoryService = {
   async getAll(): Promise<BlogCategory[]> {
-    await mockDelay(API_DELAY_MS)
+    const response = await apiRequest<ListResponse<BlogCategory>>(
+      '/admin/blog-categories',
+    )
 
-    return mockBlogCategories.map((category) => ({ ...category }))
+    return response.items
   },
 }

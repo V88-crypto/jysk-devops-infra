@@ -1,49 +1,74 @@
-import { mockAdminBlogPosts } from '@/features/admin/mocks/blogPosts'
-import type { BlogPost } from '@/shared/types/blog'
-import { mockDelay } from '@/shared/api/mockDelay'
+import { mapBlogPost, nullIfNotFound } from '@/shared/api/blogApi'
+import type { BlogPostResponse, ListResponse } from '@/shared/api/blogApi'
+import { apiRequest } from '@/shared/api/httpClient'
+import type { BlogContentBlock, BlogPost } from '@/shared/types/blog'
 
-const API_DELAY_MS = 500
+// The backend caps page_size at 100.
+const PAGE_SIZE = 100
+
+export interface BlogPostInput {
+  title: string
+  categoryId: number
+  description: string | null
+  imageUrl: string
+  imageAlt: string
+  keywords: string[]
+  isPublished: boolean
+  contentBlocks: BlogContentBlock[]
+}
+
+const toBlockBody = (block: BlogContentBlock) =>
+  block.type === 'gallery'
+    ? { type: 'gallery', images: block.images }
+    : { type: 'text', title: block.title || null, body: block.body || null }
+
+const toPostBody = (input: BlogPostInput) =>
+  JSON.stringify({
+    title: input.title,
+    category_id: input.categoryId,
+    // Without a description the backend builds one from the first text block.
+    description: input.description || null,
+    image_url: input.imageUrl,
+    image_alt: input.imageAlt || null,
+    keywords: input.keywords,
+    is_published: input.isPublished,
+    content_blocks: input.contentBlocks.map(toBlockBody),
+  })
 
 export const blogPostService = {
   async getAll(): Promise<BlogPost[]> {
-    await mockDelay(API_DELAY_MS)
-
-    return mockAdminBlogPosts.map((post) => ({ ...post }))
-  },
-
-  async getById(id: number): Promise<BlogPost | null> {
-    await mockDelay(API_DELAY_MS)
-
-    const post = mockAdminBlogPosts.find((item) => item.id === id)
-
-    return post ? { ...post } : null
-  },
-
-  async update(post: BlogPost): Promise<BlogPost> {
-    await mockDelay(API_DELAY_MS)
-
-    const postIndex = mockAdminBlogPosts.findIndex(
-      (item) => item.id === post.id,
+    const response = await apiRequest<ListResponse<BlogPostResponse>>(
+      `/admin/blog-posts?page_size=${PAGE_SIZE}`,
     )
 
-    if (postIndex === -1) {
-      throw new Error(`Blog post with id ${post.id} was not found`)
-    }
-
-    mockAdminBlogPosts[postIndex] = { ...post }
-
-    return { ...post }
+    return response.items.map(mapBlogPost)
   },
 
-  async delete(id: number): Promise<void> {
-    await mockDelay(API_DELAY_MS)
+  getById(id: number): Promise<BlogPost | null> {
+    return apiRequest<BlogPostResponse>(`/admin/blog-posts/${id}`)
+      .then(mapBlogPost)
+      .catch(nullIfNotFound)
+  },
 
-    const postIndex = mockAdminBlogPosts.findIndex((item) => item.id === id)
+  async create(input: BlogPostInput): Promise<BlogPost> {
+    return mapBlogPost(
+      await apiRequest<BlogPostResponse>('/admin/blog-posts', {
+        method: 'POST',
+        body: toPostBody(input),
+      }),
+    )
+  },
 
-    if (postIndex === -1) {
-      throw new Error(`Blog post with id ${id} was not found`)
-    }
+  async update(id: number, input: BlogPostInput): Promise<BlogPost> {
+    return mapBlogPost(
+      await apiRequest<BlogPostResponse>(`/admin/blog-posts/${id}`, {
+        method: 'PUT',
+        body: toPostBody(input),
+      }),
+    )
+  },
 
-    mockAdminBlogPosts.splice(postIndex, 1)
+  delete(id: number): Promise<void> {
+    return apiRequest<void>(`/admin/blog-posts/${id}`, { method: 'DELETE' })
   },
 }

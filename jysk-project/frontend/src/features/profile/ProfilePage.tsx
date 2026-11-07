@@ -5,7 +5,8 @@ import { Reviews } from './components/Reviews'
 import { useProfileData } from './hooks/useProfileData'
 
 export const ProfilePage = () => {
-  const { orders, favorites, reviews, removeFavorite } = useProfileData()
+  const { orders, favorites, reviews, removeFavorite, cancelOrder } =
+    useProfileData()
 
   const counts = {
     orders: orders.status === 'ready' ? orders.data.total : null,
@@ -21,7 +22,7 @@ export const ProfilePage = () => {
   return (
     <>
       <ProfileInfo counts={counts} />
-      <OrderList state={orders} />
+      <OrderList state={orders} onCancel={cancelOrder} />
       <Favorites state={favorites} onRemove={removeFavorite} />
       <Reviews state={reviews} />
     </>
