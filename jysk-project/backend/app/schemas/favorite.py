@@ -2,6 +2,7 @@ from datetime import datetime
 
 from pydantic import BaseModel
 
+from app.core.media import OptionalPublicUrl
 from app.schemas.base import Money
 
 
@@ -27,7 +28,7 @@ class FavoriteOut(BaseModel):
     created_at: datetime
     variant: FavoriteVariantOut
     product: FavoriteProductOut
-    image_url: str | None
+    image_url: OptionalPublicUrl
 
 
 class FavoriteListOut(BaseModel):

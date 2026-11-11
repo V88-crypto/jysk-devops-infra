@@ -9,6 +9,7 @@ from minio import Minio
 from minio.error import MinioException, S3Error
 
 from app.config import settings
+from app.core.media import own_media_path, to_public
 
 logger = logging.getLogger(__name__)
 
@@ -115,12 +116,15 @@ def delete_object(key: str) -> None:
         raise StorageUnavailableError from error
 
 
-def files_url_prefix() -> str:
-    return f"{settings.PUBLIC_API_URL.rstrip('/')}/files/"
+FILES_PREFIX = "/files/"
+
+
+def stored_url(key: str) -> str:
+    return f"{FILES_PREFIX}{key}"
 
 
 def public_url(key: str) -> str:
-    return f"{files_url_prefix()}{key}"
+    return to_public(stored_url(key))
 
 
 def is_safe_key(key: str) -> bool:
@@ -133,8 +137,8 @@ def is_safe_key(key: str) -> bool:
 
 
 def key_from_url(url: str | None) -> str | None:
-    prefix = files_url_prefix()
-    if not url or not url.startswith(prefix):
+    path = own_media_path(url)
+    if path is None or not path.startswith(FILES_PREFIX):
         return None
-    key = url[len(prefix):]
+    key = path[len(FILES_PREFIX):]
     return key if is_safe_key(key) else None

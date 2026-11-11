@@ -2,6 +2,7 @@ from datetime import datetime
 
 from pydantic import BaseModel, ConfigDict
 
+from app.core.media import OptionalPublicUrl, PublicUrl
 from app.schemas.base import Money
 
 
@@ -19,7 +20,7 @@ class ProductListItem(BaseModel):
     name: str
     slug: str
     price_from: Money | None
-    image_url: str | None
+    image_url: OptionalPublicUrl
 
 
 class ProductListOut(BaseModel):
@@ -37,7 +38,7 @@ class ProductSuggestOut(BaseModel):
 
 class ImageOut(BaseModel):
     id: int
-    image_url: str
+    image_url: PublicUrl
     is_primary: bool
     sort_order: int
 

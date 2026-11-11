@@ -2,6 +2,7 @@ from decimal import Decimal
 
 from sqlalchemy.orm import Session
 
+from app.core.media import to_stored
 from app.core.security import hash_password
 from app.database import SessionLocal
 from app.models.blog import BlogPost
@@ -231,7 +232,7 @@ def create_variant(db: Session, product: Product, data: dict, image_count: int) 
         db.add(
             Image(
                 variant_id=variant.id,
-                image_url=f"https://picsum.photos/seed/{variant.sku}-{n + 1}/800/600",
+                image_url=to_stored(f"https://picsum.photos/seed/{variant.sku}-{n + 1}/800/600"),
                 is_primary=(n == 0),
                 sort_order=n,
             )

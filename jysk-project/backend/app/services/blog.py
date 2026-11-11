@@ -1,6 +1,7 @@
 from sqlalchemy import func
 from sqlalchemy.orm import Query, Session, selectinload
 
+from app.core.media import to_stored
 from app.core.slugs import make_slug
 from app.models.blog import BlogCategory, BlogContentBlock, BlogContentBlockImage, BlogPost
 from app.schemas.blog import (
@@ -65,7 +66,7 @@ def build_blocks(blocks: list[BlogContentBlockIn]) -> list[BlogContentBlock]:
             body=block.body,
             sort_order=index,
             images=[
-                BlogContentBlockImage(image_url=url, sort_order=position)
+                BlogContentBlockImage(image_url=to_stored(url), sort_order=position)
                 for position, url in enumerate(block.images)
             ],
         )
@@ -77,7 +78,7 @@ def fill_post(post: BlogPost, data: BlogPostIn) -> None:
     post.title = data.title
     post.category_id = data.category_id
     post.description = data.description or make_description(data.content_blocks)
-    post.image_url = data.image_url
+    post.image_url = to_stored(data.image_url)
     post.image_alt = data.image_alt
     post.keywords = data.keywords or None
     post.is_published = data.is_published

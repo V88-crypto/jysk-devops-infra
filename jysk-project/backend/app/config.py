@@ -33,6 +33,7 @@ class Settings(BaseSettings):
     MINIO_SECURE: bool = False
 
     PUBLIC_API_URL: str = "http://localhost:8000"
+    MEDIA_TRUSTED_HOSTS: str = ""
     MAX_UPLOAD_SIZE_MB: int = 5
 
     DELIVERY_PRICE_NP_COURIER: Decimal = Decimal("150")

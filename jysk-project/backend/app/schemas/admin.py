@@ -3,6 +3,7 @@ from typing import Literal
 
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 
+from app.core.media import PublicUrl
 from app.schemas.base import Money
 from app.schemas.catalog import ImageOut
 from app.schemas.order import OrderOut as BaseOrderOut
@@ -186,4 +187,4 @@ class UserRoleIn(BaseModel):
 
 class UploadOut(BaseModel):
     key: str
-    url: str
+    url: PublicUrl
